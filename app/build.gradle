@@ -28,6 +28,7 @@ dependencies {
     androidTestImplementation Libs.testExtJunit
     androidTestImplementation Libs.espresso
 
+    implementation Libs.material
     implementation Libs.appcompat
     implementation Libs.coreKtx
     implementation Libs.constraintlayout
@@ -38,4 +39,5 @@ dependencies {
     implementation Libs.koin
     implementation Libs.glide
     annotationProcessor Libs.glideAnnotationProcessor
+    implementation Libs.imageSlider
 }

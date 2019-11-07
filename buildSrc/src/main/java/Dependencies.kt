@@ -19,6 +19,7 @@ object Libs {
         const val testExtJunit = "1.1.0"
         const val espresso = "3.1.1"
 
+        const val material = "1.0.0"
         const val appcompat = "1.0.2"
         const val coreKtx = "1.0.2"
         const val constraintlayout = "1.1.3"
@@ -26,12 +27,14 @@ object Libs {
         const val gson = "2.8.5"
         const val koin = "2.0.1"
         const val glide = "4.9.0"
+        const val imageSlider = "1.3.2"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
     const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtJunit}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
+    const val material = "com.google.android.material:material:${Versions.material}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
@@ -41,4 +44,5 @@ object Libs {
     const val koin = "org.koin:koin-android:${Versions.koin}"
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideAnnotationProcessor = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    const val imageSlider = "com.github.smarteist:autoimageslider:${Versions.imageSlider}"
 }
