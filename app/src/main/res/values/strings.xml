@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Ad Center</string>
+
+    <string name="EMPTY" />
+
+    <string name="bookmarks_title">Bookmarks</string>
+    <string name="last_ads_title">Last ads</string>
+    <string name="my_ads_title">My ads</string>
+    <string name="search_title">Search</string>
+    <string name="settings_title">Settings</string>
 </resources>
