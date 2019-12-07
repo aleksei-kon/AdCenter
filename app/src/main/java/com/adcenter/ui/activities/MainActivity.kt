@@ -12,10 +12,13 @@ import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.NavigationItem.*
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import com.adcenter.ui.fragments.*
+import com.adcenter.utils.extensions.gone
+import com.adcenter.utils.extensions.isConnectedToNetwork
+import com.adcenter.utils.extensions.visible
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : OfflineActivity() {
 
     override val layout: Int = R.layout.activity_main
 
@@ -27,6 +30,8 @@ class MainActivity : BaseActivity() {
         initToolbar()
         initNavigation()
         initFragmentManager()
+
+        updateContentVisibility()
 
         if (savedInstanceState == null) {
             selectItem(defaultNavigationItem.id)
@@ -105,6 +110,16 @@ class MainActivity : BaseActivity() {
 
         toolbarContainer.layoutParams = params
         appBar.requestLayout()
+    }
+
+    override fun updateContentVisibility() {
+        if (isConnectedToNetwork()) {
+            offlineMessage.gone()
+            content.visible()
+        } else {
+            content.gone()
+            offlineMessage.visible()
+        }
     }
 
     private val fragmentLifecycleCallback = object : FragmentManager.FragmentLifecycleCallbacks() {

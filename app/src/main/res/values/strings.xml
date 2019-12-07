@@ -8,4 +8,6 @@
     <string name="my_ads_title">My ads</string>
     <string name="search_title">Search</string>
     <string name="settings_title">Settings</string>
+    <string name="offline_message">You have problem with internet connection. Check your mobile data or Wi-Fi.</string>
+    <string name="offline_title">Connection problem</string>
 </resources>
