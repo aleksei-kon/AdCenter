@@ -28,7 +28,6 @@ object Libs {
         const val koin = "2.0.1"
         const val glide = "4.9.0"
         const val imageSlider = "1.3.2"
-        const val realtimeblurview = "1.2.1"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -46,5 +45,4 @@ object Libs {
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideAnnotationProcessor = "com.github.bumptech.glide:compiler:${Versions.glide}"
     const val imageSlider = "com.github.smarteist:autoimageslider:${Versions.imageSlider}"
-    const val realtimeblurview = "com.github.mmin18:realtimeblurview:${Versions.realtimeblurview}"
 }

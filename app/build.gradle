@@ -40,5 +40,4 @@ dependencies {
     implementation Libs.glide
     annotationProcessor Libs.glideAnnotationProcessor
     implementation Libs.imageSlider
-    implementation Libs.realtimeblurview
 }
