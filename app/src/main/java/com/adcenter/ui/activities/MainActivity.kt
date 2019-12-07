@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
 import com.adcenter.ui.IPageConfiguration
+import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.NavigationItem.*
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import com.adcenter.ui.fragments.*
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -24,31 +26,23 @@ class MainActivity : BaseActivity() {
 
         initToolbar()
         initNavigation()
-
-        supportFragmentManager.registerFragmentLifecycleCallbacks(
-            object : FragmentManager.FragmentLifecycleCallbacks() {
-                override fun onFragmentViewCreated(
-                    fragmentManager: FragmentManager,
-                    fragment: Fragment,
-                    view: View,
-                    savedInstanceState: Bundle?
-                ) {
-                    super.onFragmentViewCreated(fragmentManager, fragment, view, savedInstanceState)
-
-                    if (fragment is IPageConfiguration) {
-                        title = fragment.getToolbarTitle()
-                    }
-                }
-            }, false
-        )
+        initFragmentManager()
 
         if (savedInstanceState == null) {
             selectItem(defaultNavigationItem.id)
         }
     }
 
+    private fun initFragmentManager() {
+        supportFragmentManager.registerFragmentLifecycleCallbacks(
+            fragmentLifecycleCallback,
+            false
+        )
+    }
+
     private fun initToolbar() {
         setSupportActionBar(toolbar)
+        setupLayoutConfiguration(ToolbarScrollBehaviour.POSITIONED)
     }
 
     private fun initNavigation() {
@@ -92,5 +86,40 @@ class MainActivity : BaseActivity() {
             .beginTransaction()
             .replace(R.id.content, fragment)
             .commit()
+    }
+
+    private fun setupLayoutConfiguration(toolbarScrollBehaviour: ToolbarScrollBehaviour) {
+        val params = toolbarContainer.layoutParams
+
+        if (params is AppBarLayout.LayoutParams) {
+            when (toolbarScrollBehaviour) {
+                ToolbarScrollBehaviour.POSITIONED -> {
+                    params.scrollFlags = 0
+                }
+                ToolbarScrollBehaviour.DISAPPEARS -> {
+                    params.scrollFlags =
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+                }
+            }
+        }
+
+        toolbarContainer.layoutParams = params
+        appBar.requestLayout()
+    }
+
+    private val fragmentLifecycleCallback = object : FragmentManager.FragmentLifecycleCallbacks() {
+        override fun onFragmentViewCreated(
+            fragmentManager: FragmentManager,
+            fragment: Fragment,
+            view: View,
+            savedInstanceState: Bundle?
+        ) {
+            super.onFragmentViewCreated(fragmentManager, fragment, view, savedInstanceState)
+
+            if (fragment is IPageConfiguration) {
+                title = fragment.getToolbarTitle()
+                setupLayoutConfiguration(fragment.toolbarScrollBehaviour)
+            }
+        }
     }
 }
