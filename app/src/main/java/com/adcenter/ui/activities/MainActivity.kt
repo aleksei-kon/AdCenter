@@ -12,9 +12,9 @@ import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.NavigationItem.*
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import com.adcenter.ui.fragments.*
-import com.adcenter.utils.extensions.gone
-import com.adcenter.utils.extensions.isConnectedToNetwork
-import com.adcenter.utils.extensions.visible
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.isConnectedToNetwork
+import com.adcenter.extensions.visible
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_main.*
 

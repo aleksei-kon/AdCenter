@@ -4,8 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import com.adcenter.utils.extensions.getNetworkType
-import com.adcenter.utils.extensions.isConnectedToNetwork
+import com.adcenter.extensions.getNetworkType
+import com.adcenter.extensions.isConnectedToNetwork
 
 internal class NetworkChangeReceiver(private val networkCallback: INetworkCallback) :
     BroadcastReceiver() {

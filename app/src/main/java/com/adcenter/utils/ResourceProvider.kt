@@ -3,7 +3,7 @@ package com.adcenter.utils
 import android.content.Context
 import com.adcenter.R
 
-class ResourceDependency(private val context: Context) : IResourceDependency {
+class ResourceProvider(private val context: Context) : IResourceProvider {
 
     private fun getString(resId: Int) = context.getString(resId)
 

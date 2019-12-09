@@ -1,4 +1,4 @@
-package com.adcenter.utils.extensions
+package com.adcenter.extensions
 
 import android.content.Context
 import com.adcenter.utils.Constants.EMPTY

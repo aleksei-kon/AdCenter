@@ -10,4 +10,5 @@
     <string name="settings_title">Settings</string>
     <string name="offline_message">You have problem with internet connection. Check your mobile data or Wi-Fi.</string>
     <string name="offline_title">Connection problem</string>
+    <string name="no_result_message">No result found</string>
 </resources>

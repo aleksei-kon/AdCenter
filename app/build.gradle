@@ -33,11 +33,18 @@ dependencies {
     implementation Libs.coreKtx
     implementation Libs.constraintlayout
 
+    implementation Libs.koin
+    implementation Libs.koinScope
+    implementation Libs.koinViewModel
+    //implementation Libs.koinFragment
+    implementation Libs.koinExperimental
+
     implementation Libs.okhttp
     implementation Libs.gson
     implementation Libs.kotlin
-    implementation Libs.koin
     implementation Libs.glide
     annotationProcessor Libs.glideAnnotationProcessor
     implementation Libs.imageSlider
+    implementation Libs.coroutinesCore
+    implementation Libs.coroutinesAndroid
 }

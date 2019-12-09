@@ -1,6 +1,6 @@
 package com.adcenter.ui
 
-import com.adcenter.utils.IResourceDependency
+import com.adcenter.utils.IResourceProvider
 import com.adcenter.R
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import org.koin.core.KoinComponent
@@ -8,7 +8,7 @@ import org.koin.core.inject
 
 sealed class NavigationItem : KoinComponent {
 
-    protected val resourceDependency: IResourceDependency by inject()
+    protected val resourceDependency: IResourceProvider by inject()
 
     abstract val id: Int
 

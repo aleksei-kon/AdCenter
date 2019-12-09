@@ -1,6 +1,6 @@
 package com.adcenter.utils
 
-interface IResourceDependency {
+interface IResourceProvider {
 
     val bookmarksTitle: String
 
