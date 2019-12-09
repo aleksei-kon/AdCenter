@@ -1,4 +1,4 @@
-package com.adcenter.utils.extensions
+package com.adcenter.extensions
 
 import android.annotation.SuppressLint
 import android.app.NotificationManager
