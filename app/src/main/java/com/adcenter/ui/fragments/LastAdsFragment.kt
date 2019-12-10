@@ -6,13 +6,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.lastads.data.AdModel
-import com.adcenter.lastads.uistate.LastAdsUiState
-import com.adcenter.lastads.viewmodel.LastAdsViewModel
+import com.adcenter.entities.AdItemModel
+import com.adcenter.features.lastads.uistate.LastAdsUiState
+import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
-import com.adcenter.ui.adapters.LastAdsAdapter
-import com.adcenter.lastads.LastAdsConstants.LAST_ADS_SCOPE_ID
+import com.adcenter.ui.adapters.AdsAdapter
+import com.adcenter.features.lastads.LastAdsConstants.LAST_ADS_SCOPE_ID
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
@@ -33,7 +33,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     private val viewModel: LastAdsViewModel = fragmentScope.get()
 
-    private lateinit var adapter: LastAdsAdapter
+    private lateinit var adapter: AdsAdapter
 
     private val programsScrollListener: RecyclerView.OnScrollListener =
         ScrollToEndListener {
@@ -51,7 +51,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun initRecycler() {
-        adapter = LastAdsAdapter(requireContext())
+        adapter = AdsAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         setScrollListener()
@@ -90,7 +90,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
         })
     }
 
-    private fun setRecyclerItems(items: List<AdModel>) {
+    private fun setRecyclerItems(items: List<AdItemModel>) {
         if (items.isEmpty()) {
             noDataMessage.visible()
         } else {
