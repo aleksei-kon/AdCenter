@@ -36,7 +36,6 @@ dependencies {
     implementation Libs.koin
     implementation Libs.koinScope
     implementation Libs.koinViewModel
-    //implementation Libs.koinFragment
     implementation Libs.koinExperimental
 
     implementation Libs.okhttp

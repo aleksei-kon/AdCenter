@@ -1,7 +1,7 @@
 package com.adcenter.features.bookmarks.repository
 
-import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.entities.AdItemModel
+import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.utils.Result
 import kotlinx.coroutines.*
 
@@ -39,9 +39,11 @@ class BookmarksRepository : IBookmarksRepository {
             val place = "Place $number"
             val price = "${(1..10000).random()} byn"
             val views = (1..1000).random()
+            val id = "id:$number"
 
             response.add(
                 AdItemModel(
+                    id = id,
                     photoUrl = url,
                     title = title,
                     price = price,

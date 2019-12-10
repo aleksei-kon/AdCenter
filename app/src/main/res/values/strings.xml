@@ -12,4 +12,5 @@
     <string name="offline_title">Connection problem</string>
     <string name="no_result_message">No result found</string>
     <string name="search_hint">search…</string>
+    <string name="details_disclaimer">AdCenter isn\'t responsible for the quality of the goods</string>
 </resources>
