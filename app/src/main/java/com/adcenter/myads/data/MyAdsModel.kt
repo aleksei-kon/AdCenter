@@ -1,7 +1,7 @@
-package com.adcenter.lastads.data
+package com.adcenter.myads.data
 
 import com.adcenter.entities.AdModel
 
-data class LastAdsModel(
+data class MyAdsModel(
     val ads: List<AdModel> = emptyList()
 )

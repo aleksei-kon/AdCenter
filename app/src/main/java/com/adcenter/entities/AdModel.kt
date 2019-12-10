@@ -1,4 +1,4 @@
-package com.adcenter.lastads.data
+package com.adcenter.entities
 
 data class AdModel(
     val name: String

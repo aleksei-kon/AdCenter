@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
-import com.adcenter.lastads.data.AdModel
+import com.adcenter.entities.AdModel
 import com.adcenter.lastads.data.LastAdsModel
 import com.adcenter.lastads.data.LastAdsRequestParams
 import com.adcenter.lastads.uistate.LastAdsUiState

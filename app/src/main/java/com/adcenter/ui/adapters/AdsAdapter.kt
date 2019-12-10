@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adcenter.R
-import com.adcenter.lastads.data.AdModel
+import com.adcenter.entities.AdModel
+import com.adcenter.extensions.layoutInflater
 import kotlinx.android.synthetic.main.adapter_last_ads_item.view.*
 
-class LastAdsAdapter(private val context: Context) : BasePaginationAdapter<AdModel>() {
+class AdsAdapter(private val context: Context) : BasePaginationAdapter<AdModel>() {
 
     override val itemLayout: Int = R.layout.adapter_last_ads_item
 
     override val paginationLayout: Int = R.layout.adapter_pagination
 
-    private val inflater: LayoutInflater =
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater = context.layoutInflater
 
     override fun setItems(items: Collection<AdModel>) {
         this.items.clear()

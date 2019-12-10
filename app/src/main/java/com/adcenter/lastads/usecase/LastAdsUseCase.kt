@@ -18,12 +18,12 @@ class LastAdsUseCase(private val repository: ILastAdsRepository) :
             val adsAsync = async { repository.getLastAds(requestParams) }
             val adsResult = adsAsync.await()
 
-            val assets = when (adsResult) {
+            val ads = when (adsResult) {
                 is Result.Success -> adsResult.value
                 is Result.Error -> emptyList()
             }
 
-            LastAdsModel(assets)
+            LastAdsModel(ads)
         }
     }
 

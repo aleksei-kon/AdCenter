@@ -1,13 +1,13 @@
-package com.adcenter.lastads.repository
+package com.adcenter.myads.repository
 
 import com.adcenter.entities.AdModel
-import com.adcenter.lastads.data.LastAdsRequestParams
+import com.adcenter.myads.data.MyAdsRequestParams
 import com.adcenter.utils.Result
 import kotlinx.coroutines.*
 
-class LastAdsRepository : ILastAdsRepository {
+class MyAdsRepository : IMyAdsRepository {
 
-    override suspend fun getLastAds(params: LastAdsRequestParams): Result<List<AdModel>> {
+    override suspend fun getMyAds(params: MyAdsRequestParams): Result<List<AdModel>> {
         return withContext(Dispatchers.IO) {
 
             delay(4000)
@@ -30,11 +30,11 @@ class LastAdsRepository : ILastAdsRepository {
         }
     }
 
-    private fun testResult(params: LastAdsRequestParams): List<AdModel> {
+    private fun testResult(params: MyAdsRequestParams): List<AdModel> {
         val response = mutableListOf<AdModel>()
 
         for (number in params.pageNumber * 10 until (params.pageNumber + 1) * 10) {
-            response.add(AdModel("$number last ads"))
+            response.add(AdModel("$number my ads"))
         }
 
         return response
