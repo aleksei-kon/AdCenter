@@ -1,10 +1,10 @@
 package com.adcenter.koin.dependencies
 
-import com.adcenter.myads.repository.IMyAdsRepository
-import com.adcenter.myads.repository.MyAdsRepository
-import com.adcenter.myads.usecase.IMyAdsUseCase
-import com.adcenter.myads.usecase.MyAdsUseCase
-import com.adcenter.myads.viewmodel.MyAdsViewModel
+import com.adcenter.features.myads.repository.IMyAdsRepository
+import com.adcenter.features.myads.repository.MyAdsRepository
+import com.adcenter.features.myads.usecase.IMyAdsUseCase
+import com.adcenter.features.myads.usecase.MyAdsUseCase
+import com.adcenter.features.myads.viewmodel.MyAdsViewModel
 import com.adcenter.ui.fragments.MyAdsFragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named

@@ -9,9 +9,9 @@ import com.adcenter.R
 import com.adcenter.entities.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
-import com.adcenter.myads.MyAdsConstants.MY_ADS_SCOPE_ID
-import com.adcenter.myads.uistate.MyAdsUiState
-import com.adcenter.myads.viewmodel.MyAdsViewModel
+import com.adcenter.features.myads.MyAdsConstants.MY_ADS_SCOPE_ID
+import com.adcenter.features.myads.uistate.MyAdsUiState
+import com.adcenter.features.myads.viewmodel.MyAdsViewModel
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener

@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.bookmarks.BookmarksConstants.BOOKMARKS_SCOPE_ID
-import com.adcenter.bookmarks.uistate.BookmarksUiState
-import com.adcenter.bookmarks.viewmodel.BookmarksViewModel
+import com.adcenter.features.bookmarks.BookmarksConstants.BOOKMARKS_SCOPE_ID
+import com.adcenter.features.bookmarks.uistate.BookmarksUiState
+import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
 import com.adcenter.entities.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible

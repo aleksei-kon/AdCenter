@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
 import com.adcenter.entities.AdItemModel
-import com.adcenter.lastads.uistate.LastAdsUiState
-import com.adcenter.lastads.viewmodel.LastAdsViewModel
+import com.adcenter.features.lastads.uistate.LastAdsUiState
+import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.adapters.AdsAdapter
-import com.adcenter.lastads.LastAdsConstants.LAST_ADS_SCOPE_ID
+import com.adcenter.features.lastads.LastAdsConstants.LAST_ADS_SCOPE_ID
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
