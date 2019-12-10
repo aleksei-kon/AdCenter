@@ -8,7 +8,7 @@ import com.adcenter.bookmarks.data.BookmarksModel
 import com.adcenter.bookmarks.data.BookmarksRequestParams
 import com.adcenter.bookmarks.uistate.BookmarksUiState
 import com.adcenter.bookmarks.usecase.IBookmarksUseCase
-import com.adcenter.entities.AdModel
+import com.adcenter.entities.AdItemModel
 import com.adcenter.utils.Result
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -69,7 +69,7 @@ class BookmarksViewModel(private val bookmarksUseCase: IBookmarksUseCase) : View
         oldResponse: BookmarksModel,
         newResponse: BookmarksModel
     ): BookmarksModel {
-        val itemsList = mutableListOf<AdModel>()
+        val itemsList = mutableListOf<AdItemModel>()
 
         itemsList += oldResponse.ads
         itemsList += newResponse.ads

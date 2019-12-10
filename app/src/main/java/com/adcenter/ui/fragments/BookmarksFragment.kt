@@ -9,7 +9,7 @@ import com.adcenter.R
 import com.adcenter.bookmarks.BookmarksConstants.BOOKMARKS_SCOPE_ID
 import com.adcenter.bookmarks.uistate.BookmarksUiState
 import com.adcenter.bookmarks.viewmodel.BookmarksViewModel
-import com.adcenter.entities.AdModel
+import com.adcenter.entities.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
@@ -90,7 +90,7 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
         })
     }
 
-    private fun setRecyclerItems(items: List<AdModel>) {
+    private fun setRecyclerItems(items: List<AdItemModel>) {
         if (items.isEmpty()) {
             noDataMessage.visible()
         } else {

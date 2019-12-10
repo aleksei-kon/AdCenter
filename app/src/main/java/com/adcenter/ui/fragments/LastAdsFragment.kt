@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.entities.AdModel
+import com.adcenter.entities.AdItemModel
 import com.adcenter.lastads.uistate.LastAdsUiState
 import com.adcenter.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.ui.IPageConfiguration
@@ -90,7 +90,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
         })
     }
 
-    private fun setRecyclerItems(items: List<AdModel>) {
+    private fun setRecyclerItems(items: List<AdItemModel>) {
         if (items.isEmpty()) {
             noDataMessage.visible()
         } else {

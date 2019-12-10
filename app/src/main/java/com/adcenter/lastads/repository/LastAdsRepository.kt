@@ -1,18 +1,18 @@
 package com.adcenter.lastads.repository
 
-import com.adcenter.entities.AdModel
+import com.adcenter.entities.AdItemModel
 import com.adcenter.lastads.data.LastAdsRequestParams
 import com.adcenter.utils.Result
 import kotlinx.coroutines.*
 
 class LastAdsRepository : ILastAdsRepository {
 
-    override suspend fun getLastAds(params: LastAdsRequestParams): Result<List<AdModel>> {
+    override suspend fun getLastAds(params: LastAdsRequestParams): Result<List<AdItemModel>> {
         return withContext(Dispatchers.IO) {
 
             delay(4000)
 
-            suspendCancellableCoroutine<Result<List<AdModel>>> { continuation ->
+            suspendCancellableCoroutine<Result<List<AdItemModel>>> { continuation ->
                 runCatching {
                     val response = testResult(params)
 
@@ -30,11 +30,25 @@ class LastAdsRepository : ILastAdsRepository {
         }
     }
 
-    private fun testResult(params: LastAdsRequestParams): List<AdModel> {
-        val response = mutableListOf<AdModel>()
+    private fun testResult(params: LastAdsRequestParams): List<AdItemModel> {
+        val response = mutableListOf<AdItemModel>()
 
         for (number in params.pageNumber * 10 until (params.pageNumber + 1) * 10) {
-            response.add(AdModel("$number last ads"))
+            val url = "https://data.whicdn.com/images/322304619/original.jpg"
+            val title = "Bokmarks title $number"
+            val place = "Place $number"
+            val price = "${(1..10000).random()} byn"
+            val views = (1..1000).random()
+
+            response.add(
+                AdItemModel(
+                    photoUrl = url,
+                    title = title,
+                    price = price,
+                    place = place,
+                    views = views
+                )
+            )
         }
 
         return response

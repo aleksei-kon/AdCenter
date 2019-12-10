@@ -3,7 +3,7 @@ package com.adcenter.myads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.AdModel
+import com.adcenter.entities.AdItemModel
 import com.adcenter.myads.MyAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.myads.data.MyAdsModel
 import com.adcenter.myads.data.MyAdsRequestParams
@@ -68,7 +68,7 @@ class MyAdsViewModel(private val myAdsUseCase: IMyAdsUseCase) : ViewModel(), Cor
         oldResponse: MyAdsModel,
         newResponse: MyAdsModel
     ): MyAdsModel {
-        val itemsList = mutableListOf<AdModel>()
+        val itemsList = mutableListOf<AdItemModel>()
 
         itemsList += oldResponse.ads
         itemsList += newResponse.ads
