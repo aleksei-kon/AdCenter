@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.entities.AdModel
+import com.adcenter.entities.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.myads.MyAdsConstants.MY_ADS_SCOPE_ID
@@ -90,7 +90,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
         })
     }
 
-    private fun setRecyclerItems(items: List<AdModel>) {
+    private fun setRecyclerItems(items: List<AdItemModel>) {
         if (items.isEmpty()) {
             noDataMessage.visible()
         } else {
