@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -15,13 +16,13 @@
             android:id="@+id/collapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/colorPrimary1"
             app:collapsedTitleGravity="center_vertical|start"
+            app:collapsedTitleTextAppearance="@style/collapsingToolbarLayoutTitleColorCollapsed"
+            app:contentScrim="?attr/toolbarBackgroundColor"
             app:expandedTitleGravity="start|bottom"
-            app:collapsedTitleTextAppearance="@style/collapsingToolbarLayoutTitleColor1"
-            app:expandedTitleTextAppearance="@style/collapsingToolbarLayoutTitleColor2"
             app:expandedTitleMarginEnd="32dp"
             app:expandedTitleMarginStart="32dp"
+            app:expandedTitleTextAppearance="@style/collapsingToolbarLayoutTitleColorExpanded"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.smarteist.autoimageslider.SliderView
@@ -36,8 +37,8 @@
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="4dp"
                 app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="@color/colorPrimaryDark1"
-                app:sliderIndicatorUnselectedColor="@color/gray" />
+                app:sliderIndicatorSelectedColor="?attr/bottomNavSelectedItemColor"
+                app:sliderIndicatorUnselectedColor="?attr/bottomNavItemColor" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -47,6 +48,16 @@
                 tools:title="Title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bookmarkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_bookmark"
+        android:visibility="gone"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end" />
 
     <include
         android:id="@+id/content"
@@ -59,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
+        android:indeterminateTint="?attr/progressColor"
         android:indeterminateTintMode="src_atop"
         android:visibility="gone" />
 
@@ -70,6 +82,7 @@
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
         android:text="@string/no_result_message"
+        android:textColor="?attr/textColor"
         android:textSize="18sp"
         android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

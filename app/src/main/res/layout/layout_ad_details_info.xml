@@ -9,22 +9,15 @@
         android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <ImageView
-            android:id="@+id/bookmarkButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_bookmark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:textSize="24sp"
+            android:textColor="?attr/mainTextColor"
+            android:textSize="26sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +25,8 @@
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/colorBlack"
+            android:layout_marginTop="16dp"
+            android:textColor="?attr/mainTextColor"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/price" />
@@ -42,9 +35,9 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
+            android:layout_marginTop="2dp"
+            android:textColor="?attr/mainTextColor"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/location" />
 
@@ -52,41 +45,59 @@
             android:id="@+id/views"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:drawableStart="@drawable/ic_views"
-            android:drawablePadding="4dp"
+            android:layout_marginTop="2dp"
             android:gravity="center_vertical"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
+            android:textColor="?attr/mainTextColor"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date" />
+
+        <TextView
+            android:id="@+id/synopsisTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/description"
+            android:textColor="?attr/textColor"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/views" />
 
         <TextView
             android:id="@+id/synopsis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/views" />
+            android:layout_marginTop="4dp"
+            android:textColor="?attr/textColor"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/synopsisTitle" />
+
+        <TextView
+            android:id="@+id/contactsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/contacts"
+            android:textColor="?attr/textColor"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/synopsis" />
 
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="16sp"
+            android:layout_marginTop="4dp"
+            android:textColor="?attr/textColor"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/synopsis" />
+            app:layout_constraintTop_toBottomOf="@id/contactsTitle" />
 
         <TextView
             android:id="@+id/phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="16sp"
+            android:layout_marginTop="2dp"
+            android:textColor="?attr/textColor"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/username" />
 
@@ -94,11 +105,11 @@
             android:id="@+id/disclaimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="80dp"
             android:gravity="center_horizontal"
             android:text="@string/details_disclaimer"
-            android:textColor="@color/colorBlack"
-            android:textSize="14sp"
+            android:textColor="?attr/subTextColor"
+            android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/phone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

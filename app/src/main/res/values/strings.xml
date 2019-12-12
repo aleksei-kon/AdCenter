@@ -13,4 +13,8 @@
     <string name="no_result_message">No result found</string>
     <string name="search_hint">search…</string>
     <string name="details_disclaimer">AdCenter isn\'t responsible for the quality of the goods</string>
+    <string name="description">Description:</string>
+    <string name="contacts">Contacts:</string>
+    <string name="datePrefix">Creation date: </string>
+    <string name="viewsPrefix">Views: </string>
 </resources>

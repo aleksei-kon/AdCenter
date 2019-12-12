@@ -2,7 +2,7 @@ package com.adcenter.ui
 
 interface IPageConfiguration {
 
-    fun getToolbarTitle(): String
+    val toolbarTitle: String
 
     val toolbarScrollBehaviour: ToolbarScrollBehaviour
 

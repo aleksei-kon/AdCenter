@@ -16,4 +16,8 @@ class ResourceProvider(private val context: Context) : IResourceProvider {
     override val searchTitle: String = getString(R.string.search_title)
 
     override val settingsTitle: String = getString(R.string.settings_title)
+
+    override val datePrefix: String = getString(R.string.datePrefix)
+
+    override val viewsPrefix: String = getString(R.string.viewsPrefix)
 }
