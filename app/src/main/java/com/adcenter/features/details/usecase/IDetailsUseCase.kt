@@ -1,0 +1,10 @@
+package com.adcenter.features.details.usecase
+
+import com.adcenter.features.details.data.DetailsModel
+import com.adcenter.features.details.data.DetailsRequestParams
+import com.adcenter.utils.Result
+
+interface IDetailsUseCase {
+
+    suspend fun load(requestParams: DetailsRequestParams): Result<DetailsModel>
+}

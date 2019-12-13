@@ -6,15 +6,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.isConnectedToNetwork
+import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.NavigationItem.*
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import com.adcenter.ui.fragments.*
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.isConnectedToNetwork
-import com.adcenter.extensions.visible
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -132,7 +132,7 @@ class MainActivity : OfflineActivity() {
             super.onFragmentViewCreated(fragmentManager, fragment, view, savedInstanceState)
 
             if (fragment is IPageConfiguration) {
-                title = fragment.getToolbarTitle()
+                title = fragment.toolbarTitle
                 setupLayoutConfiguration(fragment.toolbarScrollBehaviour)
             }
         }

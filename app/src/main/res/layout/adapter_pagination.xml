@@ -6,4 +6,5 @@
     android:layout_margin="8dp"
     android:layout_gravity="center_horizontal"
     android:indeterminate="true"
+    android:indeterminateTint="?attr/progressColor"
     android:indeterminateTintMode="src_atop" />

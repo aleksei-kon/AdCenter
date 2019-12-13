@@ -22,7 +22,7 @@ import org.koin.core.qualifier.named
 
 class MyAdsFragment : BaseFragment(), IPageConfiguration {
 
-    override fun getToolbarTitle(): String = getString(R.string.my_ads_title)
+    override val toolbarTitle: String by lazy { getString(R.string.my_ads_title) }
 
     override val layout: Int = R.layout.layout_recycler
 

@@ -7,5 +7,6 @@ val koinModules = listOf(
     LastAdsDependency.module,
     MyAdsDependency.module,
     BookmarksDependency.module,
-    SearchDependency.module
+    SearchDependency.module,
+    DetailsDependency.module
 )

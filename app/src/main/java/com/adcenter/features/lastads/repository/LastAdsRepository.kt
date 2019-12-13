@@ -39,9 +39,11 @@ class LastAdsRepository : ILastAdsRepository {
             val place = "Place $number"
             val price = "${(1..10000).random()} byn"
             val views = (1..1000).random()
+            val id = "id:$number"
 
             response.add(
                 AdItemModel(
+                    id = id,
                     photoUrl = url,
                     title = title,
                     price = price,
