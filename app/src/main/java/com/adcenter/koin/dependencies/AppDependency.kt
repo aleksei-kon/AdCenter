@@ -1,15 +1,34 @@
 package com.adcenter.koin.dependencies
 
-import com.adcenter.app.theme.IThemeManager
-import com.adcenter.app.theme.ThemeManager
-import com.adcenter.utils.IResourceProvider
-import com.adcenter.utils.ResourceProvider
+import com.adcenter.utils.resource.IResourceProvider
+import com.adcenter.utils.resource.ResourceProvider
+import com.adcenter.ui.theme.IThemeManager
+import com.adcenter.ui.theme.ThemeManager
+import com.adcenter.utils.token.ITokenManager
+import com.adcenter.utils.token.TokenManager
+import com.google.gson.Gson
+import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 object AppDependency {
     val module = module {
-        single<IResourceProvider> { ResourceProvider(androidContext()) }
-        single<IThemeManager> { ThemeManager(androidContext()) }
+        single { Gson() }
+        single { OkHttpClient() }
+        single<IResourceProvider> {
+            ResourceProvider(
+                androidContext()
+            )
+        }
+        single<IThemeManager> {
+            ThemeManager(
+                androidContext()
+            )
+        }
+        single<ITokenManager> {
+            TokenManager(
+                androidContext()
+            )
+        }
     }
 }

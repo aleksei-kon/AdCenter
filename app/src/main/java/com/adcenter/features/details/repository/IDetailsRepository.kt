@@ -1,6 +1,6 @@
 package com.adcenter.features.details.repository
 
-import com.adcenter.features.details.data.DetailsModel
+import com.adcenter.entities.view.DetailsModel
 import com.adcenter.features.details.data.DetailsRequestParams
 import com.adcenter.utils.Result
 

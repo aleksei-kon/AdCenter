@@ -2,7 +2,7 @@ package com.adcenter.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.adcenter.app.theme.IThemeManager
+import com.adcenter.ui.theme.IThemeManager
 import org.koin.android.ext.android.inject
 
 abstract class BaseActivity : AppCompatActivity() {

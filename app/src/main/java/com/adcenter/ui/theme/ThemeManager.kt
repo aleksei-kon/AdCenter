@@ -1,14 +1,13 @@
-package com.adcenter.app.theme
+package com.adcenter.ui.theme
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import com.adcenter.R
+import com.adcenter.ui.theme.ThemeManagerConstants.THEME_MODE
+import com.adcenter.ui.theme.ThemeManagerConstants.THEME_PREFERENCES
 
 class ThemeManager(context: Context) : IThemeManager {
-
-    private val THEME_MODE = "THEME_MODE"
-    private val THEME_PREFERENCES = "THEME_PREFERENCES"
 
     private val preferences: SharedPreferences =
         context.getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)

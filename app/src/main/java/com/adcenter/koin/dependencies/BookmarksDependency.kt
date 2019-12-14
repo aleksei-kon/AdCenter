@@ -13,15 +13,12 @@ import org.koin.dsl.module
 object BookmarksDependency {
     val module = module {
         scope(named<BookmarksFragment>()) {
-
             scoped<IBookmarksRepository> { BookmarksRepository() }
-
             scoped<IBookmarksUseCase> {
                 BookmarksUseCase(
                     repository = get()
                 )
             }
-
             viewModel {
                 BookmarksViewModel(
                     bookmarksUseCase = get()

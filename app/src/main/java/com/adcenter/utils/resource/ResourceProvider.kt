@@ -1,9 +1,10 @@
-package com.adcenter.utils
+package com.adcenter.utils.resource
 
 import android.content.Context
 import com.adcenter.R
 
-class ResourceProvider(private val context: Context) : IResourceProvider {
+class ResourceProvider(private val context: Context) :
+    IResourceProvider {
 
     private fun getString(resId: Int) = context.getString(resId)
 

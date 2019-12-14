@@ -3,7 +3,7 @@ package com.adcenter.features.search.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.search.data.SearchModel
 import com.adcenter.features.search.data.SearchRequestParams

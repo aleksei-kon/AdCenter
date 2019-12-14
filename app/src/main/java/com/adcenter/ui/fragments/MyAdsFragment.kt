@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.features.myads.MyAdsConstants.MY_ADS_SCOPE_ID
@@ -67,23 +67,34 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
         viewModel.myAdsData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is MyAdsUiState.Loading -> {
-                    progressBar.visible()
                     recyclerView.gone()
                     noDataMessage.gone()
+                    progressBar.visible()
                 }
                 is MyAdsUiState.Success -> {
                     swipeRefresh.isRefreshing = false
                     progressBar.gone()
-                    noDataMessage.gone()
-                    recyclerView.visible()
+
+                    if (it.result.ads.isEmpty()) {
+                        recyclerView.gone()
+                        noDataMessage.visible()
+                    } else {
+                        noDataMessage.gone()
+                        recyclerView.visible()
+                    }
+
                     setRecyclerItems(it.result.ads)
                     setScrollListener()
                 }
                 is MyAdsUiState.Error -> {
                     swipeRefresh.isRefreshing = false
                     progressBar.gone()
-                    noDataMessage.visible()
-                    recyclerView.visible()
+
+                    if (adapter.isEmpty()) {
+                        recyclerView.gone()
+                        noDataMessage.visible()
+                    }
+
                     setScrollListener()
                 }
             }
@@ -91,12 +102,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun setRecyclerItems(items: List<AdItemModel>) {
-        if (items.isEmpty()) {
-            noDataMessage.visible()
-        } else {
-            noDataMessage.gone()
-            adapter.setItems(items)
-        }
+        adapter.setItems(items)
     }
 
     private fun deleteScrollListener() {

@@ -1,6 +1,6 @@
 package com.adcenter.features.details.uistate
 
-import com.adcenter.features.details.data.DetailsModel
+import com.adcenter.entities.view.DetailsModel
 
 sealed class DetailsUiState {
     object Loading : DetailsUiState()
