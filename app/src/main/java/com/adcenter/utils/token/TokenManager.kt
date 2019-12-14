@@ -10,16 +10,12 @@ class TokenManager(context: Context) : ITokenManager {
     private val preferences: SharedPreferences =
         context.getSharedPreferences(AUTH, Context.MODE_PRIVATE)
 
-    override fun getToken(): String? =
-        preferences.getString(ACCESS_TOKEN, null)
+    override var token: String?
+        get() = preferences.getString(ACCESS_TOKEN, null)
+        set(value) = preferences.edit().putString(ACCESS_TOKEN, value).apply()
 
-    override fun hasToken(): Boolean =
-        preferences.contains(ACCESS_TOKEN)
-
-    override fun updateToken(token: String) =
-        preferences.edit()
-            .putString(ACCESS_TOKEN, token)
-            .apply()
+    override val hasToken: Boolean
+        get() = preferences.contains(ACCESS_TOKEN)
 
     override fun removeToken() =
         preferences.edit()

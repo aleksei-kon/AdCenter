@@ -1,23 +1,18 @@
 package com.adcenter.ui.fragments
 
-import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import com.adcenter.R
 import com.adcenter.app.AppConfig
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
-import com.adcenter.utils.EmptyTextWatcher
+import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.theme.IThemeManager
 import kotlinx.android.synthetic.main.fragment_settings.*
-import okhttp3.*
 import org.koin.android.ext.android.inject
-import java.io.File
 
 class SettingsFragment : BaseFragment(), IPageConfiguration {
 
@@ -32,25 +27,34 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        themeSwitch.setOnClickListener {
+        if (AppConfig.isGuest) {
+            loginButton.visible()
+            logoutButton.gone()
+        } else {
+            loginButton.gone()
+            logoutButton.visible()
+        }
+
+        switchThemeButton.setOnClickListener {
             themeManager.switchTheme()
-            activity?.recreate()
+            requireActivity().recreate()
         }
 
-        buttonChoose.setOnClickListener {
-            pickFromCamera()
+        devSettingsButton.setOnClickListener {
+            requireContext().startActivity(
+                Intent(
+                    requireContext(),
+                    DevSettingsActivity::class.java
+                )
+            )
         }
-
-        urlEditText.setText(AppConfig.backendUrl)
-
-        urlEditText.addTextChangedListener(object : EmptyTextWatcher() {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                AppConfig.backendUrl = urlEditText.text.toString()
-            }
-        })
     }
+}
 
-    private fun pickFromGallery() {
+
+/*
+
+private fun pickFromGallery() {
         val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(takePicture, 0)
     }
@@ -104,4 +108,4 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
             cursor?.close()
         }
     }
-}
+ */

@@ -51,4 +51,23 @@
         <item name="android:textColor">?attr/toolbarContentColor</item>
     </style>
 
+    <style name="TextButtonStyle">
+        <item name="android:padding">6dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/bottomNavSelectedItemColor</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColorHint">?attr/subTextColor</item>
+        <item name="colorControlNormal">#2196F3</item>
+        <item name="colorControlActivated">#FFC107</item>
+        <item name="colorControlHighlight">#4CAF50</item>
+    </style>
+
 </resources>

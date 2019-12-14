@@ -17,4 +17,10 @@
     <string name="contacts">Contacts:</string>
     <string name="datePrefix">Creation date: </string>
     <string name="viewsPrefix">Views: </string>
+    <string name="backend_url">backend url</string>
+    <string name="save">Save</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="switch_theme">Switch theme</string>
+    <string name="dev_settings_button">Dev settings</string>
 </resources>

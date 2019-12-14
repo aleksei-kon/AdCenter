@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-
-    <TextView
-        android:id="@+id/imagePath"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/buttonChoose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="choose" />
-
-    <Button
-        android:id="@+id/buttonUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="upload" />
-
-    <TextView
-        android:id="@+id/themeSwitch"
+    <LinearLayout
+        android:id="@+id/settingsItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/settings_title"
-        android:textSize="40sp" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/urlEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/loginButton"
+            style="@style/TextButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/logoutButton"
+            style="@style/TextButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/switchThemeButton"
+            style="@style/TextButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_theme" />
+
+        <TextView
+            android:id="@+id/devSettingsButton"
+            style="@style/TextButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dev_settings_button" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
