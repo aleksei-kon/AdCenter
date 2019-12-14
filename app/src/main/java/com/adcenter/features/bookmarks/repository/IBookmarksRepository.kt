@@ -1,7 +1,7 @@
 package com.adcenter.features.bookmarks.repository
 
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.utils.Result
 
 interface IBookmarksRepository {

@@ -1,4 +1,4 @@
-package com.adcenter.entities
+package com.adcenter.entities.view
 
 import com.adcenter.utils.Constants.EMPTY
 

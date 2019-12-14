@@ -1,6 +1,6 @@
 package com.adcenter.features.search.repository
 
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.search.data.SearchRequestParams
 import com.adcenter.utils.Result
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adcenter.R
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.layoutInflater
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.ui.activities.DetailsActivity
@@ -49,11 +49,11 @@ class AdsAdapter(private val context: Context) : BasePaginationAdapter<AdItemMod
                     views.text = item.views.toString()
 
                     setOnClickListener {
-                        val intent = Intent(context, DetailsActivity::class.java).apply {
-                            putExtra(DETAILS_ID_KEY, item.id)
-                        }
-
-                        context.startActivity(intent)
+                        context.startActivity(
+                            Intent(context, DetailsActivity::class.java).apply {
+                                putExtra(DETAILS_ID_KEY, item.id)
+                            }
+                        )
                     }
                 }
             }

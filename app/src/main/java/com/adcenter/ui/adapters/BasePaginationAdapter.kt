@@ -15,6 +15,8 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
 
     protected abstract val paginationLayout: Int
 
+    fun isEmpty() = items.isEmpty()
+
     abstract fun setItems(items: Collection<T>)
 
     abstract fun getItemViewHolder(parent: ViewGroup): BaseItemViewHolder

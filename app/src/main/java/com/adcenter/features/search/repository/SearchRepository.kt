@@ -1,20 +1,31 @@
 package com.adcenter.features.search.repository
 
-import com.adcenter.entities.AdItemModel
+import com.adcenter.data.Callable
+import com.adcenter.data.NetworkDataRequest
+import com.adcenter.data.getSearchUrl
+import com.adcenter.data.processors.AdsDataProcessor
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.search.data.SearchRequestParams
 import com.adcenter.utils.Result
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 
 class SearchRepository : ISearchRepository {
 
+    private val processor = AdsDataProcessor()
+
     override suspend fun getSearchResult(params: SearchRequestParams): Result<List<AdItemModel>> {
         return withContext(Dispatchers.IO) {
-
-            delay(4000)
-
             suspendCancellableCoroutine<Result<List<AdItemModel>>> { continuation ->
                 runCatching {
-                    val response = testResult(params)
+                    val request = NetworkDataRequest(getSearchUrl(params))
+
+                    val response = Callable<List<AdItemModel>>()
+                        .setRequest(request)
+                        .setProcessor(processor)
+                        .call()
 
                     if (isActive) {
                         continuation.resume(Result.Success(response)) {}
@@ -26,31 +37,5 @@ class SearchRepository : ISearchRepository {
                 }
             }
         }
-    }
-
-    private fun testResult(params: SearchRequestParams): List<AdItemModel> {
-        val response = mutableListOf<AdItemModel>()
-
-        for (number in params.pageNumber * 10 until (params.pageNumber + 1) * 10) {
-            val url = "https://data.whicdn.com/images/322304619/original.jpg"
-            val title = "Search title for ${params.searchText} $number"
-            val place = "Place $number"
-            val price = "${(1..10000).random()} byn"
-            val views = (1..1000).random()
-            val id = "id:$number"
-
-            response.add(
-                AdItemModel(
-                    id = id,
-                    photoUrl = url,
-                    title = title,
-                    price = price,
-                    place = place,
-                    views = views
-                )
-            )
-        }
-
-        return response
     }
 }

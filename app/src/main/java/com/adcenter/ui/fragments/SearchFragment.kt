@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.features.search.SearchConstants.SEARCH_SCOPE_ID
@@ -81,18 +81,22 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
                 }
                 is SearchUiState.Success -> {
                     if (it.result.ads.isEmpty()) {
+                        recyclerView.gone()
                         noDataMessage.visible()
                     } else {
                         noDataMessage.gone()
+                        recyclerView.visible()
                     }
 
-                    recyclerView.visible()
                     setRecyclerItems(it.result.ads)
                     setScrollListener()
                 }
                 is SearchUiState.Error -> {
-                    noDataMessage.visible()
-                    recyclerView.gone()
+                    if (adapter.isEmpty()) {
+                        recyclerView.gone()
+                        noDataMessage.visible()
+                    }
+
                     setScrollListener()
                 }
             }

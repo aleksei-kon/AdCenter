@@ -6,12 +6,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
+import com.adcenter.entities.view.AdItemModel
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.visible
 import com.adcenter.features.bookmarks.BookmarksConstants.BOOKMARKS_SCOPE_ID
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
-import com.adcenter.entities.AdItemModel
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
@@ -67,23 +67,34 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
         viewModel.bookmarksData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BookmarksUiState.Loading -> {
-                    progressBar.visible()
                     recyclerView.gone()
                     noDataMessage.gone()
+                    progressBar.visible()
                 }
                 is BookmarksUiState.Success -> {
                     swipeRefresh.isRefreshing = false
                     progressBar.gone()
-                    noDataMessage.gone()
-                    recyclerView.visible()
+
+                    if (it.result.ads.isEmpty()) {
+                        recyclerView.gone()
+                        noDataMessage.visible()
+                    } else {
+                        noDataMessage.gone()
+                        recyclerView.visible()
+                    }
+
                     setRecyclerItems(it.result.ads)
                     setScrollListener()
                 }
                 is BookmarksUiState.Error -> {
                     swipeRefresh.isRefreshing = false
                     progressBar.gone()
-                    noDataMessage.visible()
-                    recyclerView.visible()
+
+                    if (adapter.isEmpty()) {
+                        recyclerView.gone()
+                        noDataMessage.visible()
+                    }
+
                     setScrollListener()
                 }
             }
@@ -91,12 +102,7 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun setRecyclerItems(items: List<AdItemModel>) {
-        if (items.isEmpty()) {
-            noDataMessage.visible()
-        } else {
-            noDataMessage.gone()
-            adapter.setItems(items)
-        }
+        adapter.setItems(items)
     }
 
     private fun deleteScrollListener() {

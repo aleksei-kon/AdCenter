@@ -3,7 +3,7 @@ package com.adcenter.features.lastads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.AdItemModel
+import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.lastads.data.LastAdsModel
 import com.adcenter.features.lastads.data.LastAdsRequestParams

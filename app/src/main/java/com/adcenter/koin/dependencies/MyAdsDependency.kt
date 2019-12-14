@@ -13,15 +13,12 @@ import org.koin.dsl.module
 object MyAdsDependency {
     val module = module {
         scope(named<MyAdsFragment>()) {
-
             scoped<IMyAdsRepository> { MyAdsRepository() }
-
             scoped<IMyAdsUseCase> {
                 MyAdsUseCase(
                     repository = get()
                 )
             }
-
             viewModel {
                 MyAdsViewModel(
                     myAdsUseCase = get()
