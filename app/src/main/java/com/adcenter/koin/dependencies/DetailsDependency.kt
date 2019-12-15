@@ -13,7 +13,11 @@ import org.koin.dsl.module
 object DetailsDependency {
     val module = module {
         scope(named<DetailsActivity>()) {
-            scoped<IDetailsRepository> { DetailsRepository() }
+            scoped<IDetailsRepository> {
+                DetailsRepository(
+                    processor = get()
+                )
+            }
             scoped<IDetailsUseCase> {
                 DetailsUseCase(
                     repository = get()

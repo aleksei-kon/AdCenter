@@ -13,7 +13,11 @@ import org.koin.dsl.module
 object AdRequestsDependency {
     val module = module {
         scope(named<AdRequestsFragment>()) {
-            scoped<IAdRequestsRepository> { AdRequestsRepository() }
+            scoped<IAdRequestsRepository> {
+                AdRequestsRepository(
+                    processor = get()
+                )
+            }
             scoped<IAdRequestsUseCase> {
                 AdRequestsUseCase(
                     repository = get()

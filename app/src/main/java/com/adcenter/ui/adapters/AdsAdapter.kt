@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.layoutInflater
+import com.adcenter.extensions.setTextWithVisibility
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.ui.activities.DetailsActivity
 import com.bumptech.glide.Glide
@@ -43,10 +44,10 @@ class AdsAdapter(private val context: Context) : BasePaginationAdapter<AdItemMod
                     .into(itemView.adPhoto)
 
                 itemView.apply {
-                    title.text = item.title
-                    price.text = item.price
-                    place.text = item.place
-                    views.text = item.views.toString()
+                    title.setTextWithVisibility(item.title)
+                    price.setTextWithVisibility(item.price)
+                    place.setTextWithVisibility(item.place)
+                    views.setTextWithVisibility(item.views)
 
                     setOnClickListener {
                         context.startActivity(

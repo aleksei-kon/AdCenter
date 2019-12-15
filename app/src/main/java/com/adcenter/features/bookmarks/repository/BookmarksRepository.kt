@@ -12,9 +12,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class BookmarksRepository : IBookmarksRepository {
-
-    private val processor = AdsDataProcessor()
+class BookmarksRepository(private val processor: AdsDataProcessor) : IBookmarksRepository {
 
     override suspend fun getBookmarks(params: BookmarksRequestParams): Result<List<AdItemModel>> {
         return withContext(Dispatchers.IO) {

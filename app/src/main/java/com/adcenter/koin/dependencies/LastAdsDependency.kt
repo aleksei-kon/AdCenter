@@ -13,7 +13,11 @@ import org.koin.dsl.module
 object LastAdsDependency {
     val module = module {
         scope(named<LastAdsFragment>()) {
-            scoped<ILastAdsRepository> { LastAdsRepository() }
+            scoped<ILastAdsRepository> {
+                LastAdsRepository(
+                    processor = get()
+                )
+            }
             scoped<ILastAdsUseCase> {
                 LastAdsUseCase(
                     repository = get()

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.layoutInflater
+import com.adcenter.extensions.setTextWithVisibility
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.ui.activities.DetailsActivity
 import com.bumptech.glide.Glide
@@ -45,8 +46,8 @@ class AdRequestsAdapter(private val context: Context) : BasePaginationAdapter<Ad
                     .into(itemView.adPhoto)
 
                 itemView.apply {
-                    title.text = item.title
-                    date.text = item.date
+                    title.setTextWithVisibility(item.title)
+                    date.setTextWithVisibility(item.date)
 
                     setOnClickListener {
                         context.startActivity(

@@ -3,6 +3,8 @@ package com.adcenter.utils
 object Constants {
 
     const val EMPTY = ""
+    const val DATE_FORMAT_PATTERN = "d MMM y H:mm"
+    const val MILLISECONDS_PREFIX = 1000
 
     object Request {
 

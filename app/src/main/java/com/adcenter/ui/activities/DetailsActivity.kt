@@ -13,18 +13,14 @@ import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.adapters.PhotosAdapter
 import com.adcenter.utils.Constants.EMPTY
-import com.adcenter.utils.resource.IResourceProvider
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
 import org.koin.android.ext.android.getKoin
-import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 
 class DetailsActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_details
-
-    private val resourceProvider: IResourceProvider by inject()
 
     private val activityScope =
         getKoin().getOrCreateScope(DETAILS_SCOPE_ID, named<DetailsActivity>())
@@ -83,8 +79,8 @@ class DetailsActivity : BaseActivity() {
         title = model.title
         price.setTextWithVisibility(model.price)
         location.setTextWithVisibility(model.location)
-        date.setTextWithVisibility("${resourceProvider.datePrefix}${model.date}")
-        views.setTextWithVisibility("${resourceProvider.viewsPrefix}${model.views}")
+        date.setTextWithVisibility(model.date)
+        views.setTextWithVisibility(model.views)
         synopsis.setTextWithVisibility(model.synopsis)
         username.setTextWithVisibility(model.username)
         phone.setTextWithVisibility(model.phone)

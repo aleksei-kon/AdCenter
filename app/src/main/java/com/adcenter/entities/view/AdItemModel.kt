@@ -9,5 +9,5 @@ data class AdItemModel(
     val price: String = EMPTY,
     val place: String = EMPTY,
     val date: String = EMPTY,
-    val views: Int = 0
+    val views: String = EMPTY
 )

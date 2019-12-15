@@ -12,9 +12,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class AdRequestsRepository : IAdRequestsRepository {
-
-    private val processor = AdsDataProcessor()
+class AdRequestsRepository(private val processor: AdsDataProcessor) : IAdRequestsRepository {
 
     override suspend fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>> {
         return withContext(Dispatchers.IO) {

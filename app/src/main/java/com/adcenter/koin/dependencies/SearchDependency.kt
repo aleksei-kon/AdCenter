@@ -13,7 +13,11 @@ import org.koin.dsl.module
 object SearchDependency {
     val module = module {
         scope(named<SearchFragment>()) {
-            scoped<ISearchRepository> { SearchRepository() }
+            scoped<ISearchRepository> {
+                SearchRepository(
+                    processor = get()
+                )
+            }
             scoped<ISearchUseCase> {
                 SearchUseCase(
                     repository = get()
