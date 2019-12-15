@@ -42,7 +42,7 @@ class NetworkDataRequest(
         }
 
         val requestBuilder = Request.Builder().url(url)
-        tokenManager.getToken()?.let { requestBuilder.addHeader(AUTHORIZATION_HEADER, it) }
+        tokenManager.token?.let { requestBuilder.addHeader(AUTHORIZATION_HEADER, it) }
         requestBody?.let { requestBuilder.post(it) }
 
         val response = client

@@ -2,11 +2,9 @@ package com.adcenter.utils.token
 
 interface ITokenManager {
 
-    fun getToken(): String?
+    var token: String?
 
-    fun hasToken(): Boolean
-
-    fun updateToken(token: String)
+    val hasToken: Boolean
 
     fun removeToken()
 }

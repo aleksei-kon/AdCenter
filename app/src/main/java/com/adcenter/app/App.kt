@@ -9,5 +9,7 @@ class App : Application() {
         super.onCreate()
 
         initKoin()
+
+        AppConfig.initConfig()
     }
 }

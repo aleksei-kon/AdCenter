@@ -3,8 +3,8 @@
     android:id="@+id/progressBar"
     android:layout_width="match_parent"
     android:layout_height="28dp"
-    android:layout_margin="8dp"
     android:layout_gravity="center_horizontal"
+    android:layout_margin="8dp"
     android:indeterminate="true"
     android:indeterminateTint="?attr/progressColor"
     android:indeterminateTintMode="src_atop" />

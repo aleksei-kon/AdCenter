@@ -13,5 +13,14 @@
         <attr name="mainTextColor" format="color" />
         <attr name="subTextColor" format="color" />
         <attr name="iconColor" format="color" />
+        <attr name="secondaryButtonTextColor" format="color" />
+        <attr name="secondaryButtonIconColor" format="color" />
+        <attr name="editTextColor" format="color" />
+        <attr name="editTextHintColor" format="color" />
+        <attr name="editTextControlNormalColor" format="color" />
+        <attr name="editTextControlActivatedColor" format="color" />
+        <attr name="editTextSelectionColor" format="color" />
+        <attr name="sliderSelectedItemColor" format="color" />
+        <attr name="sliderItemColor" format="color" />
     </declare-styleable>
 </resources>
