@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,30 +14,32 @@
 
         <TextView
             android:id="@+id/loginButton"
-            style="@style/TextButtonStyle"
+            style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/logoutButton"
-            style="@style/TextButtonStyle"
+            style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/logout"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/switchThemeButton"
-            style="@style/TextButtonStyle"
+            style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/switch_theme" />
 
         <TextView
             android:id="@+id/devSettingsButton"
-            style="@style/TextButtonStyle"
+            style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dev_settings_button" />

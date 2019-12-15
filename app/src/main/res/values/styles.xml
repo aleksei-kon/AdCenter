@@ -3,42 +3,60 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#005085</item>
-        <item name="colorPrimaryDark">#003957</item>
-        <item name="colorAccent">#FFD545</item>
-        <item name="colorControlNormal">@color/white</item>
-        <item name="backgroundColor" format="color">@color/white</item>
-        <item name="toolbarBackgroundColor" format="color">@color/darkBlue</item>
-        <item name="toolbarContentColor" format="color">@color/white</item>
-        <item name="bottomNavSelectedItemColor" format="color">@color/darkBlue</item>
-        <item name="bottomNavItemColor" format="color">@color/skyBlue</item>
-        <item name="bottomNavBackgroundColor" format="color">@color/darkWhite1</item>
-        <item name="progressColor" format="color">#FFD545</item>
-        <item name="titleColor" format="color">@color/black</item>
-        <item name="textColor" format="color">@color/black</item>
-        <item name="mainTextColor" format="color">@color/blue</item>
-        <item name="subTextColor" format="color">@color/grey1</item>
-        <item name="iconColor" format="color">@color/darkBlue</item>
+        <item name="colorPrimary">#065082</item>
+        <item name="colorPrimaryDark">#023C5F</item>
+        <item name="colorAccent">#FAD250</item>
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="backgroundColor" format="color">#FFFFFF</item>
+        <item name="toolbarBackgroundColor" format="color">#065082</item>
+        <item name="toolbarContentColor" format="color">#FFFFFF</item>
+        <item name="sliderSelectedItemColor" format="color">#E60A5284</item>
+        <item name="sliderItemColor" format="color">#4D91B4D2</item>
+        <item name="bottomNavSelectedItemColor" format="color">#065082</item>
+        <item name="bottomNavItemColor" format="color">#91B4D2</item>
+        <item name="bottomNavBackgroundColor" format="color">#FCFCFC</item>
+        <item name="progressColor" format="color">#FAD250</item>
+        <item name="titleColor" format="color">#000000</item>
+        <item name="textColor" format="color">#050505</item>
+        <item name="mainTextColor" format="color">#204C7E</item>
+        <item name="subTextColor" format="color">#67707A</item>
+        <item name="iconColor" format="color">#065082</item>
+        <item name="secondaryButtonTextColor" format="color">#204C7E</item>
+        <item name="secondaryButtonIconColor" format="color">#204C7E</item>
+        <item name="editTextColor" format="color">#204C7E</item>
+        <item name="editTextHintColor" format="color">#91B4D2</item>
+        <item name="editTextControlNormalColor" format="color">#023C5F</item>
+        <item name="editTextControlActivatedColor" format="color">#FAD250</item>
+        <item name="editTextSelectionColor" format="color">#CC96B4D7</item>
     </style>
 
     <!-- Application dark theme. -->
     <style name="AppDarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/lightBlack</item>
-        <item name="colorPrimaryDark">@color/lightBlack</item>
-        <item name="colorAccent">@color/darkBlue</item>
-        <item name="colorControlNormal">@color/white</item>
-        <item name="backgroundColor" format="color">@color/darkGrey1</item>
-        <item name="toolbarBackgroundColor" format="color">@color/lightBlack</item>
-        <item name="toolbarContentColor" format="color">@color/white</item>
-        <item name="bottomNavSelectedItemColor" format="color">@color/grey3</item>
-        <item name="bottomNavItemColor" format="color">@color/lightGrey2</item>
-        <item name="bottomNavBackgroundColor" format="color">@color/darkGrey2</item>
-        <item name="progressColor" format="color">@color/greyBlue</item>
-        <item name="titleColor" format="color">@color/darkWhite1</item>
-        <item name="textColor" format="color">@color/darkWhite2</item>
-        <item name="mainTextColor" format="color">@color/lightBlue2</item>
-        <item name="subTextColor" format="color">@color/lightGrey4</item>
-        <item name="iconColor" format="color">@color/grey3</item>
+        <item name="colorPrimary">#181B1F</item>
+        <item name="colorPrimaryDark">#181B1F</item>
+        <item name="colorAccent">#065082</item>
+        <item name="colorControlNormal">#E0E0E0</item>
+        <item name="backgroundColor" format="color">#282B2F</item>
+        <item name="toolbarBackgroundColor" format="color">#181B1F</item>
+        <item name="toolbarContentColor" format="color">#E0E0E0</item>
+        <item name="sliderSelectedItemColor" format="color">#094D7C</item>
+        <item name="sliderItemColor" format="color">#4DB9BDC4</item>
+        <item name="bottomNavSelectedItemColor" format="color">#5C789C</item>
+        <item name="bottomNavItemColor" format="color">#B9BDC4</item>
+        <item name="bottomNavBackgroundColor" format="color">#222529</item>
+        <item name="progressColor" format="color">#46617D</item>
+        <item name="titleColor" format="color">#FAFAFA</item>
+        <item name="textColor" format="color">#E0E0E0</item>
+        <item name="mainTextColor" format="color">#5181B8</item>
+        <item name="subTextColor" format="color">#939393</item>
+        <item name="iconColor" format="color">#5C789C</item>
+        <item name="secondaryButtonTextColor" format="color">#5C789C</item>
+        <item name="secondaryButtonIconColor" format="color">#5C789C</item>
+        <item name="editTextColor" format="color">#E0E0E0</item>
+        <item name="editTextHintColor" format="color">#939393</item>
+        <item name="editTextControlNormalColor" format="color">#FAFAFA</item>
+        <item name="editTextControlActivatedColor" format="color">#094D7C</item>
+        <item name="editTextSelectionColor" format="color">#CC939393</item>
     </style>
 
     <style name="collapsingToolbarLayoutTitleColorCollapsed" parent="@android:style/TextAppearance.Medium">
@@ -51,23 +69,27 @@
         <item name="android:textColor">?attr/toolbarContentColor</item>
     </style>
 
-    <style name="TextButtonStyle">
+    <style name="SecondaryButtonStyle">
         <item name="android:padding">6dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">?attr/bottomNavSelectedItemColor</item>
+        <item name="android:textColor">?attr/secondaryButtonTextColor</item>
     </style>
 
-    <style name="EditTextStyle">
+    <style name="EditTextTheme">
+        <item name="theme">@style/EditTextStyle</item>
+    </style>
+
+    <style name="EditTextStyle" parent="@style/Widget.AppCompat.EditText">
         <item name="android:maxLines">1</item>
         <item name="android:lines">1</item>
         <item name="android:paddingEnd">8dp</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?attr/textColor</item>
-        <item name="android:textColorHint">?attr/subTextColor</item>
-        <item name="colorControlNormal">#2196F3</item>
-        <item name="colorControlActivated">#FFC107</item>
-        <item name="colorControlHighlight">#4CAF50</item>
+        <item name="android:textColorPrimary">?attr/editTextColor</item>
+        <item name="android:textColorHint">?attr/editTextHintColor</item>
+        <item name="colorControlNormal">?attr/editTextControlNormalColor</item>
+        <item name="colorControlActivated">?attr/editTextControlActivatedColor</item>
+        <item name="colorAccent">?attr/editTextSelectionColor</item>
     </style>
 
 </resources>

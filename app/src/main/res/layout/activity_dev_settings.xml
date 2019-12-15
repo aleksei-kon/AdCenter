@@ -36,7 +36,7 @@
 
                 <EditText
                     android:id="@+id/backendUrlEditText"
-                    style="@style/EditTextStyle"
+                    style="@style/EditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/backend_url" />
@@ -44,7 +44,7 @@
 
             <TextView
                 android:id="@+id/saveButton"
-                style="@style/TextButtonStyle"
+                style="@style/SecondaryButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

@@ -37,8 +37,8 @@
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="4dp"
                 app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="?attr/bottomNavSelectedItemColor"
-                app:sliderIndicatorUnselectedColor="?attr/bottomNavItemColor" />
+                app:sliderIndicatorSelectedColor="?attr/sliderSelectedItemColor"
+                app:sliderIndicatorUnselectedColor="?attr/sliderItemColor" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
