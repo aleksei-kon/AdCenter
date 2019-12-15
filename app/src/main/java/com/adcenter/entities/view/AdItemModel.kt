@@ -8,5 +8,6 @@ data class AdItemModel(
     val title: String = EMPTY,
     val price: String = EMPTY,
     val place: String = EMPTY,
+    val date: String = EMPTY,
     val views: Int = 0
 )

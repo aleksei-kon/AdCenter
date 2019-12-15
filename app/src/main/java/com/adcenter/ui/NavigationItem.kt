@@ -52,6 +52,16 @@ sealed class NavigationItem : KoinComponent {
         override val iconRes: Int = R.drawable.ic_bookmark
     }
 
+
+    class AdRequestsItem : NavigationItem() {
+
+        override val id: Int = AD_REQUESTS.ordinal
+
+        override val title: String = resourceDependency.adRequestsTitle
+
+        override val iconRes: Int = R.drawable.ic_ad_requests
+    }
+
     class SettingsItem : NavigationItem() {
 
         override val id: Int = SETTINGS.ordinal
@@ -64,8 +74,9 @@ sealed class NavigationItem : KoinComponent {
     enum class NavigationItemId {
         LAST_ADS,
         SEARCH,
-        MY_ADS,
         BOOKMARKS,
+        MY_ADS,
+        AD_REQUESTS,
         SETTINGS
     }
 }

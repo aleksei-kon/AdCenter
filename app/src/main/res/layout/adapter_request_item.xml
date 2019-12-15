@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/adPhoto"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textColor="?attr/titleColor"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,41 +28,15 @@
         tools:text="Some item title" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:textColor="?attr/subTextColor"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/place"
         app:layout_constraintStart_toEndOf="@+id/adPhoto"
-        tools:text="10 byn" />
-
-    <TextView
-        android:id="@+id/place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
-        android:textColor="?attr/subTextColor"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adPhoto"
-        tools:text="Grodno" />
-
-    <TextView
-        android:id="@+id/views"
-        android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_marginBottom="8dp"
-        android:drawableStart="@drawable/ic_views"
-        android:drawablePadding="4dp"
-        android:gravity="center_vertical"
-        android:textColor="?attr/subTextColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="15" />
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="1.12.2018" />
 </androidx.constraintlayout.widget.ConstraintLayout>

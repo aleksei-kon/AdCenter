@@ -2,6 +2,8 @@ package com.adcenter.utils.resource
 
 interface IResourceProvider {
 
+    val adRequestsTitle: String
+
     val bookmarksTitle: String
 
     val lastAdsTitle: String

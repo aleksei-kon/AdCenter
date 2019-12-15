@@ -17,6 +17,8 @@
             style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_menu_login"
+            android:drawablePadding="2dp"
             android:text="@string/login"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -26,6 +28,8 @@
             style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_menu_logout"
+            android:drawablePadding="2dp"
             android:text="@string/logout"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -35,6 +39,8 @@
             style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_menu_switch_theme"
+            android:drawablePadding="2dp"
             android:text="@string/switch_theme" />
 
         <TextView
@@ -42,6 +48,8 @@
             style="@style/SecondaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_menu_dev"
+            android:drawablePadding="2dp"
             android:text="@string/dev_settings_button" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

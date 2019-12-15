@@ -29,6 +29,7 @@ class AdsDataProcessor : IDataProcessor<List<AdItemModel>>, KoinComponent {
             title = networkModel.title ?: EMPTY,
             price = networkModel.price ?: EMPTY,
             place = networkModel.place ?: EMPTY,
+            date = (networkModel.date ?: 0L).toString(),
             views = networkModel.views ?: 0
         )
     }

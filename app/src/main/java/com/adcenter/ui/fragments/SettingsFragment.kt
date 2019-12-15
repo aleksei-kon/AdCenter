@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.adcenter.R
-import com.adcenter.app.AppConfig
+import com.adcenter.app.config.AppConfig
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
@@ -28,12 +28,12 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (AppConfig.isGuest) {
-            loginButton.visible()
-            logoutButton.gone()
-        } else {
+        if (AppConfig.isLoggedIn) {
             loginButton.gone()
             logoutButton.visible()
+        } else {
+            loginButton.visible()
+            logoutButton.gone()
         }
 
         loginButton.setOnClickListener {

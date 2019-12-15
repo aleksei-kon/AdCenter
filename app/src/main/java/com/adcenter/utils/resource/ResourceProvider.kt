@@ -8,6 +8,8 @@ class ResourceProvider(private val context: Context) :
 
     private fun getString(resId: Int) = context.getString(resId)
 
+    override val adRequestsTitle: String = getString(R.string.ad_requests_title)
+
     override val bookmarksTitle: String = getString(R.string.bookmarks_title)
 
     override val lastAdsTitle: String = getString(R.string.last_ads_title)

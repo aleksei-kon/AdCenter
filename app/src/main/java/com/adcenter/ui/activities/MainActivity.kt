@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
+import com.adcenter.app.config.AppConfig
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
 import com.adcenter.extensions.visible
@@ -63,16 +65,29 @@ class MainActivity : OfflineActivity() {
 
         initMenuItem(LastAdsItem())
         initMenuItem(SearchItem())
-        initMenuItem(MyAdsItem())
-        initMenuItem(BookmarksItem())
+
+        if (AppConfig.isLoggedIn && !AppConfig.isAdmin) {
+            initMenuItem(BookmarksItem())
+            initMenuItem(MyAdsItem())
+        }
+
+        if (AppConfig.isAdmin) {
+            initMenuItem(AdRequestsItem())
+        }
+
         initMenuItem(SettingsItem())
 
+        bottomNavigationView.setOnNavigationItemReselectedListener { }
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             selectItem(menuItem.itemId)
         }
     }
 
     private fun initMenuItem(item: NavigationItem) {
+        if (bottomNavigationView.menu.size == 5) {
+            return
+        }
+
         bottomNavigationView.menu.add(
             Menu.NONE,
             item.id,
@@ -87,6 +102,7 @@ class MainActivity : OfflineActivity() {
             SEARCH.ordinal -> SearchFragment()
             MY_ADS.ordinal -> MyAdsFragment()
             BOOKMARKS.ordinal -> BookmarksFragment()
+            AD_REQUESTS.ordinal -> AdRequestsFragment()
             SETTINGS.ordinal -> SettingsFragment()
             else -> return false
         }

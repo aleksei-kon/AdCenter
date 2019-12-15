@@ -10,5 +10,6 @@ data class NetworkAdItem(
     val title: String?,
     val price: String?,
     val place: String?,
+    val date: Long?,
     val views: Int?
 ) : Parcelable

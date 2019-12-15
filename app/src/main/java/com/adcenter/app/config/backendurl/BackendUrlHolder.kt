@@ -1,4 +1,4 @@
-package com.adcenter.utils.backendurl
+package com.adcenter.app.config.backendurl
 
 import android.content.Context
 import android.content.SharedPreferences

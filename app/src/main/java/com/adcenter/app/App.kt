@@ -1,6 +1,7 @@
 package com.adcenter.app
 
 import android.app.Application
+import com.adcenter.app.config.AppConfig
 import com.adcenter.koin.initKoin
 
 class App : Application() {
