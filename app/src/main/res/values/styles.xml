@@ -99,4 +99,21 @@
         <item name="colorAccent">?attr/editTextSelectionColor</item>
     </style>
 
+    <style name="BigEditTextTheme">
+        <item name="theme">@style/EditTextStyle</item>
+    </style>
+
+    <style name="BigEditTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:maxLines">10</item>
+        <item name="android:lines">3</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorPrimary">?attr/editTextColor</item>
+        <item name="android:textColorHint">?attr/editTextHintColor</item>
+        <item name="colorControlNormal">?attr/editTextControlNormalColor</item>
+        <item name="colorControlActivated">?attr/editTextControlActivatedColor</item>
+        <item name="colorAccent">?attr/editTextSelectionColor</item>
+    </style>
+
 </resources>

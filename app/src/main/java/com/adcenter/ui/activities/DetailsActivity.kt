@@ -11,7 +11,7 @@ import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.features.details.DetailsConstants.DETAILS_SCOPE_ID
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.viewmodel.DetailsViewModel
-import com.adcenter.ui.adapters.PhotosAdapter
+import com.adcenter.ui.adapters.DetailsPhotosAdapter
 import com.adcenter.utils.Constants.EMPTY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
@@ -87,7 +87,7 @@ class DetailsActivity : BaseActivity() {
     }
 
     private fun setRecyclerItems(items: List<String>) {
-        val adapter = PhotosAdapter(this)
+        val adapter = DetailsPhotosAdapter(this)
         postPhotosSlider.sliderAdapter = adapter
 
         if (items.isEmpty()) {

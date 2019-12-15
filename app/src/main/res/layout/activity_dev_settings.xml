@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/toolbarBackgroundColor"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Dev settings"
+        app:title="@string/dev_settings_title"
         app:titleTextColor="?attr/toolbarContentColor" />
 
     <ScrollView

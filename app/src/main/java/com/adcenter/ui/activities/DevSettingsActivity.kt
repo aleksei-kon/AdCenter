@@ -16,13 +16,17 @@ class DevSettingsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initToolbar()
+
+        backendUrlEditText.setText(urlHolder.url)
+        saveButton.setOnClickListener { saveInfo() }
+    }
+
+    private fun initToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
-
-        backendUrlEditText.setText(urlHolder.url)
-        saveButton.setOnClickListener { saveInfo() }
     }
 
     private fun saveInfo() {

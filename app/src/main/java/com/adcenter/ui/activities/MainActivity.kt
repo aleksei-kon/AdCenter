@@ -33,6 +33,11 @@ class MainActivity : OfflineActivity() {
         initToolbar()
         initNavigation()
         initFragmentManager()
+        initNewAdButton()
+
+        newAdButton.setOnClickListener {
+            startActivity(Intent(this, NewAdActivity::class.java))
+        }
 
         updateContentVisibility()
 
@@ -46,6 +51,15 @@ class MainActivity : OfflineActivity() {
 
         initNavigation()
         selectItem(defaultNavigationItem.id)
+        initNewAdButton()
+    }
+
+    private fun initNewAdButton() {
+        if (AppConfig.isAdmin || !AppConfig.isLoggedIn) {
+            newAdButton.visible()
+        } else {
+            newAdButton.visible()
+        }
     }
 
     private fun initFragmentManager() {

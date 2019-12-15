@@ -9,5 +9,6 @@ val koinModules = listOf(
     BookmarksDependency.module,
     AdRequestsDependency.module,
     SearchDependency.module,
-    DetailsDependency.module
+    DetailsDependency.module,
+    NewDetailsDependency.module
 )

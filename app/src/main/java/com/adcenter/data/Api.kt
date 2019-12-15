@@ -14,6 +14,9 @@ fun getImageDownloadUrl(name: String) =
 fun getImageUploadUrl() =
     "$HTTP${AppConfig.backendUrl}/$IMAGE/$UPLOAD"
 
+fun getNewDetailsUrl() =
+    "$HTTP${AppConfig.backendUrl}/$ADVERT/$NEW_DETAILS"
+
 fun getDetailsUrl(params: DetailsRequestParams) =
     "$HTTP${AppConfig.backendUrl}/$ADVERT/$DETAILS?$DETAILS_ID=${params.detailsId}"
 
@@ -48,6 +51,7 @@ private const val MY_ADS = "myAds"
 private const val SEARCH = "search"
 private const val DETAILS = "details"
 private const val AD_REQUESTS = "adRequests"
+private const val NEW_DETAILS = "newDetails"
 
 private const val PAGE_NUMBER = "pageNumber"
 private const val SEARCH_TEXT = "searchText"

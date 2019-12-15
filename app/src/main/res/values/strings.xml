@@ -30,4 +30,13 @@
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
     <string name="repeat_password_hint">repeat password</string>
+    <string name="dev_settings_title">Dev settings</string>
+    <string name="new_ad_title">New ad</string>
+    <string name="title_hint">title</string>
+    <string name="price_hint">price</string>
+    <string name="place_hint">place</string>
+    <string name="description_hint">description</string>
+    <string name="phone_hint">phone</string>
+    <string name="add_photo_button">Add photo</string>
+    <string name="add_button">Add</string>
 </resources>

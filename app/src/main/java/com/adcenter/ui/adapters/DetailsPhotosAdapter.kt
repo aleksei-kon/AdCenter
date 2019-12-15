@@ -10,8 +10,8 @@ import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
 import kotlinx.android.synthetic.main.adapter_item_photo.view.*
 
-class PhotosAdapter(private val context: Context) :
-    SliderViewAdapter<PhotosAdapter.SliderAdapterVH>() {
+class DetailsPhotosAdapter(private val context: Context) :
+    SliderViewAdapter<DetailsPhotosAdapter.SliderAdapterVH>() {
 
     private val inflater: LayoutInflater = context.layoutInflater
 
@@ -43,7 +43,7 @@ class PhotosAdapter(private val context: Context) :
             Glide.with(context)
                 .load(photo)
                 .placeholder(R.drawable.ic_default_placeholder)
-                .into(itemView.postPhoto)
+                .into(itemView.photo)
         }
     }
 }
