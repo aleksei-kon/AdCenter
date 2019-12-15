@@ -10,6 +10,7 @@ import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.activities.DevSettingsActivity
+import com.adcenter.ui.activities.LoginActivity
 import com.adcenter.ui.theme.IThemeManager
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.ext.android.inject
@@ -33,6 +34,15 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
         } else {
             loginButton.gone()
             logoutButton.visible()
+        }
+
+        loginButton.setOnClickListener {
+            requireContext().startActivity(
+                Intent(
+                    requireContext(),
+                    LoginActivity::class.java
+                )
+            )
         }
 
         switchThemeButton.setOnClickListener {

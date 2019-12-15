@@ -1,5 +1,6 @@
 package com.adcenter.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -38,6 +39,13 @@ class MainActivity : OfflineActivity() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        initNavigation()
+        selectItem(defaultNavigationItem.id)
+    }
+
     private fun initFragmentManager() {
         supportFragmentManager.registerFragmentLifecycleCallbacks(
             fragmentLifecycleCallback,
@@ -51,6 +59,8 @@ class MainActivity : OfflineActivity() {
     }
 
     private fun initNavigation() {
+        bottomNavigationView.menu.clear()
+
         initMenuItem(LastAdsItem())
         initMenuItem(SearchItem())
         initMenuItem(MyAdsItem())

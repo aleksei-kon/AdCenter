@@ -75,6 +75,13 @@
         <item name="android:textColor">?attr/secondaryButtonTextColor</item>
     </style>
 
+    <style name="PrimaryButtonStyle">
+        <item name="android:padding">6dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">?attr/toolbarBackgroundColor</item>
+        <item name="android:textColor">?attr/toolbarContentColor</item>
+    </style>
+
     <style name="EditTextTheme">
         <item name="theme">@style/EditTextStyle</item>
     </style>
