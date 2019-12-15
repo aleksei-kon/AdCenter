@@ -1,0 +1,9 @@
+package com.adcenter.features.adrequests.uistate
+
+import com.adcenter.features.adrequests.data.AdRequestsModel
+
+sealed class AdRequestsUiState {
+    object Loading : AdRequestsUiState()
+    data class Success(val result: AdRequestsModel) : AdRequestsUiState()
+    data class Error(val throwable: Throwable) : AdRequestsUiState()
+}
