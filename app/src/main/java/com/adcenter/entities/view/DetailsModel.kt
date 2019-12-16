@@ -6,6 +6,7 @@ data class DetailsModel(
     val id: String = EMPTY,
     val photos: List<String> = emptyList(),
     val isBookmark: Boolean = false,
+    val isShown: Boolean = false,
     val title: String = EMPTY,
     val price: String = EMPTY,
     val location: String = EMPTY,

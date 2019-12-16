@@ -6,6 +6,7 @@ data class NetworkDetailsModel(
     val id: String = EMPTY,
     val photos: List<String>? = null,
     val isBookmark: Boolean? = null,
+    val isShown: Boolean? = null,
     val title: String? = null,
     val price: String? = null,
     val location: String? = null,

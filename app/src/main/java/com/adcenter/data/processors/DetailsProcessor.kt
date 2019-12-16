@@ -9,7 +9,6 @@ import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.MILLISECONDS_PREFIX
 import com.adcenter.utils.resource.IResourceProvider
 import com.google.gson.Gson
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,6 +41,7 @@ class DetailsProcessor(
         val id = networkModel.id
         val photos = getPhotosUrls(networkModel.photos)
         val isBookmark = networkModel.isBookmark ?: false
+        val isShown = networkModel.isShown ?: false
         val title = networkModel.title ?: EMPTY
         val price = networkModel.price ?: EMPTY
         val location = networkModel.location ?: EMPTY
@@ -55,6 +55,7 @@ class DetailsProcessor(
             id = id,
             photos = photos,
             isBookmark = isBookmark,
+            isShown = isShown,
             title = title,
             price = price,
             location = location,

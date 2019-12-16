@@ -31,8 +31,8 @@ fun getBookmarksUrl(params: BookmarksRequestParams) =
 
 fun getSearchUrl(params: SearchRequestParams) =
     "$HTTP${AppConfig.backendUrl}/$ADVERT/$SEARCH?" +
-            "$SEARCH_TEXT=${params.searchText}" +
-            "$PAGE_NUMBER=${params.pageNumber}" +
+            "$SEARCH_TEXT=${params.searchText}&" +
+            "$PAGE_NUMBER=${params.pageNumber}&" +
             "$SORT_TYPE=${params.sortType}"
 
 fun getAdRequestsUrl(params: AdRequestsParams) =
