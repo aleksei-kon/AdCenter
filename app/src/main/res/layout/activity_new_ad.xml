@@ -5,14 +5,28 @@
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <FrameLayout
+        android:id="@+id/toolbarLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/toolbarBackgroundColor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/new_ad_title"
-        app:titleTextColor="?attr/toolbarContentColor" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/toolbarBackgroundColor"
+            app:title="@string/new_ad_title"
+            app:titleTextColor="?attr/toolbarContentColor" />
+
+        <ImageView
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/ic_add_done" />
+    </FrameLayout>
 
     <ScrollView
         android:id="@+id/content"
@@ -21,7 +35,7 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
 
         <LinearLayout
             android:id="@+id/contentLayout"
@@ -111,14 +125,6 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="@string/add_photo_button" />
-
-            <TextView
-                android:id="@+id/addButton"
-                style="@style/SecondaryButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@string/add_button" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

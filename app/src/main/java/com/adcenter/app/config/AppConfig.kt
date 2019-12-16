@@ -32,7 +32,12 @@ object AppConfig : KoinComponent {
     }
 
     fun updateConfig(appConfigInfo: AppConfigInfo) {
-        appConfigManager.token = appConfigInfo.token
+        if (appConfigInfo.token.isEmpty()) {
+            appConfigManager.removeToken()
+        } else {
+            appConfigManager.token = appConfigInfo.token
+        }
+
         appConfigManager.isLoggedIn = appConfigInfo.isLoggedIn
         appConfigManager.isAdmin = appConfigInfo.isAdmin
 

@@ -10,5 +10,7 @@ val koinModules = listOf(
     AdRequestsDependency.module,
     SearchDependency.module,
     DetailsDependency.module,
-    NewDetailsDependency.module
+    NewDetailsDependency.module,
+    LoginDependency.module,
+    RegistrationDependency.module
 )

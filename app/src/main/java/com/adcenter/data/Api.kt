@@ -38,6 +38,12 @@ fun getSearchUrl(params: SearchRequestParams) =
 fun getAdRequestsUrl(params: AdRequestsParams) =
     "$HTTP${AppConfig.backendUrl}/$ADVERT/$AD_REQUESTS?$PAGE_NUMBER=${params.pageNumber}"
 
+fun getRegisterUrl() =
+    "$HTTP${AppConfig.backendUrl}/$ACCOUNT/$REGISTER"
+
+fun getLoginUrl() =
+    "$HTTP${AppConfig.backendUrl}/$ACCOUNT/$LOGIN"
+
 private const val HTTP = "http://"
 private const val HTTPS = "https://"
 
@@ -52,6 +58,9 @@ private const val SEARCH = "search"
 private const val DETAILS = "details"
 private const val AD_REQUESTS = "adRequests"
 private const val NEW_DETAILS = "newDetails"
+private const val ACCOUNT = "account"
+private const val LOGIN = "login"
+private const val REGISTER = "register"
 
 private const val PAGE_NUMBER = "pageNumber"
 private const val SEARCH_TEXT = "searchText"

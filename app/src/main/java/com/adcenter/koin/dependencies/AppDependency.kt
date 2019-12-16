@@ -3,10 +3,7 @@ package com.adcenter.koin.dependencies
 import com.adcenter.app.config.AppConfigManager
 import com.adcenter.app.config.IAppConfigManager
 import com.adcenter.app.config.backendurl.BackendUrlHolder
-import com.adcenter.data.processors.AdsDataProcessor
-import com.adcenter.data.processors.DetailsProcessor
-import com.adcenter.data.processors.NewDetailsProcessor
-import com.adcenter.data.processors.PhotoProcessor
+import com.adcenter.data.processors.*
 import com.adcenter.ui.theme.IThemeManager
 import com.adcenter.ui.theme.ThemeManager
 import com.adcenter.utils.resource.IResourceProvider
@@ -37,5 +34,10 @@ object AppDependency {
         }
         single { PhotoProcessor() }
         single { NewDetailsProcessor() }
+        single {
+            AppConfigProcessor(
+                gson = get()
+            )
+        }
     }
 }

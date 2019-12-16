@@ -29,6 +29,7 @@ class NewAdActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initToolbar()
         setViewModelObserver()
         initRecycler()
 
@@ -52,6 +53,13 @@ class NewAdActivity : BaseActivity() {
                 viewModel.addPhoto(it)
             }
         }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun initRecycler() {

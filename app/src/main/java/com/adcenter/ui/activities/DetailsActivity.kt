@@ -3,6 +3,7 @@ package com.adcenter.ui.activities
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
+import com.adcenter.app.config.AppConfig
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.setTextWithVisibility
@@ -43,6 +44,21 @@ class DetailsActivity : BaseActivity() {
         }
     }
 
+    private fun showButtons() {
+        if (AppConfig.isLoggedIn && !AppConfig.isAdmin) {
+            addRemoveBookmarkButton.visible()
+        }
+
+        if (AppConfig.isAdmin) {
+            showHideButton.visible()
+        }
+    }
+
+    private fun hideButtons() {
+        addRemoveBookmarkButton.gone()
+        showHideButton.gone()
+    }
+
     private fun load(detailsId: String) = viewModel.load(detailsId)
 
     private fun setViewModelObserver() {
@@ -52,22 +68,22 @@ class DetailsActivity : BaseActivity() {
                     progressBar.visible()
                     appbar.gone()
                     content.gone()
-                    bookmarkButton.gone()
                     noDataMessage.gone()
+                    hideButtons()
                 }
                 is DetailsUiState.Success -> {
                     progressBar.gone()
                     noDataMessage.gone()
                     appbar.visible()
                     content.visible()
-                    bookmarkButton.visible()
+                    showButtons()
                     bindModel(it.result)
                 }
                 is DetailsUiState.Error -> {
                     progressBar.gone()
                     appbar.gone()
                     content.gone()
-                    bookmarkButton.gone()
+                    hideButtons()
                     noDataMessage.visible()
                 }
             }

@@ -10,6 +10,8 @@
     <string name="search_title">Search</string>
     <string name="settings_title">Settings</string>
     <string name="offline_message">You have problem with internet connection. Check your mobile data or Wi-Fi.</string>
+    <string name="empty_fields_message">Some fields are empty</string>
+    <string name="passwords_not_match_message">Passwords not match</string>
     <string name="offline_title">Connection problem</string>
     <string name="no_result_message">No result found</string>
     <string name="search_hint">search…</string>
