@@ -15,6 +15,7 @@ import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.features.lastads.LastAdsConstants.LAST_ADS_SCOPE_ID
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.extensions.gone
+import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import kotlinx.android.synthetic.main.layout_recycler.*
 import org.koin.android.ext.android.getKoin
@@ -95,6 +96,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                         noDataMessage.visible()
                     }
 
+                    it.throwable.message?.let { message -> requireContext().toast(message) }
                     setScrollListener()
                 }
             }

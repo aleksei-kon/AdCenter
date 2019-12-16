@@ -7,6 +7,7 @@ import com.adcenter.app.config.AppConfig
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.setTextWithVisibility
+import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.features.details.DetailsConstants.DETAILS_SCOPE_ID
@@ -85,6 +86,7 @@ class DetailsActivity : BaseActivity() {
                     content.gone()
                     hideButtons()
                     noDataMessage.visible()
+                    it.throwable.message?.let { message -> toast(message) }
                 }
             }
         })

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
+import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.adrequests.AdRequestsConstants.AD_REQUESTS_SCOPE_ID
 import com.adcenter.features.adrequests.uistate.AdRequestsUiState
@@ -94,7 +95,7 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
                         recyclerView.gone()
                         noDataMessage.visible()
                     }
-
+                    it.throwable.message?.let { message -> requireContext().toast(message) }
                     setScrollListener()
                 }
             }

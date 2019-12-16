@@ -1,6 +1,7 @@
 package com.adcenter.data.processors
 
 import com.adcenter.data.getImageDownloadUrl
+import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.utils.Constants.DATE_FORMAT_PATTERN
@@ -8,6 +9,7 @@ import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.MILLISECONDS_PREFIX
 import com.adcenter.utils.resource.IResourceProvider
 import com.google.gson.Gson
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +18,20 @@ class DetailsProcessor(
     val resourceProvider: IResourceProvider
 ) : IDataProcessor<DetailsModel> {
 
+    private fun isMessage(response: String) {
+        val message: Message = try {
+            gson.fromJson<Message>(response, Message::class.java)
+        } catch (e: Exception) {
+            Message(null)
+        }
+
+        if (!message.message.isNullOrEmpty()) {
+            throw MissingFormatArgumentException(message.message)
+        }
+    }
+
     override fun processResponse(response: String): DetailsModel {
+        isMessage(response)
         val responseModel =
             gson.fromJson<NetworkDetailsModel>(response, NetworkDetailsModel::class.java)
 

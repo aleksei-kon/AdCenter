@@ -32,8 +32,8 @@ object AppDependency {
                 resourceProvider = get()
             )
         }
-        single { PhotoProcessor() }
-        single { NewDetailsProcessor() }
+        single { PhotoProcessor(get()) }
+        single { NewDetailsProcessor(get()) }
         single {
             AppConfigProcessor(
                 gson = get()

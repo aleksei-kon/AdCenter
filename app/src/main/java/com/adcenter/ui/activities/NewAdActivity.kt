@@ -6,6 +6,7 @@ import android.provider.MediaStore
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
+import com.adcenter.extensions.toast
 import com.adcenter.features.newdetails.NewDetailsConstants.NEW_DETAILS_SCOPE_ID
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
@@ -94,6 +95,7 @@ class NewAdActivity : BaseActivity() {
                 is NewDetailsUiState.Error -> {
                     addPhotoButton.isEnabled = true
                     addButton.isEnabled = true
+                    it.throwable.message?.let { message -> toast(message) }
                 }
             }
         })

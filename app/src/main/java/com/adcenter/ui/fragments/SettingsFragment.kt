@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.adcenter.R
 import com.adcenter.app.config.AppConfig
+import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
@@ -43,6 +44,11 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
                     LoginActivity::class.java
                 )
             )
+        }
+
+        logoutButton.setOnClickListener {
+            AppConfig.updateConfig(AppConfigInfo())
+            requireActivity().recreate()
         }
 
         switchThemeButton.setOnClickListener {
