@@ -6,7 +6,10 @@ import android.provider.MediaStore
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.setChildsEnabled
 import com.adcenter.extensions.toast
+import com.adcenter.extensions.visible
 import com.adcenter.features.newdetails.NewDetailsConstants.NEW_DETAILS_SCOPE_ID
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
@@ -86,15 +89,17 @@ class NewAdActivity : BaseActivity() {
         viewModel.newDetailsData.observe(this, Observer {
             when (it) {
                 is NewDetailsUiState.WaitLoading -> {
-                    addPhotoButton.isEnabled = false
-                    addButton.isEnabled = false
+                    viewLayout.setChildsEnabled(false)
+                    progressBar.visible()
                 }
                 is NewDetailsUiState.Success -> {
+                    viewLayout.setChildsEnabled(true)
+                    progressBar.gone()
                     finish()
                 }
                 is NewDetailsUiState.Error -> {
-                    addPhotoButton.isEnabled = true
-                    addButton.isEnabled = true
+                    viewLayout.setChildsEnabled(true)
+                    progressBar.gone()
                     it.throwable.message?.let { message -> toast(message) }
                 }
             }
