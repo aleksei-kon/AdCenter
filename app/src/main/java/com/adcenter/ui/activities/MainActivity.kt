@@ -35,6 +35,12 @@ class MainActivity : OfflineActivity() {
         initFragmentManager()
         initNewAdButton()
 
+        if (AppConfig.isLoggedIn) {
+            newAdButton.visible()
+        } else {
+            newAdButton.gone()
+        }
+
         newAdButton.setOnClickListener {
             startActivity(Intent(this, NewAdActivity::class.java))
         }
