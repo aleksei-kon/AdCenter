@@ -14,6 +14,7 @@ import com.adcenter.features.details.DetailsConstants.DETAILS_SCOPE_ID
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.adapters.DetailsPhotosAdapter
+import com.adcenter.ui.controllers.ShowHideButtonController
 import com.adcenter.utils.Constants.EMPTY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
@@ -102,6 +103,14 @@ class DetailsActivity : BaseActivity() {
         synopsis.setTextWithVisibility(model.synopsis)
         username.setTextWithVisibility(model.username)
         phone.setTextWithVisibility(model.phone)
+
+        showHideButton.setOnClickListener(
+            ShowHideButtonController(
+                button = showHideButton,
+                id = model.id,
+                isShown = model.isShown
+            )
+        )
     }
 
     private fun setRecyclerItems(items: List<String>) {

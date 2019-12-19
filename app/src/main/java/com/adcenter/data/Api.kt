@@ -44,6 +44,9 @@ fun getRegisterUrl() =
 fun getLoginUrl() =
     "$HTTP${AppConfig.backendUrl}/$ACCOUNT/$LOGIN"
 
+fun getShowHideUrl(id: String) =
+    "$HTTP${AppConfig.backendUrl}/$ADVERT/$SHOW_HIDE_AD?$ID=$id"
+
 private const val HTTP = "http://"
 private const val HTTPS = "https://"
 
@@ -61,8 +64,10 @@ private const val NEW_DETAILS = "newDetails"
 private const val ACCOUNT = "account"
 private const val LOGIN = "login"
 private const val REGISTER = "register"
+private const val SHOW_HIDE_AD = "showHideAd"
 
 private const val PAGE_NUMBER = "pageNumber"
 private const val SEARCH_TEXT = "searchText"
 private const val SORT_TYPE = "sortType"
 private const val DETAILS_ID = "detailsId"
+private const val ID = "id"
