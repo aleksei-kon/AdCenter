@@ -29,8 +29,12 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
         get() = Dispatchers.Main + coroutineScopeJob
 
     fun load() {
-        lastAdsUiMutableState.value = LastAdsUiState.Loading
-        loadModel()
+        if (pageNumber == FIRST_PAGE_NUMBER) {
+            lastAdsUiMutableState.value = LastAdsUiState.Loading
+            loadModel()
+        } else {
+            lastAdsUiMutableState.value = LastAdsUiState.Success(lastAdsModel)
+        }
     }
 
     fun loadMore() {

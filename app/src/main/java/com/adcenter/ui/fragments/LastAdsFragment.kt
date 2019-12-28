@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.toast
+import com.adcenter.extensions.visible
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
-import com.adcenter.ui.adapters.AdsAdapter
-import com.adcenter.features.lastads.LastAdsConstants.LAST_ADS_SCOPE_ID
 import com.adcenter.ui.ScrollToEndListener
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.toast
-import com.adcenter.extensions.visible
+import com.adcenter.ui.adapters.AdsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
-import org.koin.android.ext.android.getKoin
-import org.koin.core.qualifier.named
+import org.koin.androidx.scope.currentScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
@@ -29,10 +29,9 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val fragmentScope =
-        getKoin().getOrCreateScope(LAST_ADS_SCOPE_ID, named<LastAdsFragment>())
-
-    private val viewModel: LastAdsViewModel = fragmentScope.get()
+    private val viewModel: LastAdsViewModel by viewModel {
+        parametersOf(currentScope.id)
+    }
 
     private lateinit var adapter: AdsAdapter
 
