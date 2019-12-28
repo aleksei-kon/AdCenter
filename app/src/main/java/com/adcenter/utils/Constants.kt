@@ -4,6 +4,7 @@ object Constants {
 
     const val EMPTY = ""
     const val DATE_FORMAT_PATTERN = "d MMM y H:mm"
+    const val REQUEST_DELAY = 1200L
     const val MILLISECONDS_PREFIX = 1000
     const val IMAGE_ROUNDED_CORNERS = 16
 

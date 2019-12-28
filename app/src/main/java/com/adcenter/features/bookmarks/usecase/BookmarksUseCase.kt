@@ -3,9 +3,11 @@ package com.adcenter.features.bookmarks.usecase
 import com.adcenter.features.bookmarks.data.BookmarksModel
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.features.bookmarks.repository.IBookmarksRepository
+import com.adcenter.utils.Constants
 import com.adcenter.utils.Result
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 class BookmarksUseCase(private val repository: IBookmarksRepository) : IBookmarksUseCase {
 
@@ -14,7 +16,10 @@ class BookmarksUseCase(private val repository: IBookmarksRepository) : IBookmark
 
     private suspend fun loadModel(requestParams: BookmarksRequestParams): BookmarksModel {
         return coroutineScope {
-            val adsAsync = async { repository.getBookmarks(requestParams) }
+            val adsAsync = async {
+                delay(Constants.REQUEST_DELAY)
+                repository.getBookmarks(requestParams)
+            }
             val adsResult = adsAsync.await()
 
             val ads = when (adsResult) {

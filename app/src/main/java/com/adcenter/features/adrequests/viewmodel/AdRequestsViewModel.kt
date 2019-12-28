@@ -39,6 +39,7 @@ class AdRequestsViewModel(private val adRequestsUseCase: IAdRequestsUseCase) : V
     }
 
     fun loadMore() {
+        adRequestsUiMutableState.value = AdRequestsUiState.Pagination
         loadModel()
     }
 

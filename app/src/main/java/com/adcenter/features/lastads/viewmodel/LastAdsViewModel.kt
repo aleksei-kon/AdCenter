@@ -38,6 +38,7 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
     }
 
     fun loadMore() {
+        lastAdsUiMutableState.value = LastAdsUiState.Pagination
         loadModel()
     }
 

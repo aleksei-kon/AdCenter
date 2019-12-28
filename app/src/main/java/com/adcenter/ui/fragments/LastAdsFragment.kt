@@ -71,8 +71,12 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                     noDataMessage.gone()
                     progressBar.visible()
                 }
+                is LastAdsUiState.Pagination -> {
+                    adapter.showPagination()
+                }
                 is LastAdsUiState.Success -> {
                     swipeRefresh.isRefreshing = false
+                    adapter.hidePagination()
                     progressBar.gone()
 
                     if (it.result.ads.isEmpty()) {
@@ -88,6 +92,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                 }
                 is LastAdsUiState.Error -> {
                     swipeRefresh.isRefreshing = false
+                    adapter.hidePagination()
                     progressBar.gone()
 
                     if (adapter.isEmpty()) {

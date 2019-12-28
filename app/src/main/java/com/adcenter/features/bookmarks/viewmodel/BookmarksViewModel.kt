@@ -39,6 +39,7 @@ class BookmarksViewModel(private val bookmarksUseCase: IBookmarksUseCase) : View
     }
 
     fun loadMore() {
+        bookmarksUiMutableState.value = BookmarksUiState.Pagination
         loadModel()
     }
 

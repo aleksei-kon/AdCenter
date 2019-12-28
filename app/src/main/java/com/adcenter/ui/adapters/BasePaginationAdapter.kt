@@ -3,11 +3,18 @@ package com.adcenter.ui.adapters
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.adcenter.extensions.gone
+import com.adcenter.extensions.visible
 
 abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_ITEM = 0
     private val TYPE_PAGINATION = 1
+
+    private var isPagination: Boolean = false
+
+    protected val paginationPosition: Int
+        get() = itemCount - 1
 
     protected val items = mutableListOf<T>()
 
@@ -17,11 +24,25 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
 
     fun isEmpty() = items.isEmpty()
 
+    fun showPagination() {
+        if (!isPagination) {
+            isPagination = true
+            notifyItemInserted(paginationPosition)
+        }
+    }
+
+    fun hidePagination() {
+        if (isPagination) {
+            isPagination = false
+            notifyItemRemoved(paginationPosition)
+        }
+    }
+
     abstract fun setItems(items: Collection<T>)
 
     abstract fun getItemViewHolder(parent: ViewGroup): BaseItemViewHolder
 
-    abstract fun getPaginationViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
+    abstract fun getPaginationViewHolder(parent: ViewGroup): PaginationViewHolder
 
     override fun getItemViewType(position: Int): Int =
         when {
@@ -36,17 +57,21 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is BaseItemViewHolder) {
-            holder.bind(items[position])
+        when (holder) {
+            is BaseItemViewHolder -> holder.bind(items[position])
         }
     }
 
-    override fun getItemCount() = items.size + 1
+    override fun getItemCount() = if (isPagination) {
+        items.size + 1
+    } else {
+        items.size
+    }
 
     abstract class BaseItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         abstract fun bind(item: Any)
     }
 
-    class PaginationViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    open class PaginationViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

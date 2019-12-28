@@ -51,6 +51,8 @@ class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel(), 
     }
 
     fun loadMore() {
+        searchUiMutableState.value = SearchUiState.Pagination
+
         currentParams = currentParams.copy(pageNumber = pageNumber)
 
         loadModel()

@@ -71,8 +71,12 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
                     noDataMessage.gone()
                     progressBar.visible()
                 }
+                is BookmarksUiState.Pagination -> {
+                    adapter.showPagination()
+                }
                 is BookmarksUiState.Success -> {
                     swipeRefresh.isRefreshing = false
+                    adapter.hidePagination()
                     progressBar.gone()
 
                     if (it.result.ads.isEmpty()) {
@@ -88,6 +92,7 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
                 }
                 is BookmarksUiState.Error -> {
                     swipeRefresh.isRefreshing = false
+                    adapter.hidePagination()
                     progressBar.gone()
 
                     if (adapter.isEmpty()) {

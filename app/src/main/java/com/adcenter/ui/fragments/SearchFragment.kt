@@ -80,8 +80,14 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
                     noDataMessage.gone()
                     recyclerView.visible()
                     setRecyclerItems(emptyList())
+                    adapter.showPagination()
+                }
+                is SearchUiState.Pagination -> {
+                    adapter.showPagination()
                 }
                 is SearchUiState.Success -> {
+                    adapter.hidePagination()
+
                     if (it.result.ads.isEmpty()) {
                         recyclerView.gone()
                         noDataMessage.visible()
@@ -94,6 +100,8 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
                     setScrollListener()
                 }
                 is SearchUiState.Error -> {
+                    adapter.hidePagination()
+
                     if (adapter.isEmpty()) {
                         recyclerView.gone()
                         noDataMessage.visible()
