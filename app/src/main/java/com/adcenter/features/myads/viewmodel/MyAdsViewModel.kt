@@ -29,8 +29,12 @@ class MyAdsViewModel(private val myAdsUseCase: IMyAdsUseCase) : ViewModel(), Cor
         get() = Dispatchers.Main + coroutineScopeJob
 
     fun load() {
-        myAdsUiMutableState.value = MyAdsUiState.Loading
-        loadModel()
+        if (pageNumber == FIRST_PAGE_NUMBER) {
+            myAdsUiMutableState.value = MyAdsUiState.Loading
+            loadModel()
+        } else {
+            myAdsUiMutableState.value = MyAdsUiState.Success(myAdsModel)
+        }
     }
 
     fun loadMore() {

@@ -55,6 +55,8 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
         setViewModelObserver()
         initRecycler()
         searchText.addTextChangedListener(textWatcher)
+
+        viewModel.load()
     }
 
     override fun onDestroyView() {

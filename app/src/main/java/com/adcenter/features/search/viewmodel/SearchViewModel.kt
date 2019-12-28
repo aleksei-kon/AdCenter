@@ -28,18 +28,26 @@ class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel(), 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + coroutineScopeJob
 
+    fun load() {
+        if (currentParams.pageNumber != FIRST_PAGE_NUMBER) {
+            searchUiMutableState.value = SearchUiState.Success(searchModel)
+        }
+    }
+
     fun load(searchText: String) {
-        searchUiMutableState.value = SearchUiState.NewSearch
+        if (searchText != currentParams.searchText) {
+            searchUiMutableState.value = SearchUiState.NewSearch
 
-        searchModel = SearchModel()
+            searchModel = SearchModel()
 
-        pageNumber = FIRST_PAGE_NUMBER
-        currentParams = currentParams.copy(
-            searchText = searchText,
-            pageNumber = pageNumber
-        )
+            pageNumber = FIRST_PAGE_NUMBER
+            currentParams = currentParams.copy(
+                searchText = searchText,
+                pageNumber = pageNumber
+            )
 
-        loadModel()
+            loadModel()
+        }
     }
 
     fun loadMore() {

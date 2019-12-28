@@ -3,6 +3,7 @@ package com.adcenter.features.details.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.entities.view.DetailsModel
 import com.adcenter.features.details.data.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.usecase.IDetailsUseCase
@@ -17,6 +18,8 @@ class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel(
     private val coroutineScopeJob = Job()
     private val detailsUiMutableState = MutableLiveData<DetailsUiState>()
 
+    private var detailsModel: DetailsModel? = null
+
     val detailsData: LiveData<DetailsUiState>
         get() = detailsUiMutableState
 
@@ -24,12 +27,16 @@ class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel(
         get() = Dispatchers.Main + coroutineScopeJob
 
     fun load(detailsId: String) {
-        if (detailsId.isEmpty()) {
-            detailsUiMutableState.value = DetailsUiState.Error(Throwable())
-        } else {
-            detailsUiMutableState.value = DetailsUiState.Loading
-            currentParams = DetailsRequestParams(detailsId)
-            loadModel()
+        val detailsCopy = detailsModel
+
+        when {
+            detailsId.isEmpty() -> detailsUiMutableState.value = DetailsUiState.Error(Throwable())
+            detailsCopy != null -> detailsUiMutableState.value = DetailsUiState.Success(detailsCopy)
+            else -> {
+                detailsUiMutableState.value = DetailsUiState.Loading
+                currentParams = DetailsRequestParams(detailsId)
+                loadModel()
+            }
         }
     }
 
@@ -39,6 +46,8 @@ class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel(
         launch {
             when (val result = detailsUseCase.load(currentParams)) {
                 is Result.Success -> {
+                    detailsModel = result.value
+
                     detailsUiMutableState.value = DetailsUiState.Success(result.value)
                 }
                 is Result.Error -> {

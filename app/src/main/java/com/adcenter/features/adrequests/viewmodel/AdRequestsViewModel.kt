@@ -30,8 +30,12 @@ class AdRequestsViewModel(private val adRequestsUseCase: IAdRequestsUseCase) : V
         get() = Dispatchers.Main + coroutineScopeJob
 
     fun load() {
-        adRequestsUiMutableState.value = AdRequestsUiState.Loading
-        loadModel()
+        if (pageNumber == FIRST_PAGE_NUMBER) {
+            adRequestsUiMutableState.value = AdRequestsUiState.Loading
+            loadModel()
+        } else {
+            adRequestsUiMutableState.value = AdRequestsUiState.Success(adRequestsModel)
+        }
     }
 
     fun loadMore() {

@@ -30,8 +30,12 @@ class BookmarksViewModel(private val bookmarksUseCase: IBookmarksUseCase) : View
         get() = Dispatchers.Main + coroutineScopeJob
 
     fun load() {
-        bookmarksUiMutableState.value = BookmarksUiState.Loading
-        loadModel()
+        if (pageNumber == FIRST_PAGE_NUMBER) {
+            bookmarksUiMutableState.value = BookmarksUiState.Loading
+            loadModel()
+        } else {
+            bookmarksUiMutableState.value = BookmarksUiState.Success(bookmarksModel)
+        }
     }
 
     fun loadMore() {
