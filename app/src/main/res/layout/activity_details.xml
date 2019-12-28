@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:src="@drawable/ic_add_to_bookmarks"
+        android:src="@drawable/ic_button_add_to_bookmarks"
         android:visibility="gone"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end" />
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:src="@drawable/ic_show_ad"
+        android:src="@drawable/ic_button_show_ad"
         android:visibility="gone"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end" />
@@ -72,6 +72,12 @@
     <include
         android:id="@+id/content"
         layout="@layout/layout_ad_details_info"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/noDataMessage"
+        layout="@layout/layout_not_found"
+        android:gravity="center"
         android:visibility="gone" />
 
     <ProgressBar
@@ -82,17 +88,5 @@
         android:indeterminate="true"
         android:indeterminateTint="?attr/progressColor"
         android:indeterminateTintMode="src_atop"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/noDataMessage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="@string/no_result_message"
-        android:textColor="?attr/textColor"
-        android:textSize="18sp"
         android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -8,22 +8,21 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.setChildsEnabled
 import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
-import com.adcenter.features.registration.RegistrationConstants.REGISTRATION_SCOPE_ID
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.viewmodel.RegistrationViewModel
 import kotlinx.android.synthetic.main.activity_register.*
-import org.koin.android.ext.android.getKoin
-import org.koin.core.qualifier.named
+import org.koin.androidx.scope.currentScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class RegisterActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_register
 
-    private val activityScope =
-        getKoin().getOrCreateScope(REGISTRATION_SCOPE_ID, named<RegisterActivity>())
-
-    private val viewModel: RegistrationViewModel = activityScope.get()
+    private val viewModel: RegistrationViewModel by viewModel {
+        parametersOf(currentScope.id)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

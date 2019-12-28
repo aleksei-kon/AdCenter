@@ -8,6 +8,7 @@ import com.adcenter.features.search.viewmodel.SearchViewModel
 import com.adcenter.ui.fragments.SearchFragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object SearchDependency {
@@ -23,11 +24,12 @@ object SearchDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                SearchViewModel(
-                    searchUseCase = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            SearchViewModel(
+                searchUseCase = getScope(scopeId).get()
+            )
         }
     }
 }

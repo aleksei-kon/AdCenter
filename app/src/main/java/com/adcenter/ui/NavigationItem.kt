@@ -22,7 +22,7 @@ sealed class NavigationItem : KoinComponent {
 
         override val title: String = resourceDependency.lastAdsTitle
 
-        override val iconRes: Int = R.drawable.ic_last_ads
+        override val iconRes: Int = R.drawable.ic_menu_last_ads
     }
 
     class SearchItem : NavigationItem() {
@@ -31,7 +31,7 @@ sealed class NavigationItem : KoinComponent {
 
         override val title: String = resourceDependency.searchTitle
 
-        override val iconRes: Int = R.drawable.ic_search
+        override val iconRes: Int = R.drawable.ic_menu_search
     }
 
     class MyAdsItem : NavigationItem() {
@@ -40,7 +40,7 @@ sealed class NavigationItem : KoinComponent {
 
         override val title: String = resourceDependency.myAdsTitle
 
-        override val iconRes: Int = R.drawable.ic_my_ads
+        override val iconRes: Int = R.drawable.ic_menu_my_ads
     }
 
     class BookmarksItem : NavigationItem() {
@@ -49,7 +49,7 @@ sealed class NavigationItem : KoinComponent {
 
         override val title: String = resourceDependency.bookmarksTitle
 
-        override val iconRes: Int = R.drawable.ic_bookmark
+        override val iconRes: Int = R.drawable.ic_menu_bookmarks
     }
 
 
@@ -59,7 +59,7 @@ sealed class NavigationItem : KoinComponent {
 
         override val title: String = resourceDependency.adRequestsTitle
 
-        override val iconRes: Int = R.drawable.ic_ad_requests
+        override val iconRes: Int = R.drawable.ic_menu_ad_requests
     }
 
     class SettingsItem : NavigationItem() {
@@ -68,7 +68,7 @@ sealed class NavigationItem : KoinComponent {
 
         override val title: String = resourceDependency.settingsTitle
 
-        override val iconRes: Int = R.drawable.ic_settings
+        override val iconRes: Int = R.drawable.ic_menu_settings
     }
 
     enum class NavigationItemId {

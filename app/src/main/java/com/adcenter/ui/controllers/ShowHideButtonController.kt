@@ -24,8 +24,8 @@ class ShowHideButtonController(
     private val executor = Executors.newCachedThreadPool()
     private val handler = Handler()
 
-    private val showIcon = R.drawable.ic_show_ad
-    private val hideIcon = R.drawable.ic_hide_ad
+    private val showIcon = R.drawable.ic_button_show_ad
+    private val hideIcon = R.drawable.ic_button_hide_ad
 
     init {
         updateIcon()

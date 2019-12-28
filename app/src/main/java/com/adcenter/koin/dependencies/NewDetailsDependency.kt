@@ -13,6 +13,7 @@ import com.adcenter.ui.activities.NewAdActivity
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object NewDetailsDependency {
@@ -38,14 +39,15 @@ object NewDetailsDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                NewDetailsViewModel(
-                    context = androidContext(),
-                    newDetailsUseCase = get(),
-                    uploadPhotoUseCase = get(),
-                    gson = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            NewDetailsViewModel(
+                context = androidContext(),
+                newDetailsUseCase = getScope(scopeId).get(),
+                uploadPhotoUseCase = getScope(scopeId).get(),
+                gson = get()
+            )
         }
     }
 }

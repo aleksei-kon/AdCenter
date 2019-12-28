@@ -42,7 +42,7 @@ class DetailsPhotosAdapter(private val context: Context) :
 
             Glide.with(context)
                 .load(photo)
-                .placeholder(R.drawable.ic_default_placeholder)
+                .placeholder(R.drawable.default_placeholder)
                 .into(itemView.photo)
         }
     }

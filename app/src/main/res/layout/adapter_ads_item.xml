@@ -13,7 +13,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_default_placeholder" />
+        tools:src="@drawable/default_placeholder" />
 
     <TextView
         android:id="@+id/title"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_marginBottom="8dp"
-        android:drawableStart="@drawable/ic_views"
+        android:drawableStart="@drawable/ic_general_views"
         android:drawablePadding="4dp"
         android:gravity="center_vertical"
         android:textColor="?attr/subTextColor"

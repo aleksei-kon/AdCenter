@@ -8,6 +8,7 @@ import com.adcenter.features.login.viewmodel.LoginViewModel
 import com.adcenter.ui.activities.LoginActivity
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object LoginDependency {
@@ -23,12 +24,13 @@ object LoginDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                LoginViewModel(
-                    loginUseCase = get(),
-                    gson = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            LoginViewModel(
+                loginUseCase = getScope(scopeId).get(),
+                gson = get()
+            )
         }
     }
 }

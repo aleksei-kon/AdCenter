@@ -8,6 +8,7 @@ import com.adcenter.features.myads.viewmodel.MyAdsViewModel
 import com.adcenter.ui.fragments.MyAdsFragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object MyAdsDependency {
@@ -23,11 +24,12 @@ object MyAdsDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                MyAdsViewModel(
-                    myAdsUseCase = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            MyAdsViewModel(
+                myAdsUseCase = getScope(scopeId).get()
+            )
         }
     }
 }

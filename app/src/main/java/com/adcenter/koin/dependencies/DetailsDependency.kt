@@ -8,6 +8,7 @@ import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.activities.DetailsActivity
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object DetailsDependency {
@@ -23,11 +24,12 @@ object DetailsDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                DetailsViewModel(
-                    detailsUseCase = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            DetailsViewModel(
+                detailsUseCase = getScope(scopeId).get()
+            )
         }
     }
 }

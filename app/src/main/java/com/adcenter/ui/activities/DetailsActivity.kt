@@ -10,7 +10,6 @@ import com.adcenter.extensions.setTextWithVisibility
 import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
-import com.adcenter.features.details.DetailsConstants.DETAILS_SCOPE_ID
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.adapters.DetailsPhotosAdapter
@@ -18,17 +17,17 @@ import com.adcenter.ui.controllers.ShowHideButtonController
 import com.adcenter.utils.Constants.EMPTY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
-import org.koin.android.ext.android.getKoin
-import org.koin.core.qualifier.named
+import org.koin.androidx.scope.currentScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailsActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_details
 
-    private val activityScope =
-        getKoin().getOrCreateScope(DETAILS_SCOPE_ID, named<DetailsActivity>())
-
-    private val viewModel: DetailsViewModel = activityScope.get()
+    private val viewModel: DetailsViewModel by viewModel {
+        parametersOf(currentScope.id)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

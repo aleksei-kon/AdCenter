@@ -10,14 +10,14 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.setChildsEnabled
 import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
-import com.adcenter.features.newdetails.NewDetailsConstants.NEW_DETAILS_SCOPE_ID
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
 import com.adcenter.ui.adapters.NewPhotosAdapter
 import kotlinx.android.synthetic.main.activity_new_ad.*
-import org.koin.android.ext.android.getKoin
-import org.koin.core.qualifier.named
+import org.koin.androidx.scope.currentScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class NewAdActivity : BaseActivity() {
 
@@ -25,10 +25,9 @@ class NewAdActivity : BaseActivity() {
 
     private lateinit var adapter: NewPhotosAdapter
 
-    private val activityScope =
-        getKoin().getOrCreateScope(NEW_DETAILS_SCOPE_ID, named<NewAdActivity>())
-
-    private val viewModel: NewDetailsViewModel = activityScope.get()
+    private val viewModel: NewDetailsViewModel by viewModel {
+        parametersOf(currentScope.id)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

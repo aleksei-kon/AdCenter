@@ -11,7 +11,10 @@ import com.adcenter.extensions.layoutInflater
 import com.adcenter.extensions.setTextWithVisibility
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.ui.activities.DetailsActivity
+import com.adcenter.utils.Constants
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.adapter_request_item.view.*
 
@@ -39,10 +42,14 @@ class AdRequestsAdapter(private val context: Context) : BasePaginationAdapter<Ad
 
         override fun bind(item: Any) {
             if (item is AdItemModel) {
+                val thumbnail = Glide.with(context)
+                    .load(R.drawable.default_placeholder)
+                    .apply(RequestOptions.circleCropTransform())
+
                 Glide.with(context)
                     .load(item.photoUrl)
                     .apply(RequestOptions.circleCropTransform())
-                    .placeholder(R.drawable.ic_default_placeholder)
+                    .thumbnail(thumbnail)
                     .into(itemView.adPhoto)
 
                 itemView.apply {

@@ -8,22 +8,21 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.setChildsEnabled
 import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
-import com.adcenter.features.login.LoginConstants.LOGIN_SCOPE_ID
 import com.adcenter.features.login.data.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
-import org.koin.android.ext.android.getKoin
-import org.koin.core.qualifier.named
+import org.koin.androidx.scope.currentScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class LoginActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_login
 
-    private val activityScope =
-        getKoin().getOrCreateScope(LOGIN_SCOPE_ID, named<LoginActivity>())
-
-    private val viewModel: LoginViewModel = activityScope.get()
+    private val viewModel: LoginViewModel by viewModel {
+        parametersOf(currentScope.id)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

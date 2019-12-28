@@ -42,7 +42,7 @@
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="16dp"
                     android:visibility="gone"
-                    app:srcCompat="@drawable/ic_new_ad"
+                    app:srcCompat="@drawable/ic_general_new_ad"
                     tools:visibility="visible" />
             </FrameLayout>
         </com.google.android.material.appbar.AppBarLayout>

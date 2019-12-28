@@ -41,4 +41,10 @@
     <string name="phone_hint">phone</string>
     <string name="add_photo_button">Add photo</string>
     <string name="add_button">Add</string>
+    <string name="not_found_title">Not found</string>
+    <string name="not_found_text">Something went wrong and no data was found</string>
+    <string name="no_result_found_title">No result found</string>
+    <string name="no_result_found_text">Try different keywords or remove search filters</string>
+    <string name="empty_title">Empty</string>
+    <string name="this_list_is_empty_text">This list is empty</string>
 </resources>

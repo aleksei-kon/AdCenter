@@ -8,6 +8,7 @@ import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
 import com.adcenter.ui.fragments.BookmarksFragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object BookmarksDependency {
@@ -23,11 +24,12 @@ object BookmarksDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                BookmarksViewModel(
-                    bookmarksUseCase = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            BookmarksViewModel(
+                bookmarksUseCase = getScope(scopeId).get()
+            )
         }
     }
 }

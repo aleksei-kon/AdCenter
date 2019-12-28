@@ -8,6 +8,7 @@ import com.adcenter.features.registration.viewmodel.RegistrationViewModel
 import com.adcenter.ui.activities.RegisterActivity
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
+import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
 object RegistrationDependency {
@@ -23,12 +24,13 @@ object RegistrationDependency {
                     repository = get()
                 )
             }
-            viewModel {
-                RegistrationViewModel(
-                    registrationUseCase = get(),
-                    gson = get()
-                )
-            }
+        }
+
+        viewModel { (scopeId: ScopeID) ->
+            RegistrationViewModel(
+                registrationUseCase = getScope(scopeId).get(),
+                gson = get()
+            )
         }
     }
 }
