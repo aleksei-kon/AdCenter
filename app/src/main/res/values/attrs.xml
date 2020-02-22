@@ -23,4 +23,12 @@
         <attr name="sliderSelectedItemColor" format="color" />
         <attr name="sliderItemColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="ProgressIconView">
+        <attr name="icon" format="reference" />
+        <attr name="iconColorFilter" format="reference|color" />
+        <attr name="progressColorFilter" format="reference|color" />
+        <attr name="showIcon" format="boolean" />
+        <attr name="showProgress" format="boolean" />
+    </declare-styleable>
 </resources>
