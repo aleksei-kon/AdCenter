@@ -21,7 +21,7 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
     private var lastAdsModel: LastAdsModel = LastAdsModel()
     private var disposable: Disposable? = null
 
-    private val nextPageSource: Single<LastAdsModel>
+    private val dataSource: Single<LastAdsModel>
         get() = Single.create {
             when (val result = lastAdsUseCase.load(currentParams)) {
                 is Result.Success -> {
@@ -75,7 +75,7 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
     private fun loadModel() {
         disposable?.dispose()
 
-        disposable = nextPageSource
+        disposable = dataSource
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(successConsumer, errorConsumer)
