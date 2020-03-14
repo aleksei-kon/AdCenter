@@ -10,6 +10,7 @@ import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.usecase.ISearchUseCase
 import com.adcenter.utils.Result
 import io.reactivex.Single
+import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -28,15 +29,22 @@ class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel() {
             }
         }
 
-    private val successConsumer: (SearchModel) -> Unit = {
-        searchUiMutableState.value = SearchUiState.Success(it)
-        currentParams = currentParams.copy(
-            pageNumber = currentParams.pageNumber + 1
-        )
-    }
+    private val observer = object : SingleObserver<SearchModel> {
 
-    private val errorConsumer: (Throwable) -> Unit = {
-        searchUiMutableState.value = SearchUiState.Error(it)
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
+        }
+
+        override fun onSuccess(model: SearchModel) {
+            searchUiMutableState.value = SearchUiState.Success(model)
+            currentParams = currentParams.copy(
+                pageNumber = currentParams.pageNumber + 1
+            )
+        }
+
+        override fun onError(e: Throwable) {
+            searchUiMutableState.value = SearchUiState.Error(e)
+        }
     }
 
     private val searchUiMutableState = MutableLiveData<SearchUiState>()
@@ -72,10 +80,10 @@ class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel() {
     private fun loadModel() {
         disposable?.dispose()
 
-        disposable = dataSource
+        dataSource
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(successConsumer, errorConsumer)
+            .subscribe(observer)
     }
 
     private fun updateModel(
