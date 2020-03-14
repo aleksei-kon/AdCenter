@@ -10,26 +10,41 @@ import com.adcenter.features.lastads.data.LastAdsRequestParams
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
 import com.adcenter.utils.Result
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
-class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(), CoroutineScope {
+class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel() {
 
     private var currentParams: LastAdsRequestParams = LastAdsRequestParams()
     private var lastAdsModel: LastAdsModel = LastAdsModel()
-    private var pageNumber = FIRST_PAGE_NUMBER
 
-    private val coroutineScopeJob = Job()
     private val lastAdsUiMutableState = MutableLiveData<LastAdsUiState>()
+
+    private var disposable: Disposable? = null
+
+    private val nextPageSource: Single<LastAdsUiState>
+        get() = Single.create {
+            val result = when (val info = lastAdsUseCase.load(currentParams)) {
+                is Result.Success -> {
+                    lastAdsModel = mergeResults(lastAdsModel, info.value)
+
+                    LastAdsUiState.Success(lastAdsModel)
+                }
+                is Result.Error -> {
+                    LastAdsUiState.Error(info.exception)
+                }
+            }
+
+            it.onSuccess(result)
+        }
 
     val lastAdsData: LiveData<LastAdsUiState>
         get() = lastAdsUiMutableState
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + coroutineScopeJob
-
     fun load() {
-        if (pageNumber == FIRST_PAGE_NUMBER) {
+        if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
             lastAdsUiMutableState.value = LastAdsUiState.Loading
             loadModel()
         } else {
@@ -44,29 +59,24 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
 
     fun refresh() {
         lastAdsModel = LastAdsModel()
-        pageNumber = FIRST_PAGE_NUMBER
+        currentParams = currentParams.copy(
+            pageNumber = FIRST_PAGE_NUMBER
+        )
         loadModel()
     }
 
     private fun loadModel() {
-        coroutineContext.cancelChildren()
+        disposable?.dispose()
 
-        currentParams = LastAdsRequestParams(pageNumber)
-
-        launch {
-            when (val result = lastAdsUseCase.load(currentParams)) {
-                is Result.Success -> {
-                    lastAdsModel = mergeResults(lastAdsModel, result.value)
-
-                    lastAdsUiMutableState.value = LastAdsUiState.Success(lastAdsModel)
-
-                    pageNumber++
-                }
-                is Result.Error -> {
-                    lastAdsUiMutableState.value = LastAdsUiState.Error(result.exception)
-                }
+        disposable = nextPageSource
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { result ->
+                lastAdsUiMutableState.value = result
+                currentParams = currentParams.copy(
+                    pageNumber = currentParams.pageNumber + 1
+                )
             }
-        }
     }
 
     private fun mergeResults(
@@ -84,6 +94,6 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
     override fun onCleared() {
         super.onCleared()
 
-        coroutineScopeJob.cancel()
+        disposable?.dispose()
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
@@ -16,37 +15,40 @@ import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
+import com.adcenter.utils.resource.IResourceProvider
 import kotlinx.android.synthetic.main.layout_recycler.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
-    override val toolbarTitle: String by lazy { getString(R.string.last_ads_title) }
-
-    override val layout: Int = R.layout.layout_recycler
-
-    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
+    private val resourceProvider: IResourceProvider by inject()
 
     private val viewModel: LastAdsViewModel by viewModel {
         parametersOf(currentScope.id)
     }
 
+    private val programsScrollListener = ScrollToEndListener {
+        loadMore()
+        deleteScrollListener()
+    }
+
     private lateinit var adapter: AdsAdapter
 
-    private val programsScrollListener: RecyclerView.OnScrollListener =
-        ScrollToEndListener {
-            loadMore()
-            deleteScrollListener()
-        }
+    override val layout: Int = R.layout.layout_recycler
+
+    override val toolbarTitle: String = resourceProvider.lastAdsTitle
+
+    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setViewModelObserver()
         initRecycler()
-        initViews()
+        initSwipeRefresh()
         load()
     }
 
@@ -57,8 +59,9 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
         setScrollListener()
     }
 
-    private fun initViews() {
+    private fun initSwipeRefresh() {
         swipeRefresh.setOnRefreshListener {
+            deleteScrollListener()
             refresh()
         }
     }

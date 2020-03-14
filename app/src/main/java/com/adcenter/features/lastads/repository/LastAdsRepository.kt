@@ -7,33 +7,20 @@ import com.adcenter.data.processors.AdsDataProcessor
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.lastads.data.LastAdsRequestParams
 import com.adcenter.utils.Result
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 
 class LastAdsRepository(private val processor: AdsDataProcessor) : ILastAdsRepository {
 
-    override suspend fun getLastAds(params: LastAdsRequestParams): Result<List<AdItemModel>> {
-        return withContext(Dispatchers.IO) {
-            suspendCancellableCoroutine<Result<List<AdItemModel>>> { continuation ->
-                runCatching {
-                    val request = NetworkDataRequest(getLastAdsUrl(params))
+    override fun getLastAds(params: LastAdsRequestParams): Result<List<AdItemModel>> =
+        runCatching {
+            val request = NetworkDataRequest(getLastAdsUrl(params))
 
-                    val response = Callable<List<AdItemModel>>()
-                        .setRequest(request)
-                        .setProcessor(processor)
-                        .call()
+            val response = Callable<List<AdItemModel>>()
+                .setRequest(request)
+                .setProcessor(processor)
+                .call()
 
-                    if (isActive) {
-                        continuation.resume(Result.Success(response)) {}
-                    } else {
-                        continuation.cancel()
-                    }
-                }.onFailure {
-                    continuation.resume(Result.Error(it)) {}
-                }
-            }
+            Result.Success(response)
+        }.getOrElse {
+            Result.Error(it)
         }
-    }
 }

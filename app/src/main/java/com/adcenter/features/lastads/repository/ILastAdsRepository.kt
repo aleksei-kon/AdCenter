@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface ILastAdsRepository {
 
-    suspend fun getLastAds(params: LastAdsRequestParams): Result<List<AdItemModel>>
+    fun getLastAds(params: LastAdsRequestParams): Result<List<AdItemModel>>
 }

@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface ILastAdsUseCase {
 
-    suspend fun load(requestParams: LastAdsRequestParams): Result<LastAdsModel>
+    fun load(requestParams: LastAdsRequestParams): Result<LastAdsModel>
 }

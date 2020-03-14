@@ -49,4 +49,6 @@ dependencies {
     implementation Libs.imageSlider
     implementation Libs.coroutinesCore
     implementation Libs.coroutinesAndroid
+    implementation Libs.rxJava
+    implementation Libs.rxAndroid
 }
