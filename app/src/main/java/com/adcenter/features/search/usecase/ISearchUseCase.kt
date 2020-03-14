@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface ISearchUseCase {
 
-    suspend fun load(requestParams: SearchRequestParams): Result<SearchModel>
+    fun load(requestParams: SearchRequestParams): Result<SearchModel>
 }
