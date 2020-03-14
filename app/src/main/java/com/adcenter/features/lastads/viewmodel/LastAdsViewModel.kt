@@ -3,7 +3,6 @@ package com.adcenter.features.lastads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.lastads.data.LastAdsModel
 import com.adcenter.features.lastads.data.LastAdsRequestParams
@@ -24,13 +23,8 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
     private val dataSource: Single<LastAdsModel>
         get() = Single.create {
             when (val result = lastAdsUseCase.load(currentParams)) {
-                is Result.Success -> {
-                    lastAdsModel = mergeResults(lastAdsModel, result.value)
-                    it.onSuccess(lastAdsModel)
-                }
-                is Result.Error -> {
-                    it.onError(result.exception)
-                }
+                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Error -> it.onError(result.exception)
             }
         }
 
@@ -81,16 +75,12 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
             .subscribe(successConsumer, errorConsumer)
     }
 
-    private fun mergeResults(
-        oldResponse: LastAdsModel,
+    private fun updateModel(
         newResponse: LastAdsModel
     ): LastAdsModel {
-        val itemsList = mutableListOf<AdItemModel>()
+        lastAdsModel = LastAdsModel(lastAdsModel.ads + newResponse.ads)
 
-        itemsList += oldResponse.ads
-        itemsList += newResponse.ads
-
-        return LastAdsModel(itemsList)
+        return lastAdsModel
     }
 
     override fun onCleared() {
