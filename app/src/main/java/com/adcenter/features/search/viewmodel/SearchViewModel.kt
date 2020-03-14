@@ -3,6 +3,7 @@ package com.adcenter.features.search.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.extensions.async
 import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.search.data.SearchModel
 import com.adcenter.features.search.data.SearchRequestParams
@@ -81,8 +82,7 @@ class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel() {
         disposable?.dispose()
 
         dataSource
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
+            .async()
             .subscribe(observer)
     }
 

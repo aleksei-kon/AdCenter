@@ -3,6 +3,7 @@ package com.adcenter.features.lastads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.extensions.async
 import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.lastads.data.LastAdsModel
 import com.adcenter.features.lastads.data.LastAdsRequestParams
@@ -10,9 +11,7 @@ import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
 import com.adcenter.utils.Result
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel() {
 
@@ -70,8 +69,7 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
         disposable?.dispose()
 
         disposable = dataSource
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
+            .async()
             .subscribe(successConsumer, errorConsumer)
     }
 
