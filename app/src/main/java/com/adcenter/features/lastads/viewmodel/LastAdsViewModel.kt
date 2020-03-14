@@ -19,26 +19,33 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
 
     private var currentParams: LastAdsRequestParams = LastAdsRequestParams()
     private var lastAdsModel: LastAdsModel = LastAdsModel()
-
-    private val lastAdsUiMutableState = MutableLiveData<LastAdsUiState>()
-
     private var disposable: Disposable? = null
 
-    private val nextPageSource: Single<LastAdsUiState>
+    private val nextPageSource: Single<LastAdsModel>
         get() = Single.create {
-            val result = when (val info = lastAdsUseCase.load(currentParams)) {
+            when (val result = lastAdsUseCase.load(currentParams)) {
                 is Result.Success -> {
-                    lastAdsModel = mergeResults(lastAdsModel, info.value)
-
-                    LastAdsUiState.Success(lastAdsModel)
+                    lastAdsModel = mergeResults(lastAdsModel, result.value)
+                    it.onSuccess(lastAdsModel)
                 }
                 is Result.Error -> {
-                    LastAdsUiState.Error(info.exception)
+                    it.onError(result.exception)
                 }
             }
-
-            it.onSuccess(result)
         }
+
+    private val successConsumer: (LastAdsModel) -> Unit = {
+        lastAdsUiMutableState.value = LastAdsUiState.Success(it)
+        currentParams = currentParams.copy(
+            pageNumber = currentParams.pageNumber + 1
+        )
+    }
+
+    private val errorConsumer: (Throwable) -> Unit = {
+        lastAdsUiMutableState.value = LastAdsUiState.Error(it)
+    }
+
+    private val lastAdsUiMutableState = MutableLiveData<LastAdsUiState>()
 
     val lastAdsData: LiveData<LastAdsUiState>
         get() = lastAdsUiMutableState
@@ -69,14 +76,9 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
         disposable?.dispose()
 
         disposable = nextPageSource
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { result ->
-                lastAdsUiMutableState.value = result
-                currentParams = currentParams.copy(
-                    pageNumber = currentParams.pageNumber + 1
-                )
-            }
+            .subscribe(successConsumer, errorConsumer)
     }
 
     private fun mergeResults(
