@@ -12,5 +12,6 @@ val koinModules = listOf(
     detailsDependencyModule,
     newDetailsDependencyModule,
     loginDependencyModule,
-    registrationDependencyModule
+    registrationDependencyModule,
+    processorDependencyModule
 )
