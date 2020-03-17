@@ -15,7 +15,8 @@ val loginDependencyModule = module {
     scope(named<LoginActivity>()) {
         scoped<ILoginRepository> {
             LoginRepository(
-                processor = get()
+                processor = get(),
+                gson = get()
             )
         }
         scoped<ILoginUseCase> {
@@ -27,8 +28,7 @@ val loginDependencyModule = module {
 
     viewModel { (scopeId: ScopeID) ->
         LoginViewModel(
-            loginUseCase = getScope(scopeId).get(),
-            gson = get()
+            loginUseCase = getScope(scopeId).get()
         )
     }
 }

@@ -15,7 +15,8 @@ val registrationDependencyModule = module {
     scope(named<RegisterActivity>()) {
         scoped<IRegistrationRepository> {
             RegistrationRepository(
-                processor = get()
+                processor = get(),
+                gson = get()
             )
         }
         scoped<IRegistrationUseCase> {
@@ -27,8 +28,7 @@ val registrationDependencyModule = module {
 
     viewModel { (scopeId: ScopeID) ->
         RegistrationViewModel(
-            registrationUseCase = getScope(scopeId).get(),
-            gson = get()
+            registrationUseCase = getScope(scopeId).get()
         )
     }
 }

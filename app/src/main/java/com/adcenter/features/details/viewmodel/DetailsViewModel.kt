@@ -4,27 +4,51 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.entities.view.DetailsModel
+import com.adcenter.extensions.async
 import com.adcenter.features.details.data.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.usecase.IDetailsUseCase
 import com.adcenter.utils.Result
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
-class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel(), CoroutineScope {
+class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel() {
 
     private var currentParams: DetailsRequestParams = DetailsRequestParams()
-
-    private val coroutineScopeJob = Job()
-    private val detailsUiMutableState = MutableLiveData<DetailsUiState>()
-
     private var detailsModel: DetailsModel? = null
+    private var disposable: Disposable? = null
+
+    private val dataSource: Single<DetailsModel>
+        get() = Single.create {
+            when (val result = detailsUseCase.load(currentParams)) {
+                is Result.Success -> {
+                    detailsModel = result.value
+                    it.onSuccess(result.value)
+                }
+                is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val observer = object : SingleObserver<DetailsModel> {
+
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
+        }
+
+        override fun onSuccess(model: DetailsModel) {
+            detailsUiMutableState.value = DetailsUiState.Success(model)
+        }
+
+        override fun onError(e: Throwable) {
+            detailsUiMutableState.value = DetailsUiState.Error(e)
+        }
+    }
+
+    private val detailsUiMutableState = MutableLiveData<DetailsUiState>()
 
     val detailsData: LiveData<DetailsUiState>
         get() = detailsUiMutableState
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + coroutineScopeJob
 
     fun load(detailsId: String) {
         val detailsCopy = detailsModel
@@ -41,25 +65,16 @@ class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel(
     }
 
     private fun loadModel() {
-        coroutineContext.cancelChildren()
+        disposable?.dispose()
 
-        launch {
-            when (val result = detailsUseCase.load(currentParams)) {
-                is Result.Success -> {
-                    detailsModel = result.value
-
-                    detailsUiMutableState.value = DetailsUiState.Success(result.value)
-                }
-                is Result.Error -> {
-                    detailsUiMutableState.value = DetailsUiState.Error(result.exception)
-                }
-            }
-        }
+        dataSource
+            .async()
+            .subscribe(observer)
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        coroutineScopeJob.cancel()
+        disposable?.dispose()
     }
 }

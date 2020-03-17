@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface IDetailsUseCase {
 
-    suspend fun load(requestParams: DetailsRequestParams): Result<DetailsModel>
+    fun load(requestParams: DetailsRequestParams): Result<DetailsModel>
 }
