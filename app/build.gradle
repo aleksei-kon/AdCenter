@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -49,6 +50,11 @@ dependencies {
     implementation Libs.imageSlider
     implementation Libs.coroutinesCore
     implementation Libs.coroutinesAndroid
+
     implementation Libs.rxJava
     implementation Libs.rxAndroid
+
+    implementation Libs.dagger
+    kapt Libs.daggerProcessor
+    kapt Libs.daggerCompiler
 }

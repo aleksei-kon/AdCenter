@@ -19,7 +19,6 @@ object AppDependency {
         single { OkHttpClient() }
         single { BackendUrlHolder(androidContext()) }
         single<IResourceProvider> { ResourceProvider(androidContext()) }
-        single<IThemeManager> { ThemeManager(androidContext()) }
         single<IAppConfigManager> { AppConfigManager(androidContext()) }
         single {
             AdsDataProcessor(
