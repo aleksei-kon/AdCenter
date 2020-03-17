@@ -1,6 +1,5 @@
-package com.adcenter.app.config
+package com.adcenter.config
 
-import com.adcenter.app.config.backendurl.BackendUrlHolder
 import com.adcenter.entities.view.AppConfigInfo
 import org.koin.core.KoinComponent
 import org.koin.core.inject

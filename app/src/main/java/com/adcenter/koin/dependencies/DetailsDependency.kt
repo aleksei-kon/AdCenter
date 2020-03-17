@@ -11,25 +11,23 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object DetailsDependency {
-    val module = module {
-        scope(named<DetailsActivity>()) {
-            scoped<IDetailsRepository> {
-                DetailsRepository(
-                    processor = get()
-                )
-            }
-            scoped<IDetailsUseCase> {
-                DetailsUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            DetailsViewModel(
-                detailsUseCase = getScope(scopeId).get()
+val detailsDependencyModule = module {
+    scope(named<DetailsActivity>()) {
+        scoped<IDetailsRepository> {
+            DetailsRepository(
+                processor = get()
             )
         }
+        scoped<IDetailsUseCase> {
+            DetailsUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        DetailsViewModel(
+            detailsUseCase = getScope(scopeId).get()
+        )
     }
 }

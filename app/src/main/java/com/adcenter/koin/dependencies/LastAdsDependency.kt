@@ -11,25 +11,23 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object LastAdsDependency {
-    val module = module {
-        scope(named<LastAdsFragment>()) {
-            scoped<ILastAdsRepository> {
-                LastAdsRepository(
-                    processor = get()
-                )
-            }
-            scoped<ILastAdsUseCase> {
-                LastAdsUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            LastAdsViewModel(
-                lastAdsUseCase = getScope(scopeId).get()
+val lastAdsDependencyModule = module {
+    scope(named<LastAdsFragment>()) {
+        scoped<ILastAdsRepository> {
+            LastAdsRepository(
+                processor = get()
             )
         }
+        scoped<ILastAdsUseCase> {
+            LastAdsUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        LastAdsViewModel(
+            lastAdsUseCase = getScope(scopeId).get()
+        )
     }
 }

@@ -2,7 +2,7 @@ package com.adcenter.features.registration.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getRegisterUrl
+import com.adcenter.api.getRegisterUrl
 import com.adcenter.data.processors.AppConfigProcessor
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.utils.Result

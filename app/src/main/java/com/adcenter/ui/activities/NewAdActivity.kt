@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.extensions.gone
+import com.adcenter.extensions.longToast
 import com.adcenter.extensions.setChildsEnabled
-import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
@@ -99,7 +99,7 @@ class NewAdActivity : BaseActivity() {
                 is NewDetailsUiState.Error -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
-                    it.throwable.message?.let { message -> toast(message) }
+                    it.throwable.message?.let { message -> longToast(message) }
                 }
             }
         })

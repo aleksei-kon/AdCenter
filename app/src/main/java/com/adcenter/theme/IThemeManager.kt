@@ -1,4 +1,4 @@
-package com.adcenter.ui.theme
+package com.adcenter.theme
 
 interface IThemeManager {
 

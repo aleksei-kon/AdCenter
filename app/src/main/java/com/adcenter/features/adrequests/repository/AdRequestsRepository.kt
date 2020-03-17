@@ -2,7 +2,7 @@ package com.adcenter.features.adrequests.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getAdRequestsUrl
+import com.adcenter.api.getAdRequestsUrl
 import com.adcenter.data.processors.AdsDataProcessor
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.adrequests.data.AdRequestsParams
@@ -12,7 +12,11 @@ class AdRequestsRepository(private val processor: AdsDataProcessor) : IAdRequest
 
     override fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>> =
         runCatching {
-            val request = NetworkDataRequest(getAdRequestsUrl(params))
+            val request = NetworkDataRequest(
+                getAdRequestsUrl(
+                    params
+                )
+            )
 
             val response = Callable<List<AdItemModel>>()
                 .setRequest(request)

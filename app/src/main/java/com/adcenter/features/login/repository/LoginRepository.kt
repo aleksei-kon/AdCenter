@@ -2,7 +2,7 @@ package com.adcenter.features.login.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getLoginUrl
+import com.adcenter.api.getLoginUrl
 import com.adcenter.data.processors.AppConfigProcessor
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.utils.Result

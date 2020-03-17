@@ -1,4 +1,4 @@
-package com.adcenter.utils.resource
+package com.adcenter.resource
 
 import android.content.Context
 import com.adcenter.R

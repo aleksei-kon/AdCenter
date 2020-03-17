@@ -1,4 +1,4 @@
-package com.adcenter.utils.resource
+package com.adcenter.resource
 
 interface IResourceProvider {
 

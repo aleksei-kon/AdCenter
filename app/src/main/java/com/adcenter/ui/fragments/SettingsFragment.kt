@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.adcenter.R
-import com.adcenter.app.config.AppConfig
+import com.adcenter.config.AppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
@@ -12,7 +12,7 @@ import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.LoginActivity
-import com.adcenter.ui.theme.IThemeManager
+import com.adcenter.theme.IThemeManager
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.ext.android.inject
 

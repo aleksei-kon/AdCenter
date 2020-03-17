@@ -3,7 +3,7 @@ package com.adcenter.features.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.app.config.AppConfig
+import com.adcenter.config.AppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState

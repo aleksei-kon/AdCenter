@@ -1,11 +1,12 @@
-package com.adcenter.app.config
+package com.adcenter.config
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.adcenter.app.config.TokenManagerConstants.ACCESS_TOKEN
-import com.adcenter.app.config.TokenManagerConstants.APP_CONFIG
-import com.adcenter.app.config.TokenManagerConstants.IS_ADMIN
-import com.adcenter.app.config.TokenManagerConstants.IS_LOGGED_IN
+
+private const val APP_CONFIG = "APP_CONFIG"
+private const val ACCESS_TOKEN = "ACCESS_TOKEN"
+private const val IS_LOGGED_IN = "IS_LOGGED_IN"
+private const val IS_ADMIN = "IS_ADMIN"
 
 class AppConfigManager(context: Context) : IAppConfigManager {
 

@@ -4,11 +4,11 @@ import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import com.adcenter.R
+import com.adcenter.api.getShowHideUrl
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getShowHideUrl
 import com.adcenter.data.processors.ShowHideProcessor
-import com.adcenter.extensions.toast
+import com.adcenter.extensions.longToast
 import java.util.concurrent.Executors
 
 class ShowHideButtonController(
@@ -37,7 +37,13 @@ class ShowHideButtonController(
         executor.execute {
             try {
                 val response = Callable<Boolean>()
-                    .setRequest(NetworkDataRequest(getShowHideUrl(id)))
+                    .setRequest(
+                        NetworkDataRequest(
+                            getShowHideUrl(
+                                id
+                            )
+                        )
+                    )
                     .setProcessor(ShowHideProcessor())
                     .call()
 
@@ -55,7 +61,7 @@ class ShowHideButtonController(
             } catch (e: Exception) {
                 handler.post {
                     button.isEnabled = true
-                    button.context.toast(e.message ?: "Error")
+                    button.context.longToast(e.message ?: "Error")
                 }
             }
         }

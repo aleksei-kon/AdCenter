@@ -2,7 +2,7 @@ package com.adcenter.features.myads.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getMyAdsUrl
+import com.adcenter.api.getMyAdsUrl
 import com.adcenter.data.processors.AdsDataProcessor
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.myads.data.MyAdsRequestParams

@@ -1,13 +1,13 @@
 package com.adcenter.data.processors
 
-import com.adcenter.data.getImageDownloadUrl
+import com.adcenter.api.getImageDownloadUrl
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.utils.Constants.DATE_FORMAT_PATTERN
 import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.MILLISECONDS_PREFIX
-import com.adcenter.utils.resource.IResourceProvider
+import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*

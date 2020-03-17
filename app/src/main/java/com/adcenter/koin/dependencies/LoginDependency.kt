@@ -11,26 +11,24 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object LoginDependency {
-    val module = module {
-        scope(named<LoginActivity>()) {
-            scoped<ILoginRepository> {
-                LoginRepository(
-                    processor = get()
-                )
-            }
-            scoped<ILoginUseCase> {
-                LoginUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            LoginViewModel(
-                loginUseCase = getScope(scopeId).get(),
-                gson = get()
+val loginDependencyModule = module {
+    scope(named<LoginActivity>()) {
+        scoped<ILoginRepository> {
+            LoginRepository(
+                processor = get()
             )
         }
+        scoped<ILoginUseCase> {
+            LoginUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        LoginViewModel(
+            loginUseCase = getScope(scopeId).get(),
+            gson = get()
+        )
     }
 }

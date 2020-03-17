@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
 import com.adcenter.extensions.gone
+import com.adcenter.extensions.longToast
 import com.adcenter.extensions.setChildsEnabled
-import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
@@ -51,8 +51,8 @@ class RegisterActivity : BaseActivity() {
 
     private fun register() {
         when {
-            isFieldsEmpty -> toast(getString(R.string.empty_fields_message))
-            !isPasswordsTheSame -> toast(getString(R.string.passwords_not_match_message))
+            isFieldsEmpty -> longToast(getString(R.string.empty_fields_message))
+            !isPasswordsTheSame -> longToast(getString(R.string.passwords_not_match_message))
             else -> {
                 val params = RegistrationRequestParams(
                     username = loginEditText.text.toString(),
@@ -80,7 +80,7 @@ class RegisterActivity : BaseActivity() {
                 is RegistrationUiState.Error -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
-                    it.throwable.message?.let { message -> toast(message) }
+                    it.throwable.message?.let { message -> longToast(message) }
                 }
             }
         })

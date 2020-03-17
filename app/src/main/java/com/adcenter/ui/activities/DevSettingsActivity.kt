@@ -2,8 +2,8 @@ package com.adcenter.ui.activities
 
 import android.os.Bundle
 import com.adcenter.R
-import com.adcenter.app.config.AppConfig
-import com.adcenter.app.config.backendurl.BackendUrlHolder
+import com.adcenter.config.AppConfig
+import com.adcenter.config.BackendUrlHolder
 import kotlinx.android.synthetic.main.activity_dev_settings.*
 import org.koin.android.ext.android.inject
 

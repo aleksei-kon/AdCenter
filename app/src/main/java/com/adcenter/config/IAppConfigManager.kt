@@ -1,4 +1,4 @@
-package com.adcenter.app.config
+package com.adcenter.config
 
 interface IAppConfigManager {
 

@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
 import com.adcenter.extensions.gone
+import com.adcenter.extensions.longToast
 import com.adcenter.extensions.setChildsEnabled
-import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.login.data.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
@@ -45,7 +45,7 @@ class LoginActivity : BaseActivity() {
 
     private fun login() {
         if (isFieldsEmpty) {
-            toast(getString(R.string.empty_fields_message))
+            longToast(getString(R.string.empty_fields_message))
         } else {
             val params = LoginRequestParams(
                 username = loginEditText.text.toString(),
@@ -72,7 +72,7 @@ class LoginActivity : BaseActivity() {
                 is LoginUiState.Error -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
-                    it.throwable.message?.let { message -> toast(message) }
+                    it.throwable.message?.let { message -> longToast(message) }
                 }
             }
         })

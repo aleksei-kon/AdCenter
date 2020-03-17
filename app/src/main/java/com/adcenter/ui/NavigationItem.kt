@@ -2,7 +2,7 @@ package com.adcenter.ui
 
 import com.adcenter.R
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
-import com.adcenter.utils.resource.IResourceProvider
+import com.adcenter.resource.IResourceProvider
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

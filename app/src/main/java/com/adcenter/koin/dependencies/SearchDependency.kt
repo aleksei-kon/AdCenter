@@ -11,25 +11,23 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object SearchDependency {
-    val module = module {
-        scope(named<SearchFragment>()) {
-            scoped<ISearchRepository> {
-                SearchRepository(
-                    processor = get()
-                )
-            }
-            scoped<ISearchUseCase> {
-                SearchUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            SearchViewModel(
-                searchUseCase = getScope(scopeId).get()
+val searchDependencyModule = module {
+    scope(named<SearchFragment>()) {
+        scoped<ISearchRepository> {
+            SearchRepository(
+                processor = get()
             )
         }
+        scoped<ISearchUseCase> {
+            SearchUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        SearchViewModel(
+            searchUseCase = getScope(scopeId).get()
+        )
     }
 }

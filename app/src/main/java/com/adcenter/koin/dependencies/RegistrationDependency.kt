@@ -11,26 +11,24 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object RegistrationDependency {
-    val module = module {
-        scope(named<RegisterActivity>()) {
-            scoped<IRegistrationRepository> {
-                RegistrationRepository(
-                    processor = get()
-                )
-            }
-            scoped<IRegistrationUseCase> {
-                RegistrationUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            RegistrationViewModel(
-                registrationUseCase = getScope(scopeId).get(),
-                gson = get()
+val registrationDependencyModule = module {
+    scope(named<RegisterActivity>()) {
+        scoped<IRegistrationRepository> {
+            RegistrationRepository(
+                processor = get()
             )
         }
+        scoped<IRegistrationUseCase> {
+            RegistrationUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        RegistrationViewModel(
+            registrationUseCase = getScope(scopeId).get(),
+            gson = get()
+        )
     }
 }

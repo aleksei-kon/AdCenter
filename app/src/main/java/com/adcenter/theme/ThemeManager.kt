@@ -1,11 +1,12 @@
-package com.adcenter.ui.theme
+package com.adcenter.theme
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import com.adcenter.R
-import com.adcenter.ui.theme.ThemeManagerConstants.THEME_MODE
-import com.adcenter.ui.theme.ThemeManagerConstants.THEME_PREFERENCES
+
+private const val THEME_MODE = "THEME_MODE"
+private const val THEME_PREFERENCES = "THEME_PREFERENCES"
 
 class ThemeManager(context: Context) : IThemeManager {
 

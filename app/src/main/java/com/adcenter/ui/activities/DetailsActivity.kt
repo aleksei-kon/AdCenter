@@ -3,11 +3,11 @@ package com.adcenter.ui.activities
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
-import com.adcenter.app.config.AppConfig
+import com.adcenter.config.AppConfig
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.gone
+import com.adcenter.extensions.longToast
 import com.adcenter.extensions.setTextWithVisibility
-import com.adcenter.extensions.toast
 import com.adcenter.extensions.visible
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.features.details.uistate.DetailsUiState
@@ -86,7 +86,7 @@ class DetailsActivity : BaseActivity() {
                     content.gone()
                     hideButtons()
                     noDataMessage.visible()
-                    it.throwable.message?.let { message -> toast(message) }
+                    it.throwable.message?.let { message -> longToast(message) }
                 }
             }
         })

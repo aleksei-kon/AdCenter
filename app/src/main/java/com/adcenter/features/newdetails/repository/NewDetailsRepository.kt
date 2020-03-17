@@ -2,7 +2,7 @@ package com.adcenter.features.newdetails.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getNewDetailsUrl
+import com.adcenter.api.getNewDetailsUrl
 import com.adcenter.data.processors.NewDetailsProcessor
 import com.adcenter.features.newdetails.data.NewDetailsModel
 import com.adcenter.utils.Result

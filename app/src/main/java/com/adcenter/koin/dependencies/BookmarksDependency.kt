@@ -11,25 +11,23 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object BookmarksDependency {
-    val module = module {
-        scope(named<BookmarksFragment>()) {
-            scoped<IBookmarksRepository> {
-                BookmarksRepository(
-                    processor = get()
-                )
-            }
-            scoped<IBookmarksUseCase> {
-                BookmarksUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            BookmarksViewModel(
-                bookmarksUseCase = getScope(scopeId).get()
+val bookmarksDependencyModule = module {
+    scope(named<BookmarksFragment>()) {
+        scoped<IBookmarksRepository> {
+            BookmarksRepository(
+                processor = get()
             )
         }
+        scoped<IBookmarksUseCase> {
+            BookmarksUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        BookmarksViewModel(
+            bookmarksUseCase = getScope(scopeId).get()
+        )
     }
 }

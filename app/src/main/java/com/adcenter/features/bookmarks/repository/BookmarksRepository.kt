@@ -2,7 +2,7 @@ package com.adcenter.features.bookmarks.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getBookmarksUrl
+import com.adcenter.api.getBookmarksUrl
 import com.adcenter.data.processors.AdsDataProcessor
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
@@ -12,7 +12,11 @@ class BookmarksRepository(private val processor: AdsDataProcessor) : IBookmarksR
 
     override fun getBookmarks(params: BookmarksRequestParams): Result<List<AdItemModel>> =
         runCatching {
-            val request = NetworkDataRequest(getBookmarksUrl(params))
+            val request = NetworkDataRequest(
+                getBookmarksUrl(
+                    params
+                )
+            )
 
             val response = Callable<List<AdItemModel>>()
                 .setRequest(request)

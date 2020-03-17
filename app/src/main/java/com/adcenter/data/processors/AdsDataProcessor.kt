@@ -1,6 +1,6 @@
 package com.adcenter.data.processors
 
-import com.adcenter.data.getImageDownloadUrl
+import com.adcenter.api.getImageDownloadUrl
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkAdItem
 import com.adcenter.entities.view.AdItemModel
@@ -8,7 +8,6 @@ import com.adcenter.utils.Constants
 import com.adcenter.utils.Constants.EMPTY
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 

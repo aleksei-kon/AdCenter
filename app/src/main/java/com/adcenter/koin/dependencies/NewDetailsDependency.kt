@@ -16,38 +16,36 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object NewDetailsDependency {
-    val module = module {
-        scope(named<NewAdActivity>()) {
-            scoped<INewDetailsRepository> {
-                NewDetailsRepository(
-                    processor = get()
-                )
-            }
-            scoped<IPhotoRepository> {
-                PhotoRepository(
-                    processor = get()
-                )
-            }
-            scoped<INewDetailsUseCase> {
-                NewDetailsUseCase(
-                    repository = get()
-                )
-            }
-            scoped<IUploadPhotoUseCase> {
-                UploadPhotoUseCase(
-                    repository = get()
-                )
-            }
-        }
-
-        viewModel { (scopeId: ScopeID) ->
-            NewDetailsViewModel(
-                context = androidContext(),
-                newDetailsUseCase = getScope(scopeId).get(),
-                uploadPhotoUseCase = getScope(scopeId).get(),
-                gson = get()
+val newDetailsDependencyModule = module {
+    scope(named<NewAdActivity>()) {
+        scoped<INewDetailsRepository> {
+            NewDetailsRepository(
+                processor = get()
             )
         }
+        scoped<IPhotoRepository> {
+            PhotoRepository(
+                processor = get()
+            )
+        }
+        scoped<INewDetailsUseCase> {
+            NewDetailsUseCase(
+                repository = get()
+            )
+        }
+        scoped<IUploadPhotoUseCase> {
+            UploadPhotoUseCase(
+                repository = get()
+            )
+        }
+    }
+
+    viewModel { (scopeId: ScopeID) ->
+        NewDetailsViewModel(
+            context = androidContext(),
+            newDetailsUseCase = getScope(scopeId).get(),
+            uploadPhotoUseCase = getScope(scopeId).get(),
+            gson = get()
+        )
     }
 }

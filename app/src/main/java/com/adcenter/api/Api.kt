@@ -1,6 +1,6 @@
-package com.adcenter.data
+package com.adcenter.api
 
-import com.adcenter.app.config.AppConfig
+import com.adcenter.config.AppConfig
 import com.adcenter.features.adrequests.data.AdRequestsParams
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.features.details.data.DetailsRequestParams
