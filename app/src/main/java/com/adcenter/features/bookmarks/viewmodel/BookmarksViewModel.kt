@@ -3,34 +3,56 @@ package com.adcenter.features.bookmarks.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.view.AdItemModel
+import com.adcenter.extensions.async
 import com.adcenter.features.bookmarks.BookmarksConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.bookmarks.data.BookmarksModel
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.usecase.IBookmarksUseCase
 import com.adcenter.utils.Result
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
-class BookmarksViewModel(private val bookmarksUseCase: IBookmarksUseCase) : ViewModel(),
-    CoroutineScope {
+class BookmarksViewModel(private val bookmarksUseCase: IBookmarksUseCase) : ViewModel() {
 
     private var currentParams: BookmarksRequestParams = BookmarksRequestParams()
     private var bookmarksModel: BookmarksModel = BookmarksModel()
-    private var pageNumber = FIRST_PAGE_NUMBER
+    private var disposable: Disposable? = null
 
-    private val coroutineScopeJob = Job()
+    private val dataSource: Single<BookmarksModel>
+        get() = Single.create {
+            when (val result = bookmarksUseCase.load(currentParams)) {
+                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val observer = object : SingleObserver<BookmarksModel> {
+
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
+        }
+
+        override fun onSuccess(model: BookmarksModel) {
+            bookmarksUiMutableState.value = BookmarksUiState.Success(model)
+            currentParams = currentParams.copy(
+                pageNumber = currentParams.pageNumber + 1
+            )
+        }
+
+        override fun onError(e: Throwable) {
+            bookmarksUiMutableState.value = BookmarksUiState.Error(e)
+        }
+    }
+
     private val bookmarksUiMutableState = MutableLiveData<BookmarksUiState>()
 
     val bookmarksData: LiveData<BookmarksUiState>
         get() = bookmarksUiMutableState
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + coroutineScopeJob
-
     fun load() {
-        if (pageNumber == FIRST_PAGE_NUMBER) {
+        if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
             bookmarksUiMutableState.value = BookmarksUiState.Loading
             loadModel()
         } else {
@@ -45,46 +67,31 @@ class BookmarksViewModel(private val bookmarksUseCase: IBookmarksUseCase) : View
 
     fun refresh() {
         bookmarksModel = BookmarksModel()
-        pageNumber = FIRST_PAGE_NUMBER
+        currentParams = currentParams.copy(
+            pageNumber = FIRST_PAGE_NUMBER
+        )
         loadModel()
     }
 
     private fun loadModel() {
-        coroutineContext.cancelChildren()
+        disposable?.dispose()
 
-        currentParams = BookmarksRequestParams(pageNumber)
-
-        launch {
-            when (val result = bookmarksUseCase.load(currentParams)) {
-                is Result.Success -> {
-                    bookmarksModel = mergeResults(bookmarksModel, result.value)
-
-                    bookmarksUiMutableState.value = BookmarksUiState.Success(bookmarksModel)
-
-                    pageNumber++
-                }
-                is Result.Error -> {
-                    bookmarksUiMutableState.value = BookmarksUiState.Error(result.exception)
-                }
-            }
-        }
+        dataSource
+            .async()
+            .subscribe(observer)
     }
 
-    private fun mergeResults(
-        oldResponse: BookmarksModel,
+    private fun updateModel(
         newResponse: BookmarksModel
     ): BookmarksModel {
-        val itemsList = mutableListOf<AdItemModel>()
+        bookmarksModel = BookmarksModel(bookmarksModel.ads + newResponse.ads)
 
-        itemsList += oldResponse.ads
-        itemsList += newResponse.ads
-
-        return BookmarksModel(itemsList)
+        return bookmarksModel
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        coroutineScopeJob.cancel()
+        disposable?.dispose()
     }
 }

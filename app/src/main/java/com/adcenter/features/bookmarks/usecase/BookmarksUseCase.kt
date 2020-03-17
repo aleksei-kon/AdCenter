@@ -3,31 +3,19 @@ package com.adcenter.features.bookmarks.usecase
 import com.adcenter.features.bookmarks.data.BookmarksModel
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.features.bookmarks.repository.IBookmarksRepository
-import com.adcenter.utils.Constants
 import com.adcenter.utils.Result
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 
 class BookmarksUseCase(private val repository: IBookmarksRepository) : IBookmarksUseCase {
 
-    override suspend fun load(requestParams: BookmarksRequestParams): Result<BookmarksModel> =
+    override fun load(requestParams: BookmarksRequestParams): Result<BookmarksModel> =
         Result.Success(loadModel(requestParams))
 
-    private suspend fun loadModel(requestParams: BookmarksRequestParams): BookmarksModel {
-        return coroutineScope {
-            val adsAsync = async {
-                delay(Constants.REQUEST_DELAY)
-                repository.getBookmarks(requestParams)
-            }
-            val adsResult = adsAsync.await()
-
-            val ads = when (adsResult) {
-                is Result.Success -> adsResult.value
-                is Result.Error -> emptyList()
-            }
-
-            BookmarksModel(ads)
+    private fun loadModel(requestParams: BookmarksRequestParams): BookmarksModel {
+        val ads = when (val result = repository.getBookmarks(requestParams)) {
+            is Result.Success -> result.value
+            is Result.Error -> emptyList()
         }
+
+        return BookmarksModel(ads)
     }
 }

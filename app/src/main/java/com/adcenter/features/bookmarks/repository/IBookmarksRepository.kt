@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface IBookmarksRepository {
 
-    suspend fun getBookmarks(params: BookmarksRequestParams): Result<List<AdItemModel>>
+    fun getBookmarks(params: BookmarksRequestParams): Result<List<AdItemModel>>
 }
