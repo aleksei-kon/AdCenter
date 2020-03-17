@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface IAdRequestsRepository {
 
-    suspend fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>>
+    fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>>
 }

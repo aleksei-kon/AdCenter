@@ -3,33 +3,56 @@ package com.adcenter.features.myads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.view.AdItemModel
+import com.adcenter.extensions.async
 import com.adcenter.features.myads.MyAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.myads.data.MyAdsModel
 import com.adcenter.features.myads.data.MyAdsRequestParams
 import com.adcenter.features.myads.uistate.MyAdsUiState
 import com.adcenter.features.myads.usecase.IMyAdsUseCase
 import com.adcenter.utils.Result
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
-class MyAdsViewModel(private val myAdsUseCase: IMyAdsUseCase) : ViewModel(), CoroutineScope {
+class MyAdsViewModel(private val myAdsUseCase: IMyAdsUseCase) : ViewModel() {
 
     private var currentParams: MyAdsRequestParams = MyAdsRequestParams()
     private var myAdsModel: MyAdsModel = MyAdsModel()
-    private var pageNumber = FIRST_PAGE_NUMBER
+    private var disposable: Disposable? = null
 
-    private val coroutineScopeJob = Job()
+    private val dataSource: Single<MyAdsModel>
+        get() = Single.create {
+            when (val result = myAdsUseCase.load(currentParams)) {
+                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val observer = object : SingleObserver<MyAdsModel> {
+
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
+        }
+
+        override fun onSuccess(model: MyAdsModel) {
+            myAdsUiMutableState.value = MyAdsUiState.Success(model)
+            currentParams = currentParams.copy(
+                pageNumber = currentParams.pageNumber + 1
+            )
+        }
+
+        override fun onError(e: Throwable) {
+            myAdsUiMutableState.value = MyAdsUiState.Error(e)
+        }
+    }
+
     private val myAdsUiMutableState = MutableLiveData<MyAdsUiState>()
 
     val myAdsData: LiveData<MyAdsUiState>
         get() = myAdsUiMutableState
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + coroutineScopeJob
-
     fun load() {
-        if (pageNumber == FIRST_PAGE_NUMBER) {
+        if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
             myAdsUiMutableState.value = MyAdsUiState.Loading
             loadModel()
         } else {
@@ -44,46 +67,31 @@ class MyAdsViewModel(private val myAdsUseCase: IMyAdsUseCase) : ViewModel(), Cor
 
     fun refresh() {
         myAdsModel = MyAdsModel()
-        pageNumber = FIRST_PAGE_NUMBER
+        currentParams = currentParams.copy(
+            pageNumber = FIRST_PAGE_NUMBER
+        )
         loadModel()
     }
 
     private fun loadModel() {
-        coroutineContext.cancelChildren()
+        disposable?.dispose()
 
-        currentParams = MyAdsRequestParams(pageNumber)
-
-        launch {
-            when (val result = myAdsUseCase.load(currentParams)) {
-                is Result.Success -> {
-                    myAdsModel = mergeResults(myAdsModel, result.value)
-
-                    myAdsUiMutableState.value = MyAdsUiState.Success(myAdsModel)
-
-                    pageNumber++
-                }
-                is Result.Error -> {
-                    myAdsUiMutableState.value = MyAdsUiState.Error(result.exception)
-                }
-            }
-        }
+        dataSource
+            .async()
+            .subscribe(observer)
     }
 
-    private fun mergeResults(
-        oldResponse: MyAdsModel,
+    private fun updateModel(
         newResponse: MyAdsModel
     ): MyAdsModel {
-        val itemsList = mutableListOf<AdItemModel>()
+        myAdsModel = MyAdsModel(myAdsModel.ads + newResponse.ads)
 
-        itemsList += oldResponse.ads
-        itemsList += newResponse.ads
-
-        return MyAdsModel(itemsList)
+        return myAdsModel
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        coroutineScopeJob.cancel()
+        disposable?.dispose()
     }
 }

@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface ISearchRepository {
 
-    suspend fun getSearchResult(params: SearchRequestParams): Result<List<AdItemModel>>
+    fun getSearchResult(params: SearchRequestParams): Result<List<AdItemModel>>
 }

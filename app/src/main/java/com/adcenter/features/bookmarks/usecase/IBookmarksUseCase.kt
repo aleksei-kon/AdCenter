@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface IBookmarksUseCase {
 
-    suspend fun load(requestParams: BookmarksRequestParams): Result<BookmarksModel>
+    fun load(requestParams: BookmarksRequestParams): Result<BookmarksModel>
 }

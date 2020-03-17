@@ -29,6 +29,8 @@ object Libs {
         const val glide = "4.9.0"
         const val imageSlider = "1.3.2"
         const val coroutines = "1.3.2"
+        const val rxJava = "2.2.19"
+        const val rxAndroid = "2.1.1"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -53,4 +55,7 @@ object Libs {
     const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     //const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
     const val koinExperimental = "org.koin:koin-androidx-ext:${Versions.koin}"
+
+    const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
+    const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
 }

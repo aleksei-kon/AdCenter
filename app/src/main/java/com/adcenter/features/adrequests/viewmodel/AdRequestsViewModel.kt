@@ -3,34 +3,56 @@ package com.adcenter.features.adrequests.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.entities.view.AdItemModel
+import com.adcenter.extensions.async
 import com.adcenter.features.adrequests.AdRequestsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.adrequests.data.AdRequestsModel
 import com.adcenter.features.adrequests.data.AdRequestsParams
 import com.adcenter.features.adrequests.uistate.AdRequestsUiState
 import com.adcenter.features.adrequests.usecase.IAdRequestsUseCase
 import com.adcenter.utils.Result
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
-class AdRequestsViewModel(private val adRequestsUseCase: IAdRequestsUseCase) : ViewModel(),
-    CoroutineScope {
+class AdRequestsViewModel(private val adRequestsUseCase: IAdRequestsUseCase) : ViewModel() {
 
     private var currentParams: AdRequestsParams = AdRequestsParams()
     private var adRequestsModel: AdRequestsModel = AdRequestsModel()
-    private var pageNumber = FIRST_PAGE_NUMBER
+    private var disposable: Disposable? = null
 
-    private val coroutineScopeJob = Job()
+    private val dataSource: Single<AdRequestsModel>
+        get() = Single.create {
+            when (val result = adRequestsUseCase.load(currentParams)) {
+                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val observer = object : SingleObserver<AdRequestsModel> {
+
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
+        }
+
+        override fun onSuccess(model: AdRequestsModel) {
+            adRequestsUiMutableState.value = AdRequestsUiState.Success(model)
+            currentParams = currentParams.copy(
+                pageNumber = currentParams.pageNumber + 1
+            )
+        }
+
+        override fun onError(e: Throwable) {
+            adRequestsUiMutableState.value = AdRequestsUiState.Error(e)
+        }
+    }
+
     private val adRequestsUiMutableState = MutableLiveData<AdRequestsUiState>()
 
     val adRequestsData: LiveData<AdRequestsUiState>
         get() = adRequestsUiMutableState
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + coroutineScopeJob
-
     fun load() {
-        if (pageNumber == FIRST_PAGE_NUMBER) {
+        if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
             adRequestsUiMutableState.value = AdRequestsUiState.Loading
             loadModel()
         } else {
@@ -45,46 +67,32 @@ class AdRequestsViewModel(private val adRequestsUseCase: IAdRequestsUseCase) : V
 
     fun refresh() {
         adRequestsModel = AdRequestsModel()
-        pageNumber = FIRST_PAGE_NUMBER
+        currentParams = currentParams.copy(
+            pageNumber = FIRST_PAGE_NUMBER
+        )
+
         loadModel()
     }
 
     private fun loadModel() {
-        coroutineContext.cancelChildren()
+        disposable?.dispose()
 
-        currentParams = AdRequestsParams(pageNumber)
-
-        launch {
-            when (val result = adRequestsUseCase.load(currentParams)) {
-                is Result.Success -> {
-                    adRequestsModel = mergeResults(adRequestsModel, result.value)
-
-                    adRequestsUiMutableState.value = AdRequestsUiState.Success(adRequestsModel)
-
-                    pageNumber++
-                }
-                is Result.Error -> {
-                    adRequestsUiMutableState.value = AdRequestsUiState.Error(result.exception)
-                }
-            }
-        }
+        dataSource
+            .async()
+            .subscribe(observer)
     }
 
-    private fun mergeResults(
-        oldResponse: AdRequestsModel,
+    private fun updateModel(
         newResponse: AdRequestsModel
     ): AdRequestsModel {
-        val itemsList = mutableListOf<AdItemModel>()
+        adRequestsModel = AdRequestsModel(adRequestsModel.ads + newResponse.ads)
 
-        itemsList += oldResponse.ads
-        itemsList += newResponse.ads
-
-        return AdRequestsModel(itemsList)
+        return adRequestsModel
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        coroutineScopeJob.cancel()
+        disposable?.dispose()
     }
 }
