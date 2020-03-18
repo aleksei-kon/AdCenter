@@ -1,21 +1,33 @@
 package com.adcenter.data.processors
 
-import com.adcenter.api.getImageDownloadUrl
+import com.adcenter.api.IApi
+import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
+import com.adcenter.resource.IResourceProvider
 import com.adcenter.utils.Constants.DATE_FORMAT_PATTERN
 import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.MILLISECONDS_PREFIX
-import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class DetailsProcessor(
-    val gson: Gson,
-    val resourceProvider: IResourceProvider
-) : IDataProcessor<DetailsModel> {
+class DetailsProcessor : IDataProcessor<DetailsModel> {
+
+    @Inject
+    lateinit var resourceProvider: IResourceProvider
+
+    @Inject
+    lateinit var gson: Gson
+
+    @Inject
+    lateinit var api: IApi
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private fun isMessage(response: String) {
         val message: Message = try {
@@ -71,7 +83,7 @@ class DetailsProcessor(
         if (photos == null || photos.isEmpty()) {
             emptyList()
         } else {
-            photos.map { getImageDownloadUrl(it) }
+            photos.map { api.getImageDownloadUrl(it) }
         }
 
     private fun getViews(views: Int?): String =

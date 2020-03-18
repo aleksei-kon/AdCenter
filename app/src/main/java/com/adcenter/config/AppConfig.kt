@@ -1,36 +1,34 @@
 package com.adcenter.config
 
 import com.adcenter.entities.view.AppConfigInfo
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-object AppConfig : KoinComponent {
+class AppConfig(
+    private val urlHolder: IBackendUrlHolder,
+    private val appConfigManager: IAppConfigManager
+) : IAppConfig {
 
-    private val urlHolder: BackendUrlHolder by inject()
-    private val appConfigManager: IAppConfigManager by inject()
-
-    var backendUrl: String
+    override var backendUrl: String
         get() = urlHolder.url
         set(value) {
             urlHolder.url = value
         }
 
-    var token: String? = null
+    override var token: String? = null
         private set
 
-    var isLoggedIn: Boolean = false
+    override var isLoggedIn: Boolean = false
         private set
 
-    var isAdmin: Boolean = false
+    override var isAdmin: Boolean = false
         private set
 
-    fun initConfig() {
+    override fun initConfig() {
         token = appConfigManager.token
         isLoggedIn = appConfigManager.isLoggedIn
         isAdmin = appConfigManager.isAdmin
     }
 
-    fun updateConfig(appConfigInfo: AppConfigInfo) {
+    override fun updateConfig(appConfigInfo: AppConfigInfo) {
         if (appConfigInfo.token.isEmpty()) {
             appConfigManager.removeToken()
         } else {

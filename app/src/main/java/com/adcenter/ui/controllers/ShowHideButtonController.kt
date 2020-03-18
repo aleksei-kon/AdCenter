@@ -4,18 +4,27 @@ import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import com.adcenter.R
-import com.adcenter.api.getShowHideUrl
+import com.adcenter.api.IApi
+import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.ShowHideProcessor
 import com.adcenter.extensions.longToast
 import java.util.concurrent.Executors
+import javax.inject.Inject
 
 class ShowHideButtonController(
     private val button: ImageButton,
     private val id: String,
     private var isShown: Boolean
 ) : View.OnClickListener {
+
+    @Inject
+    lateinit var api: IApi
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     override fun onClick(v: View?) {
         showHideAd()
@@ -37,13 +46,7 @@ class ShowHideButtonController(
         executor.execute {
             try {
                 val response = Callable<Boolean>()
-                    .setRequest(
-                        NetworkDataRequest(
-                            getShowHideUrl(
-                                id
-                            )
-                        )
-                    )
+                    .setRequest(NetworkDataRequest(api.getShowHideUrl(id)))
                     .setProcessor(ShowHideProcessor())
                     .call()
 

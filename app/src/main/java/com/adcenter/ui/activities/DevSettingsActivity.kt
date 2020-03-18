@@ -2,14 +2,23 @@ package com.adcenter.ui.activities
 
 import android.os.Bundle
 import com.adcenter.R
-import com.adcenter.config.AppConfig
-import com.adcenter.config.BackendUrlHolder
+import com.adcenter.app.App
+import com.adcenter.config.IAppConfig
+import com.adcenter.config.IBackendUrlHolder
 import kotlinx.android.synthetic.main.activity_dev_settings.*
-import org.koin.android.ext.android.inject
+import javax.inject.Inject
 
 class DevSettingsActivity : BaseActivity() {
 
-    private val urlHolder: BackendUrlHolder by inject()
+    @Inject
+    lateinit var appConfig: IAppConfig
+
+    @Inject
+    lateinit var urlHolder: IBackendUrlHolder
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     override val layout: Int = R.layout.activity_dev_settings
 
@@ -31,7 +40,7 @@ class DevSettingsActivity : BaseActivity() {
 
     private fun saveInfo() {
         urlHolder.url = backendUrlEditText.text.toString()
-        AppConfig.backendUrl = backendUrlEditText.text.toString()
+        appConfig.backendUrl = backendUrlEditText.text.toString()
         finish()
     }
 }

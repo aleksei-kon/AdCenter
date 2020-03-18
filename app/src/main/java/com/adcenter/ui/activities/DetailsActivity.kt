@@ -3,7 +3,8 @@ package com.adcenter.ui.activities
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
-import com.adcenter.config.AppConfig
+import com.adcenter.app.App
+import com.adcenter.config.IAppConfig
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
@@ -20,8 +21,16 @@ import kotlinx.android.synthetic.main.layout_ad_details_info.*
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
 class DetailsActivity : BaseActivity() {
+
+    @Inject
+    lateinit var appConfig: IAppConfig
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     override val layout: Int = R.layout.activity_details
 
@@ -46,11 +55,11 @@ class DetailsActivity : BaseActivity() {
     }
 
     private fun showButtons() {
-        if (AppConfig.isLoggedIn && !AppConfig.isAdmin) {
+        if (appConfig.isLoggedIn && !appConfig.isAdmin) {
             addRemoveBookmarkButton.visible()
         }
 
-        if (AppConfig.isAdmin) {
+        if (appConfig.isAdmin) {
             showHideButton.visible()
         }
     }

@@ -15,8 +15,7 @@ val loginDependencyModule = module {
     scope(named<LoginActivity>()) {
         scoped<ILoginRepository> {
             LoginRepository(
-                processor = get(),
-                gson = get()
+                processor = get()
             )
         }
         scoped<ILoginUseCase> {

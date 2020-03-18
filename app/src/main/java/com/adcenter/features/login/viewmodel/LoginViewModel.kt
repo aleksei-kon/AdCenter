@@ -3,7 +3,8 @@ package com.adcenter.features.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.config.AppConfig
+import com.adcenter.app.App
+import com.adcenter.config.IAppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
 import com.adcenter.features.login.data.LoginRequestParams
@@ -13,8 +14,16 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
 class LoginViewModel(private val loginUseCase: ILoginUseCase) : ViewModel() {
+
+    @Inject
+    lateinit var appConfig: IAppConfig
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private var loginModel: AppConfigInfo = AppConfigInfo()
     private var currentParams: LoginRequestParams = LoginRequestParams()
@@ -25,7 +34,7 @@ class LoginViewModel(private val loginUseCase: ILoginUseCase) : ViewModel() {
             when (val result = loginUseCase.login(currentParams)) {
                 is Result.Success -> {
                     loginModel = result.value
-                    AppConfig.updateConfig(loginModel)
+                    appConfig.updateConfig(loginModel)
                     it.onSuccess(loginModel)
                 }
                 is Result.Error -> it.onError(result.exception)

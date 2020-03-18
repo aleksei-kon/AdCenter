@@ -1,6 +1,7 @@
 package com.adcenter.data.processors
 
-import com.adcenter.api.getImageDownloadUrl
+import com.adcenter.api.IApi
+import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkAdItem
 import com.adcenter.entities.view.AdItemModel
@@ -10,8 +11,19 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class AdsDataProcessor(private val gson: Gson) : IDataProcessor<List<AdItemModel>> {
+class AdsDataProcessor : IDataProcessor<List<AdItemModel>> {
+
+    @Inject
+    lateinit var gson: Gson
+
+    @Inject
+    lateinit var api: IApi
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private fun isMessage(response: String) {
         val message: Message = try {
@@ -38,7 +50,7 @@ class AdsDataProcessor(private val gson: Gson) : IDataProcessor<List<AdItemModel
 
     private fun processNetworkModel(networkModel: NetworkAdItem): AdItemModel {
         val id = networkModel.id
-        val photoUrl = getImageDownloadUrl(networkModel.photoUrl ?: EMPTY)
+        val photoUrl = api.getImageDownloadUrl(networkModel.photoUrl ?: EMPTY)
         val title = networkModel.title ?: EMPTY
         val price = networkModel.price ?: EMPTY
         val place = networkModel.place ?: EMPTY
