@@ -15,8 +15,7 @@ val registrationDependencyModule = module {
     scope(named<RegisterActivity>()) {
         scoped<IRegistrationRepository> {
             RegistrationRepository(
-                processor = get(),
-                gson = get()
+                processor = get()
             )
         }
         scoped<IRegistrationUseCase> {

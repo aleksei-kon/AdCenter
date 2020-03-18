@@ -5,19 +5,22 @@ import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
+import com.adcenter.resource.IResourceProvider
 import com.adcenter.utils.Constants.DATE_FORMAT_PATTERN
 import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.MILLISECONDS_PREFIX
-import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class DetailsProcessor(val gson: Gson) : IDataProcessor<DetailsModel> {
+class DetailsProcessor : IDataProcessor<DetailsModel> {
 
     @Inject
     lateinit var resourceProvider: IResourceProvider
+
+    @Inject
+    lateinit var gson: Gson
 
     init {
         App.appComponent.inject(this)

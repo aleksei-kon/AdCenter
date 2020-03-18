@@ -20,8 +20,7 @@ val newDetailsDependencyModule = module {
     scope(named<NewAdActivity>()) {
         scoped<INewDetailsRepository> {
             NewDetailsRepository(
-                processor = get(),
-                gson = get()
+                processor = get()
             )
         }
         scoped<IPhotoRepository> {

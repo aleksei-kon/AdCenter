@@ -1,10 +1,19 @@
 package com.adcenter.data.processors
 
+import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.google.gson.Gson
 import java.util.*
+import javax.inject.Inject
 
-class PhotoProcessor(private val gson: Gson) : IDataProcessor<String> {
+class PhotoProcessor : IDataProcessor<String> {
+
+    @Inject
+    lateinit var gson: Gson
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private fun isMessage(response: String) {
         val message: Message = try {

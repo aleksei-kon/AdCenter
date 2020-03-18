@@ -1,14 +1,20 @@
 package com.adcenter.data.processors
 
+import com.adcenter.app.App
 import com.adcenter.entities.network.Message
-import com.adcenter.features.newdetails.data.NewDetailsModel
 import com.google.gson.Gson
 import java.lang.Exception
 import java.util.*
+import javax.inject.Inject
 
 class ShowHideProcessor : IDataProcessor<Boolean> {
 
-    private val gson = Gson()
+    @Inject
+    lateinit var gson: Gson
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private fun isMessage(response: String) {
         val message: Message = try {
