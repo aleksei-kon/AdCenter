@@ -2,7 +2,7 @@ package com.adcenter.di.dagger.module
 
 import com.adcenter.api.Api
 import com.adcenter.api.IApi
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -16,5 +16,5 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient()
 
     @Provides
-    fun provideApi(appConfig: AppConfig): IApi = Api(appConfig)
+    fun provideApi(appConfig: IAppConfig): IApi = Api(appConfig)
 }

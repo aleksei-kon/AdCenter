@@ -1,7 +1,7 @@
 package com.adcenter.app
 
 import android.app.Application
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import com.adcenter.di.dagger.components.AppComponent
 import com.adcenter.di.dagger.components.DaggerAppComponent
 import com.adcenter.di.dagger.module.ContextModule
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class App : Application() {
 
     @Inject
-    lateinit var appConfig: AppConfig
+    lateinit var appConfig: IAppConfig
 
     override fun onCreate() {
         super.onCreate()

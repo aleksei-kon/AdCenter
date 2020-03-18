@@ -1,6 +1,6 @@
 package com.adcenter.api
 
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import com.adcenter.features.adrequests.data.AdRequestsParams
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.features.details.data.DetailsRequestParams
@@ -33,7 +33,7 @@ private const val SORT_TYPE = "sortType"
 private const val DETAILS_ID = "detailsId"
 private const val ID = "id"
 
-class Api(private val appConfig: AppConfig) : IApi {
+class Api(private val appConfig: IAppConfig) : IApi {
 
     override fun getImageDownloadUrl(name: String) =
         "$HTTP${appConfig.backendUrl}/$IMAGE/$DOWNLOAD/$name"

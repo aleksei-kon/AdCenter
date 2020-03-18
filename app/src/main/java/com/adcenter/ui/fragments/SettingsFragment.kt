@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.adcenter.R
 import com.adcenter.app.App
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
@@ -27,7 +27,7 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
     lateinit var resourceProvider: IResourceProvider
 
     @Inject
-    lateinit var appConfig: AppConfig
+    lateinit var appConfig: IAppConfig
 
     init {
         App.appComponent.inject(this)

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.app.App
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
 import com.adcenter.features.login.data.LoginRequestParams
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class LoginViewModel(private val loginUseCase: ILoginUseCase) : ViewModel() {
 
     @Inject
-    lateinit var appConfig: AppConfig
+    lateinit var appConfig: IAppConfig
 
     init {
         App.appComponent.inject(this)

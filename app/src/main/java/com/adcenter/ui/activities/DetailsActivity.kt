@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
 import com.adcenter.app.App
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
@@ -26,7 +26,7 @@ import javax.inject.Inject
 class DetailsActivity : BaseActivity() {
 
     @Inject
-    lateinit var appConfig: AppConfig
+    lateinit var appConfig: IAppConfig
 
     init {
         App.appComponent.inject(this)

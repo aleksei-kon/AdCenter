@@ -1,10 +1,7 @@
 package com.adcenter.di.dagger.module
 
 import android.content.Context
-import com.adcenter.config.AppConfig
-import com.adcenter.config.AppConfigManager
-import com.adcenter.config.BackendUrlHolder
-import com.adcenter.config.IAppConfigManager
+import com.adcenter.config.*
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.resource.ResourceProvider
 import com.adcenter.theme.IThemeManager
@@ -33,12 +30,12 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBackendUrlHolder(context: Context): BackendUrlHolder = BackendUrlHolder(context)
+    fun provideBackendUrlHolder(context: Context): IBackendUrlHolder = BackendUrlHolder(context)
 
     @Provides
     @Singleton
     fun provideAppConfig(
-        urlHolder: BackendUrlHolder,
+        urlHolder: IBackendUrlHolder,
         appConfigManager: IAppConfigManager
-    ): AppConfig = AppConfig(urlHolder, appConfigManager)
+    ): IAppConfig = AppConfig(urlHolder, appConfigManager)
 }

@@ -1,7 +1,7 @@
 package com.adcenter.data
 
 import com.adcenter.app.App
-import com.adcenter.config.AppConfig
+import com.adcenter.config.IAppConfig
 import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.Request.AUTHORIZATION_HEADER
 import com.adcenter.utils.Constants.Request.FILE_FORM_PARAM
@@ -17,7 +17,7 @@ class NetworkDataRequest(
 ) : IDataRequest {
 
     @Inject
-    lateinit var appConfig: AppConfig
+    lateinit var appConfig: IAppConfig
 
     @Inject
     lateinit var client: OkHttpClient

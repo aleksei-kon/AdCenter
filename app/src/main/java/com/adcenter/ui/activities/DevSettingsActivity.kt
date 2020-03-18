@@ -3,18 +3,18 @@ package com.adcenter.ui.activities
 import android.os.Bundle
 import com.adcenter.R
 import com.adcenter.app.App
-import com.adcenter.config.AppConfig
-import com.adcenter.config.BackendUrlHolder
+import com.adcenter.config.IAppConfig
+import com.adcenter.config.IBackendUrlHolder
 import kotlinx.android.synthetic.main.activity_dev_settings.*
 import javax.inject.Inject
 
 class DevSettingsActivity : BaseActivity() {
 
     @Inject
-    lateinit var appConfig: AppConfig
+    lateinit var appConfig: IAppConfig
 
     @Inject
-    lateinit var urlHolder: BackendUrlHolder
+    lateinit var urlHolder: IBackendUrlHolder
 
     init {
         App.appComponent.inject(this)
