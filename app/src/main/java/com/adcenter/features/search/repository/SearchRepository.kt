@@ -2,7 +2,7 @@ package com.adcenter.features.search.repository
 
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.getSearchUrl
+import com.adcenter.api.getSearchUrl
 import com.adcenter.data.processors.AdsDataProcessor
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.search.data.SearchRequestParams

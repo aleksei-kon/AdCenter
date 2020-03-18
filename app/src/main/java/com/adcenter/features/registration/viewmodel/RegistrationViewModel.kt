@@ -3,62 +3,69 @@ package com.adcenter.features.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.app.config.AppConfig
+import com.adcenter.config.AppConfig
 import com.adcenter.entities.view.AppConfigInfo
+import com.adcenter.extensions.async
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.usecase.IRegistrationUseCase
 import com.adcenter.utils.Result
-import com.google.gson.Gson
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
-class RegistrationViewModel(
-    private val registrationUseCase: IRegistrationUseCase,
-    private val gson: Gson
-) : ViewModel(), CoroutineScope {
+class RegistrationViewModel(private val registrationUseCase: IRegistrationUseCase) : ViewModel() {
 
     private var registrationModel: AppConfigInfo = AppConfigInfo()
     private var currentParams: RegistrationRequestParams = RegistrationRequestParams()
+    private var disposable: Disposable? = null
 
-    private val coroutineScopeJob = Job()
+    private val dataSource: Single<AppConfigInfo>
+        get() = Single.create {
+            when (val result = registrationUseCase.register(currentParams)) {
+                is Result.Success -> {
+                    registrationModel = result.value
+                    AppConfig.updateConfig(registrationModel)
+                    it.onSuccess(registrationModel)
+                }
+                is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val observer = object : SingleObserver<AppConfigInfo> {
+
+        override fun onSubscribe(d: Disposable) {
+            disposable = d
+        }
+
+        override fun onSuccess(model: AppConfigInfo) {
+            registrationUiMutableState.value = RegistrationUiState.Success(model)
+        }
+
+        override fun onError(e: Throwable) {
+            registrationUiMutableState.value = RegistrationUiState.Error(e)
+        }
+    }
+
     private val registrationUiMutableState = MutableLiveData<RegistrationUiState>()
 
     val registrationData: LiveData<RegistrationUiState>
         get() = registrationUiMutableState
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + coroutineScopeJob
-
     fun register(params: RegistrationRequestParams) {
         registrationUiMutableState.value = RegistrationUiState.WaitRegistration
         currentParams = params
-        uploadModel()
-    }
 
-    private fun uploadModel() {
-        coroutineContext.cancelChildren()
+        disposable?.dispose()
 
-        launch {
-            val json = gson.toJson(currentParams)
-
-            when (val result = registrationUseCase.register(json)) {
-                is Result.Success -> {
-                    registrationModel = result.value
-                    AppConfig.updateConfig(registrationModel)
-                    registrationUiMutableState.value =
-                        RegistrationUiState.Success(registrationModel)
-                }
-                is Result.Error -> {
-                    registrationUiMutableState.value = RegistrationUiState.Error(result.exception)
-                }
-            }
-        }
+        dataSource
+            .async()
+            .subscribe(observer)
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        coroutineScopeJob.cancel()
+        disposable?.dispose()
     }
 }

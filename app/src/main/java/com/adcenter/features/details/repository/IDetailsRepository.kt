@@ -6,5 +6,5 @@ import com.adcenter.utils.Result
 
 interface IDetailsRepository {
 
-    suspend fun getDetails(params: DetailsRequestParams): Result<DetailsModel>
+    fun getDetails(params: DetailsRequestParams): Result<DetailsModel>
 }

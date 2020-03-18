@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
-import com.adcenter.extensions.toast
+import com.adcenter.extensions.longToast
 import com.adcenter.extensions.visible
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
@@ -15,7 +15,7 @@ import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
-import com.adcenter.utils.resource.IResourceProvider
+import com.adcenter.resource.IResourceProvider
 import kotlinx.android.synthetic.main.layout_recycler.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.currentScope
@@ -103,7 +103,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> requireContext().toast(message) }
+                    it.throwable.message?.let { message -> requireContext().longToast(message) }
                     setScrollListener()
                 }
             }

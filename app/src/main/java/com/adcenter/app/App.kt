@@ -1,22 +1,31 @@
 package com.adcenter.app
 
 import android.app.Application
-import com.adcenter.app.config.AppConfig
-import com.adcenter.dagger.components.AppComponent
-import com.adcenter.dagger.components.DaggerAppComponent
-import com.adcenter.dagger.module.ContextModule
-import com.adcenter.koin.initKoin
+import com.adcenter.config.AppConfig
+import com.adcenter.di.dagger.components.AppComponent
+import com.adcenter.di.dagger.components.DaggerAppComponent
+import com.adcenter.di.dagger.module.ContextModule
+import com.adcenter.di.koin.koinModules
 import io.reactivex.plugins.RxJavaPlugins
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        RxJavaPlugins.setErrorHandler {}
         initKoin()
         initDagger()
-        AppConfig.initConfig()
+        initRxJava()
+        initAppConfig()
+    }
+
+    private fun initKoin() {
+        startKoin {
+            androidContext(this@App)
+            modules(koinModules)
+        }
     }
 
     private fun initDagger() {
@@ -25,9 +34,16 @@ class App : Application() {
             .build()
     }
 
+    private fun initRxJava() {
+        RxJavaPlugins.setErrorHandler {}
+    }
+
+    private fun initAppConfig() {
+        AppConfig.initConfig()
+    }
+
     companion object {
 
         lateinit var appComponent: AppComponent
-            private set
     }
 }

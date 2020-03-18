@@ -8,7 +8,7 @@ import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
-import com.adcenter.app.config.AppConfig
+import com.adcenter.config.AppConfig
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
 import com.adcenter.extensions.visible
