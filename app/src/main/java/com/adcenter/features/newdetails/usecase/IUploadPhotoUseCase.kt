@@ -5,5 +5,5 @@ import java.io.File
 
 interface IUploadPhotoUseCase {
 
-    suspend fun upload(file: File): Result<String>
+    fun upload(file: File): Result<String>
 }

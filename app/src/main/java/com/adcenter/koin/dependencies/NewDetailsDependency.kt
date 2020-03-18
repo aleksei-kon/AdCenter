@@ -20,7 +20,8 @@ val newDetailsDependencyModule = module {
     scope(named<NewAdActivity>()) {
         scoped<INewDetailsRepository> {
             NewDetailsRepository(
-                processor = get()
+                processor = get(),
+                gson = get()
             )
         }
         scoped<IPhotoRepository> {
@@ -44,8 +45,7 @@ val newDetailsDependencyModule = module {
         NewDetailsViewModel(
             context = androidContext(),
             newDetailsUseCase = getScope(scopeId).get(),
-            uploadPhotoUseCase = getScope(scopeId).get(),
-            gson = get()
+            uploadPhotoUseCase = getScope(scopeId).get()
         )
     }
 }
