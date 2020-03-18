@@ -1,6 +1,6 @@
 package com.adcenter.features.login.repository
 
-import com.adcenter.api.getLoginUrl
+import com.adcenter.api.IApi
 import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
@@ -18,6 +18,9 @@ class LoginRepository(
     @Inject
     lateinit var gson: Gson
 
+    @Inject
+    lateinit var api: IApi
+
     init {
         App.appComponent.inject(this)
     }
@@ -25,7 +28,7 @@ class LoginRepository(
     override fun login(params: LoginRequestParams): Result<AppConfigInfo> =
         runCatching {
             val request = NetworkDataRequest(
-                url = getLoginUrl(),
+                url = api.getLoginUrl(),
                 body = gson.toJson(params)
             )
 

@@ -1,14 +1,20 @@
 package com.adcenter.di.dagger.module
 
+import com.adcenter.api.Api
+import com.adcenter.api.IApi
+import com.adcenter.config.AppConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [AppModule::class])
 class NetworkModule {
 
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient()
+
+    @Provides
+    fun provideApi(appConfig: AppConfig): IApi = Api(appConfig)
 }

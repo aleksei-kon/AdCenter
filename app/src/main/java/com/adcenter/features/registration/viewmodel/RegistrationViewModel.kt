@@ -3,6 +3,8 @@ package com.adcenter.features.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.api.IApi
+import com.adcenter.app.App
 import com.adcenter.config.AppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
@@ -13,8 +15,16 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
 class RegistrationViewModel(private val registrationUseCase: IRegistrationUseCase) : ViewModel() {
+
+    @Inject
+    lateinit var appConfig: AppConfig
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private var registrationModel: AppConfigInfo = AppConfigInfo()
     private var currentParams: RegistrationRequestParams = RegistrationRequestParams()
@@ -25,7 +35,7 @@ class RegistrationViewModel(private val registrationUseCase: IRegistrationUseCas
             when (val result = registrationUseCase.register(currentParams)) {
                 is Result.Success -> {
                     registrationModel = result.value
-                    AppConfig.updateConfig(registrationModel)
+                    appConfig.updateConfig(registrationModel)
                     it.onSuccess(registrationModel)
                 }
                 is Result.Error -> it.onError(result.exception)

@@ -8,6 +8,7 @@ import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
+import com.adcenter.app.App
 import com.adcenter.config.AppConfig
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
@@ -20,8 +21,16 @@ import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import com.adcenter.ui.fragments.*
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : OfflineActivity() {
+
+    @Inject
+    lateinit var appConfig: AppConfig
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     override val layout: Int = R.layout.activity_main
 
@@ -35,7 +44,7 @@ class MainActivity : OfflineActivity() {
         initFragmentManager()
         initNewAdButton()
 
-        if (AppConfig.isLoggedIn) {
+        if (appConfig.isLoggedIn) {
             newAdButton.visible()
         } else {
             newAdButton.gone()
@@ -61,7 +70,7 @@ class MainActivity : OfflineActivity() {
     }
 
     private fun initNewAdButton() {
-        if (AppConfig.isAdmin || !AppConfig.isLoggedIn) {
+        if (appConfig.isAdmin || !appConfig.isLoggedIn) {
             newAdButton.visible()
         } else {
             newAdButton.visible()
@@ -86,12 +95,12 @@ class MainActivity : OfflineActivity() {
         initMenuItem(LastAdsItem())
         initMenuItem(SearchItem())
 
-        if (AppConfig.isLoggedIn && !AppConfig.isAdmin) {
+        if (appConfig.isLoggedIn && !appConfig.isAdmin) {
             initMenuItem(BookmarksItem())
             initMenuItem(MyAdsItem())
         }
 
-        if (AppConfig.isAdmin) {
+        if (appConfig.isAdmin) {
             initMenuItem(AdRequestsItem())
         }
 

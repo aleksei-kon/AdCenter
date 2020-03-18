@@ -17,6 +17,9 @@ class NetworkDataRequest(
 ) : IDataRequest {
 
     @Inject
+    lateinit var appConfig: AppConfig
+
+    @Inject
     lateinit var client: OkHttpClient
 
     init {
@@ -46,7 +49,7 @@ class NetworkDataRequest(
         }
 
         val requestBuilder = Request.Builder().url(url)
-        AppConfig.token?.let { requestBuilder.addHeader(AUTHORIZATION_HEADER, it) }
+        appConfig.token?.let { requestBuilder.addHeader(AUTHORIZATION_HEADER, it) }
         requestBody?.let { requestBuilder.post(it) }
 
         val response = client

@@ -1,13 +1,11 @@
 package com.adcenter.config
 
 import com.adcenter.entities.view.AppConfigInfo
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-object AppConfig : KoinComponent {
-
-    private val urlHolder: BackendUrlHolder by inject()
-    private val appConfigManager: IAppConfigManager by inject()
+class AppConfig(
+    private val urlHolder: BackendUrlHolder,
+    private val appConfigManager: IAppConfigManager
+) {
 
     var backendUrl: String
         get() = urlHolder.url

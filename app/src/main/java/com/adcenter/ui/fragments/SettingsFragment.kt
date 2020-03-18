@@ -26,6 +26,9 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
     @Inject
     lateinit var resourceProvider: IResourceProvider
 
+    @Inject
+    lateinit var appConfig: AppConfig
+
     init {
         App.appComponent.inject(this)
     }
@@ -40,7 +43,7 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (AppConfig.isLoggedIn) {
+        if (appConfig.isLoggedIn) {
             loginButton.gone()
             logoutButton.visible()
         } else {
@@ -58,7 +61,7 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
         }
 
         logoutButton.setOnClickListener {
-            AppConfig.updateConfig(AppConfigInfo())
+            appConfig.updateConfig(AppConfigInfo())
             requireActivity().recreate()
         }
 

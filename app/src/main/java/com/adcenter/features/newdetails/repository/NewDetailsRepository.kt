@@ -1,6 +1,6 @@
 package com.adcenter.features.newdetails.repository
 
-import com.adcenter.api.getNewDetailsUrl
+import com.adcenter.api.IApi
 import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
@@ -18,6 +18,9 @@ class NewDetailsRepository(
     @Inject
     lateinit var gson: Gson
 
+    @Inject
+    lateinit var api: IApi
+
     init {
         App.appComponent.inject(this)
     }
@@ -25,7 +28,7 @@ class NewDetailsRepository(
     override fun addDetails(params: NewDetailsRequestParams): Result<NewDetailsModel> =
         runCatching {
             val request = NetworkDataRequest(
-                url = getNewDetailsUrl(),
+                url = api.getNewDetailsUrl(),
                 body = gson.toJson(params)
             )
 

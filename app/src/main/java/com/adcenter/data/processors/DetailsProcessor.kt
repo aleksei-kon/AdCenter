@@ -1,6 +1,6 @@
 package com.adcenter.data.processors
 
-import com.adcenter.api.getImageDownloadUrl
+import com.adcenter.api.IApi
 import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
@@ -21,6 +21,9 @@ class DetailsProcessor : IDataProcessor<DetailsModel> {
 
     @Inject
     lateinit var gson: Gson
+
+    @Inject
+    lateinit var api: IApi
 
     init {
         App.appComponent.inject(this)
@@ -80,7 +83,7 @@ class DetailsProcessor : IDataProcessor<DetailsModel> {
         if (photos == null || photos.isEmpty()) {
             emptyList()
         } else {
-            photos.map { getImageDownloadUrl(it) }
+            photos.map { api.getImageDownloadUrl(it) }
         }
 
     private fun getViews(views: Int?): String =

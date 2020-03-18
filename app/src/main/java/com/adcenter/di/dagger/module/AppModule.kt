@@ -1,6 +1,10 @@
 package com.adcenter.di.dagger.module
 
 import android.content.Context
+import com.adcenter.config.AppConfig
+import com.adcenter.config.AppConfigManager
+import com.adcenter.config.BackendUrlHolder
+import com.adcenter.config.IAppConfigManager
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.resource.ResourceProvider
 import com.adcenter.theme.IThemeManager
@@ -17,10 +21,24 @@ class AppModule {
     fun provideGson(): Gson = Gson()
 
     @Provides
+    fun provideResourceProvider(context: Context): IResourceProvider = ResourceProvider(context)
+
+    @Provides
     @Singleton
     fun provideThemeManager(context: Context): IThemeManager = ThemeManager(context)
 
     @Provides
     @Singleton
-    fun provideResourceManager(context: Context): IResourceProvider = ResourceProvider(context)
+    fun provideAppConfigManager(context: Context): IAppConfigManager = AppConfigManager(context)
+
+    @Provides
+    @Singleton
+    fun provideBackendUrlHolder(context: Context): BackendUrlHolder = BackendUrlHolder(context)
+
+    @Provides
+    @Singleton
+    fun provideAppConfig(
+        urlHolder: BackendUrlHolder,
+        appConfigManager: IAppConfigManager
+    ): AppConfig = AppConfig(urlHolder, appConfigManager)
 }

@@ -1,6 +1,6 @@
 package com.adcenter.features.registration.repository
 
-import com.adcenter.api.getRegisterUrl
+import com.adcenter.api.IApi
 import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
@@ -18,6 +18,9 @@ class RegistrationRepository(
     @Inject
     lateinit var gson: Gson
 
+    @Inject
+    lateinit var api: IApi
+
     init {
         App.appComponent.inject(this)
     }
@@ -25,7 +28,7 @@ class RegistrationRepository(
     override fun register(params: RegistrationRequestParams): Result<AppConfigInfo> =
         runCatching {
             val request = NetworkDataRequest(
-                url = getRegisterUrl(),
+                url = api.getRegisterUrl(),
                 body = gson.toJson(params)
             )
 
