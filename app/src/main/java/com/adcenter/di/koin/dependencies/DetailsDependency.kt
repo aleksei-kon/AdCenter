@@ -1,4 +1,4 @@
-package com.adcenter.koin.dependencies
+package com.adcenter.di.koin.dependencies
 
 import com.adcenter.features.details.repository.DetailsRepository
 import com.adcenter.features.details.repository.IDetailsRepository

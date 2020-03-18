@@ -1,4 +1,4 @@
-package com.adcenter.koin.dependencies
+package com.adcenter.di.koin.dependencies
 
 import com.adcenter.features.registration.repository.IRegistrationRepository
 import com.adcenter.features.registration.repository.RegistrationRepository

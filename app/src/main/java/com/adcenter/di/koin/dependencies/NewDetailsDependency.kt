@@ -1,4 +1,4 @@
-package com.adcenter.koin.dependencies
+package com.adcenter.di.koin.dependencies
 
 import com.adcenter.features.newdetails.repository.INewDetailsRepository
 import com.adcenter.features.newdetails.repository.IPhotoRepository

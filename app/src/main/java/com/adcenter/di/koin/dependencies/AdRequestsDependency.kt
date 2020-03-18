@@ -1,4 +1,4 @@
-package com.adcenter.koin.dependencies
+package com.adcenter.di.koin.dependencies
 
 import com.adcenter.features.adrequests.repository.AdRequestsRepository
 import com.adcenter.features.adrequests.repository.IAdRequestsRepository

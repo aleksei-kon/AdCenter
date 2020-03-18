@@ -1,6 +1,6 @@
-package com.adcenter.koin
+package com.adcenter.di.koin
 
-import com.adcenter.koin.dependencies.*
+import com.adcenter.di.koin.dependencies.*
 
 val koinModules = listOf(
     appDependencyModule,
