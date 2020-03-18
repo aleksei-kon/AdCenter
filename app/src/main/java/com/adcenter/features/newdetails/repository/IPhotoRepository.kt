@@ -5,5 +5,5 @@ import java.io.File
 
 interface IPhotoRepository {
 
-    suspend fun addPhoto(file: File): Result<String>
+    fun addPhoto(file: File): Result<String>
 }
