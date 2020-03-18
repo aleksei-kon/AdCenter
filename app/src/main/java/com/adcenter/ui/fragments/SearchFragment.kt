@@ -7,12 +7,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
+import com.adcenter.app.App
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
 import com.adcenter.extensions.visible
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.viewmodel.SearchViewModel
+import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
@@ -22,10 +24,19 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
 class SearchFragment : BaseFragment(), IPageConfiguration {
 
-    override val toolbarTitle: String by lazy { getString(R.string.search_title) }
+    @Inject
+    lateinit var resourceProvider: IResourceProvider
+
+    init {
+        App.appComponent.inject(this)
+    }
+
+    override val toolbarTitle: String
+        get() = resourceProvider.searchTitle
 
     override val layout: Int = R.layout.fragment_search
 

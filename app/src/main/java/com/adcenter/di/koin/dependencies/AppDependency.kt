@@ -14,9 +14,7 @@ import org.koin.dsl.module
 
 val appDependencyModule = module {
     single { Gson() }
-    single { OkHttpClient() }
     single { BackendUrlHolder(androidContext()) }
-    single<IResourceProvider> { ResourceProvider(androidContext()) }
     single<IThemeManager> { ThemeManager(androidContext()) }
     single<IAppConfigManager> { AppConfigManager(androidContext()) }
 }

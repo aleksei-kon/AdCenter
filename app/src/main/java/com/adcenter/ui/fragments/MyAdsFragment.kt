@@ -6,12 +6,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
+import com.adcenter.app.App
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
 import com.adcenter.extensions.visible
 import com.adcenter.features.myads.uistate.MyAdsUiState
 import com.adcenter.features.myads.viewmodel.MyAdsViewModel
+import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
@@ -20,10 +22,19 @@ import kotlinx.android.synthetic.main.layout_recycler.*
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
 class MyAdsFragment : BaseFragment(), IPageConfiguration {
 
-    override val toolbarTitle: String by lazy { getString(R.string.my_ads_title) }
+    @Inject
+    lateinit var resourceProvider: IResourceProvider
+
+    init {
+        App.appComponent.inject(this)
+    }
+
+    override val toolbarTitle: String
+        get() = resourceProvider.myAdsTitle
 
     override val layout: Int = R.layout.layout_recycler
 

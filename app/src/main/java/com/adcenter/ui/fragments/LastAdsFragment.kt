@@ -5,26 +5,41 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
+import com.adcenter.app.App
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
 import com.adcenter.extensions.visible
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
+import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
-import com.adcenter.resource.IResourceProvider
 import kotlinx.android.synthetic.main.layout_recycler.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
 class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
-    private val resourceProvider: IResourceProvider by inject()
+    @Inject
+    lateinit var resourceProvider: IResourceProvider
+
+    init {
+        App.appComponent.inject(this)
+    }
+
+    private lateinit var adapter: AdsAdapter
+
+    override val layout: Int = R.layout.layout_recycler
+
+    override val toolbarTitle: String
+        get() = resourceProvider.lastAdsTitle
+
+    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
     private val viewModel: LastAdsViewModel by viewModel {
         parametersOf(currentScope.id)
@@ -34,14 +49,6 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
         loadMore()
         deleteScrollListener()
     }
-
-    private lateinit var adapter: AdsAdapter
-
-    override val layout: Int = R.layout.layout_recycler
-
-    override val toolbarTitle: String = resourceProvider.lastAdsTitle
-
-    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

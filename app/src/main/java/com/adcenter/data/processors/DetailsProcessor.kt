@@ -1,6 +1,7 @@
 package com.adcenter.data.processors
 
 import com.adcenter.api.getImageDownloadUrl
+import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
@@ -11,11 +12,16 @@ import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class DetailsProcessor(
-    val gson: Gson,
-    val resourceProvider: IResourceProvider
-) : IDataProcessor<DetailsModel> {
+class DetailsProcessor(val gson: Gson) : IDataProcessor<DetailsModel> {
+
+    @Inject
+    lateinit var resourceProvider: IResourceProvider
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     private fun isMessage(response: String) {
         val message: Message = try {

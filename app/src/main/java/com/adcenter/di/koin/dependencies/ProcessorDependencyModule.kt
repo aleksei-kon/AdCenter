@@ -8,10 +8,5 @@ val processorDependencyModule = module {
     single { PhotoProcessor(get()) }
     single { NewDetailsProcessor(get()) }
     single { AppConfigProcessor(get()) }
-    single {
-        DetailsProcessor(
-            gson = get(),
-            resourceProvider = get()
-        )
-    }
+    single { DetailsProcessor(get()) }
 }
