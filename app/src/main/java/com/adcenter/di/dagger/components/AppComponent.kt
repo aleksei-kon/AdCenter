@@ -38,6 +38,7 @@ interface AppComponent {
 
     fun plusLastAdsComponent(module: LastAdsModule): LastAdsComponent
     fun plusAdRequestsComponent(module: AdRequestsModule): AdRequestsComponent
+    fun plusSearchComponent(module: SearchModule): SearchComponent
 
     fun inject(app: App)
 

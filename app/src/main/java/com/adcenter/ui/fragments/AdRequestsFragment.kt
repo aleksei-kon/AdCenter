@@ -3,7 +3,6 @@ package com.adcenter.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
@@ -11,6 +10,7 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
+import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.adrequests.uistate.AdRequestsUiState
 import com.adcenter.features.adrequests.viewmodel.AdRequestsViewModel
@@ -38,8 +38,8 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val viewModel: AdRequestsViewModel by lazy {
-        ViewModelProviders.of(this).get(AdRequestsViewModel::class.java)
+    private val viewModel by lazy {
+        provideViewModel(AdRequestsViewModel::class.java)
     }
 
     private lateinit var adapter: AdRequestsAdapter

@@ -7,7 +7,6 @@ import com.adcenter.features.lastads.repository.ILastAdsRepository
 import com.adcenter.features.lastads.repository.LastAdsRepository
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
 import com.adcenter.features.lastads.usecase.LastAdsUseCase
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 

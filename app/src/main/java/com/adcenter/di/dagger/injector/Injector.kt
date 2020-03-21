@@ -1,13 +1,11 @@
 package com.adcenter.di.dagger.injector
 
 import android.content.Context
-import com.adcenter.di.dagger.components.AdRequestsComponent
-import com.adcenter.di.dagger.components.AppComponent
-import com.adcenter.di.dagger.components.DaggerAppComponent
-import com.adcenter.di.dagger.components.LastAdsComponent
+import com.adcenter.di.dagger.components.*
 import com.adcenter.di.dagger.module.AdRequestsModule
 import com.adcenter.di.dagger.module.ContextModule
 import com.adcenter.di.dagger.module.LastAdsModule
+import com.adcenter.di.dagger.module.SearchModule
 
 object Injector {
 
@@ -15,6 +13,7 @@ object Injector {
 
     private var lastAdsComponent: LastAdsComponent? = null
     private var adRequestsComponent: AdRequestsComponent? = null
+    private var searchComponent: SearchComponent? = null
 
     val appComponent: AppComponent
         get() = appComponentInstance ?: throw IllegalStateException("AppComponent is null")
@@ -44,10 +43,22 @@ object Injector {
             adRequestsComponent = appComponent.plusAdRequestsComponent(AdRequestsModule())
         }
 
-        return adRequestsComponent ?: throw IllegalStateException("LastAdsComponent is null")
+        return adRequestsComponent ?: throw IllegalStateException("AdRequestsComponent is null")
     }
 
     fun clearAdRequestsComponent() {
         adRequestsComponent = null
+    }
+
+    fun plusSearchComponent(): SearchComponent {
+        if (searchComponent == null) {
+            searchComponent = appComponent.plusSearchComponent(SearchModule())
+        }
+
+        return searchComponent ?: throw IllegalStateException("SearchComponent is null")
+    }
+
+    fun clearSearchComponent() {
+        searchComponent = null
     }
 }

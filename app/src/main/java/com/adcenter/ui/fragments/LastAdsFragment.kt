@@ -3,13 +3,13 @@ package com.adcenter.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
+import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
@@ -39,8 +39,8 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val viewModel: LastAdsViewModel by lazy {
-        ViewModelProviders.of(this).get(LastAdsViewModel::class.java)
+    private val viewModel by lazy {
+        provideViewModel(LastAdsViewModel::class.java)
     }
 
     private val programsScrollListener = ScrollToEndListener {

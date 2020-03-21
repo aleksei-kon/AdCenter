@@ -4,20 +4,14 @@ import com.adcenter.api.IApi
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.AdsDataProcessor
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.search.data.SearchRequestParams
 import com.adcenter.utils.Result
-import javax.inject.Inject
 
-class SearchRepository(private val processor: AdsDataProcessor) : ISearchRepository {
-
-    @Inject
-    lateinit var api: IApi
-
-    init {
-        Injector.appComponent.inject(this)
-    }
+class SearchRepository(
+    private val processor: AdsDataProcessor,
+    private val api: IApi
+) : ISearchRepository {
 
     override fun getSearchResult(params: SearchRequestParams): Result<List<AdItemModel>> =
         runCatching {

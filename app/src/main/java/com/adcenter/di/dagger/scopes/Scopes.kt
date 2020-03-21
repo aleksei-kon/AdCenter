@@ -7,3 +7,6 @@ annotation class LastAdsScope
 
 @Scope
 annotation class AdRequestsScope
+
+@Scope
+annotation class SearchScope
