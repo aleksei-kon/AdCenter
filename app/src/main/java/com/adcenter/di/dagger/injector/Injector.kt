@@ -2,10 +2,7 @@ package com.adcenter.di.dagger.injector
 
 import android.content.Context
 import com.adcenter.di.dagger.components.*
-import com.adcenter.di.dagger.module.AdRequestsModule
-import com.adcenter.di.dagger.module.ContextModule
-import com.adcenter.di.dagger.module.LastAdsModule
-import com.adcenter.di.dagger.module.SearchModule
+import com.adcenter.di.dagger.module.*
 
 object Injector {
 
@@ -14,6 +11,7 @@ object Injector {
     private var lastAdsComponent: LastAdsComponent? = null
     private var adRequestsComponent: AdRequestsComponent? = null
     private var searchComponent: SearchComponent? = null
+    private var bookmarksComponent: BookmarksComponent? = null
 
     val appComponent: AppComponent
         get() = appComponentInstance ?: throw IllegalStateException("AppComponent is null")
@@ -60,5 +58,17 @@ object Injector {
 
     fun clearSearchComponent() {
         searchComponent = null
+    }
+
+    fun plusBookmarksComponent(): BookmarksComponent {
+        if (bookmarksComponent == null) {
+            bookmarksComponent = appComponent.plusBookmarksComponent(BookmarksModule())
+        }
+
+        return bookmarksComponent ?: throw IllegalStateException("BookmarksComponent is null")
+    }
+
+    fun clearBookmarksComponent() {
+        bookmarksComponent = null
     }
 }

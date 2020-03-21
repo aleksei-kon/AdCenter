@@ -5,7 +5,6 @@ import com.adcenter.di.koin.dependencies.*
 val koinModules = listOf(
     temporaryModule,
     myAdsDependencyModule,
-    bookmarksDependencyModule,
     detailsDependencyModule,
     newDetailsDependencyModule,
     loginDependencyModule,

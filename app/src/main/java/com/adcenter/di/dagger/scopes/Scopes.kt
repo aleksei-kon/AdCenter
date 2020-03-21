@@ -10,3 +10,6 @@ annotation class AdRequestsScope
 
 @Scope
 annotation class SearchScope
+
+@Scope
+annotation class BookmarksScope
