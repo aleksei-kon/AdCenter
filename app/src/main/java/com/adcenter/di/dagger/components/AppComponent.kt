@@ -38,6 +38,7 @@ interface AppComponent {
     fun plusSearchComponent(module: SearchModule): SearchComponent
     fun plusBookmarksComponent(module: BookmarksModule): BookmarksComponent
     fun plusMyAdsComponent(module: MyAdsModule): MyAdsComponent
+    fun plusDetailsComponent(module: DetailsModule): DetailsComponent
 
     fun inject(app: App)
 

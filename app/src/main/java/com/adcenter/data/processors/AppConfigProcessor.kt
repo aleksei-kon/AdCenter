@@ -1,6 +1,5 @@
 package com.adcenter.data.processors
 
-import com.adcenter.app.App
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkAppConfigModel

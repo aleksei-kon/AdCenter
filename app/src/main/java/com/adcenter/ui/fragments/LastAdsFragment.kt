@@ -72,8 +72,8 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun setViewModelObserver() {
-        viewModel.lastAdsData.observe(viewLifecycleOwner, Observer {
-            when (it) {
+        viewModel.lastAdsData.observe(viewLifecycleOwner, Observer { uiState ->
+            when (uiState) {
                 is LastAdsUiState.Loading -> {
                     recyclerView.gone()
                     noDataMessage.gone()
@@ -87,7 +87,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                     adapter.hidePagination()
                     progressBar.gone()
 
-                    if (it.result.ads.isEmpty()) {
+                    if (uiState.result.ads.isEmpty()) {
                         recyclerView.gone()
                         noDataMessage.visible()
                     } else {
@@ -95,7 +95,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                         recyclerView.visible()
                     }
 
-                    setRecyclerItems(it.result.ads)
+                    setRecyclerItems(uiState.result.ads)
                     setScrollListener()
                 }
                 is LastAdsUiState.Error -> {
@@ -108,7 +108,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> requireContext().longToast(message) }
+                    uiState.throwable.message?.let { message -> requireContext().longToast(message) }
                     setScrollListener()
                 }
             }

@@ -16,3 +16,6 @@ annotation class BookmarksScope
 
 @Scope
 annotation class MyAdsScope
+
+@Scope
+annotation class DetailsScope

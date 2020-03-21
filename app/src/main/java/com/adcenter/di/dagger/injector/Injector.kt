@@ -13,6 +13,7 @@ object Injector {
     private var searchComponent: SearchComponent? = null
     private var bookmarksComponent: BookmarksComponent? = null
     private var myAdsComponent: MyAdsComponent? = null
+    private var detailsComponent: DetailsComponent? = null
 
     val appComponent: AppComponent
         get() = appComponentInstance ?: throw IllegalStateException("AppComponent is null")
@@ -83,5 +84,17 @@ object Injector {
 
     fun clearMyAdsComponent() {
         myAdsComponent = null
+    }
+
+    fun plusDetailsComponent(): DetailsComponent {
+        if (detailsComponent == null) {
+            detailsComponent = appComponent.plusDetailsComponent(DetailsModule())
+        }
+
+        return detailsComponent ?: throw IllegalStateException("DetailsComponent is null")
+    }
+
+    fun clearDetailsComponent() {
+        detailsComponent = null
     }
 }
