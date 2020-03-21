@@ -49,7 +49,6 @@ class AdsAdapter(
         override fun bind(item: Any) {
             if (item is AdItemModel) {
                 if (!animation.hasStarted() || animation.hasEnded()) {
-                    animation.cancel()
                     itemView.startAnimation(animation)
                 }
 

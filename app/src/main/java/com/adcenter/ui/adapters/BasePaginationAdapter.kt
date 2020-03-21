@@ -12,7 +12,7 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
     private var isPagination: Boolean = false
 
     private val paginationPosition: Int
-        get() = itemCount - 1
+        get() = itemCount
 
     protected val items = mutableListOf<T>()
 
