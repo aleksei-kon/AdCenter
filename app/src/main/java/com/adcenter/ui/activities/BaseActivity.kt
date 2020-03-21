@@ -2,7 +2,7 @@ package com.adcenter.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.adcenter.app.App
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.theme.IThemeManager
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
 
         setTheme(themeManager.getThemeResId())
         setContentView(layout)

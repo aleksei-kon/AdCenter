@@ -5,10 +5,10 @@ import android.view.View
 import android.widget.ImageButton
 import com.adcenter.R
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.ShowHideProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.longToast
 import java.util.concurrent.Executors
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class ShowHideButtonController(
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun onClick(v: View?) {

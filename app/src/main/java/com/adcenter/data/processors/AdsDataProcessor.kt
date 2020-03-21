@@ -1,7 +1,6 @@
 package com.adcenter.data.processors
 
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkAdItem
 import com.adcenter.entities.view.AdItemModel
@@ -11,19 +10,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
-class AdsDataProcessor : IDataProcessor<List<AdItemModel>> {
-
-    @Inject
-    lateinit var gson: Gson
-
-    @Inject
-    lateinit var api: IApi
-
-    init {
-        App.appComponent.inject(this)
-    }
+class AdsDataProcessor(
+    private val gson: Gson,
+    private val api: IApi
+) : IDataProcessor<List<AdItemModel>> {
 
     private fun isMessage(response: String) {
         val message: Message = try {

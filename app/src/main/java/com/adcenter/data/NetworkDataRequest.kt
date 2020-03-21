@@ -1,7 +1,7 @@
 package com.adcenter.data
 
-import com.adcenter.app.App
 import com.adcenter.config.IAppConfig
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.utils.Constants.EMPTY
 import com.adcenter.utils.Constants.Request.AUTHORIZATION_HEADER
 import com.adcenter.utils.Constants.Request.FILE_FORM_PARAM
@@ -23,7 +23,7 @@ class NetworkDataRequest(
     lateinit var client: OkHttpClient
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun getResponse(): String {

@@ -3,8 +3,8 @@ package com.adcenter.ui.activities
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
-import com.adcenter.app.App
 import com.adcenter.config.IAppConfig
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
@@ -29,7 +29,7 @@ class DetailsActivity : BaseActivity() {
     lateinit var appConfig: IAppConfig
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override val layout: Int = R.layout.activity_details

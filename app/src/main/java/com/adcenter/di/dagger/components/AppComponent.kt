@@ -5,11 +5,11 @@ import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.*
 import com.adcenter.di.dagger.module.AppModule
 import com.adcenter.di.dagger.module.ContextModule
+import com.adcenter.di.dagger.module.LastAdsModule
 import com.adcenter.di.dagger.module.NetworkModule
 import com.adcenter.features.adrequests.repository.AdRequestsRepository
 import com.adcenter.features.bookmarks.repository.BookmarksRepository
 import com.adcenter.features.details.repository.DetailsRepository
-import com.adcenter.features.lastads.repository.LastAdsRepository
 import com.adcenter.features.login.repository.LoginRepository
 import com.adcenter.features.login.viewmodel.LoginViewModel
 import com.adcenter.features.myads.repository.MyAdsRepository
@@ -28,9 +28,17 @@ import com.adcenter.ui.fragments.*
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [ContextModule::class, AppModule::class, NetworkModule::class])
 @Singleton
+@Component(
+    modules = [
+        ContextModule::class,
+        AppModule::class,
+        NetworkModule::class
+    ]
+)
 interface AppComponent {
+
+    fun plusLastAdsComponent(module: LastAdsModule): LastAdsComponent
 
     fun inject(app: App)
 
@@ -51,7 +59,6 @@ interface AppComponent {
     fun inject(component: LoginRepository)
     fun inject(component: DetailsProcessor)
     fun inject(component: ShowHideProcessor)
-    fun inject(component: AdsDataProcessor)
     fun inject(component: AppConfigProcessor)
     fun inject(component: NewDetailsProcessor)
     fun inject(component: PhotoProcessor)
@@ -60,7 +67,6 @@ interface AppComponent {
     fun inject(component: AdRequestsRepository)
     fun inject(component: BookmarksRepository)
     fun inject(component: DetailsRepository)
-    fun inject(component: LastAdsRepository)
     fun inject(component: LoginViewModel)
     fun inject(component: MyAdsRepository)
     fun inject(component: PhotoRepository)

@@ -2,9 +2,9 @@ package com.adcenter.ui.activities
 
 import android.os.Bundle
 import com.adcenter.R
-import com.adcenter.app.App
 import com.adcenter.config.IAppConfig
 import com.adcenter.config.IBackendUrlHolder
+import com.adcenter.di.dagger.injector.Injector
 import kotlinx.android.synthetic.main.activity_dev_settings.*
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class DevSettingsActivity : BaseActivity() {
     lateinit var urlHolder: IBackendUrlHolder
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override val layout: Int = R.layout.activity_dev_settings

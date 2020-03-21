@@ -2,6 +2,7 @@ package com.adcenter.data.processors
 
 import com.adcenter.api.IApi
 import com.adcenter.app.App
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.network.Message
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
@@ -26,7 +27,7 @@ class DetailsProcessor : IDataProcessor<DetailsModel> {
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     private fun isMessage(response: String) {

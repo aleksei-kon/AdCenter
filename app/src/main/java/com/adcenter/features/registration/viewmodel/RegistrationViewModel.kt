@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.app.App
 import com.adcenter.config.IAppConfig
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
 import com.adcenter.features.registration.data.RegistrationRequestParams
@@ -22,7 +23,7 @@ class RegistrationViewModel(private val registrationUseCase: IRegistrationUseCas
     lateinit var appConfig: IAppConfig
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     private var registrationModel: AppConfigInfo = AppConfigInfo()

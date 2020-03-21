@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.app.App
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
@@ -30,7 +30,7 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
     lateinit var resourceProvider: IResourceProvider
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override val toolbarTitle: String

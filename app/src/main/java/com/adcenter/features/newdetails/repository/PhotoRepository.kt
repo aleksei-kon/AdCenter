@@ -5,6 +5,7 @@ import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.PhotoProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.utils.Result
 import java.io.File
 import javax.inject.Inject
@@ -15,7 +16,7 @@ class PhotoRepository(private val processor: PhotoProcessor) : IPhotoRepository 
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun addPhoto(file: File): Result<String> =

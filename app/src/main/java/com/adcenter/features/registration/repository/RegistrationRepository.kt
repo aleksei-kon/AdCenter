@@ -5,6 +5,7 @@ import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.AppConfigProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.utils.Result
@@ -22,7 +23,7 @@ class RegistrationRepository(
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun register(params: RegistrationRequestParams): Result<AppConfigInfo> =

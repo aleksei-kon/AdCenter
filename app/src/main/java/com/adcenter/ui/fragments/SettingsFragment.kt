@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.adcenter.R
-import com.adcenter.app.App
 import com.adcenter.config.IAppConfig
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
@@ -30,7 +30,7 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
     lateinit var appConfig: IAppConfig
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override val toolbarTitle: String
