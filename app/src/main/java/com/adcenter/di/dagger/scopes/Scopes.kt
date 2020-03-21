@@ -13,3 +13,6 @@ annotation class SearchScope
 
 @Scope
 annotation class BookmarksScope
+
+@Scope
+annotation class MyAdsScope
