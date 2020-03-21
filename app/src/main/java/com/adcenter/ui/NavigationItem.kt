@@ -4,10 +4,9 @@ import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.NavigationItem.NavigationItemId.*
-import org.koin.core.KoinComponent
 import javax.inject.Inject
 
-sealed class NavigationItem : KoinComponent {
+sealed class NavigationItem {
 
     @Inject
     lateinit var resourceDependency: IResourceProvider

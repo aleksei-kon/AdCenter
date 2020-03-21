@@ -1,5 +1,6 @@
 package com.adcenter.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -14,10 +15,12 @@ import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
+import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
+import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
@@ -60,7 +63,7 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun initRecycler() {
-        adapter = AdsAdapter(requireContext())
+        adapter = AdsAdapter(::onItemClick)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         setScrollListener()
@@ -127,6 +130,14 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
     private fun setScrollListener() {
         recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(programsScrollListener)
+    }
+
+    private fun onItemClick(id: String) {
+        context?.startActivity(
+            Intent(context, DetailsActivity::class.java).apply {
+                putExtra(DETAILS_ID_KEY, id)
+            }
+        )
     }
 
     private fun load() = viewModel.load()

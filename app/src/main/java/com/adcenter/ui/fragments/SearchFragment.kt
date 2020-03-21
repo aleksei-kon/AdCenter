@@ -1,5 +1,6 @@
 package com.adcenter.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextWatcher
 import android.view.View
@@ -13,12 +14,14 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
 import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
+import com.adcenter.features.details.DetailsConstants
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.viewmodel.SearchViewModel
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
+import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.utils.EmptyTextWatcher
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -75,7 +78,7 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun initRecycler() {
-        adapter = AdsAdapter(requireContext())
+        adapter = AdsAdapter(::onItemClick)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         setScrollListener()
@@ -134,6 +137,14 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
     private fun setScrollListener() {
         recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(programsScrollListener)
+    }
+
+    private fun onItemClick(id: String) {
+        context?.startActivity(
+            Intent(context, DetailsActivity::class.java).apply {
+                putExtra(DetailsConstants.DETAILS_ID_KEY, id)
+            }
+        )
     }
 
     private fun load() = viewModel.load(searchText.text.toString())

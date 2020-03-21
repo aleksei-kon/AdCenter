@@ -14,7 +14,6 @@
 
         <TextView
             android:id="@+id/loginButton"
-            style="@style/SettingsMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_menu_login"
@@ -25,7 +24,6 @@
 
         <TextView
             android:id="@+id/logoutButton"
-            style="@style/SettingsMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_menu_logout"
@@ -36,7 +34,6 @@
 
         <TextView
             android:id="@+id/switchThemeButton"
-            style="@style/SettingsMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_menu_switch_theme"
@@ -45,7 +42,6 @@
 
         <TextView
             android:id="@+id/devSettingsButton"
-            style="@style/SettingsMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_menu_dev"

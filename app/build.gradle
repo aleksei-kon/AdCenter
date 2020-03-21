@@ -33,14 +33,10 @@ dependencies {
     androidTestImplementation Libs.espresso
 
     implementation Libs.material
+    implementation Libs.swiperefreshlayout
     implementation Libs.appcompat
     implementation Libs.coreKtx
     implementation Libs.constraintlayout
-
-    implementation Libs.koin
-    implementation Libs.koinScope
-    implementation Libs.koinViewModel
-    implementation Libs.koinExperimental
 
     implementation Libs.okhttp
     implementation Libs.gson

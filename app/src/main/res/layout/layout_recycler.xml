@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:indeterminateTint="?attr/progressColor"
         android:indeterminateTintMode="src_atop"
         android:visibility="gone" />
 </FrameLayout>
