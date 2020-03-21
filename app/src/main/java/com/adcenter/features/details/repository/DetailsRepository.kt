@@ -5,6 +5,7 @@ import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.DetailsProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.features.details.data.DetailsRequestParams
 import com.adcenter.utils.Result
@@ -16,7 +17,7 @@ class DetailsRepository(private val processor: DetailsProcessor) : IDetailsRepos
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun getDetails(params: DetailsRequestParams): Result<DetailsModel> =

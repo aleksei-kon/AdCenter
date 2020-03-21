@@ -5,6 +5,7 @@ import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.NewDetailsProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.features.newdetails.data.NewDetailsModel
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.utils.Result
@@ -22,7 +23,7 @@ class NewDetailsRepository(
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun addDetails(params: NewDetailsRequestParams): Result<NewDetailsModel> =

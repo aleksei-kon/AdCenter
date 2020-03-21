@@ -32,6 +32,7 @@ object Libs {
         const val rxJava = "2.2.19"
         const val rxAndroid = "2.1.1"
         const val dagger = "2.27"
+        const val viewModel = "2.1.0"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -56,6 +57,8 @@ object Libs {
     const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     //const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
     const val koinExperimental = "org.koin:koin-androidx-ext:${Versions.koin}"
+
+    const val viewModel = "androidx.lifecycle:lifecycle-extensions:${Versions.viewModel}"
 
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"

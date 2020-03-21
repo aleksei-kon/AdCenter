@@ -2,9 +2,7 @@ package com.adcenter.app
 
 import android.app.Application
 import com.adcenter.config.IAppConfig
-import com.adcenter.di.dagger.components.AppComponent
-import com.adcenter.di.dagger.components.DaggerAppComponent
-import com.adcenter.di.dagger.module.ContextModule
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.di.koin.koinModules
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
@@ -33,11 +31,8 @@ class App : Application() {
     }
 
     private fun initDagger() {
-        appComponent = DaggerAppComponent.builder()
-            .contextModule(ContextModule(this))
-            .build()
-
-        appComponent.inject(this)
+        Injector.init(this)
+        Injector.appComponent.inject(this)
     }
 
     private fun initRxJava() {
@@ -50,6 +45,5 @@ class App : Application() {
 
     companion object {
 
-        lateinit var appComponent: AppComponent
     }
 }

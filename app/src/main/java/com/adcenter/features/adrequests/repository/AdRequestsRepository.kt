@@ -1,10 +1,10 @@
 package com.adcenter.features.adrequests.repository
 
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.AdsDataProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.adrequests.data.AdRequestsParams
 import com.adcenter.utils.Result
@@ -16,7 +16,7 @@ class AdRequestsRepository(private val processor: AdsDataProcessor) : IAdRequest
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>> =

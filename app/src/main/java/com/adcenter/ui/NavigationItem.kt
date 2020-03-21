@@ -1,11 +1,10 @@
 package com.adcenter.ui
 
 import com.adcenter.R
-import com.adcenter.app.App
-import com.adcenter.ui.NavigationItem.NavigationItemId.*
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.resource.IResourceProvider
+import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 import javax.inject.Inject
 
 sealed class NavigationItem : KoinComponent {
@@ -14,7 +13,7 @@ sealed class NavigationItem : KoinComponent {
     lateinit var resourceDependency: IResourceProvider
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     abstract val id: Int

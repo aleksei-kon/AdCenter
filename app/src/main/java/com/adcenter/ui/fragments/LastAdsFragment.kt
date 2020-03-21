@@ -3,9 +3,10 @@ package com.adcenter.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
-import com.adcenter.app.App
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
@@ -18,9 +19,6 @@ import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import javax.inject.Inject
 
 class LastAdsFragment : BaseFragment(), IPageConfiguration {
@@ -29,7 +27,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
     lateinit var resourceProvider: IResourceProvider
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     private lateinit var adapter: AdsAdapter
@@ -41,8 +39,8 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val viewModel: LastAdsViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel: LastAdsViewModel by lazy {
+        ViewModelProviders.of(this).get(LastAdsViewModel::class.java)
     }
 
     private val programsScrollListener = ScrollToEndListener {

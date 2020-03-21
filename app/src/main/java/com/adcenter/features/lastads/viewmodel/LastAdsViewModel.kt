@@ -3,6 +3,7 @@ package com.adcenter.features.lastads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.async
 import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.lastads.data.LastAdsModel
@@ -12,8 +13,16 @@ import com.adcenter.features.lastads.usecase.ILastAdsUseCase
 import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
-class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel() {
+class LastAdsViewModel : ViewModel() {
+
+    @Inject
+    lateinit var lastAdsUseCase: ILastAdsUseCase
+
+    init {
+        Injector.plusLastAdsComponent().inject(this)
+    }
 
     private var currentParams: LastAdsRequestParams = LastAdsRequestParams()
     private var lastAdsModel: LastAdsModel = LastAdsModel()
@@ -85,5 +94,6 @@ class LastAdsViewModel(private val lastAdsUseCase: ILastAdsUseCase) : ViewModel(
         super.onCleared()
 
         disposable?.dispose()
+        Injector.clearLastAdsComponent()
     }
 }

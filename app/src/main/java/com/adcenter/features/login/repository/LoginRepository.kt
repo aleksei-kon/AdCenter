@@ -1,10 +1,10 @@
 package com.adcenter.features.login.repository
 
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.AppConfigProcessor
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.features.login.data.LoginRequestParams
 import com.adcenter.utils.Result
@@ -22,7 +22,7 @@ class LoginRepository(
     lateinit var api: IApi
 
     init {
-        App.appComponent.inject(this)
+        Injector.appComponent.inject(this)
     }
 
     override fun login(params: LoginRequestParams): Result<AppConfigInfo> =
