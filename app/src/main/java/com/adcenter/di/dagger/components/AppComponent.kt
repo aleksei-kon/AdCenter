@@ -2,16 +2,13 @@ package com.adcenter.di.dagger.components
 
 import com.adcenter.app.App
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.*
+import com.adcenter.data.processors.DetailsProcessor
+import com.adcenter.data.processors.NewDetailsProcessor
+import com.adcenter.data.processors.PhotoProcessor
+import com.adcenter.data.processors.ShowHideProcessor
 import com.adcenter.di.dagger.module.*
-import com.adcenter.features.details.repository.DetailsRepository
-import com.adcenter.features.login.repository.LoginRepository
-import com.adcenter.features.login.viewmodel.LoginViewModel
-import com.adcenter.features.myads.repository.MyAdsRepository
 import com.adcenter.features.newdetails.repository.NewDetailsRepository
 import com.adcenter.features.newdetails.repository.PhotoRepository
-import com.adcenter.features.registration.repository.RegistrationRepository
-import com.adcenter.features.registration.viewmodel.RegistrationViewModel
 import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DetailsActivity
@@ -39,6 +36,8 @@ interface AppComponent {
     fun plusBookmarksComponent(module: BookmarksModule): BookmarksComponent
     fun plusMyAdsComponent(module: MyAdsModule): MyAdsComponent
     fun plusDetailsComponent(module: DetailsModule): DetailsComponent
+    fun plusLoginComponent(module: LoginModule): LoginComponent
+    fun plusRegistrationComponent(module: RegistrationModule): RegistrationComponent
 
     fun inject(app: App)
 
@@ -56,18 +55,11 @@ interface AppComponent {
 
     fun inject(component: NetworkDataRequest)
     fun inject(component: NavigationItem)
-    fun inject(component: LoginRepository)
     fun inject(component: DetailsProcessor)
     fun inject(component: ShowHideProcessor)
-    fun inject(component: AppConfigProcessor)
     fun inject(component: NewDetailsProcessor)
     fun inject(component: PhotoProcessor)
-    fun inject(component: RegistrationRepository)
     fun inject(component: NewDetailsRepository)
-    fun inject(component: DetailsRepository)
-    fun inject(component: LoginViewModel)
-    fun inject(component: MyAdsRepository)
     fun inject(component: PhotoRepository)
-    fun inject(component: RegistrationViewModel)
     fun inject(component: ShowHideButtonController)
 }

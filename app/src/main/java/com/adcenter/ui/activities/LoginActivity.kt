@@ -4,24 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.adcenter.R
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.longToast
-import com.adcenter.extensions.setChildsEnabled
-import com.adcenter.extensions.visible
+import com.adcenter.extensions.*
 import com.adcenter.features.login.data.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class LoginActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_login
 
-    private val viewModel: LoginViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel by lazy {
+        provideViewModel(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

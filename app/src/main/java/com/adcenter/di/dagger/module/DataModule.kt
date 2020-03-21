@@ -2,6 +2,7 @@ package com.adcenter.di.dagger.module
 
 import com.adcenter.api.IApi
 import com.adcenter.data.processors.AdsDataProcessor
+import com.adcenter.data.processors.AppConfigProcessor
 import com.adcenter.data.processors.DetailsProcessor
 import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
@@ -25,4 +26,8 @@ class DataModule {
         api: IApi
     ): DetailsProcessor =
         DetailsProcessor(resourceProvider, gson, api)
+
+    @Provides
+    fun provideAppConfigProcessor(gson: Gson): AppConfigProcessor =
+        AppConfigProcessor(gson)
 }

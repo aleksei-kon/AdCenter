@@ -14,6 +14,8 @@ object Injector {
     private var bookmarksComponent: BookmarksComponent? = null
     private var myAdsComponent: MyAdsComponent? = null
     private var detailsComponent: DetailsComponent? = null
+    private var loginComponent: LoginComponent? = null
+    private var registrationComponent: RegistrationComponent? = null
 
     val appComponent: AppComponent
         get() = appComponentInstance ?: throw IllegalStateException("AppComponent is null")
@@ -96,5 +98,29 @@ object Injector {
 
     fun clearDetailsComponent() {
         detailsComponent = null
+    }
+
+    fun plusLoginComponent(): LoginComponent {
+        if (loginComponent == null) {
+            loginComponent = appComponent.plusLoginComponent(LoginModule())
+        }
+
+        return loginComponent ?: throw IllegalStateException("LoginComponent is null")
+    }
+
+    fun clearLoginComponent() {
+        loginComponent = null
+    }
+
+    fun plusRegistrationComponent(): RegistrationComponent {
+        if (registrationComponent == null) {
+            registrationComponent = appComponent.plusRegistrationComponent(RegistrationModule())
+        }
+
+        return registrationComponent ?: throw IllegalStateException("RegistrationComponent is null")
+    }
+
+    fun clearRegistrationComponent() {
+        registrationComponent = null
     }
 }

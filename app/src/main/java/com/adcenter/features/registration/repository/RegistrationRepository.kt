@@ -1,30 +1,19 @@
 package com.adcenter.features.registration.repository
 
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.AppConfigProcessor
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.utils.Result
 import com.google.gson.Gson
-import javax.inject.Inject
 
 class RegistrationRepository(
-    private val processor: AppConfigProcessor
+    private val processor: AppConfigProcessor,
+    private val gson: Gson,
+    private val api: IApi
 ) : IRegistrationRepository {
-
-    @Inject
-    lateinit var gson: Gson
-
-    @Inject
-    lateinit var api: IApi
-
-    init {
-        Injector.appComponent.inject(this)
-    }
 
     override fun register(params: RegistrationRequestParams): Result<AppConfigInfo> =
         runCatching {
