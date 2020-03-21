@@ -37,6 +37,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun plusLastAdsComponent(module: LastAdsModule): LastAdsComponent
+    fun plusAdRequestsComponent(module: AdRequestsModule): AdRequestsComponent
 
     fun inject(app: App)
 

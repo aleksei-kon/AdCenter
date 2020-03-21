@@ -10,14 +10,10 @@ import com.adcenter.features.adrequests.data.AdRequestsParams
 import com.adcenter.utils.Result
 import javax.inject.Inject
 
-class AdRequestsRepository(private val processor: AdsDataProcessor) : IAdRequestsRepository {
-
-    @Inject
-    lateinit var api: IApi
-
-    init {
-        Injector.appComponent.inject(this)
-    }
+class AdRequestsRepository(
+    private val processor: AdsDataProcessor,
+    private val api: IApi
+) : IAdRequestsRepository {
 
     override fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>> =
         runCatching {

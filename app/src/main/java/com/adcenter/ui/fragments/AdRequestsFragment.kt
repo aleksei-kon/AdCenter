@@ -3,6 +3,7 @@ package com.adcenter.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
@@ -19,9 +20,6 @@ import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdRequestsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import javax.inject.Inject
 
 class AdRequestsFragment : BaseFragment(), IPageConfiguration {
@@ -40,8 +38,8 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val viewModel: AdRequestsViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel: AdRequestsViewModel by lazy {
+        ViewModelProviders.of(this).get(AdRequestsViewModel::class.java)
     }
 
     private lateinit var adapter: AdRequestsAdapter

@@ -4,3 +4,6 @@ import javax.inject.Scope
 
 @Scope
 annotation class LastAdsScope
+
+@Scope
+annotation class AdRequestsScope

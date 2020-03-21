@@ -6,7 +6,6 @@ val koinModules = listOf(
     temporaryModule,
     myAdsDependencyModule,
     bookmarksDependencyModule,
-    adRequestsDependencyModule,
     searchDependencyModule,
     detailsDependencyModule,
     newDetailsDependencyModule,
