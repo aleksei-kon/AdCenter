@@ -2,13 +2,8 @@ package com.adcenter.di.dagger.components
 
 import com.adcenter.app.App
 import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.DetailsProcessor
-import com.adcenter.data.processors.NewDetailsProcessor
-import com.adcenter.data.processors.PhotoProcessor
 import com.adcenter.data.processors.ShowHideProcessor
 import com.adcenter.di.dagger.module.*
-import com.adcenter.features.newdetails.repository.NewDetailsRepository
-import com.adcenter.features.newdetails.repository.PhotoRepository
 import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DetailsActivity
@@ -54,13 +49,8 @@ interface AppComponent {
     fun inject(fragment: MyAdsFragment)
     fun inject(fragment: SearchFragment)
 
-    fun inject(component: NetworkDataRequest)
-    fun inject(component: NavigationItem)
-    fun inject(component: DetailsProcessor)
-    fun inject(component: ShowHideProcessor)
-    fun inject(component: NewDetailsProcessor)
-    fun inject(component: PhotoProcessor)
-    fun inject(component: NewDetailsRepository)
-    fun inject(component: PhotoRepository)
-    fun inject(component: ShowHideButtonController)
+    fun inject(p: NetworkDataRequest)
+    fun inject(p: NavigationItem)
+    fun inject(p: ShowHideProcessor)
+    fun inject(p: ShowHideButtonController)
 }
