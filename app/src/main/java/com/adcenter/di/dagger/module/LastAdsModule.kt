@@ -15,10 +15,6 @@ import dagger.Provides
 class LastAdsModule {
 
     @Provides
-    fun provideAdsDataProcessor(gson: Gson, api: IApi): AdsDataProcessor =
-        AdsDataProcessor(gson, api)
-
-    @Provides
     @LastAdsScope
     fun provideLastAdsRepository(processor: AdsDataProcessor, api: IApi): ILastAdsRepository =
         LastAdsRepository(processor, api)

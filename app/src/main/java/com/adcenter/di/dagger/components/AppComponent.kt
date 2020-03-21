@@ -3,10 +3,7 @@ package com.adcenter.di.dagger.components
 import com.adcenter.app.App
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.*
-import com.adcenter.di.dagger.module.AppModule
-import com.adcenter.di.dagger.module.ContextModule
-import com.adcenter.di.dagger.module.LastAdsModule
-import com.adcenter.di.dagger.module.NetworkModule
+import com.adcenter.di.dagger.module.*
 import com.adcenter.features.adrequests.repository.AdRequestsRepository
 import com.adcenter.features.bookmarks.repository.BookmarksRepository
 import com.adcenter.features.details.repository.DetailsRepository
@@ -33,7 +30,8 @@ import javax.inject.Singleton
     modules = [
         ContextModule::class,
         AppModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        DataModule::class
     ]
 )
 interface AppComponent {
