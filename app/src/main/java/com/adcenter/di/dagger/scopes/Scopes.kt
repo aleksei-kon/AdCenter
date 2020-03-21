@@ -21,6 +21,9 @@ annotation class MyAdsScope
 annotation class DetailsScope
 
 @Scope
+annotation class NewDetailsScope
+
+@Scope
 annotation class LoginScope
 
 @Scope

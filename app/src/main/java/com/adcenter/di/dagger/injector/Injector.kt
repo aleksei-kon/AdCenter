@@ -14,6 +14,7 @@ object Injector {
     private var bookmarksComponent: BookmarksComponent? = null
     private var myAdsComponent: MyAdsComponent? = null
     private var detailsComponent: DetailsComponent? = null
+    private var newDetailsComponent: NewDetailsComponent? = null
     private var loginComponent: LoginComponent? = null
     private var registrationComponent: RegistrationComponent? = null
 
@@ -100,6 +101,18 @@ object Injector {
         detailsComponent = null
     }
 
+    fun plusNewDetailsComponent(): NewDetailsComponent {
+        if (newDetailsComponent == null) {
+            newDetailsComponent = appComponent.plusNewDetailsComponent(NewDetailsModule())
+        }
+
+        return newDetailsComponent ?: throw IllegalStateException("NewDetailsComponent is null")
+    }
+
+    fun clearNewDetailsComponent() {
+        newDetailsComponent = null
+    }
+
     fun plusLoginComponent(): LoginComponent {
         if (loginComponent == null) {
             loginComponent = appComponent.plusLoginComponent(LoginModule())
@@ -123,4 +136,6 @@ object Injector {
     fun clearRegistrationComponent() {
         registrationComponent = null
     }
+
+
 }

@@ -36,6 +36,7 @@ interface AppComponent {
     fun plusBookmarksComponent(module: BookmarksModule): BookmarksComponent
     fun plusMyAdsComponent(module: MyAdsModule): MyAdsComponent
     fun plusDetailsComponent(module: DetailsModule): DetailsComponent
+    fun plusNewDetailsComponent(module: NewDetailsModule): NewDetailsComponent
     fun plusLoginComponent(module: LoginModule): LoginComponent
     fun plusRegistrationComponent(module: RegistrationModule): RegistrationComponent
 

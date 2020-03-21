@@ -6,18 +6,12 @@ import android.provider.MediaStore
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.longToast
-import com.adcenter.extensions.setChildsEnabled
-import com.adcenter.extensions.visible
+import com.adcenter.extensions.*
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
 import com.adcenter.ui.adapters.NewPhotosAdapter
 import kotlinx.android.synthetic.main.activity_new_ad.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class NewAdActivity : BaseActivity() {
 
@@ -25,8 +19,8 @@ class NewAdActivity : BaseActivity() {
 
     private lateinit var adapter: NewPhotosAdapter
 
-    private val viewModel: NewDetailsViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel by lazy {
+        provideViewModel(NewDetailsViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
