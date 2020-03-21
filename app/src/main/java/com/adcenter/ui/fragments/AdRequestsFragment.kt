@@ -50,7 +50,6 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
     private val programsScrollListener: RecyclerView.OnScrollListener =
         ScrollToEndListener {
             loadMore()
-            deleteScrollListener()
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -122,12 +121,7 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
         adapter.setItems(items)
     }
 
-    private fun deleteScrollListener() {
-        recyclerView.clearOnScrollListeners()
-    }
-
     private fun setScrollListener() {
-        recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(programsScrollListener)
     }
 

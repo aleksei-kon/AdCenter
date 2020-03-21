@@ -52,7 +52,6 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
     private val programsScrollListener: RecyclerView.OnScrollListener =
         ScrollToEndListener {
             loadMore()
-            deleteScrollListener()
         }
 
     private val textWatcher: TextWatcher = object : EmptyTextWatcher() {
@@ -88,7 +87,6 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
         viewModel.searchData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is SearchUiState.NewSearch -> {
-                    deleteScrollListener()
                     noDataMessage.gone()
                     recyclerView.visible()
                     setRecyclerItems(emptyList())
@@ -130,12 +128,7 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
         adapter.setItems(items)
     }
 
-    private fun deleteScrollListener() {
-        recyclerView.clearOnScrollListeners()
-    }
-
     private fun setScrollListener() {
-        recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(programsScrollListener)
     }
 

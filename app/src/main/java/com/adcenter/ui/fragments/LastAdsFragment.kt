@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
@@ -51,7 +48,6 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     private val programsScrollListener = ScrollToEndListener {
         loadMore()
-        deleteScrollListener()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +68,6 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     private fun initSwipeRefresh() {
         swipeRefresh.setOnRefreshListener {
-            deleteScrollListener()
             refresh()
         }
     }
@@ -125,12 +120,7 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
         adapter.setItems(items)
     }
 
-    private fun deleteScrollListener() {
-        recyclerView.clearOnScrollListeners()
-    }
-
     private fun setScrollListener() {
-        recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(programsScrollListener)
     }
 
