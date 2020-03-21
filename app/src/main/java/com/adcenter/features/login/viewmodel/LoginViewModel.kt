@@ -16,13 +16,16 @@ import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class LoginViewModel(private val loginUseCase: ILoginUseCase) : ViewModel() {
+class LoginViewModel() : ViewModel() {
+
+    @Inject
+    lateinit var loginUseCase: ILoginUseCase
 
     @Inject
     lateinit var appConfig: IAppConfig
 
     init {
-        Injector.appComponent.inject(this)
+        Injector.plusLoginComponent().inject(this)
     }
 
     private var loginModel: AppConfigInfo = AppConfigInfo()
@@ -76,5 +79,6 @@ class LoginViewModel(private val loginUseCase: ILoginUseCase) : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
+        Injector.clearLoginComponent()
     }
 }

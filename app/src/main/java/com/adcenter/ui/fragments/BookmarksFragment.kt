@@ -10,6 +10,7 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
+import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
@@ -19,9 +20,6 @@ import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import javax.inject.Inject
 
 class BookmarksFragment : BaseFragment(), IPageConfiguration {
@@ -40,8 +38,8 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val viewModel: BookmarksViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel by lazy {
+        provideViewModel(BookmarksViewModel::class.java)
     }
 
     private lateinit var adapter: AdsAdapter

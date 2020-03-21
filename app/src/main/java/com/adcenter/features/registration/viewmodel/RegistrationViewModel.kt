@@ -3,7 +3,6 @@ package com.adcenter.features.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.app.App
 import com.adcenter.config.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
@@ -17,13 +16,16 @@ import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class RegistrationViewModel(private val registrationUseCase: IRegistrationUseCase) : ViewModel() {
+class RegistrationViewModel : ViewModel() {
+
+    @Inject
+    lateinit var registrationUseCase: IRegistrationUseCase
 
     @Inject
     lateinit var appConfig: IAppConfig
 
     init {
-        Injector.appComponent.inject(this)
+        Injector.plusRegistrationComponent().inject(this)
     }
 
     private var registrationModel: AppConfigInfo = AppConfigInfo()
@@ -77,5 +79,6 @@ class RegistrationViewModel(private val registrationUseCase: IRegistrationUseCas
         super.onCleared()
 
         disposable?.dispose()
+        Injector.clearRegistrationComponent()
     }
 }

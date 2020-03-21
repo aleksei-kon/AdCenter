@@ -1,21 +1,11 @@
 package com.adcenter.data.processors
 
-import com.adcenter.app.App
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.network.Message
 import com.adcenter.features.newdetails.data.NewDetailsModel
 import com.google.gson.Gson
 import java.util.*
-import javax.inject.Inject
 
-class NewDetailsProcessor : IDataProcessor<NewDetailsModel> {
-
-    @Inject
-    lateinit var gson: Gson
-
-    init {
-        Injector.appComponent.inject(this)
-    }
+class NewDetailsProcessor(private val gson: Gson) : IDataProcessor<NewDetailsModel> {
 
     private fun isMessage(response: String) {
         val message: Message = try {

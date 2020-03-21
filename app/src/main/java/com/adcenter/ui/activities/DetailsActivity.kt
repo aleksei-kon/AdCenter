@@ -6,10 +6,7 @@ import com.adcenter.R
 import com.adcenter.config.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.longToast
-import com.adcenter.extensions.setTextWithVisibility
-import com.adcenter.extensions.visible
+import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.viewmodel.DetailsViewModel
@@ -18,9 +15,6 @@ import com.adcenter.ui.controllers.ShowHideButtonController
 import com.adcenter.utils.Constants.EMPTY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import javax.inject.Inject
 
 class DetailsActivity : BaseActivity() {
@@ -34,8 +28,8 @@ class DetailsActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_details
 
-    private val viewModel: DetailsViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel by lazy {
+        provideViewModel(DetailsViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

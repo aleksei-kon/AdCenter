@@ -3,6 +3,7 @@ package com.adcenter.features.details.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.async
 import com.adcenter.features.details.data.DetailsRequestParams
@@ -12,8 +13,16 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
-class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel() {
+class DetailsViewModel : ViewModel() {
+
+    @Inject
+    lateinit var detailsUseCase: IDetailsUseCase
+
+    init {
+        Injector.plusDetailsComponent().inject(this)
+    }
 
     private var currentParams: DetailsRequestParams = DetailsRequestParams()
     private var detailsModel: DetailsModel? = null
@@ -76,5 +85,6 @@ class DetailsViewModel(private val detailsUseCase: IDetailsUseCase) : ViewModel(
         super.onCleared()
 
         disposable?.dispose()
+        Injector.clearDetailsComponent()
     }
 }

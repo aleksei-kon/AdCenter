@@ -1,24 +1,17 @@
 package com.adcenter.features.bookmarks.repository
 
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.AdsDataProcessor
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.features.bookmarks.data.BookmarksRequestParams
 import com.adcenter.utils.Result
-import javax.inject.Inject
 
-class BookmarksRepository(private val processor: AdsDataProcessor) : IBookmarksRepository {
-
-    @Inject
-    lateinit var api: IApi
-
-    init {
-        Injector.appComponent.inject(this)
-    }
+class BookmarksRepository(
+    private val processor: AdsDataProcessor,
+    private val api: IApi
+) : IBookmarksRepository {
 
     override fun getBookmarks(params: BookmarksRequestParams): Result<List<AdItemModel>> =
         runCatching {

@@ -1,24 +1,17 @@
 package com.adcenter.features.details.repository
 
 import com.adcenter.api.IApi
-import com.adcenter.app.App
 import com.adcenter.data.Callable
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.DetailsProcessor
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.features.details.data.DetailsRequestParams
 import com.adcenter.utils.Result
-import javax.inject.Inject
 
-class DetailsRepository(private val processor: DetailsProcessor) : IDetailsRepository {
-
-    @Inject
-    lateinit var api: IApi
-
-    init {
-        Injector.appComponent.inject(this)
-    }
+class DetailsRepository(
+    private val processor: DetailsProcessor,
+    private val api: IApi
+) : IDetailsRepository {
 
     override fun getDetails(params: DetailsRequestParams): Result<DetailsModel> =
         runCatching {

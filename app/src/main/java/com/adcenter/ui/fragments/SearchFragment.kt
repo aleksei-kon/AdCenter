@@ -11,6 +11,7 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
+import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.viewmodel.SearchViewModel
@@ -21,9 +22,6 @@ import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.utils.EmptyTextWatcher
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment(), IPageConfiguration {
@@ -42,8 +40,8 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
 
     override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
 
-    private val viewModel: SearchViewModel by viewModel {
-        parametersOf(currentScope.id)
+    private val viewModel by lazy {
+        provideViewModel(SearchViewModel::class.java)
     }
 
     private lateinit var adapter: AdsAdapter

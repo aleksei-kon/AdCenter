@@ -15,9 +15,6 @@ import javax.inject.Singleton
 class AppModule {
 
     @Provides
-    fun provideGson(): Gson = Gson()
-
-    @Provides
     fun provideResourceProvider(context: Context): IResourceProvider = ResourceProvider(context)
 
     @Provides

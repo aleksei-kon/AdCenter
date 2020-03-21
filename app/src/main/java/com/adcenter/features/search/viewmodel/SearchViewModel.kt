@@ -3,6 +3,7 @@ package com.adcenter.features.search.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.async
 import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.search.data.SearchModel
@@ -12,11 +13,17 @@ import com.adcenter.features.search.usecase.ISearchUseCase
 import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel() {
+class SearchViewModel : ViewModel() {
+
+    @Inject
+    lateinit var searchUseCase: ISearchUseCase
+
+    init {
+        Injector.plusSearchComponent().inject(this)
+    }
 
     private var currentParams: SearchRequestParams = SearchRequestParams()
     private var searchModel: SearchModel = SearchModel()
@@ -98,5 +105,6 @@ class SearchViewModel(private val searchUseCase: ISearchUseCase) : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
+        Injector.clearSearchComponent()
     }
 }
