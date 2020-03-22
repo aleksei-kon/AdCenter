@@ -4,7 +4,6 @@ import com.adcenter.app.App
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.ShowHideProcessor
 import com.adcenter.di.dagger.module.*
-import com.adcenter.ui.NavigationItem
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.activities.DevSettingsActivity
@@ -50,7 +49,6 @@ interface AppComponent {
     fun inject(fragment: SearchFragment)
 
     fun inject(p: NetworkDataRequest)
-    fun inject(p: NavigationItem)
     fun inject(p: ShowHideProcessor)
     fun inject(p: ShowHideButtonController)
 }
