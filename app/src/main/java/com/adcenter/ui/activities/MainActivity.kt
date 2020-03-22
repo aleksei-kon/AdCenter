@@ -6,16 +6,26 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
+import com.adcenter.config.IAppConfig
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
 import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
 import com.adcenter.ui.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 private const val CURRENT_MENU_ITEM_ID_KEY = "currentMenuItemId"
 
 class MainActivity : OfflineActivity() {
+
+    @Inject
+    lateinit var appConfig: IAppConfig
+
+    init {
+        Injector.appComponent.inject(this)
+    }
 
     private val defaultItemId: Int = R.id.lastAdsItem
 
@@ -45,18 +55,18 @@ class MainActivity : OfflineActivity() {
         updateContentVisibility()
 
         addFab.setOnClickListener {
-            startActivity(Intent(this, NewAdActivity::class.java))
+            val activityClass = if (appConfig.isLoggedIn || appConfig.isAdmin) {
+                NewAdActivity::class.java
+            } else {
+                LoginActivity::class.java
+            }
+
+            startActivity(Intent(this, activityClass))
         }
 
         if (savedInstanceState == null) {
             selectItem(defaultItemId)
         }
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-
-        selectItem(defaultItemId)
     }
 
     override fun updateContentVisibility() {
@@ -92,6 +102,7 @@ class MainActivity : OfflineActivity() {
             R.id.lastAdsItem -> LastAdsFragment()
             R.id.myAdsItem -> MyAdsFragment()
             R.id.bookmarksItem -> BookmarksFragment()
+            R.id.adRequestsItem -> AdRequestsFragment()
             R.id.settingsItem -> SettingsFragment()
             else -> return false
         }
