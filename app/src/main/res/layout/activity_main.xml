@@ -69,5 +69,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="end"
-        app:hideOnScroll="true" />
+        app:hideOnScroll="true"
+        app:navigationIcon="@drawable/ic_hamburger" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,7 +39,6 @@ interface AppComponent {
     fun inject(activity: BaseActivity)
     fun inject(activity: DevSettingsActivity)
     fun inject(activity: DetailsActivity)
-    fun inject(activity: MainActivity)
 
     fun inject(fragment: SettingsFragment)
     fun inject(fragment: AdRequestsFragment)

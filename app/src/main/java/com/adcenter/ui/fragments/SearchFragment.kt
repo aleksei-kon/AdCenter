@@ -41,8 +41,6 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
 
     override val layout: Int = R.layout.fragment_search
 
-    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
-
     private val viewModel by lazy {
         provideViewModel(SearchViewModel::class.java)
     }

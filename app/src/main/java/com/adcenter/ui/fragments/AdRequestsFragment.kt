@@ -39,8 +39,6 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
 
     override val layout: Int = R.layout.layout_recycler
 
-    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
-
     private val viewModel by lazy {
         provideViewModel(AdRequestsViewModel::class.java)
     }

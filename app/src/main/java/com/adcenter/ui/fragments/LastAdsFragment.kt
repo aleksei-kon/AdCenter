@@ -40,8 +40,6 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
     override val toolbarTitle: String
         get() = resourceProvider.lastAdsTitle
 
-    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.DISAPPEARS
-
     private val viewModel by lazy {
         provideViewModel(LastAdsViewModel::class.java)
     }

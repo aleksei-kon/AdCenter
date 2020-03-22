@@ -47,4 +47,5 @@
     <string name="no_result_found_text">Try different keywords or remove search filters</string>
     <string name="empty_title">Empty</string>
     <string name="this_list_is_empty_text">This list is empty</string>
+    <string name="bottom_sheet_menu_title">Menu</string>
 </resources>
