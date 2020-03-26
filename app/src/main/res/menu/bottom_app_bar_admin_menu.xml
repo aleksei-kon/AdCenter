@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/lastAdsItem"
         android:icon="@drawable/ic_menu_last_ads"
-        android:title="@string/last_ads_title"
-        app:showAsAction="always" />
+        android:title="@string/last_ads_title" />
 
     <item
         android:id="@+id/myAdsItem"
         android:icon="@drawable/ic_menu_my_ads"
-        android:title="@string/my_ads_title"
-        app:showAsAction="always" />
+        android:title="@string/my_ads_title" />
 
     <item
         android:id="@+id/bookmarksItem"
         android:icon="@drawable/ic_menu_bookmarks"
-        android:title="@string/bookmarks_title"
-        app:showAsAction="always" />
+        android:title="@string/bookmarks_title" />
 
     <item
         android:id="@+id/adRequestsItem"
         android:icon="@drawable/ic_menu_ad_requests"
-        android:title="@string/ad_requests_title"
-        app:showAsAction="always" />
+        android:title="@string/ad_requests_title" />
 
     <item
         android:id="@+id/settingsItem"
         android:icon="@drawable/ic_menu_settings"
-        android:title="@string/settings_title"
-        app:showAsAction="always" />
+        android:title="@string/settings_title" />
 </menu>

@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/ic_general_add_done" />
+            app:srcCompat="@drawable/ic_apply" />
     </FrameLayout>
 
     <ScrollView

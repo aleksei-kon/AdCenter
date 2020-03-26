@@ -64,7 +64,7 @@
             android:layout_height="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/ic_general_views"
+            android:drawableStart="@drawable/ic_views"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"

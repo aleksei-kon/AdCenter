@@ -4,12 +4,10 @@
     <item
         android:id="@+id/lastAdsItem"
         android:icon="@drawable/ic_menu_last_ads"
-        android:title="@string/last_ads_title"
-        app:showAsAction="always" />
+        android:title="@string/last_ads_title" />
 
     <item
         android:id="@+id/settingsItem"
         android:icon="@drawable/ic_menu_settings"
-        android:title="@string/settings_title"
-        app:showAsAction="always" />
+        android:title="@string/settings_title" />
 </menu>
