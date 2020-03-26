@@ -54,6 +54,10 @@ class MainActivity : OfflineActivity() {
         initFragmentManager()
         updateContentVisibility()
 
+        searchButton.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
+
         addFab.setOnClickListener {
             val activityClass = if (appConfig.isLoggedIn || appConfig.isAdmin) {
                 NewAdActivity::class.java

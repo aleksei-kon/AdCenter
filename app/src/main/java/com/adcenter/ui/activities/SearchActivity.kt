@@ -1,45 +1,25 @@
-package com.adcenter.ui.fragments
+package com.adcenter.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextWatcher
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.longToast
-import com.adcenter.extensions.provideViewModel
-import com.adcenter.extensions.visible
+import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.viewmodel.SearchViewModel
-import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
-import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.utils.EmptyTextWatcher
-import kotlinx.android.synthetic.main.fragment_search.*
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_search.*
 
-class SearchFragment : BaseFragment(), IPageConfiguration {
+class SearchActivity : OfflineActivity() {
 
-    @Inject
-    lateinit var resourceProvider: IResourceProvider
-
-    init {
-        Injector.appComponent.inject(this)
-    }
-
-    override val toolbarTitle: String
-        get() = resourceProvider.searchTitle
-
-    override val layout: Int = R.layout.fragment_search
+    override val layout: Int = R.layout.activity_search
 
     private val viewModel by lazy {
         provideViewModel(SearchViewModel::class.java)
@@ -58,8 +38,10 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        backButton.setOnClickListener { finish() }
 
         setViewModelObserver()
         initRecycler()
@@ -68,21 +50,31 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
         viewModel.load()
     }
 
-    override fun onDestroyView() {
+    override fun onDestroy() {
         searchText.removeTextChangedListener(textWatcher)
 
-        super.onDestroyView()
+        super.onDestroy()
+    }
+
+    override fun updateContentVisibility() {
+        if (isConnectedToNetwork()) {
+            offlineMessage.gone()
+            content.visible()
+        } else {
+            content.gone()
+            offlineMessage.visible()
+        }
     }
 
     private fun initRecycler() {
         adapter = AdsAdapter(::onItemClick)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(this)
         setScrollListener()
     }
 
     private fun setViewModelObserver() {
-        viewModel.searchData.observe(viewLifecycleOwner, Observer {
+        viewModel.searchData.observe(this, Observer {
             when (it) {
                 is SearchUiState.NewSearch -> {
                     noDataMessage.gone()
@@ -115,7 +107,7 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> requireContext().longToast(message) }
+                    it.throwable.message?.let { message -> longToast(message) }
                     setScrollListener()
                 }
             }
@@ -131,8 +123,8 @@ class SearchFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun onItemClick(id: String) {
-        context?.startActivity(
-            Intent(context, DetailsActivity::class.java).apply {
+        startActivity(
+            Intent(this, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)
             }
         )

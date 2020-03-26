@@ -43,7 +43,6 @@ interface AppComponent {
     fun inject(fragment: BookmarksFragment)
     fun inject(fragment: LastAdsFragment)
     fun inject(fragment: MyAdsFragment)
-    fun inject(fragment: SearchFragment)
     fun inject(fragment: NavigationBottomSheetDialogFragment)
 
     fun inject(p: NetworkDataRequest)
