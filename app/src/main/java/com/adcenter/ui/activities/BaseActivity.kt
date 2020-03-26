@@ -15,8 +15,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.appComponent.inject(this)
 
+        Injector.appComponent.inject(this)
         setTheme(themeManager.getThemeResId())
         setContentView(layout)
     }

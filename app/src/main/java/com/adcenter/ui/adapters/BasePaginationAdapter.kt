@@ -3,11 +3,15 @@ package com.adcenter.ui.adapters
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.adcenter.ui.adapters.ViewHolderType.ITEM
+import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
+
+enum class ViewHolderType {
+    ITEM,
+    PAGINATION
+}
 
 abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val TYPE_ITEM = 0
-    private val TYPE_PAGINATION = 1
 
     private var isPagination: Boolean = false
 
@@ -44,13 +48,13 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
 
     override fun getItemViewType(position: Int): Int =
         when {
-            items.isEmpty() || position == items.size -> TYPE_PAGINATION
-            else -> TYPE_ITEM
+            items.isEmpty() || position == items.size -> PAGINATION.ordinal
+            else -> ITEM.ordinal
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            TYPE_ITEM -> getItemViewHolder(parent)
+            ITEM.ordinal -> getItemViewHolder(parent)
             else -> getPaginationViewHolder(parent)
         }
 

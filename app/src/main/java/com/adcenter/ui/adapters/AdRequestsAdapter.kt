@@ -24,12 +24,12 @@ class AdRequestsAdapter(
 
     override fun setItems(items: List<AdItemModel>) {
         val diffCallback = AdsDiffCallback(this.items, items)
-        val diffRsult = DiffUtil.calculateDiff(diffCallback)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         this.items.clear()
         this.items.addAll(items)
 
-        diffRsult.dispatchUpdatesTo(this)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewHolder(parent: ViewGroup): BaseItemViewHolder =

@@ -12,6 +12,7 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
 import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
+import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
 import com.adcenter.ui.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -31,7 +32,8 @@ class MainActivity : OfflineActivity() {
 
     private var currentMenuItemId: Int = -1
 
-    private val navigationBottomSheet = NavigationBottomSheetDialogFragment().apply {
+    private val navigationBottomSheet = NavigationBottomSheetDialogFragment()
+        .apply {
         onItemSelectedListener = ::selectItem
     }
 

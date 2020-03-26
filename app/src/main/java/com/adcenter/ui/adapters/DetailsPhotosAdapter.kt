@@ -25,7 +25,7 @@ class DetailsPhotosAdapter(private val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): SliderAdapterVH =
-        SliderAdapterVH(inflater.inflate(R.layout.adapter_item_photo, null))
+        SliderAdapterVH(inflater.inflate(R.layout.adapter_item_photo, parent, false))
 
     override fun onBindViewHolder(viewHolder: SliderAdapterVH, i: Int) {
         viewHolder.bind(photos[i])

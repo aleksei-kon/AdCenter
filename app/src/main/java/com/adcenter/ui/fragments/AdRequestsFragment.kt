@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
@@ -18,7 +17,6 @@ import com.adcenter.features.adrequests.viewmodel.AdRequestsViewModel
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdRequestsAdapter
@@ -34,42 +32,33 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
         Injector.appComponent.inject(this)
     }
 
-    override val toolbarTitle: String
-        get() = resourceProvider.adRequestsTitle
+    private val recyclerAdapter = AdRequestsAdapter(::onItemClick)
+
+    private val viewModel by lazy { provideViewModel(AdRequestsViewModel::class.java) }
+
+    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
     override val layout: Int = R.layout.layout_recycler
 
-    private val viewModel by lazy {
-        provideViewModel(AdRequestsViewModel::class.java)
-    }
-
-    private lateinit var adapter: AdRequestsAdapter
-
-    private val programsScrollListener: RecyclerView.OnScrollListener =
-        ScrollToEndListener {
-            loadMore()
-        }
+    override val toolbarTitle: String
+        get() = resourceProvider.adRequestsTitle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setViewModelObserver()
         initRecycler()
-        initViews()
+        initSwipeRefresh()
+        setViewModelObserver()
         load()
     }
 
     private fun initRecycler() {
-        adapter = AdRequestsAdapter(::onItemClick)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        setScrollListener()
-    }
-
-    private fun initViews() {
-        swipeRefresh.setOnRefreshListener {
-            refresh()
+        recyclerView.apply {
+            adapter = recyclerAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
+
+        setScrollListener()
     }
 
     private fun setViewModelObserver() {
@@ -81,11 +70,11 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
                     progressBar.visible()
                 }
                 is AdRequestsUiState.Pagination -> {
-                    adapter.showPagination()
+                    recyclerAdapter.showPagination()
                 }
                 is AdRequestsUiState.Success -> {
                     swipeRefresh.isRefreshing = false
-                    adapter.hidePagination()
+                    recyclerAdapter.hidePagination()
                     progressBar.gone()
 
                     if (it.result.ads.isEmpty()) {
@@ -101,26 +90,31 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
                 }
                 is AdRequestsUiState.Error -> {
                     swipeRefresh.isRefreshing = false
-                    adapter.hidePagination()
+                    recyclerAdapter.hidePagination()
                     progressBar.gone()
 
-                    if (adapter.isEmpty()) {
+                    if (recyclerAdapter.isEmpty()) {
                         recyclerView.gone()
                         noDataMessage.visible()
                     }
-                    it.throwable.message?.let { message -> requireContext().longToast(message) }
+
+                    it.throwable.message?.let { message -> longToast(message) }
                     setScrollListener()
                 }
             }
         })
     }
 
+    private fun initSwipeRefresh() {
+        swipeRefresh.setOnRefreshListener { refresh() }
+    }
+
     private fun setRecyclerItems(items: List<AdItemModel>) {
-        adapter.setItems(items)
+        recyclerAdapter.setItems(items)
     }
 
     private fun setScrollListener() {
-        recyclerView.addOnScrollListener(programsScrollListener)
+        recyclerView.addOnScrollListener(recyclerScrollListener)
     }
 
     private fun onItemClick(id: String) {

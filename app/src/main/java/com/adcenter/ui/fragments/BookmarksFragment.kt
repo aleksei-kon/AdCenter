@@ -1,11 +1,12 @@
 package com.adcenter.ui.fragments
 
 import android.content.Intent
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
@@ -18,12 +19,19 @@ import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
+import com.adcenter.ui.RecyclerViewMargin
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
+import com.adcenter.ui.adapters.ItemType.GRID
+import com.adcenter.ui.adapters.ViewHolderType.ITEM
+import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
 import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
+
+private const val SINGLE_COUNT = 1
+private const val PORTRAIT_COUNT = 2
+private const val LANDSCAPE_COUNT = 4
 
 class BookmarksFragment : BaseFragment(), IPageConfiguration {
 
@@ -34,42 +42,56 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
         Injector.appComponent.inject(this)
     }
 
-    override val toolbarTitle: String
-        get() = resourceProvider.bookmarksTitle
+    private val recyclerAdapter = AdsAdapter(GRID, ::onItemClick)
+
+    private val viewModel by lazy { provideViewModel(BookmarksViewModel::class.java) }
+
+    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
     override val layout: Int = R.layout.layout_recycler
 
-    private val viewModel by lazy {
-        provideViewModel(BookmarksViewModel::class.java)
-    }
-
-    private lateinit var adapter: AdsAdapter
-
-    private val programsScrollListener: RecyclerView.OnScrollListener =
-        ScrollToEndListener {
-            loadMore()
-        }
+    override val toolbarTitle: String
+        get() = resourceProvider.bookmarksTitle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setViewModelObserver()
         initRecycler()
-        initViews()
+        initSwipeRefresh()
+        setViewModelObserver()
         load()
     }
 
     private fun initRecycler() {
-        adapter = AdsAdapter(::onItemClick)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        setScrollListener()
-    }
-
-    private fun initViews() {
-        swipeRefresh.setOnRefreshListener {
-            refresh()
+        val columns = when (resources.configuration.orientation) {
+            ORIENTATION_LANDSCAPE -> LANDSCAPE_COUNT
+            ORIENTATION_PORTRAIT -> PORTRAIT_COUNT
+            else -> SINGLE_COUNT
         }
+
+        val itemDecoration = RecyclerViewMargin(
+            margin = resources.getDimensionPixelSize(R.dimen.recycler_item_margin),
+            columns = columns
+        )
+
+        val gridLayoutManager = GridLayoutManager(requireContext(), columns).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int =
+                    when (recyclerAdapter.getItemViewType(position)) {
+                        ITEM.ordinal -> SINGLE_COUNT
+                        PAGINATION.ordinal -> columns
+                        else -> columns
+                    }
+            }
+        }
+
+        recyclerView.apply {
+            addItemDecoration(itemDecoration)
+            layoutManager = gridLayoutManager
+            adapter = recyclerAdapter
+        }
+
+        setScrollListener()
     }
 
     private fun setViewModelObserver() {
@@ -81,11 +103,11 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
                     progressBar.visible()
                 }
                 is BookmarksUiState.Pagination -> {
-                    adapter.showPagination()
+                    recyclerAdapter.showPagination()
                 }
                 is BookmarksUiState.Success -> {
                     swipeRefresh.isRefreshing = false
-                    adapter.hidePagination()
+                    recyclerAdapter.hidePagination()
                     progressBar.gone()
 
                     if (it.result.ads.isEmpty()) {
@@ -101,27 +123,31 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
                 }
                 is BookmarksUiState.Error -> {
                     swipeRefresh.isRefreshing = false
-                    adapter.hidePagination()
+                    recyclerAdapter.hidePagination()
                     progressBar.gone()
 
-                    if (adapter.isEmpty()) {
+                    if (recyclerAdapter.isEmpty()) {
                         recyclerView.gone()
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> requireContext().longToast(message) }
+                    it.throwable.message?.let { message -> longToast(message) }
                     setScrollListener()
                 }
             }
         })
     }
 
+    private fun initSwipeRefresh() {
+        swipeRefresh.setOnRefreshListener { refresh() }
+    }
+
     private fun setRecyclerItems(items: List<AdItemModel>) {
-        adapter.setItems(items)
+        recyclerAdapter.setItems(items)
     }
 
     private fun setScrollListener() {
-        recyclerView.addOnScrollListener(programsScrollListener)
+        recyclerView.addOnScrollListener(recyclerScrollListener)
     }
 
     private fun onItemClick(id: String) {

@@ -1,53 +1,57 @@
 package com.adcenter.ui.activities
 
 import android.content.Intent
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.text.TextWatcher
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.viewmodel.SearchViewModel
+import com.adcenter.ui.RecyclerViewMargin
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
+import com.adcenter.ui.adapters.ItemType
+import com.adcenter.ui.adapters.ItemType.LINEAR
+import com.adcenter.ui.adapters.ViewHolderType.ITEM
+import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
 import com.adcenter.utils.EmptyTextWatcher
 import kotlinx.android.synthetic.main.activity_search.*
 
+private const val SINGLE_COUNT = 1
+private const val LANDSCAPE_COUNT = 4
+
 class SearchActivity : OfflineActivity() {
 
-    override val layout: Int = R.layout.activity_search
+    private lateinit var recyclerAdapter: AdsAdapter
 
-    private val viewModel by lazy {
-        provideViewModel(SearchViewModel::class.java)
-    }
+    private val viewModel by lazy { provideViewModel(SearchViewModel::class.java) }
 
-    private lateinit var adapter: AdsAdapter
-
-    private val programsScrollListener: RecyclerView.OnScrollListener =
-        ScrollToEndListener {
-            loadMore()
-        }
+    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
     private val textWatcher: TextWatcher = object : EmptyTextWatcher() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            load()
+            load(searchText.text.toString())
         }
     }
+
+    override val layout: Int = R.layout.activity_search
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         backButton.setOnClickListener { finish() }
 
-        setViewModelObserver()
         initRecycler()
         searchText.addTextChangedListener(textWatcher)
-
-        viewModel.load()
+        setViewModelObserver()
+        load()
     }
 
     override fun onDestroy() {
@@ -67,9 +71,42 @@ class SearchActivity : OfflineActivity() {
     }
 
     private fun initRecycler() {
-        adapter = AdsAdapter(::onItemClick)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.apply {
+            when (resources.configuration.orientation) {
+                ORIENTATION_LANDSCAPE -> {
+                    addItemDecoration(
+                        RecyclerViewMargin(
+                            margin = resources.getDimensionPixelSize(R.dimen.recycler_item_margin),
+                            columns = LANDSCAPE_COUNT
+                        )
+                    )
+                    layoutManager = GridLayoutManager(this@SearchActivity, LANDSCAPE_COUNT).apply {
+                        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                            override fun getSpanSize(position: Int): Int =
+                                when (recyclerAdapter.getItemViewType(position)) {
+                                    ITEM.ordinal -> SINGLE_COUNT
+                                    PAGINATION.ordinal -> LANDSCAPE_COUNT
+                                    else -> LANDSCAPE_COUNT
+                                }
+                        }
+                    }
+                    recyclerAdapter = AdsAdapter(ItemType.GRID, ::onItemClick)
+                }
+                ORIENTATION_PORTRAIT -> {
+                    addItemDecoration(
+                        RecyclerViewMargin(
+                            margin = resources.getDimensionPixelSize(R.dimen.recycler_item_margin),
+                            columns = SINGLE_COUNT
+                        )
+                    )
+                    layoutManager = LinearLayoutManager(this@SearchActivity)
+                    recyclerAdapter = AdsAdapter(LINEAR, ::onItemClick)
+                }
+            }
+
+            adapter = recyclerAdapter
+        }
+
         setScrollListener()
     }
 
@@ -80,13 +117,13 @@ class SearchActivity : OfflineActivity() {
                     noDataMessage.gone()
                     recyclerView.visible()
                     setRecyclerItems(emptyList())
-                    adapter.showPagination()
+                    recyclerAdapter.showPagination()
                 }
                 is SearchUiState.Pagination -> {
-                    adapter.showPagination()
+                    recyclerAdapter.showPagination()
                 }
                 is SearchUiState.Success -> {
-                    adapter.hidePagination()
+                    recyclerAdapter.hidePagination()
 
                     if (it.result.ads.isEmpty()) {
                         recyclerView.gone()
@@ -100,9 +137,9 @@ class SearchActivity : OfflineActivity() {
                     setScrollListener()
                 }
                 is SearchUiState.Error -> {
-                    adapter.hidePagination()
+                    recyclerAdapter.hidePagination()
 
-                    if (adapter.isEmpty()) {
+                    if (recyclerAdapter.isEmpty()) {
                         recyclerView.gone()
                         noDataMessage.visible()
                     }
@@ -115,11 +152,11 @@ class SearchActivity : OfflineActivity() {
     }
 
     private fun setRecyclerItems(items: List<AdItemModel>) {
-        adapter.setItems(items)
+        recyclerAdapter.setItems(items)
     }
 
     private fun setScrollListener() {
-        recyclerView.addOnScrollListener(programsScrollListener)
+        recyclerView.addOnScrollListener(recyclerScrollListener)
     }
 
     private fun onItemClick(id: String) {
@@ -130,7 +167,9 @@ class SearchActivity : OfflineActivity() {
         )
     }
 
-    private fun load() = viewModel.load(searchText.text.toString())
+    private fun load() = viewModel.load()
+
+    private fun load(searchText: String) = viewModel.load(searchText)
 
     private fun loadMore() = viewModel.loadMore()
 }

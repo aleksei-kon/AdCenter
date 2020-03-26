@@ -26,7 +26,6 @@ class DevSettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         initToolbar()
-
         backendUrlEditText.setText(urlHolder.url)
         saveButton.setOnClickListener { saveInfo() }
     }

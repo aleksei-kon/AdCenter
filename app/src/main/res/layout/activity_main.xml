@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/secondaryColor"
         android:src="@drawable/ic_add_fab"
+        app:borderWidth="0dp"
         app:layout_anchor="@id/bottomAppBar" />
 
     <com.google.android.material.bottomappbar.BottomAppBar

@@ -32,10 +32,10 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
         Injector.appComponent.inject(this)
     }
 
+    override val layout: Int = R.layout.fragment_settings
+
     override val toolbarTitle: String
         get() = resourceProvider.settingsTitle
-
-    override val layout: Int = R.layout.fragment_settings
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,10 +50,7 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
 
         loginButton.setOnClickListener {
             requireContext().startActivity(
-                Intent(
-                    requireContext(),
-                    LoginActivity::class.java
-                )
+                Intent(requireContext(), LoginActivity::class.java)
             )
         }
 
@@ -69,10 +66,7 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
 
         devSettingsButton.setOnClickListener {
             requireContext().startActivity(
-                Intent(
-                    requireContext(),
-                    DevSettingsActivity::class.java
-                )
+                Intent(requireContext(), DevSettingsActivity::class.java)
             )
         }
     }

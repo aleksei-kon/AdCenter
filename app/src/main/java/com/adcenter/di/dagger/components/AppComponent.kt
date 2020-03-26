@@ -5,6 +5,7 @@ import com.adcenter.data.NetworkDataRequest
 import com.adcenter.data.processors.ShowHideProcessor
 import com.adcenter.di.dagger.module.*
 import com.adcenter.ui.activities.*
+import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
 import com.adcenter.ui.controllers.ShowHideButtonController
 import com.adcenter.ui.fragments.*
 import dagger.Component

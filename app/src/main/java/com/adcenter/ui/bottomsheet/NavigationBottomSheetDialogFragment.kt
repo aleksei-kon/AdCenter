@@ -1,4 +1,4 @@
-package com.adcenter.ui.activities
+package com.adcenter.ui.bottomsheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
