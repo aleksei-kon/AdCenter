@@ -19,7 +19,8 @@ object Libs {
         const val testExtJunit = "1.1.0"
         const val espresso = "3.1.1"
 
-        const val material = "1.0.0"
+        const val material = "1.1.0"
+        const val swiperefreshlayout = "1.0.0"
         const val appcompat = "1.0.2"
         const val coreKtx = "1.0.2"
         const val constraintlayout = "1.1.3"
@@ -40,6 +41,7 @@ object Libs {
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
     const val material = "com.google.android.material:material:${Versions.material}"
+    const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
@@ -52,14 +54,7 @@ object Libs {
     const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
-    const val koin = "org.koin:koin-android:${Versions.koin}"
-    const val koinScope = "org.koin:koin-androidx-scope:${Versions.koin}"
-    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-    //const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
-    const val koinExperimental = "org.koin:koin-androidx-ext:${Versions.koin}"
-
     const val viewModel = "androidx.lifecycle:lifecycle-extensions:${Versions.viewModel}"
-
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     const val dagger = "com.google.dagger:dagger-android:${Versions.dagger}"

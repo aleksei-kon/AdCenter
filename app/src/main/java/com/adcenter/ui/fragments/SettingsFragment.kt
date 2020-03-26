@@ -12,7 +12,6 @@ import com.adcenter.extensions.visible
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.theme.IThemeManager
 import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.LoginActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -37,8 +36,6 @@ class SettingsFragment : BaseFragment(), IPageConfiguration {
         get() = resourceProvider.settingsTitle
 
     override val layout: Int = R.layout.fragment_settings
-
-    override val toolbarScrollBehaviour: ToolbarScrollBehaviour = ToolbarScrollBehaviour.POSITIONED
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

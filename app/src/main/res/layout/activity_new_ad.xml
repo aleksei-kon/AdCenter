@@ -3,15 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/viewLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/backgroundColor">
+    android:layout_height="match_parent">
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:indeterminateTint="?attr/progressColor"
         android:indeterminateTintMode="src_atop"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,9 +27,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/toolbarBackgroundColor"
-            app:title="@string/new_ad_title"
-            app:titleTextColor="?attr/toolbarContentColor" />
+            app:title="@string/new_ad_title" />
 
         <ImageView
             android:id="@+id/addButton"
@@ -64,7 +60,6 @@
 
                 <EditText
                     android:id="@+id/titleEditText"
-                    style="@style/EditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/title_hint"
@@ -78,7 +73,6 @@
 
                 <EditText
                     android:id="@+id/priceEditText"
-                    style="@style/EditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/price_hint"
@@ -92,7 +86,6 @@
 
                 <EditText
                     android:id="@+id/placeEditText"
-                    style="@style/EditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/place_hint"
@@ -106,7 +99,6 @@
 
                 <EditText
                     android:id="@+id/synopsisEditText"
-                    style="@style/BigEditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/description_hint"
@@ -120,7 +112,6 @@
 
                 <EditText
                     android:id="@+id/phoneEditText"
-                    style="@style/EditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_hint"
@@ -134,7 +125,6 @@
 
             <TextView
                 android:id="@+id/addPhotoButton"
-                style="@style/SecondaryButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"

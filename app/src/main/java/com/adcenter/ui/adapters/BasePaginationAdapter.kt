@@ -3,8 +3,6 @@ package com.adcenter.ui.adapters
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.visible
 
 abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -13,8 +11,8 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
 
     private var isPagination: Boolean = false
 
-    protected val paginationPosition: Int
-        get() = itemCount - 1
+    private val paginationPosition: Int
+        get() = itemCount
 
     protected val items = mutableListOf<T>()
 
@@ -38,7 +36,7 @@ abstract class BasePaginationAdapter<T : Any> : RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    abstract fun setItems(items: Collection<T>)
+    abstract fun setItems(items: List<T>)
 
     abstract fun getItemViewHolder(parent: ViewGroup): BaseItemViewHolder
 

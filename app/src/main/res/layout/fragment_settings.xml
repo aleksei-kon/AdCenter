@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,44 +13,64 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/loginButton"
-            style="@style/SettingsMenuItem"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_menu_login"
             android:drawablePadding="2dp"
             android:text="@string/login"
+            android:textColor="#000"
             android:visibility="gone"
+            app:icon="@drawable/ic_menu_login"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="#000"
+            app:rippleColor="@color/secondaryLightColor"
             tools:visibility="visible" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/logoutButton"
-            style="@style/SettingsMenuItem"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_menu_logout"
             android:drawablePadding="2dp"
             android:text="@string/logout"
+            android:textColor="#000"
             android:visibility="gone"
+            app:icon="@drawable/ic_menu_logout"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="#000"
+            app:rippleColor="@color/secondaryLightColor"
             tools:visibility="visible" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/switchThemeButton"
-            style="@style/SettingsMenuItem"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_menu_switch_theme"
             android:drawablePadding="2dp"
-            android:text="@string/switch_theme" />
+            android:text="@string/switch_theme"
+            android:textColor="#000"
+            app:icon="@drawable/ic_menu_switch_theme"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="#000"
+            app:rippleColor="@color/secondaryLightColor" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/devSettingsButton"
-            style="@style/SettingsMenuItem"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_menu_dev"
             android:drawablePadding="2dp"
-            android:text="@string/dev_settings_button" />
+            android:text="@string/dev_settings_button"
+            android:textColor="#000"
+            app:icon="@drawable/ic_menu_dev"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="#000"
+            app:rippleColor="@color/secondaryLightColor" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

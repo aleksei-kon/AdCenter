@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="app_colors">
-        <attr name="backgroundColor" format="color" />
-        <attr name="toolbarBackgroundColor" format="color" />
-        <attr name="toolbarContentColor" format="color" />
-        <attr name="bottomNavSelectedItemColor" format="color" />
-        <attr name="bottomNavItemColor" format="color" />
-        <attr name="bottomNavBackgroundColor" format="color" />
-        <attr name="progressColor" format="color" />
-        <attr name="titleColor" format="color" />
-        <attr name="textColor" format="color" />
-        <attr name="mainTextColor" format="color" />
-        <attr name="subTextColor" format="color" />
-        <attr name="iconColor" format="color" />
-        <attr name="secondaryButtonTextColor" format="color" />
-        <attr name="secondaryButtonIconColor" format="color" />
-        <attr name="editTextColor" format="color" />
-        <attr name="editTextHintColor" format="color" />
-        <attr name="editTextControlNormalColor" format="color" />
-        <attr name="editTextControlActivatedColor" format="color" />
-        <attr name="editTextSelectionColor" format="color" />
-        <attr name="sliderSelectedItemColor" format="color" />
-        <attr name="sliderItemColor" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="ProgressIconView">
-        <attr name="icon" format="reference" />
-        <attr name="iconColorFilter" format="reference|color" />
-        <attr name="progressColorFilter" format="reference|color" />
-        <attr name="showIcon" format="boolean" />
-        <attr name="showProgress" format="boolean" />
+        <attr name="test" format="color" />
     </declare-styleable>
 </resources>

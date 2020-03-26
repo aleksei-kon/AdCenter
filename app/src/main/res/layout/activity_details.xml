@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/backgroundColor">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -17,12 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:collapsedTitleGravity="center_vertical|start"
-            app:collapsedTitleTextAppearance="@style/collapsingToolbarLayoutTitleColorCollapsed"
-            app:contentScrim="?attr/toolbarBackgroundColor"
             app:expandedTitleGravity="start|bottom"
             app:expandedTitleMarginEnd="32dp"
             app:expandedTitleMarginStart="32dp"
-            app:expandedTitleTextAppearance="@style/collapsingToolbarLayoutTitleColorExpanded"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.smarteist.autoimageslider.SliderView
@@ -36,9 +32,7 @@
                 app:sliderIndicatorMargin="8dp"
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="4dp"
-                app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="?attr/sliderSelectedItemColor"
-                app:sliderIndicatorUnselectedColor="?attr/sliderItemColor" />
+                app:sliderIndicatorRadius="2dp"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -86,7 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:indeterminateTint="?attr/progressColor"
         android:indeterminateTintMode="src_atop"
         android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

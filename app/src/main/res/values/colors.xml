@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="darkBlue">#065082</color>
-    <color name="blue">#2A5885</color>
-    <color name="greyBlue">#46617D</color>
-    <color name="lightBlue1">#4A76A8</color>
-    <color name="lightBlue2">#5181B8</color>
-    <color name="darkSkyBlue">#688096</color>
-    <color name="grey3">#688096</color>
-    <color name="grey2">#6B727E</color>
-    <color name="grey1">#67707A</color>
-    <color name="lightGrey4">#939393</color>
-    <color name="lightGrey3">#A8ADB8</color>
-    <color name="skyBlue">#99B1C6</color>
-    <color name="lightGrey2">#B9BDC4</color>
-    <color name="lightGrey1">#C4D1DE</color>
-    <color name="darkWhite2">#E0E0E0</color>
-    <color name="darkWhite1">#FAFAFA</color>
-    <color name="white">#FFFFFF</color>
-    <color name="darkGrey1">#282B2F</color>
-    <color name="darkGrey2">#222529</color>
-    <color name="lightBlack">#181B1F</color>
-    <color name="black">#000000</color>
-    <color name="lightRed">#ef3a50</color>
-    <color name="red">#FF3347</color>
-    <color name="yellow">#DBC021</color>
+    <color name="primaryColor">#ffffff</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#cccccc</color>
+    <color name="secondaryColor">#ff9e80</color>
+    <color name="secondaryLightColor">#ffd0b0</color>
+    <color name="secondaryDarkColor">#c96f53</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
 </resources>

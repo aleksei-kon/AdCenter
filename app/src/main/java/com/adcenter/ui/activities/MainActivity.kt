@@ -2,9 +2,7 @@ package com.adcenter.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.adcenter.R
@@ -14,14 +12,11 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
 import com.adcenter.extensions.visible
 import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.IPageConfiguration.ToolbarScrollBehaviour
-import com.adcenter.ui.NavigationItem
-import com.adcenter.ui.NavigationItem.*
-import com.adcenter.ui.NavigationItem.NavigationItemId.*
 import com.adcenter.ui.fragments.*
-import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
+private const val CURRENT_MENU_ITEM_ID_KEY = "currentMenuItemId"
 
 class MainActivity : OfflineActivity() {
 
@@ -32,139 +27,50 @@ class MainActivity : OfflineActivity() {
         Injector.appComponent.inject(this)
     }
 
+    private val defaultItemId: Int = R.id.lastAdsItem
+
+    private var currentMenuItemId: Int = -1
+
+    private val navigationBottomSheet = NavigationBottomSheetDialogFragment().apply {
+        onItemSelectedListener = ::selectItem
+    }
+
     override val layout: Int = R.layout.activity_main
 
-    private val defaultNavigationItem: NavigationItem = LastAdsItem()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(CURRENT_MENU_ITEM_ID_KEY, currentMenuItemId)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        currentMenuItemId = savedInstanceState.getInt(CURRENT_MENU_ITEM_ID_KEY)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initToolbar()
-        initNavigation()
+        initBottomAppBar()
         initFragmentManager()
-        initNewAdButton()
-
-        if (appConfig.isLoggedIn) {
-            newAdButton.visible()
-        } else {
-            newAdButton.gone()
-        }
-
-        newAdButton.setOnClickListener {
-            startActivity(Intent(this, NewAdActivity::class.java))
-        }
-
         updateContentVisibility()
 
-        if (savedInstanceState == null) {
-            selectItem(defaultNavigationItem.id)
-        }
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-
-        initNavigation()
-        selectItem(defaultNavigationItem.id)
-        initNewAdButton()
-    }
-
-    private fun initNewAdButton() {
-        if (appConfig.isAdmin || !appConfig.isLoggedIn) {
-            newAdButton.visible()
-        } else {
-            newAdButton.visible()
-        }
-    }
-
-    private fun initFragmentManager() {
-        supportFragmentManager.registerFragmentLifecycleCallbacks(
-            fragmentLifecycleCallback,
-            false
-        )
-    }
-
-    private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        setupLayoutConfiguration(ToolbarScrollBehaviour.POSITIONED)
-    }
-
-    private fun initNavigation() {
-        bottomNavigationView.menu.clear()
-
-        initMenuItem(LastAdsItem())
-        initMenuItem(SearchItem())
-
-        if (appConfig.isLoggedIn && !appConfig.isAdmin) {
-            initMenuItem(BookmarksItem())
-            initMenuItem(MyAdsItem())
+        searchButton.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
         }
 
-        if (appConfig.isAdmin) {
-            initMenuItem(AdRequestsItem())
-        }
-
-        initMenuItem(SettingsItem())
-
-        bottomNavigationView.setOnNavigationItemReselectedListener { }
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            selectItem(menuItem.itemId)
-        }
-    }
-
-    private fun initMenuItem(item: NavigationItem) {
-        if (bottomNavigationView.menu.size == 5) {
-            return
-        }
-
-        bottomNavigationView.menu.add(
-            Menu.NONE,
-            item.id,
-            Menu.NONE,
-            item.title
-        ).setIcon(item.iconRes)
-    }
-
-    private fun selectItem(itemId: Int): Boolean {
-        val fragment: BaseFragment = when (itemId) {
-            LAST_ADS.ordinal -> LastAdsFragment()
-            SEARCH.ordinal -> SearchFragment()
-            MY_ADS.ordinal -> MyAdsFragment()
-            BOOKMARKS.ordinal -> BookmarksFragment()
-            AD_REQUESTS.ordinal -> AdRequestsFragment()
-            SETTINGS.ordinal -> SettingsFragment()
-            else -> return false
-        }
-
-        setFragment(fragment)
-
-        return true
-    }
-
-    private fun setFragment(fragment: BaseFragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.content, fragment)
-            .commit()
-    }
-
-    private fun setupLayoutConfiguration(toolbarScrollBehaviour: ToolbarScrollBehaviour) {
-        val params = toolbarContainer.layoutParams
-
-        if (params is AppBarLayout.LayoutParams) {
-            when (toolbarScrollBehaviour) {
-                ToolbarScrollBehaviour.POSITIONED -> {
-                    params.scrollFlags = 0
-                }
-                ToolbarScrollBehaviour.DISAPPEARS -> {
-                    params.scrollFlags =
-                        AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-                }
+        addFab.setOnClickListener {
+            val activityClass = if (appConfig.isLoggedIn || appConfig.isAdmin) {
+                NewAdActivity::class.java
+            } else {
+                LoginActivity::class.java
             }
+
+            startActivity(Intent(this, activityClass))
         }
 
-        toolbarContainer.layoutParams = params
-        appBar.requestLayout()
+        if (savedInstanceState == null) {
+            selectItem(defaultItemId)
+        }
     }
 
     override fun updateContentVisibility() {
@@ -177,6 +83,47 @@ class MainActivity : OfflineActivity() {
         }
     }
 
+    private fun initBottomAppBar() {
+        setSupportActionBar(bottomAppBar)
+        bottomAppBar.setNavigationOnClickListener {
+            navigationBottomSheet.show(supportFragmentManager, null)
+        }
+    }
+
+    private fun initFragmentManager() {
+        supportFragmentManager.registerFragmentLifecycleCallbacks(
+            fragmentLifecycleCallback,
+            false
+        )
+    }
+
+    private fun selectItem(itemId: Int): Boolean {
+        if (itemId == currentMenuItemId) {
+            return true
+        }
+
+        val fragment: BaseFragment = when (itemId) {
+            R.id.lastAdsItem -> LastAdsFragment()
+            R.id.myAdsItem -> MyAdsFragment()
+            R.id.bookmarksItem -> BookmarksFragment()
+            R.id.adRequestsItem -> AdRequestsFragment()
+            R.id.settingsItem -> SettingsFragment()
+            else -> return false
+        }
+
+        setFragment(fragment)
+        currentMenuItemId = itemId
+
+        return true
+    }
+
+    private fun setFragment(fragment: BaseFragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.content, fragment)
+            .commit()
+    }
+
     private val fragmentLifecycleCallback = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentViewCreated(
             fragmentManager: FragmentManager,
@@ -186,9 +133,10 @@ class MainActivity : OfflineActivity() {
         ) {
             super.onFragmentViewCreated(fragmentManager, fragment, view, savedInstanceState)
 
-            if (fragment is IPageConfiguration) {
-                title = fragment.toolbarTitle
-                setupLayoutConfiguration(fragment.toolbarScrollBehaviour)
+            when (fragment) {
+                is NavigationBottomSheetDialogFragment -> return
+                is IPageConfiguration -> appBarTitle.text = fragment.toolbarTitle
+                else -> appBarTitle.text = getString(R.string.app_name)
             }
         }
     }

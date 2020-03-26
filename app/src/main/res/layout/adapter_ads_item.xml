@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    app:rippleColor="@color/secondaryLightColor"
+    app:cardCornerRadius="8dp"
+    app:strokeWidth="1dp">
 
-    <ImageView
-        android:id="@+id/adPhoto"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/default_placeholder" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="?attr/titleColor"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adPhoto"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Some item title" />
+        <ImageView
+            android:id="@+id/adPhoto"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/default_placeholder" />
 
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
-        android:gravity="center_vertical"
-        android:textColor="?attr/subTextColor"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/place"
-        app:layout_constraintStart_toEndOf="@+id/adPhoto"
-        tools:text="10 byn" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="21sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/adPhoto"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Some item title" />
 
-    <TextView
-        android:id="@+id/place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
-        android:textColor="?attr/subTextColor"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adPhoto"
-        tools:text="Grodno" />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/adPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="10 byn" />
 
-    <TextView
-        android:id="@+id/views"
-        android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_marginBottom="8dp"
-        android:drawableStart="@drawable/ic_general_views"
-        android:drawablePadding="4dp"
-        android:gravity="center_vertical"
-        android:textColor="?attr/subTextColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="15" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/adPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/price"
+            tools:text="Grodno" />
+
+        <TextView
+            android:id="@+id/views"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@drawable/ic_general_views"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="15" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

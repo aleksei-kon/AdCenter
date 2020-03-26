@@ -42,6 +42,7 @@
         <activity
             android:name=".ui.activities.NewAdActivity"
             android:launchMode="singleTask" />
+        <activity android:name=".ui.activities.SearchActivity" />
     </application>
 
 </manifest>
