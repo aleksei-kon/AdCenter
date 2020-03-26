@@ -45,8 +45,8 @@ class RegisterActivity : BaseActivity() {
 
     private fun register() {
         when {
-            isFieldsEmpty -> longToast(getString(R.string.empty_fields_message))
-            !isPasswordsTheSame -> longToast(getString(R.string.passwords_not_match_message))
+            isFieldsEmpty -> longToast(getString(R.string.EMPTY_FIELDS_MESSAGE))
+            !isPasswordsTheSame -> longToast(getString(R.string.PASSWORDS_NOT_MATCH_MESSAGE))
             else -> {
                 val params = RegistrationRequestParams(
                     username = loginEditText.text.toString(),

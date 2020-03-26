@@ -4,20 +4,20 @@
     <item
         android:id="@+id/lastAdsItem"
         android:icon="@drawable/ic_menu_last_ads"
-        android:title="@string/last_ads_title" />
+        android:title="@string/LAST_ADS_TITLE" />
 
     <item
         android:id="@+id/myAdsItem"
         android:icon="@drawable/ic_menu_my_ads"
-        android:title="@string/my_ads_title" />
+        android:title="@string/MY_ADS_TITLE" />
 
     <item
         android:id="@+id/bookmarksItem"
         android:icon="@drawable/ic_menu_bookmarks"
-        android:title="@string/bookmarks_title" />
+        android:title="@string/BOOKMARKS_TITLE" />
 
     <item
         android:id="@+id/settingsItem"
         android:icon="@drawable/ic_menu_settings"
-        android:title="@string/settings_title" />
+        android:title="@string/SETTINGS_TITLE" />
 </menu>

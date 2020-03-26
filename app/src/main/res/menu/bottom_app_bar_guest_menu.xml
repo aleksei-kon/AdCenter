@@ -4,10 +4,10 @@
     <item
         android:id="@+id/lastAdsItem"
         android:icon="@drawable/ic_menu_last_ads"
-        android:title="@string/last_ads_title" />
+        android:title="@string/LAST_ADS_TITLE" />
 
     <item
         android:id="@+id/settingsItem"
         android:icon="@drawable/ic_menu_settings"
-        android:title="@string/settings_title" />
+        android:title="@string/SETTINGS_TITLE" />
 </menu>

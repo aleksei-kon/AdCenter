@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
             android:gravity="center_vertical"
-            android:text="@string/bottom_sheet_menu_title"
+            android:text="@string/BOTTOM_SHEET_MENU_TITLE"
             android:textColor="@color/primaryTextColor"
             android:textSize="20sp" />
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/dev_settings_title" />
+        app:title="@string/DEV_SETTINGS_TITLE" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -35,7 +35,7 @@
                     android:id="@+id/backendUrlEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/backend_url" />
+                    android:hint="@string/BACKEND_URL" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/save" />
+                android:text="@string/SAVE" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

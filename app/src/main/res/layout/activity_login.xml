@@ -38,7 +38,7 @@
             android:id="@+id/loginEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login_hint"
+            android:hint="@string/LOGIN_HINT"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,7 +54,7 @@
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password_hint"
+            android:hint="@string/PASSWORD_HINT"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,7 +65,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:text="@string/register_button"
+        android:text="@string/REGISTER_BUTTON"
         app:layout_constraintEnd_toStartOf="@+id/buttonLogin"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout" />
 
@@ -75,7 +75,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="@string/login_button"
+        android:text="@string/LOGIN_BUTTON"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

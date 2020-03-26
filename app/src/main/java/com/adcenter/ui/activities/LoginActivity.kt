@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity() {
 
     private fun login() {
         if (isFieldsEmpty) {
-            longToast(getString(R.string.empty_fields_message))
+            longToast(getString(R.string.EMPTY_FIELDS_MESSAGE))
         } else {
             val params = LoginRequestParams(
                 username = loginEditText.text.toString(),
