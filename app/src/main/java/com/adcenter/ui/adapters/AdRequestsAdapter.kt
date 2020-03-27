@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.layoutInflater
 import com.adcenter.extensions.setTextWithVisibility
 import com.adcenter.ui.diffutill.AdsDiffCallback
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.adapter_request_item.view.*
 
 class AdRequestsAdapter(
@@ -54,18 +54,13 @@ class AdRequestsAdapter(
                 itemView.apply {
                     title.setTextWithVisibility(item.title)
                     date.setTextWithVisibility(item.date)
+                    adPhoto.load(item.photoUrl) {
+                        placeholder(R.drawable.default_placeholder)
+                        error(R.drawable.default_placeholder)
+                        transformations(CircleCropTransformation())
+                    }
                     setOnClickListener { itemClickListener.invoke(item.id) }
                 }
-
-                val thumbnail = Glide.with(itemView.context)
-                    .load(R.drawable.default_placeholder)
-                    .apply(RequestOptions.circleCropTransform())
-
-                Glide.with(itemView.context)
-                    .load(item.photoUrl)
-                    .apply(RequestOptions.circleCropTransform())
-                    .thumbnail(thumbnail)
-                    .into(itemView.adPhoto)
             }
         }
     }

@@ -1,6 +1,9 @@
 package com.adcenter.ui.activities
 
+import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
+import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
+import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import androidx.lifecycle.Observer
 import com.adcenter.R
 import com.adcenter.config.IAppConfig
@@ -11,7 +14,6 @@ import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.adapters.DetailsPhotosAdapter
-import com.adcenter.ui.controllers.ShowHideButtonController
 import com.adcenter.utils.Constants.EMPTY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
@@ -28,17 +30,19 @@ class DetailsActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_details
 
-    private val viewModel by lazy {
-        provideViewModel(DetailsViewModel::class.java)
-    }
+    private val viewModel by lazy { provideViewModel(DetailsViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        window.apply {
+            clearFlags(FLAG_TRANSLUCENT_STATUS)
+            addFlags(FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            statusBarColor = TRANSPARENT
+        }
+
+        backButton.setOnClickListener { finish() }
+
         setViewModelObserver()
 
         if (intent.hasExtra(DETAILS_ID_KEY)) {
@@ -49,28 +53,25 @@ class DetailsActivity : BaseActivity() {
     }
 
     private fun showButtons() {
-        if (appConfig.isLoggedIn && !appConfig.isAdmin) {
+        /*if (appConfig.isLoggedIn && !appConfig.isAdmin) {
             addRemoveBookmarkButton.visible()
         }
 
         if (appConfig.isAdmin) {
             showHideButton.visible()
-        }
+        }*/
     }
 
     private fun hideButtons() {
-        addRemoveBookmarkButton.gone()
-        showHideButton.gone()
+        /*addRemoveBookmarkButton.gone()
+        showHideButton.gone()*/
     }
-
-    private fun load(detailsId: String) = viewModel.load(detailsId)
 
     private fun setViewModelObserver() {
         viewModel.detailsData.observe(this, Observer {
             when (it) {
                 is DetailsUiState.Loading -> {
                     progressBar.visible()
-                    appbar.gone()
                     content.gone()
                     noDataMessage.gone()
                     hideButtons()
@@ -78,14 +79,12 @@ class DetailsActivity : BaseActivity() {
                 is DetailsUiState.Success -> {
                     progressBar.gone()
                     noDataMessage.gone()
-                    appbar.visible()
                     content.visible()
                     showButtons()
                     bindModel(it.result)
                 }
                 is DetailsUiState.Error -> {
                     progressBar.gone()
-                    appbar.gone()
                     content.gone()
                     hideButtons()
                     noDataMessage.visible()
@@ -97,7 +96,7 @@ class DetailsActivity : BaseActivity() {
 
     private fun bindModel(model: DetailsModel) {
         setRecyclerItems(model.photos)
-        title = model.title
+        itemTitle.setTextWithVisibility(model.title)
         price.setTextWithVisibility(model.price)
         location.setTextWithVisibility(model.location)
         date.setTextWithVisibility(model.date)
@@ -105,14 +104,6 @@ class DetailsActivity : BaseActivity() {
         synopsis.setTextWithVisibility(model.synopsis)
         username.setTextWithVisibility(model.username)
         phone.setTextWithVisibility(model.phone)
-
-        showHideButton.setOnClickListener(
-            ShowHideButtonController(
-                button = showHideButton,
-                id = model.id,
-                isShown = model.isShown
-            )
-        )
     }
 
     private fun setRecyclerItems(items: List<String>) {
@@ -125,4 +116,6 @@ class DetailsActivity : BaseActivity() {
             adapter.setPhotos(items)
         }
     }
+
+    private fun load(detailsId: String) = viewModel.load(detailsId)
 }

@@ -14,5 +14,6 @@
         <attr name="iconColor" format="color" />
         <attr name="rippleMainColor" format="color" />
         <attr name="rippleLightColor" format="color" />
+        <attr name="buttonStrokeColor" format="color" />
     </declare-styleable>
 </resources>

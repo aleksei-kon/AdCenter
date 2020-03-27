@@ -22,6 +22,7 @@
         <item name="iconColor">@color/primaryTextColor</item>
         <item name="rippleMainColor">@color/secondaryColor</item>
         <item name="rippleLightColor">@color/secondaryLightColor</item>
+        <item name="buttonStrokeColor">@color/secondaryColor</item>
     </style>
 
     <!-- Application dark theme. -->
@@ -46,6 +47,7 @@
         <item name="iconColor">@color/primaryColor</item>
         <item name="rippleMainColor">@color/secondaryColor</item>
         <item name="rippleLightColor">@color/secondaryLightColor</item>
+        <item name="buttonStrokeColor">@color/secondaryColor</item>
     </style>
 
 </resources>
