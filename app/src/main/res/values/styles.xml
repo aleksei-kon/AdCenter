@@ -7,19 +7,45 @@
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/secondaryTextColor</item>
-        <item name="rippleColor">@color/secondaryLightColor</item>
         <item name="android:colorEdgeEffect">@color/secondaryLightColor</item>
+
+        <item name="bgColor">@color/primaryColor</item>
+        <item name="toolbarBgColor">@color/primaryColor</item>
+        <item name="bottomAppBarBgColor">@color/primaryColor</item>
+        <item name="bottomSheetBgColor">@color/primaryColor</item>
+        <item name="toolbarTitleColor">@color/primaryTextColor</item>
+        <item name="toolbarIconColor">@color/primaryTextColor</item>
+        <item name="textColor">@color/primaryTextColor</item>
+        <item name="subtextColor">@color/primarySubtextColor</item>
+        <item name="fabBgColor">@color/secondaryColor</item>
+        <item name="fabIconColor">@color/primaryTextColor</item>
+        <item name="iconColor">@color/primaryTextColor</item>
+        <item name="rippleMainColor">@color/secondaryColor</item>
+        <item name="rippleLightColor">@color/secondaryLightColor</item>
     </style>
 
     <!-- Application dark theme. -->
     <style name="AppDarkTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimary">@color/primaryTextColor</item>
+        <item name="colorPrimaryDark">@color/primaryTextColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/secondaryTextColor</item>
-        <item name="rippleColor">@color/secondaryLightColor</item>
         <item name="android:colorEdgeEffect">@color/secondaryLightColor</item>
+
+        <item name="bgColor">@color/primarySubtextColor</item>
+        <item name="toolbarBgColor">@color/primarySubtextColor</item>
+        <item name="bottomAppBarBgColor">@color/primarySubtextColor</item>
+        <item name="bottomSheetBgColor">@color/primarySubtextColor</item>
+        <item name="toolbarTitleColor">@color/primaryColor</item>
+        <item name="toolbarIconColor">@color/primaryColor</item>
+        <item name="textColor">@color/primaryColor</item>
+        <item name="subtextColor">@color/primaryColor</item>
+        <item name="fabBgColor">@color/secondaryColor</item>
+        <item name="fabIconColor">@color/primaryColor</item>
+        <item name="iconColor">@color/primaryColor</item>
+        <item name="rippleMainColor">@color/secondaryColor</item>
+        <item name="rippleLightColor">@color/secondaryLightColor</item>
     </style>
 
 </resources>

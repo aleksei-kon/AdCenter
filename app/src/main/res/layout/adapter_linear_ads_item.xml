@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:rippleColor="@color/secondaryLightColor"
     app:cardCornerRadius="8dp"
+    app:rippleColor="?attr/rippleLightColor"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:textColor="?attr/textColor"
             android:textSize="21sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/adPhoto"
@@ -41,6 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
+            android:textColor="?attr/textColor"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/adPhoto"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -53,6 +55,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center_vertical"
+            android:textColor="?attr/textColor"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/adPhoto"
             app:layout_constraintTop_toBottomOf="@+id/price"
@@ -67,8 +70,11 @@
             android:drawableStart="@drawable/ic_views"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
+            android:textColor="?attr/subtextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="15" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>

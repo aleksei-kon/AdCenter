@@ -8,7 +8,7 @@ import com.adcenter.R
 import com.adcenter.extensions.layoutInflater
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
-import kotlinx.android.synthetic.main.adapter_item_photo.view.*
+import kotlinx.android.synthetic.main.adapter_item_ad_photo.view.*
 
 class DetailsPhotosAdapter(private val context: Context) :
     SliderViewAdapter<DetailsPhotosAdapter.SliderAdapterVH>() {
@@ -25,7 +25,7 @@ class DetailsPhotosAdapter(private val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): SliderAdapterVH =
-        SliderAdapterVH(inflater.inflate(R.layout.adapter_item_photo, parent, false))
+        SliderAdapterVH(inflater.inflate(R.layout.adapter_item_ad_photo, parent, false))
 
     override fun onBindViewHolder(viewHolder: SliderAdapterVH, i: Int) {
         viewHolder.bind(photos[i])

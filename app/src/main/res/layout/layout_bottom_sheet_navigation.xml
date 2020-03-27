@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bottomSheetBgColor"
     android:orientation="vertical"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -20,7 +21,7 @@
             android:layout_gravity="start|center_vertical"
             android:gravity="center_vertical"
             android:text="@string/BOTTOM_SHEET_MENU_TITLE"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="?attr/toolbarTitleColor"
             android:textSize="20sp" />
 
         <ImageView
@@ -37,7 +38,7 @@
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#000" />
+        android:background="?attr/toolbarIconColor" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/navigationViewContainer"
@@ -46,8 +47,10 @@
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"
-            app:itemBackground="@drawable/default_ripple"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:itemBackground="@drawable/default_ripple" />
+
     </androidx.core.widget.NestedScrollView>
+
 </LinearLayout>

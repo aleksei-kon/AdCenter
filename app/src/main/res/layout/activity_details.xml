@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/bgColor">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="272dp"
+        android:background="?attr/toolbarBgColor"
         android:visibility="gone">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -32,7 +34,7 @@
                 app:sliderIndicatorMargin="8dp"
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="4dp"
-                app:sliderIndicatorRadius="2dp"/>
+                app:sliderIndicatorRadius="2dp" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -40,7 +42,9 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 tools:title="Title" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,8 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:backgroundTint="?attr/fabBgColor"
         android:src="@drawable/ic_button_add_to_bookmarks"
         android:visibility="gone"
+        app:borderWidth="0dp"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end" />
 
@@ -58,8 +64,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:backgroundTint="?attr/fabBgColor"
         android:src="@drawable/ic_button_show_ad"
         android:visibility="gone"
+        app:borderWidth="0dp"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end" />
 

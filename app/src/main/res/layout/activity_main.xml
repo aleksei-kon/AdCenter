@@ -5,6 +5,7 @@
     android:id="@+id/activityCoordinatorContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -12,7 +13,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primaryColor"
+        android:background="?attr/toolbarBgColor"
         app:liftOnScroll="true">
 
         <FrameLayout
@@ -28,7 +29,7 @@
                 android:layout_marginStart="16dp"
                 android:gravity="center_vertical"
                 android:text="@string/EMPTY"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="?attr/toolbarTitleColor"
                 android:textSize="20sp"
                 tools:text="Title" />
 
@@ -39,7 +40,9 @@
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="16dp"
                 app:srcCompat="@drawable/ic_search" />
+
         </FrameLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
@@ -59,7 +62,7 @@
         android:id="@+id/addFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/secondaryColor"
+        android:backgroundTint="?attr/fabBgColor"
         android:src="@drawable/ic_add_fab"
         app:borderWidth="0dp"
         app:layout_anchor="@id/bottomAppBar" />
@@ -69,6 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:backgroundTint="?attr/bottomAppBarBgColor"
         app:fabAlignmentMode="end"
         app:hideOnScroll="true"
         app:navigationIcon="@drawable/ic_hamburger" />

@@ -4,6 +4,7 @@
     android:id="@+id/activityCoordinatorContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -11,7 +12,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primaryColor"
+        android:background="?attr/toolbarBgColor"
         app:liftOnScroll="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +36,7 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="#FFFFFF"
+                android:background="?attr/toolbarBgColor"
                 android:hint="@string/SEARCH_HINT"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/sortButton"
@@ -52,7 +53,9 @@
                 app:layout_constraintStart_toEndOf="@+id/searchText"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_sort" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout

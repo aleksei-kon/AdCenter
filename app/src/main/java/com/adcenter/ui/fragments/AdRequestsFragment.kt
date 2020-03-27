@@ -17,6 +17,7 @@ import com.adcenter.features.adrequests.viewmodel.AdRequestsViewModel
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.IPageConfiguration
+import com.adcenter.ui.RecyclerViewMargin
 import com.adcenter.ui.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdRequestsAdapter
@@ -54,8 +55,14 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
 
     private fun initRecycler() {
         recyclerView.apply {
-            adapter = recyclerAdapter
+            addItemDecoration(
+                RecyclerViewMargin(
+                    margin = resources.getDimensionPixelSize(R.dimen.recycler_item_margin),
+                    columns = 1
+                )
+            )
             layoutManager = LinearLayoutManager(requireContext())
+            adapter = recyclerAdapter
         }
 
         setScrollListener()

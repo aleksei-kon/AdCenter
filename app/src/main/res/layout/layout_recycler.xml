@@ -23,7 +23,9 @@
                 layout="@layout/layout_empty_result"
                 android:gravity="center"
                 android:visibility="gone" />
+
         </FrameLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
@@ -34,4 +36,5 @@
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
         android:visibility="gone" />
+
 </FrameLayout>

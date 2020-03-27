@@ -29,6 +29,7 @@
             android:paddingStart="64dp"
             android:paddingEnd="64dp"
             android:text="@string/EMPTY_TITLE"
+            android:textColor="?attr/textColor"
             android:textSize="21sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,10 +45,13 @@
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
             android:text="@string/THIS_LIST_IS_EMPTY_TEXT"
+            android:textColor="?attr/subtextColor"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

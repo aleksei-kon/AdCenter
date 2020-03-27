@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="app_colors">
-        <attr name="test" format="color" />
+        <attr name="bgColor" format="color" />
+        <attr name="toolbarBgColor" format="color" />
+        <attr name="bottomAppBarBgColor" format="color" />
+        <attr name="bottomSheetBgColor" format="color" />
+        <attr name="toolbarTitleColor" format="color" />
+        <attr name="toolbarIconColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="subtextColor" format="color" />
+        <attr name="fabBgColor" format="color" />
+        <attr name="fabIconColor" format="color" />
+        <attr name="iconColor" format="color" />
+        <attr name="rippleMainColor" format="color" />
+        <attr name="rippleLightColor" format="color" />
     </declare-styleable>
 </resources>

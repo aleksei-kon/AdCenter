@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/adPhoto"
@@ -37,4 +36,5 @@
         app:layout_constraintStart_toEndOf="@+id/adPhoto"
         app:layout_constraintTop_toBottomOf="@id/title"
         tools:text="1.12.2018" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

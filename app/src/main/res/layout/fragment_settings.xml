@@ -20,13 +20,13 @@
             android:layout_height="wrap_content"
             android:drawablePadding="2dp"
             android:text="@string/LOGIN"
-            android:textColor="#000"
+            android:textColor="?attr/textColor"
             android:visibility="gone"
             app:icon="@drawable/ic_settings_login"
             app:iconGravity="textStart"
             app:iconPadding="8dp"
-            app:iconTint="#000"
-            app:rippleColor="@color/secondaryLightColor"
+            app:iconTint="?attr/iconColor"
+            app:rippleColor="?attr/rippleLightColor"
             tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton
@@ -36,13 +36,13 @@
             android:layout_height="wrap_content"
             android:drawablePadding="2dp"
             android:text="@string/LOGOUT"
-            android:textColor="#000"
+            android:textColor="?attr/textColor"
             android:visibility="gone"
             app:icon="@drawable/ic_settings_logout"
             app:iconGravity="textStart"
             app:iconPadding="8dp"
-            app:iconTint="#000"
-            app:rippleColor="@color/secondaryLightColor"
+            app:iconTint="?attr/iconColor"
+            app:rippleColor="?attr/rippleLightColor"
             tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton
@@ -52,12 +52,12 @@
             android:layout_height="wrap_content"
             android:drawablePadding="2dp"
             android:text="@string/SWITCH_THEME"
-            android:textColor="#000"
+            android:textColor="?attr/textColor"
             app:icon="@drawable/ic_settings_switch_theme"
             app:iconGravity="textStart"
             app:iconPadding="8dp"
-            app:iconTint="#000"
-            app:rippleColor="@color/secondaryLightColor" />
+            app:iconTint="?attr/iconColor"
+            app:rippleColor="?attr/rippleLightColor" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/devSettingsButton"
@@ -66,11 +66,13 @@
             android:layout_height="wrap_content"
             android:drawablePadding="2dp"
             android:text="@string/DEV_SETTINGS_BUTTON"
-            android:textColor="#000"
+            android:textColor="?attr/textColor"
             app:icon="@drawable/ic_settings_dev"
             app:iconGravity="textStart"
             app:iconPadding="8dp"
-            app:iconTint="#000"
-            app:rippleColor="@color/secondaryLightColor" />
+            app:iconTint="?attr/iconColor"
+            app:rippleColor="?attr/rippleLightColor" />
+
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>
