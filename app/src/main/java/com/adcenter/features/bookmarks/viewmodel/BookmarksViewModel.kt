@@ -3,7 +3,6 @@ package com.adcenter.features.bookmarks.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.async
 import com.adcenter.features.bookmarks.BookmarksConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.bookmarks.data.BookmarksModel
@@ -14,16 +13,10 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
-class BookmarksViewModel : ViewModel() {
-
-    @Inject
-    lateinit var bookmarksUseCase: IBookmarksUseCase
-
-    init {
-        Injector.plusBookmarksComponent().inject(this)
-    }
+class BookmarksViewModel(
+    private val useCase: IBookmarksUseCase
+) : ViewModel() {
 
     private var currentParams: BookmarksRequestParams = BookmarksRequestParams()
     private var bookmarksModel: BookmarksModel = BookmarksModel()
@@ -31,7 +24,7 @@ class BookmarksViewModel : ViewModel() {
 
     private val dataSource: Single<BookmarksModel>
         get() = Single.create {
-            when (val result = bookmarksUseCase.load(currentParams)) {
+            when (val result = useCase.load(currentParams)) {
                 is Result.Success -> it.onSuccess(updateModel(result.value))
                 is Result.Error -> it.onError(result.exception)
             }
@@ -102,6 +95,5 @@ class BookmarksViewModel : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
-        Injector.clearBookmarksComponent()
     }
 }

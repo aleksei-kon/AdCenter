@@ -1,13 +1,13 @@
 package com.adcenter.di.dagger.components
 
+import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.module.RegistrationModule
-import com.adcenter.di.dagger.scopes.RegistrationScope
-import com.adcenter.features.registration.viewmodel.RegistrationViewModel
+import com.adcenter.ui.activities.RegisterActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [RegistrationModule::class])
-@RegistrationScope
+@ActivityScope
 interface RegistrationComponent {
 
-    fun inject(viewModel: RegistrationViewModel)
+    fun inject(activity: RegisterActivity)
 }

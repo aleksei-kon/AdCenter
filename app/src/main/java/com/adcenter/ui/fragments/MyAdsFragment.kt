@@ -6,6 +6,7 @@ import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
@@ -38,11 +39,15 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
     @Inject
     lateinit var resourceProvider: IResourceProvider
 
-    init {
-        Injector.appComponent.inject(this)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by lazy { provideViewModel(MyAdsViewModel::class.java) }
+    private val viewModel by lazy {
+        provideViewModel(
+            MyAdsViewModel::class.java,
+            viewModelFactory
+        )
+    }
 
     private val recyclerAdapter = AdsAdapter(GRID, ::onItemClick)
 
@@ -55,6 +60,11 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Injector
+            .appComponent
+            .myAdsComponent()
+            .inject(this)
 
         initRecycler()
         initЫwipeRefresh()

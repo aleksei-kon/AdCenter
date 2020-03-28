@@ -14,16 +14,10 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
-class MyAdsViewModel : ViewModel() {
-
-    @Inject
-    lateinit var myAdsUseCase: IMyAdsUseCase
-
-    init {
-        Injector.plusMyAdsComponent().inject(this)
-    }
+class MyAdsViewModel(
+    private val useCase: IMyAdsUseCase
+) : ViewModel() {
 
     private var currentParams: MyAdsRequestParams = MyAdsRequestParams()
     private var myAdsModel: MyAdsModel = MyAdsModel()
@@ -31,7 +25,7 @@ class MyAdsViewModel : ViewModel() {
 
     private val dataSource: Single<MyAdsModel>
         get() = Single.create {
-            when (val result = myAdsUseCase.load(currentParams)) {
+            when (val result = useCase.load(currentParams)) {
                 is Result.Success -> it.onSuccess(updateModel(result.value))
                 is Result.Error -> it.onError(result.exception)
             }
@@ -102,6 +96,5 @@ class MyAdsViewModel : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
-        Injector.clearMyAdsComponent()
     }
 }

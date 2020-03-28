@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
 import com.adcenter.config.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
@@ -24,16 +25,25 @@ class DetailsActivity : BaseActivity() {
     @Inject
     lateinit var appConfig: IAppConfig
 
-    init {
-        Injector.appComponent.inject(this)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override val layout: Int = R.layout.activity_details
 
-    private val viewModel by lazy { provideViewModel(DetailsViewModel::class.java) }
+    private val viewModel by lazy {
+        provideViewModel(
+            DetailsViewModel::class.java,
+            viewModelFactory
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Injector
+            .appComponent
+            .detailsComponent()
+            .inject(this)
 
         window.apply {
             clearFlags(FLAG_TRANSLUCENT_STATUS)

@@ -1,13 +1,13 @@
 package com.adcenter.di.dagger.components
 
+import com.adcenter.di.dagger.annotations.FragmentScope
 import com.adcenter.di.dagger.module.BookmarksModule
-import com.adcenter.di.dagger.scopes.BookmarksScope
-import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
+import com.adcenter.ui.fragments.BookmarksFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [BookmarksModule::class])
-@BookmarksScope
+@FragmentScope
 interface BookmarksComponent {
 
-    fun inject(viewModel: BookmarksViewModel)
+    fun inject(fragment: BookmarksFragment)
 }

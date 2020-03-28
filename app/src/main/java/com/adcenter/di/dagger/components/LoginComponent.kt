@@ -1,13 +1,13 @@
 package com.adcenter.di.dagger.components
 
+import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.module.LoginModule
-import com.adcenter.di.dagger.scopes.LoginScope
-import com.adcenter.features.login.viewmodel.LoginViewModel
+import com.adcenter.ui.activities.LoginActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [LoginModule::class])
-@LoginScope
+@ActivityScope
 interface LoginComponent {
 
-    fun inject(viewModel: LoginViewModel)
+    fun inject(activity: LoginActivity)
 }

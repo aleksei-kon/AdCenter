@@ -3,23 +3,37 @@ package com.adcenter.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
 import com.adcenter.features.login.data.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 class LoginActivity : BaseActivity() {
 
     override val layout: Int = R.layout.activity_login
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val viewModel by lazy {
-        provideViewModel(LoginViewModel::class.java)
+        provideViewModel(
+            LoginViewModel::class.java,
+            viewModelFactory
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Injector
+            .appComponent
+            .loginComponent()
+            .inject(this)
 
         buttonRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))

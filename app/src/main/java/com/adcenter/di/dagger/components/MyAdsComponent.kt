@@ -1,13 +1,13 @@
 package com.adcenter.di.dagger.components
 
+import com.adcenter.di.dagger.annotations.FragmentScope
 import com.adcenter.di.dagger.module.MyAdsModule
-import com.adcenter.di.dagger.scopes.MyAdsScope
-import com.adcenter.features.myads.viewmodel.MyAdsViewModel
+import com.adcenter.ui.fragments.MyAdsFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MyAdsModule::class])
-@MyAdsScope
+@FragmentScope
 interface MyAdsComponent {
 
-    fun inject(viewModel: MyAdsViewModel)
+    fun inject(fragment: MyAdsFragment)
 }

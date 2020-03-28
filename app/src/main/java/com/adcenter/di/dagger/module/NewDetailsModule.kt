@@ -1,9 +1,12 @@
 package com.adcenter.di.dagger.module
 
+import android.content.Context
+import androidx.lifecycle.ViewModel
 import com.adcenter.api.IApi
 import com.adcenter.data.processors.NewDetailsProcessor
 import com.adcenter.data.processors.PhotoProcessor
-import com.adcenter.di.dagger.scopes.NewDetailsScope
+import com.adcenter.di.dagger.annotations.ActivityScope
+import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.newdetails.repository.INewDetailsRepository
 import com.adcenter.features.newdetails.repository.IPhotoRepository
 import com.adcenter.features.newdetails.repository.NewDetailsRepository
@@ -12,15 +15,17 @@ import com.adcenter.features.newdetails.usecase.INewDetailsUseCase
 import com.adcenter.features.newdetails.usecase.IUploadPhotoUseCase
 import com.adcenter.features.newdetails.usecase.NewDetailsUseCase
 import com.adcenter.features.newdetails.usecase.UploadPhotoUseCase
+import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoMap
 
 @Module
 class NewDetailsModule {
 
     @Provides
-    @NewDetailsScope
+    @ActivityScope
     fun provideNewDetailsRepository(
         processor: NewDetailsProcessor,
         gson: Gson,
@@ -29,7 +34,7 @@ class NewDetailsModule {
         NewDetailsRepository(processor, gson, api)
 
     @Provides
-    @NewDetailsScope
+    @ActivityScope
     fun providePhotoRepository(
         processor: PhotoProcessor,
         api: IApi
@@ -37,16 +42,26 @@ class NewDetailsModule {
         PhotoRepository(processor, api)
 
     @Provides
-    @NewDetailsScope
+    @ActivityScope
     fun provideNewDetailsUseCase(
         repository: INewDetailsRepository
     ): INewDetailsUseCase =
         NewDetailsUseCase(repository)
 
     @Provides
-    @NewDetailsScope
+    @ActivityScope
     fun provideUploadPhotoUseCase(
         repository: IPhotoRepository
     ): IUploadPhotoUseCase =
         UploadPhotoUseCase(repository)
+
+    @Provides
+    @IntoMap
+    @ActivityScope
+    @ViewModelKey(NewDetailsViewModel::class)
+    fun provideNewDetailsViewModel(
+        context: Context,
+        newDetailsUseCase: INewDetailsUseCase,
+        uploadPhotoUseCase: IUploadPhotoUseCase
+    ): ViewModel = NewDetailsViewModel(context, newDetailsUseCase, uploadPhotoUseCase)
 }

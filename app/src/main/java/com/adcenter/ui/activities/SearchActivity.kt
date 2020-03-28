@@ -6,9 +6,11 @@ import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.text.TextWatcher
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants
@@ -23,15 +25,24 @@ import com.adcenter.ui.adapters.ViewHolderType.ITEM
 import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
 import com.adcenter.utils.EmptyTextWatcher
 import kotlinx.android.synthetic.main.activity_search.*
+import javax.inject.Inject
 
 private const val SINGLE_COUNT = 1
 private const val LANDSCAPE_COUNT = 4
 
 class SearchActivity : OfflineActivity() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var recyclerAdapter: AdsAdapter
 
-    private val viewModel by lazy { provideViewModel(SearchViewModel::class.java) }
+    private val viewModel by lazy {
+        provideViewModel(
+            SearchViewModel::class.java,
+            viewModelFactory
+        )
+    }
 
     private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
@@ -45,6 +56,11 @@ class SearchActivity : OfflineActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Injector
+            .appComponent
+            .searchComponent()
+            .inject(this)
 
         backButton.setOnClickListener { finish() }
 

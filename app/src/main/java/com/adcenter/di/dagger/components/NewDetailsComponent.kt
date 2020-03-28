@@ -1,13 +1,13 @@
 package com.adcenter.di.dagger.components
 
+import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.module.NewDetailsModule
-import com.adcenter.di.dagger.scopes.NewDetailsScope
-import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
+import com.adcenter.ui.activities.NewAdActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [NewDetailsModule::class])
-@NewDetailsScope
+@ActivityScope
 interface NewDetailsComponent {
 
-    fun inject(viewModel: NewDetailsViewModel)
+    fun inject(activity: NewAdActivity)
 }

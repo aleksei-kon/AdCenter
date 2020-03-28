@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
@@ -29,13 +30,17 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
     @Inject
     lateinit var resourceProvider: IResourceProvider
 
-    init {
-        Injector.appComponent.inject(this)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val recyclerAdapter = AdRequestsAdapter(::onItemClick)
 
-    private val viewModel by lazy { provideViewModel(AdRequestsViewModel::class.java) }
+    private val viewModel by lazy {
+        provideViewModel(
+            AdRequestsViewModel::class.java,
+            viewModelFactory
+        )
+    }
 
     private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
@@ -46,6 +51,11 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Injector
+            .appComponent
+            .adRequestsComponent()
+            .inject(this)
 
         initRecycler()
         initSwipeRefresh()

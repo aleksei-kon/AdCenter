@@ -6,6 +6,7 @@ import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
@@ -39,13 +40,17 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
     @Inject
     lateinit var resourceProvider: IResourceProvider
 
-    init {
-        Injector.appComponent.inject(this)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var recyclerAdapter: AdsAdapter
 
-    private val viewModel by lazy { provideViewModel(LastAdsViewModel::class.java) }
+    private val viewModel by lazy {
+        provideViewModel(
+            LastAdsViewModel::class.java,
+            viewModelFactory
+        )
+    }
 
     private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
@@ -56,6 +61,11 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Injector
+            .appComponent
+            .lastAdsComponent()
+            .inject(this)
 
         initRecycler()
         initSwipeRefresh()

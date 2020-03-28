@@ -6,6 +6,7 @@ import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
@@ -38,13 +39,17 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
     @Inject
     lateinit var resourceProvider: IResourceProvider
 
-    init {
-        Injector.appComponent.inject(this)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val recyclerAdapter = AdsAdapter(GRID, ::onItemClick)
 
-    private val viewModel by lazy { provideViewModel(BookmarksViewModel::class.java) }
+    private val viewModel by lazy {
+        provideViewModel(
+            BookmarksViewModel::class.java,
+            viewModelFactory
+        )
+    }
 
     private val recyclerScrollListener = ScrollToEndListener { loadMore() }
 
@@ -55,6 +60,11 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Injector
+            .appComponent
+            .bookmarksComponent()
+            .inject(this)
 
         initRecycler()
         initSwipeRefresh()

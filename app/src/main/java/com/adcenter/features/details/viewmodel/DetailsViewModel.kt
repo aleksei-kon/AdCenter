@@ -13,16 +13,10 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
-class DetailsViewModel : ViewModel() {
-
-    @Inject
-    lateinit var detailsUseCase: IDetailsUseCase
-
-    init {
-        Injector.plusDetailsComponent().inject(this)
-    }
+class DetailsViewModel(
+    private val useCase: IDetailsUseCase
+) : ViewModel() {
 
     private var currentParams: DetailsRequestParams = DetailsRequestParams()
     private var detailsModel: DetailsModel? = null
@@ -30,7 +24,7 @@ class DetailsViewModel : ViewModel() {
 
     private val dataSource: Single<DetailsModel>
         get() = Single.create {
-            when (val result = detailsUseCase.load(currentParams)) {
+            when (val result = useCase.load(currentParams)) {
                 is Result.Success -> {
                     detailsModel = result.value
                     it.onSuccess(result.value)
@@ -85,6 +79,5 @@ class DetailsViewModel : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
-        Injector.clearDetailsComponent()
     }
 }

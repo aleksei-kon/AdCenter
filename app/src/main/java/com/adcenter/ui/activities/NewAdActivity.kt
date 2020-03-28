@@ -4,27 +4,41 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
 import com.adcenter.ui.adapters.NewPhotosAdapter
 import kotlinx.android.synthetic.main.activity_new_ad.*
+import javax.inject.Inject
 
 class NewAdActivity : BaseActivity() {
 
-    override val layout: Int = R.layout.activity_new_ad
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var adapter: NewPhotosAdapter
 
     private val viewModel by lazy {
-        provideViewModel(NewDetailsViewModel::class.java)
+        provideViewModel(
+            NewDetailsViewModel::class.java,
+            viewModelFactory
+        )
     }
+
+    override val layout: Int = R.layout.activity_new_ad
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Injector
+            .appComponent
+            .newDetailsComponent()
+            .inject(this)
 
         initToolbar()
         setViewModelObserver()

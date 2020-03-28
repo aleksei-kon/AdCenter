@@ -3,23 +3,37 @@ package com.adcenter.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
+import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
 import com.adcenter.features.registration.data.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.viewmodel.RegistrationViewModel
 import kotlinx.android.synthetic.main.activity_register.*
+import javax.inject.Inject
 
 class RegisterActivity : BaseActivity() {
 
-    override val layout: Int = R.layout.activity_register
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel by lazy {
-        provideViewModel(RegistrationViewModel::class.java)
+        provideViewModel(
+            RegistrationViewModel::class.java,
+            viewModelFactory
+        )
     }
+
+    override val layout: Int = R.layout.activity_register
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Injector
+            .appComponent
+            .registrationComponent()
+            .inject(this)
 
         buttonRegister.setOnClickListener {
             register()

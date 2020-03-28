@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.config.IAppConfig
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
 import com.adcenter.features.login.data.LoginRequestParams
@@ -14,19 +13,11 @@ import com.adcenter.utils.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
-class LoginViewModel() : ViewModel() {
-
-    @Inject
-    lateinit var loginUseCase: ILoginUseCase
-
-    @Inject
-    lateinit var appConfig: IAppConfig
-
-    init {
-        Injector.plusLoginComponent().inject(this)
-    }
+class LoginViewModel(
+    private val appConfig: IAppConfig,
+    private val loginUseCase: ILoginUseCase
+) : ViewModel() {
 
     private var loginModel: AppConfigInfo = AppConfigInfo()
     private var currentParams: LoginRequestParams = LoginRequestParams()
@@ -79,6 +70,5 @@ class LoginViewModel() : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
-        Injector.clearLoginComponent()
     }
 }

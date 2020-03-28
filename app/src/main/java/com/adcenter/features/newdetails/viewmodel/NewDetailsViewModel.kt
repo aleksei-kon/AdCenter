@@ -6,7 +6,6 @@ import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.async
 import com.adcenter.features.newdetails.data.NewDetailsModel
 import com.adcenter.features.newdetails.data.NewDetailsRequestParams
@@ -19,22 +18,12 @@ import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import java.io.File
-import javax.inject.Inject
 
-class NewDetailsViewModel() : ViewModel() {
-
-    @Inject
-    lateinit var context: Context
-
-    @Inject
-    lateinit var newDetailsUseCase: INewDetailsUseCase
-
-    @Inject
-    lateinit var uploadPhotoUseCase: IUploadPhotoUseCase
-
-    init {
-        Injector.plusNewDetailsComponent().inject(this)
-    }
+class NewDetailsViewModel(
+    private val context: Context,
+    private val newDetailsUseCase: INewDetailsUseCase,
+    private val uploadPhotoUseCase: IUploadPhotoUseCase
+) : ViewModel() {
 
     private var newDetailsModel: NewDetailsModel = NewDetailsModel()
     private var currentParams: NewDetailsRequestParams = NewDetailsRequestParams()
@@ -114,6 +103,5 @@ class NewDetailsViewModel() : ViewModel() {
         super.onCleared()
 
         disposable?.dispose()
-        Injector.clearNewDetailsComponent()
     }
 }

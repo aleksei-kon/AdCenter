@@ -1,13 +1,13 @@
 package com.adcenter.di.dagger.components
 
+import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.module.SearchModule
-import com.adcenter.di.dagger.scopes.SearchScope
-import com.adcenter.features.search.viewmodel.SearchViewModel
+import com.adcenter.ui.activities.SearchActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [SearchModule::class])
-@SearchScope
+@ActivityScope
 interface SearchComponent {
 
-    fun inject(viewModel: SearchViewModel)
+    fun inject(activity: SearchActivity)
 }
