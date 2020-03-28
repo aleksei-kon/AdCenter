@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.extensions.async
 import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
-import com.adcenter.features.lastads.data.LastAdsModel
-import com.adcenter.features.lastads.data.LastAdsRequestParams
+import com.adcenter.features.lastads.models.LastAdsModel
+import com.adcenter.features.lastads.models.LastAdsRequestParams
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 

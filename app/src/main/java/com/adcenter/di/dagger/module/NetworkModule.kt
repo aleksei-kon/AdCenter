@@ -1,8 +1,8 @@
 package com.adcenter.di.dagger.module
 
-import com.adcenter.api.Api
-import com.adcenter.api.IApi
-import com.adcenter.config.IAppConfig
+import com.adcenter.datasource.api.Api
+import com.adcenter.datasource.api.IApi
+import com.adcenter.appconfig.IAppConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

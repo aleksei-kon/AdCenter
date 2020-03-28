@@ -1,6 +1,6 @@
 package com.adcenter.features.search.uistate
 
-import com.adcenter.features.search.data.SearchModel
+import com.adcenter.features.search.models.SearchModel
 
 sealed class SearchUiState {
     object NewSearch : SearchUiState()

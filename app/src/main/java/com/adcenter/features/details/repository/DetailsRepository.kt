@@ -1,12 +1,12 @@
 package com.adcenter.features.details.repository
 
-import com.adcenter.api.IApi
-import com.adcenter.data.Callable
-import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.DetailsProcessor
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.Callable
+import com.adcenter.datasource.NetworkDataRequest
+import com.adcenter.datasource.processors.DetailsProcessor
 import com.adcenter.entities.view.DetailsModel
-import com.adcenter.features.details.data.DetailsRequestParams
-import com.adcenter.utils.Result
+import com.adcenter.features.details.models.DetailsRequestParams
+import com.adcenter.datasource.Result
 
 class DetailsRepository(
     private val processor: DetailsProcessor,

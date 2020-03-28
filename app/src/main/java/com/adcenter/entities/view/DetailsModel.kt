@@ -1,6 +1,6 @@
 package com.adcenter.entities.view
 
-import com.adcenter.utils.Constants.EMPTY
+import com.adcenter.extensions.Constants.EMPTY
 
 data class DetailsModel(
     val id: String = EMPTY,

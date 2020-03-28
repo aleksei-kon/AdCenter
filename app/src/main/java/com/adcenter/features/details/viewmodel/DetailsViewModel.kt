@@ -3,13 +3,12 @@ package com.adcenter.features.details.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.async
-import com.adcenter.features.details.data.DetailsRequestParams
+import com.adcenter.features.details.models.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.usecase.IDetailsUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

@@ -1,9 +1,9 @@
 package com.adcenter.features.adrequests.usecase
 
-import com.adcenter.features.adrequests.data.AdRequestsModel
-import com.adcenter.features.adrequests.data.AdRequestsParams
+import com.adcenter.features.adrequests.models.AdRequestsModel
+import com.adcenter.features.adrequests.models.AdRequestsParams
 import com.adcenter.features.adrequests.repository.IAdRequestsRepository
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 
 class AdRequestsUseCase(private val repository: IAdRequestsRepository) : IAdRequestsUseCase {
 

@@ -1,12 +1,12 @@
 package com.adcenter.features.bookmarks.repository
 
-import com.adcenter.api.IApi
-import com.adcenter.data.Callable
-import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.AdsDataProcessor
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.Callable
+import com.adcenter.datasource.NetworkDataRequest
+import com.adcenter.datasource.processors.AdsDataProcessor
 import com.adcenter.entities.view.AdItemModel
-import com.adcenter.features.bookmarks.data.BookmarksRequestParams
-import com.adcenter.utils.Result
+import com.adcenter.features.bookmarks.models.BookmarksRequestParams
+import com.adcenter.datasource.Result
 
 class BookmarksRepository(
     private val processor: AdsDataProcessor,

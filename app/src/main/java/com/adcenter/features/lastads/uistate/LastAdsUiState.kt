@@ -1,6 +1,6 @@
 package com.adcenter.features.lastads.uistate
 
-import com.adcenter.features.lastads.data.LastAdsModel
+import com.adcenter.features.lastads.models.LastAdsModel
 
 sealed class LastAdsUiState {
     object Loading : LastAdsUiState()

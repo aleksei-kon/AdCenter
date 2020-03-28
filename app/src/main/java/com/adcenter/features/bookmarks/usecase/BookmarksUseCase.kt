@@ -1,9 +1,9 @@
 package com.adcenter.features.bookmarks.usecase
 
-import com.adcenter.features.bookmarks.data.BookmarksModel
-import com.adcenter.features.bookmarks.data.BookmarksRequestParams
+import com.adcenter.features.bookmarks.models.BookmarksModel
+import com.adcenter.features.bookmarks.models.BookmarksRequestParams
 import com.adcenter.features.bookmarks.repository.IBookmarksRepository
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 
 class BookmarksUseCase(private val repository: IBookmarksRepository) : IBookmarksUseCase {
 

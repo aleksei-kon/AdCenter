@@ -1,10 +1,10 @@
 package com.adcenter.features.newdetails.repository
 
-import com.adcenter.api.IApi
-import com.adcenter.data.Callable
-import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.PhotoProcessor
-import com.adcenter.utils.Result
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.Callable
+import com.adcenter.datasource.NetworkDataRequest
+import com.adcenter.datasource.processors.PhotoProcessor
+import com.adcenter.datasource.Result
 import java.io.File
 
 class PhotoRepository(

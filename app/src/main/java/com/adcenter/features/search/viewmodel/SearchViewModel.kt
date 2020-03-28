@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.extensions.async
 import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
-import com.adcenter.features.search.data.SearchModel
-import com.adcenter.features.search.data.SearchRequestParams
+import com.adcenter.features.search.models.SearchModel
+import com.adcenter.features.search.models.SearchRequestParams
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.usecase.ISearchUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.extensions.async
 import com.adcenter.features.bookmarks.BookmarksConstants.FIRST_PAGE_NUMBER
-import com.adcenter.features.bookmarks.data.BookmarksModel
-import com.adcenter.features.bookmarks.data.BookmarksRequestParams
+import com.adcenter.features.bookmarks.models.BookmarksModel
+import com.adcenter.features.bookmarks.models.BookmarksRequestParams
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.usecase.IBookmarksUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

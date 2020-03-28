@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
-import com.adcenter.features.login.data.LoginRequestParams
+import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*

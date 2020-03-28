@@ -3,13 +3,13 @@ package com.adcenter.features.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.config.IAppConfig
+import com.adcenter.appconfig.IAppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
-import com.adcenter.features.registration.data.RegistrationRequestParams
+import com.adcenter.features.registration.models.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.usecase.IRegistrationUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

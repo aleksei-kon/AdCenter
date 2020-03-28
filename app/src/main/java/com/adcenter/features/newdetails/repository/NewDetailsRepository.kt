@@ -1,12 +1,12 @@
 package com.adcenter.features.newdetails.repository
 
-import com.adcenter.api.IApi
-import com.adcenter.data.Callable
-import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.NewDetailsProcessor
-import com.adcenter.features.newdetails.data.NewDetailsModel
-import com.adcenter.features.newdetails.data.NewDetailsRequestParams
-import com.adcenter.utils.Result
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.Callable
+import com.adcenter.datasource.NetworkDataRequest
+import com.adcenter.datasource.processors.NewDetailsProcessor
+import com.adcenter.features.newdetails.models.NewDetailsModel
+import com.adcenter.features.newdetails.models.NewDetailsRequestParams
+import com.adcenter.datasource.Result
 import com.google.gson.Gson
 
 class NewDetailsRepository(

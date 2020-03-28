@@ -17,15 +17,16 @@ import com.adcenter.features.adrequests.uistate.AdRequestsUiState
 import com.adcenter.features.adrequests.viewmodel.AdRequestsViewModel
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.RecyclerViewMargin
-import com.adcenter.ui.ScrollToEndListener
+import com.adcenter.ui.common.IPageConfiguration
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdRequestsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
 
-class AdRequestsFragment : BaseFragment(), IPageConfiguration {
+class AdRequestsFragment : BaseFragment(),
+    IPageConfiguration {
 
     @Inject
     lateinit var resourceProvider: IResourceProvider
@@ -42,7 +43,8 @@ class AdRequestsFragment : BaseFragment(), IPageConfiguration {
         )
     }
 
-    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
+    private val recyclerScrollListener =
+        ScrollToEndListener { loadMore() }
 
     override val layout: Int = R.layout.layout_recycler
 

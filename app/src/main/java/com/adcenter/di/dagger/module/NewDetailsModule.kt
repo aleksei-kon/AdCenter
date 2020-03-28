@@ -2,9 +2,9 @@ package com.adcenter.di.dagger.module
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.adcenter.api.IApi
-import com.adcenter.data.processors.NewDetailsProcessor
-import com.adcenter.data.processors.PhotoProcessor
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.processors.NewDetailsProcessor
+import com.adcenter.datasource.processors.PhotoProcessor
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.newdetails.repository.INewDetailsRepository

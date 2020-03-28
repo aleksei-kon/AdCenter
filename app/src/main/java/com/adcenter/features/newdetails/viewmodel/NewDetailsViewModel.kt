@@ -7,13 +7,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.extensions.async
-import com.adcenter.features.newdetails.data.NewDetailsModel
-import com.adcenter.features.newdetails.data.NewDetailsRequestParams
+import com.adcenter.features.newdetails.models.NewDetailsModel
+import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.usecase.INewDetailsUseCase
 import com.adcenter.features.newdetails.usecase.IUploadPhotoUseCase
-import com.adcenter.utils.Constants.EMPTY
-import com.adcenter.utils.Result
+import com.adcenter.extensions.Constants.EMPTY
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

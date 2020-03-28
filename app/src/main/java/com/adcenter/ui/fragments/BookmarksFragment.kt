@@ -19,9 +19,9 @@ import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.RecyclerViewMargin
-import com.adcenter.ui.ScrollToEndListener
+import com.adcenter.ui.common.IPageConfiguration
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType.GRID
@@ -34,7 +34,8 @@ private const val SINGLE_COUNT = 1
 private const val PORTRAIT_COUNT = 2
 private const val LANDSCAPE_COUNT = 4
 
-class BookmarksFragment : BaseFragment(), IPageConfiguration {
+class BookmarksFragment : BaseFragment(),
+    IPageConfiguration {
 
     @Inject
     lateinit var resourceProvider: IResourceProvider
@@ -51,7 +52,8 @@ class BookmarksFragment : BaseFragment(), IPageConfiguration {
         )
     }
 
-    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
+    private val recyclerScrollListener =
+        ScrollToEndListener { loadMore() }
 
     override val layout: Int = R.layout.layout_recycler
 

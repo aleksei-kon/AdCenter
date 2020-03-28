@@ -1,6 +1,6 @@
 package com.adcenter.features.adrequests.uistate
 
-import com.adcenter.features.adrequests.data.AdRequestsModel
+import com.adcenter.features.adrequests.models.AdRequestsModel
 
 sealed class AdRequestsUiState {
     object Loading : AdRequestsUiState()

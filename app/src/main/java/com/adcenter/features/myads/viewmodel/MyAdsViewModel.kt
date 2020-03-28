@@ -3,14 +3,13 @@ package com.adcenter.features.myads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.async
 import com.adcenter.features.myads.MyAdsConstants.FIRST_PAGE_NUMBER
-import com.adcenter.features.myads.data.MyAdsModel
-import com.adcenter.features.myads.data.MyAdsRequestParams
+import com.adcenter.features.myads.models.MyAdsModel
+import com.adcenter.features.myads.models.MyAdsRequestParams
 import com.adcenter.features.myads.uistate.MyAdsUiState
 import com.adcenter.features.myads.usecase.IMyAdsUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

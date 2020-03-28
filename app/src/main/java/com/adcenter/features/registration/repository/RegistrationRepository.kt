@@ -1,12 +1,12 @@
 package com.adcenter.features.registration.repository
 
-import com.adcenter.api.IApi
-import com.adcenter.data.Callable
-import com.adcenter.data.NetworkDataRequest
-import com.adcenter.data.processors.AppConfigProcessor
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.Callable
+import com.adcenter.datasource.NetworkDataRequest
+import com.adcenter.datasource.processors.AppConfigProcessor
 import com.adcenter.entities.view.AppConfigInfo
-import com.adcenter.features.registration.data.RegistrationRequestParams
-import com.adcenter.utils.Result
+import com.adcenter.features.registration.models.RegistrationRequestParams
+import com.adcenter.datasource.Result
 import com.google.gson.Gson
 
 class RegistrationRepository(

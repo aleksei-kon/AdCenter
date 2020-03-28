@@ -4,20 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.adcenter.R
-import com.adcenter.config.IAppConfig
+import com.adcenter.appconfig.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.theme.IThemeManager
-import com.adcenter.ui.IPageConfiguration
+import com.adcenter.ui.theme.IThemeManager
+import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.LoginActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 import javax.inject.Inject
 
-class SettingsFragment : BaseFragment(), IPageConfiguration {
+class SettingsFragment : BaseFragment(),
+    IPageConfiguration {
 
     @Inject
     lateinit var themeManager: IThemeManager

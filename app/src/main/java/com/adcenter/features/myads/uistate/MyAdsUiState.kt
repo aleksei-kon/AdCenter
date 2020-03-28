@@ -1,6 +1,6 @@
 package com.adcenter.features.myads.uistate
 
-import com.adcenter.features.myads.data.MyAdsModel
+import com.adcenter.features.myads.models.MyAdsModel
 
 sealed class MyAdsUiState {
     object Loading : MyAdsUiState()

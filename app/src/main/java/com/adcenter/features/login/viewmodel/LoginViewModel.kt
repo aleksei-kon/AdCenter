@@ -3,13 +3,13 @@ package com.adcenter.features.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.adcenter.config.IAppConfig
+import com.adcenter.appconfig.IAppConfig
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.async
-import com.adcenter.features.login.data.LoginRequestParams
+import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.usecase.ILoginUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

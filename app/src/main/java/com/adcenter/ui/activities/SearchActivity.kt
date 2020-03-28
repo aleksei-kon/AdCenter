@@ -16,14 +16,14 @@ import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.viewmodel.SearchViewModel
-import com.adcenter.ui.RecyclerViewMargin
-import com.adcenter.ui.ScrollToEndListener
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType
 import com.adcenter.ui.adapters.ItemType.LINEAR
 import com.adcenter.ui.adapters.ViewHolderType.ITEM
 import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
-import com.adcenter.utils.EmptyTextWatcher
+import com.adcenter.ui.common.EmptyTextWatcher
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
@@ -44,7 +44,8 @@ class SearchActivity : OfflineActivity() {
         )
     }
 
-    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
+    private val recyclerScrollListener =
+        ScrollToEndListener { loadMore() }
 
     private val textWatcher: TextWatcher = object : EmptyTextWatcher() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

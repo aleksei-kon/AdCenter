@@ -1,8 +1,8 @@
 package com.adcenter.features.myads.usecase
 
-import com.adcenter.features.myads.data.MyAdsModel
-import com.adcenter.features.myads.data.MyAdsRequestParams
-import com.adcenter.utils.Result
+import com.adcenter.features.myads.models.MyAdsModel
+import com.adcenter.features.myads.models.MyAdsRequestParams
+import com.adcenter.datasource.Result
 
 interface IMyAdsUseCase {
 

@@ -1,9 +1,9 @@
 package com.adcenter.features.registration.usecase
 
 import com.adcenter.entities.view.AppConfigInfo
-import com.adcenter.features.registration.data.RegistrationRequestParams
+import com.adcenter.features.registration.models.RegistrationRequestParams
 import com.adcenter.features.registration.repository.IRegistrationRepository
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 
 class RegistrationUseCase(private val repository: IRegistrationRepository) : IRegistrationUseCase {
 

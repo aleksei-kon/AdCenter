@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adcenter.R
-import com.adcenter.config.IAppConfig
+import com.adcenter.appconfig.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_bottom_sheet_navigation.*

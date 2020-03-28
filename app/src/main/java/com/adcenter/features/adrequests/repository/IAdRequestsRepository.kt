@@ -1,8 +1,8 @@
 package com.adcenter.features.adrequests.repository
 
 import com.adcenter.entities.view.AdItemModel
-import com.adcenter.features.adrequests.data.AdRequestsParams
-import com.adcenter.utils.Result
+import com.adcenter.features.adrequests.models.AdRequestsParams
+import com.adcenter.datasource.Result
 
 interface IAdRequestsRepository {
 

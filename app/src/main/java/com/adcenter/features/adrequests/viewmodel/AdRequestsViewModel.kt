@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.extensions.async
 import com.adcenter.features.adrequests.AdRequestsConstants.FIRST_PAGE_NUMBER
-import com.adcenter.features.adrequests.data.AdRequestsModel
-import com.adcenter.features.adrequests.data.AdRequestsParams
+import com.adcenter.features.adrequests.models.AdRequestsModel
+import com.adcenter.features.adrequests.models.AdRequestsParams
 import com.adcenter.features.adrequests.uistate.AdRequestsUiState
 import com.adcenter.features.adrequests.usecase.IAdRequestsUseCase
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

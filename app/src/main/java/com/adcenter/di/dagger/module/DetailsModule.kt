@@ -1,8 +1,8 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
-import com.adcenter.api.IApi
-import com.adcenter.data.processors.DetailsProcessor
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.processors.DetailsProcessor
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.details.repository.DetailsRepository

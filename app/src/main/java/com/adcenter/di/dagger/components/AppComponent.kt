@@ -1,6 +1,6 @@
 package com.adcenter.di.dagger.components
 
-import com.adcenter.data.NetworkDataRequest
+import com.adcenter.datasource.NetworkDataRequest
 import com.adcenter.di.dagger.module.*
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DevSettingsActivity

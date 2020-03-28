@@ -1,6 +1,6 @@
 package com.adcenter.features.newdetails.uistate
 
-import com.adcenter.features.newdetails.data.NewDetailsModel
+import com.adcenter.features.newdetails.models.NewDetailsModel
 
 sealed class NewDetailsUiState {
     object WaitLoading : NewDetailsUiState()

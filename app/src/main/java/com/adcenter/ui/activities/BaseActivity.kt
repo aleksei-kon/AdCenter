@@ -3,7 +3,7 @@ package com.adcenter.ui.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.adcenter.di.dagger.injector.Injector
-import com.adcenter.theme.IThemeManager
+import com.adcenter.ui.theme.IThemeManager
 import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {

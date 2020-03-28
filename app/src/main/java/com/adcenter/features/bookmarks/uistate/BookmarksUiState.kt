@@ -1,6 +1,6 @@
 package com.adcenter.features.bookmarks.uistate
 
-import com.adcenter.features.bookmarks.data.BookmarksModel
+import com.adcenter.features.bookmarks.models.BookmarksModel
 
 sealed class BookmarksUiState {
     object Loading : BookmarksUiState()

@@ -3,7 +3,7 @@ package com.adcenter.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.adcenter.config.IAppConfig
+import com.adcenter.appconfig.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
 import javax.inject.Inject
 

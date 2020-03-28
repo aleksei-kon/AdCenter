@@ -2,8 +2,8 @@ package com.adcenter.ui.activities
 
 import android.os.Bundle
 import com.adcenter.R
-import com.adcenter.config.IAppConfig
-import com.adcenter.config.IBackendUrlHolder
+import com.adcenter.appconfig.IAppConfig
+import com.adcenter.appconfig.IBackendUrlHolder
 import com.adcenter.di.dagger.injector.Injector
 import kotlinx.android.synthetic.main.activity_dev_settings.*
 import javax.inject.Inject

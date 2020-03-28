@@ -1,7 +1,7 @@
 package com.adcenter.di.dagger.module
 
-import com.adcenter.api.IApi
-import com.adcenter.data.processors.*
+import com.adcenter.datasource.api.IApi
+import com.adcenter.datasource.processors.*
 import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
 import dagger.Module

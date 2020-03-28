@@ -1,0 +1,18 @@
+package com.adcenter.appconfig
+
+import android.content.Context
+import android.content.SharedPreferences
+import com.adcenter.extensions.Constants.EMPTY
+
+private const val BACKEND_URL_PREFS = "BACKEND_URL_PREFS"
+private const val URL = "BACKEND_URL"
+
+class BackendUrlHolder(context: Context) : IBackendUrlHolder {
+
+    private val preferences: SharedPreferences =
+        context.getSharedPreferences(BACKEND_URL_PREFS, Context.MODE_PRIVATE)
+
+    override var url: String
+        get() = preferences.getString(URL, EMPTY) ?: EMPTY
+        set(value) = preferences.edit().putString(URL, value).apply()
+}

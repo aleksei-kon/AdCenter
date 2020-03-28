@@ -1,7 +1,7 @@
 package com.adcenter.features.newdetails.usecase
 
 import com.adcenter.features.newdetails.repository.IPhotoRepository
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 import java.io.File
 
 class UploadPhotoUseCase(private val repository: IPhotoRepository) : IUploadPhotoUseCase {

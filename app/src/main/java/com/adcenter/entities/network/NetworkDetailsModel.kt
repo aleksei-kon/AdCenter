@@ -1,6 +1,6 @@
 package com.adcenter.entities.network
 
-import com.adcenter.utils.Constants.EMPTY
+import com.adcenter.extensions.Constants.EMPTY
 
 data class NetworkDetailsModel(
     val id: String = EMPTY,

@@ -20,9 +20,9 @@ import com.adcenter.features.details.DetailsConstants
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.IPageConfiguration
-import com.adcenter.ui.RecyclerViewMargin
-import com.adcenter.ui.ScrollToEndListener
+import com.adcenter.ui.common.IPageConfiguration
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType.GRID
@@ -35,7 +35,8 @@ import javax.inject.Inject
 private const val SINGLE_COUNT = 1
 private const val LANDSCAPE_COUNT = 4
 
-class LastAdsFragment : BaseFragment(), IPageConfiguration {
+class LastAdsFragment : BaseFragment(),
+    IPageConfiguration {
 
     @Inject
     lateinit var resourceProvider: IResourceProvider
@@ -52,7 +53,8 @@ class LastAdsFragment : BaseFragment(), IPageConfiguration {
         )
     }
 
-    private val recyclerScrollListener = ScrollToEndListener { loadMore() }
+    private val recyclerScrollListener =
+        ScrollToEndListener { loadMore() }
 
     override val layout: Int = R.layout.layout_recycler
 

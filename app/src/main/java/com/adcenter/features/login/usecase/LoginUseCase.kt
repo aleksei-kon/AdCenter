@@ -1,9 +1,9 @@
 package com.adcenter.features.login.usecase
 
 import com.adcenter.entities.view.AppConfigInfo
-import com.adcenter.features.login.data.LoginRequestParams
+import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.repository.ILoginRepository
-import com.adcenter.utils.Result
+import com.adcenter.datasource.Result
 
 class LoginUseCase(private val repository: ILoginRepository) : ILoginUseCase {
 
