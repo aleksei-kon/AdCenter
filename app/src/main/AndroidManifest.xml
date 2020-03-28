@@ -16,15 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activities.MainActivity"
-            android:launchMode="singleTask">
+            android:name=".ui.activities.SplashActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.activities.DetailsActivity"
             android:launchMode="singleTask" />
@@ -42,7 +45,9 @@
         <activity
             android:name=".ui.activities.NewAdActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.activities.SearchActivity" />
+        <activity
+            android:name=".ui.activities.SearchActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

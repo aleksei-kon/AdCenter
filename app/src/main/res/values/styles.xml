@@ -50,4 +50,8 @@
         <item name="buttonStrokeColor">@color/secondaryColor</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+    </style>
+
 </resources>

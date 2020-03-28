@@ -1,4 +1,4 @@
-package com.adcenter.di.dagger
+package com.adcenter.di.dagger.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

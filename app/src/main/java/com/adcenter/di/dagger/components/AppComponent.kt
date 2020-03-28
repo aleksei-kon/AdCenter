@@ -1,11 +1,11 @@
 package com.adcenter.di.dagger.components
 
-import com.adcenter.app.App
 import com.adcenter.data.NetworkDataRequest
 import com.adcenter.di.dagger.module.*
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.MainActivity
+import com.adcenter.ui.activities.SplashActivity
 import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
 import com.adcenter.ui.fragments.SettingsFragment
 import dagger.Component
@@ -33,8 +33,7 @@ interface AppComponent {
     fun loginComponent(): LoginComponent
     fun registrationComponent(): RegistrationComponent
 
-    fun inject(app: App)
-
+    fun inject(activity: SplashActivity)
     fun inject(activity: BaseActivity)
     fun inject(activity: MainActivity)
     fun inject(activity: DevSettingsActivity)
