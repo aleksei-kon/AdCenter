@@ -1,5 +1,9 @@
 <resources>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
@@ -23,6 +27,8 @@
         <item name="rippleMainColor">@color/secondaryColor</item>
         <item name="rippleLightColor">@color/secondaryLightColor</item>
         <item name="buttonStrokeColor">@color/secondaryColor</item>
+        <item name="buttonOutlineTextColor">@color/secondaryColor</item>
+        <item name="buttonContainedTextColor">@color/primaryColor</item>
     </style>
 
     <!-- Application dark theme. -->
@@ -48,10 +54,52 @@
         <item name="rippleMainColor">@color/secondaryColor</item>
         <item name="rippleLightColor">@color/secondaryLightColor</item>
         <item name="buttonStrokeColor">@color/secondaryColor</item>
+        <item name="buttonOutlineTextColor">@color/secondaryColor</item>
+        <item name="buttonContainedTextColor">@color/primaryColor</item>
     </style>
 
-    <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+    <style name="ButtonOutline" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:maxHeight">40dp</item>
+        <item name="android:textColor">?attr/buttonOutlineTextColor</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="rippleColor">?attr/rippleLightColor</item>
+        <item name="strokeColor">?attr/buttonStrokeColor</item>
+    </style>
+
+    <style name="ButtonContained" parent="Widget.MaterialComponents.Button">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:maxHeight">40dp</item>
+        <item name="android:textColor">?attr/buttonContainedTextColor</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="rippleColor">?attr/rippleLightColor</item>
+        <item name="elevation">0dp</item>
+        <item name="backgroundTint">?attr/fabBgColor</item>
+    </style>
+
+    <style name="OutlineInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/grayColor</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="boxBackgroundColor">@null</item>
+        <item name="boxStrokeColor">@color/secondaryColor</item>
+        <item name="endIconTint">@color/secondaryColor</item>
+        <item name="hintTextColor">@color/secondaryColor</item>
+        <item name="passwordToggleTint">@color/secondaryColor</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
     </style>
 
 </resources>

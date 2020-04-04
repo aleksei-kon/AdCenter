@@ -15,5 +15,14 @@
         <attr name="rippleMainColor" format="color" />
         <attr name="rippleLightColor" format="color" />
         <attr name="buttonStrokeColor" format="color" />
+        <attr name="buttonContainedTextColor" format="color" />
+        <attr name="buttonOutlineTextColor" format="color" />
+
+        <attr name="inputTextColor" format="color" />
+        <attr name="inputHintColor" format="color" />
+        <attr name="inputBgColor" format="color" />
+        <attr name="inputStrokeColor" format="color" />
+        <attr name="inputIconColor" format="color" />
+
     </declare-styleable>
 </resources>

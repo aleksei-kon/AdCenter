@@ -10,15 +10,15 @@
     <FrameLayout
         android:id="@+id/menuTitleContainer"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:layout_height="?attr/actionBarSize">
 
         <TextView
             android:id="@+id/navigationMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
             android:text="@string/BOTTOM_SHEET_MENU_TITLE"
             android:textColor="?attr/toolbarTitleColor"
@@ -29,6 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:srcCompat="@drawable/ic_close" />
     </FrameLayout>
 
