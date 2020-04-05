@@ -1,8 +1,7 @@
 package com.adcenter.features.registration.models
 
-import com.adcenter.extensions.Constants
+import com.adcenter.entities.network.CredentialsModel
 
 class RegistrationRequestParams(
-    val username: String = Constants.EMPTY,
-    val password: String = Constants.EMPTY
+    val credentialsModel: CredentialsModel = CredentialsModel()
 )

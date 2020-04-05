@@ -6,16 +6,15 @@ import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.entities.Result
+import com.adcenter.extensions.Constants.EMPTY
 import com.adcenter.extensions.async
-import com.adcenter.features.newdetails.models.NewDetailsModel
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.usecase.INewDetailsUseCase
 import com.adcenter.features.newdetails.usecase.IUploadPhotoUseCase
-import com.adcenter.extensions.Constants.EMPTY
-import com.adcenter.datasource.Result
-import io.reactivex.Single
-import io.reactivex.SingleObserver
+import io.reactivex.Completable
+import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
 import java.io.File
 
@@ -25,13 +24,12 @@ class NewDetailsViewModel(
     private val uploadPhotoUseCase: IUploadPhotoUseCase
 ) : ViewModel() {
 
-    private var newDetailsModel: NewDetailsModel = NewDetailsModel()
     private var currentParams: NewDetailsRequestParams = NewDetailsRequestParams()
     private var photos = mutableListOf<Uri>()
     private var disposable: Disposable? = null
 
-    private val dataSource: Single<NewDetailsModel>
-        get() = Single.create {
+    private val dataSource: Completable
+        get() = Completable.create {
             val photoUrls: List<String> = photos.map { getFile(it) }.map {
                 when (val result = uploadPhotoUseCase.upload(it)) {
                     is Result.Success -> result.value
@@ -39,25 +37,24 @@ class NewDetailsViewModel(
                 }
             }
 
-            currentParams = currentParams.copy(photos = photoUrls)
+            currentParams = NewDetailsRequestParams(
+                newDetailsModel = currentParams.newDetailsModel.copy(photos = photoUrls)
+            )
 
             when (val result = newDetailsUseCase.upload(currentParams)) {
-                is Result.Success -> {
-                    newDetailsModel = result.value
-                    it.onSuccess(newDetailsModel)
-                }
+                is Result.Success -> it.onComplete()
                 is Result.Error -> it.onError(result.exception)
             }
         }
 
-    private val observer = object : SingleObserver<NewDetailsModel> {
+    private val observer = object : CompletableObserver {
 
         override fun onSubscribe(d: Disposable) {
             disposable = d
         }
 
-        override fun onSuccess(model: NewDetailsModel) {
-            newDetailsUiMutableState.value = NewDetailsUiState.Success(model)
+        override fun onComplete() {
+            newDetailsUiMutableState.value = NewDetailsUiState.Success
         }
 
         override fun onError(e: Throwable) {

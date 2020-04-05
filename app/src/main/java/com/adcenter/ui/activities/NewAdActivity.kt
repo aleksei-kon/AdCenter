@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
+import com.adcenter.entities.network.NewDetailsModel
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
@@ -82,11 +83,13 @@ class NewAdActivity : BaseActivity() {
 
     private fun upload() {
         val params = NewDetailsRequestParams(
-            title = titleEditText.text.toString(),
-            price = priceEditText.text.toString(),
-            location = placeEditText.text.toString(),
-            synopsis = synopsisEditText.text.toString(),
-            phone = phoneEditText.text.toString()
+            newDetailsModel = NewDetailsModel(
+                title = titleEditText.text.toString(),
+                price = priceEditText.text.toString(),
+                location = placeEditText.text.toString(),
+                synopsis = synopsisEditText.text.toString(),
+                phone = phoneEditText.text.toString()
+            )
         )
 
         viewModel.upload(params)

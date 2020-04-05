@@ -1,31 +1,34 @@
 package com.adcenter.features.newdetails.repository
 
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.Callable
-import com.adcenter.datasource.NetworkDataRequest
-import com.adcenter.datasource.processors.PhotoProcessor
-import com.adcenter.datasource.Result
+import com.adcenter.datasource.network.ImageService
+import com.adcenter.entities.Result
+import com.adcenter.extensions.Constants.Request.FILE_FORM_PARAM
+import com.adcenter.extensions.Constants.Request.MEDIA_TYPE_IMAGE
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 
 class PhotoRepository(
-    private val processor: PhotoProcessor,
-    private val api: IApi
+    private val imageService: ImageService
 ) : IPhotoRepository {
 
     override fun addPhoto(file: File): Result<String> =
         runCatching {
-            val request = NetworkDataRequest(
-                url = api.getImageUploadUrl(),
-                body = file
-            )
+            val response = imageService
+                .uploadImage(imageBodyFromFile(file))
+                .execute()
+                .body()
 
-            val response = Callable<String>()
-                .setRequest(request)
-                .setProcessor(processor)
-                .call()
-
-            Result.Success(response)
+            response?.let { Result.Success(it) } ?: throw IllegalArgumentException("Empty response")
         }.getOrElse {
             Result.Error(it)
         }
+
+    private fun imageBodyFromFile(file: File): MultipartBody.Part {
+        val requestFile = RequestBody.create(MediaType.parse(MEDIA_TYPE_IMAGE), file)
+        val imageBody = MultipartBody.Part.createFormData(FILE_FORM_PARAM, file.name, requestFile)
+
+        return imageBody
+    }
 }

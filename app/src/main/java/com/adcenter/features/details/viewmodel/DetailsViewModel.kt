@@ -8,7 +8,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.details.models.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.usecase.IDetailsUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

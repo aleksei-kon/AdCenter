@@ -10,6 +10,7 @@ import com.adcenter.extensions.*
 import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.viewmodel.LoginViewModel
+import com.adcenter.entities.network.CredentialsModel
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -56,8 +57,10 @@ class LoginActivity : BaseActivity() {
             longToast(getString(R.string.EMPTY_FIELDS_MESSAGE))
         } else {
             val params = LoginRequestParams(
-                username = loginEditText.text.toString(),
-                password = passwordEditText.text.toString()
+                credentialsModel = CredentialsModel(
+                    username = loginEditText.text.toString(),
+                    password = passwordEditText.text.toString()
+                )
             )
 
             viewModel.login(params)

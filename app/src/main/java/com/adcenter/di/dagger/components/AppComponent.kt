@@ -1,6 +1,5 @@
 package com.adcenter.di.dagger.components
 
-import com.adcenter.datasource.NetworkDataRequest
 import com.adcenter.di.dagger.module.*
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DevSettingsActivity
@@ -37,9 +36,6 @@ interface AppComponent {
     fun inject(activity: BaseActivity)
     fun inject(activity: MainActivity)
     fun inject(activity: DevSettingsActivity)
-
     fun inject(fragment: SettingsFragment)
     fun inject(fragment: NavigationBottomSheetDialogFragment)
-
-    fun inject(p: NetworkDataRequest)
 }

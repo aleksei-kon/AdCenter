@@ -7,11 +7,11 @@ class AppConfig(
     private val appConfigManager: IAppConfigManager
 ) : IAppConfig {
 
-    override var backendUrl: String
-        get() = urlHolder.url
-        set(value) {
-            urlHolder.url = value
-        }
+    override val backendUrl: String
+        get() = "http://${urlHolder.url}/"
+
+    override val imageUrl: String
+        get() = "${backendUrl}image/download/"
 
     override var token: String? = null
         private set

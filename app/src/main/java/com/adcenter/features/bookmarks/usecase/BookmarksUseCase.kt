@@ -3,7 +3,7 @@ package com.adcenter.features.bookmarks.usecase
 import com.adcenter.features.bookmarks.models.BookmarksModel
 import com.adcenter.features.bookmarks.models.BookmarksRequestParams
 import com.adcenter.features.bookmarks.repository.IBookmarksRepository
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 
 class BookmarksUseCase(private val repository: IBookmarksRepository) : IBookmarksUseCase {
 

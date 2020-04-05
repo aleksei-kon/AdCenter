@@ -2,9 +2,8 @@ package com.adcenter.di.dagger.module
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.processors.NewDetailsProcessor
-import com.adcenter.datasource.processors.PhotoProcessor
+import com.adcenter.datasource.network.AdvertService
+import com.adcenter.datasource.network.ImageService
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.newdetails.repository.INewDetailsRepository
@@ -16,7 +15,6 @@ import com.adcenter.features.newdetails.usecase.IUploadPhotoUseCase
 import com.adcenter.features.newdetails.usecase.NewDetailsUseCase
 import com.adcenter.features.newdetails.usecase.UploadPhotoUseCase
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -26,20 +24,13 @@ class NewDetailsModule {
 
     @Provides
     @ActivityScope
-    fun provideNewDetailsRepository(
-        processor: NewDetailsProcessor,
-        gson: Gson,
-        api: IApi
-    ): INewDetailsRepository =
-        NewDetailsRepository(processor, gson, api)
+    fun provideNewDetailsRepository(advertService: AdvertService): INewDetailsRepository =
+        NewDetailsRepository(advertService)
 
     @Provides
     @ActivityScope
-    fun providePhotoRepository(
-        processor: PhotoProcessor,
-        api: IApi
-    ): IPhotoRepository =
-        PhotoRepository(processor, api)
+    fun providePhotoRepository(imageService: ImageService): IPhotoRepository =
+        PhotoRepository(imageService)
 
     @Provides
     @ActivityScope

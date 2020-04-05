@@ -1,8 +1,8 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.processors.AdsDataProcessor
+import com.adcenter.datasource.mappers.AdsMapper
+import com.adcenter.datasource.network.AdvertService
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.search.repository.ISearchRepository
@@ -19,8 +19,10 @@ class SearchModule {
 
     @Provides
     @ActivityScope
-    fun provideSearchRepository(processor: AdsDataProcessor, api: IApi): ISearchRepository =
-        SearchRepository(processor, api)
+    fun provideSearchRepository(
+        advertService: AdvertService,
+        adsMapper: AdsMapper
+    ): ISearchRepository = SearchRepository(advertService, adsMapper)
 
     @Provides
     @ActivityScope

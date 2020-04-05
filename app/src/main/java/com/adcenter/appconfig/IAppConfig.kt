@@ -4,7 +4,9 @@ import com.adcenter.entities.view.AppConfigInfo
 
 interface IAppConfig {
 
-    var backendUrl: String
+    val backendUrl: String
+
+    val imageUrl: String
 
     val token: String?
 

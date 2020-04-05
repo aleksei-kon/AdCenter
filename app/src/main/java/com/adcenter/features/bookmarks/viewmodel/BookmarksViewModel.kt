@@ -9,7 +9,7 @@ import com.adcenter.features.bookmarks.models.BookmarksModel
 import com.adcenter.features.bookmarks.models.BookmarksRequestParams
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.usecase.IBookmarksUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

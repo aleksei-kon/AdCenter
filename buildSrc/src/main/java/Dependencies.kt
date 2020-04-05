@@ -24,9 +24,8 @@ object Libs {
         const val appcompat = "1.0.2"
         const val coreKtx = "1.0.2"
         const val constraintlayout = "1.1.3"
-        const val okhttp = "3.12.1"
-        const val gson = "2.8.5"
-        const val koin = "2.0.1"
+        //const val okhttp = "3.12.1"
+        //const val gson = "2.8.5"
         const val coil = "0.9.5"
         const val imageSlider = "1.3.2"
         const val coroutines = "1.3.2"
@@ -34,6 +33,8 @@ object Libs {
         const val rxAndroid = "2.1.1"
         const val dagger = "2.27"
         const val viewModel = "2.1.0"
+        const val retrofit2 = "2.8.1"
+        const val convertergson = "2.4.0"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -46,8 +47,8 @@ object Libs {
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
-    const val gson = "com.google.code.gson:gson:${Versions.gson}"
+    //const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+    //const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val coil = "io.coil-kt:coil:${Versions.coil}"
     const val imageSlider = "com.github.smarteist:autoimageslider:${Versions.imageSlider}"
     const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
@@ -59,4 +60,6 @@ object Libs {
     const val dagger = "com.google.dagger:dagger-android:${Versions.dagger}"
     const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
+    const val convertergson = "com.squareup.retrofit2:converter-gson:${Versions.convertergson}"
 }

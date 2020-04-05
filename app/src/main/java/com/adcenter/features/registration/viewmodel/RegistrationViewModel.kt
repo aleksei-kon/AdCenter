@@ -9,7 +9,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.registration.models.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.usecase.IRegistrationUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

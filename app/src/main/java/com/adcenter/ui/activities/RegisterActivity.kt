@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
+import com.adcenter.entities.network.CredentialsModel
 import com.adcenter.features.registration.models.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.viewmodel.RegistrationViewModel
@@ -63,8 +64,10 @@ class RegisterActivity : BaseActivity() {
             !isPasswordsTheSame -> longToast(getString(R.string.PASSWORDS_NOT_MATCH_MESSAGE))
             else -> {
                 val params = RegistrationRequestParams(
-                    username = loginEditText.text.toString(),
-                    password = passwordEditText.text.toString()
+                    credentialsModel = CredentialsModel(
+                        username = loginEditText.text.toString(),
+                        password = passwordEditText.text.toString()
+                    )
                 )
 
                 viewModel.register(params)

@@ -39,7 +39,6 @@ class DevSettingsActivity : BaseActivity() {
 
     private fun saveInfo() {
         urlHolder.url = backendUrlEditText.text.toString()
-        appConfig.backendUrl = backendUrlEditText.text.toString()
         finish()
     }
 }

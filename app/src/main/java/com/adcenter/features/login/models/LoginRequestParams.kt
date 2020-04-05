@@ -1,8 +1,7 @@
 package com.adcenter.features.login.models
 
-import com.adcenter.extensions.Constants.EMPTY
+import com.adcenter.entities.network.CredentialsModel
 
 data class LoginRequestParams(
-    val username: String = EMPTY,
-    val password: String = EMPTY
+    val credentialsModel: CredentialsModel = CredentialsModel()
 )

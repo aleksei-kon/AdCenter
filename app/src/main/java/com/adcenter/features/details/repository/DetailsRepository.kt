@@ -1,30 +1,24 @@
 package com.adcenter.features.details.repository
 
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.Callable
-import com.adcenter.datasource.NetworkDataRequest
-import com.adcenter.datasource.processors.DetailsProcessor
+import com.adcenter.entities.Result
+import com.adcenter.datasource.mappers.DetailsMapper
+import com.adcenter.datasource.network.AdvertService
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.features.details.models.DetailsRequestParams
-import com.adcenter.datasource.Result
 
 class DetailsRepository(
-    private val processor: DetailsProcessor,
-    private val api: IApi
+    private val advertService: AdvertService,
+    private val detailsMapper: DetailsMapper
 ) : IDetailsRepository {
 
     override fun getDetails(params: DetailsRequestParams): Result<DetailsModel> =
         runCatching {
-            val request = NetworkDataRequest(
-                api.getDetailsUrl(
-                    params
-                )
-            )
+            val networkResponse = advertService
+                .getDetails(params.detailsId)
+                .execute()
+                .body()
 
-            val response = Callable<DetailsModel>()
-                .setRequest(request)
-                .setProcessor(processor)
-                .call()
+            val response = detailsMapper.map(networkResponse)
 
             Result.Success(response)
         }.getOrElse {

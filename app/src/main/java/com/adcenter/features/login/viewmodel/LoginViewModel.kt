@@ -9,7 +9,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.usecase.ILoginUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

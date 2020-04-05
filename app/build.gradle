@@ -45,15 +45,14 @@ dependencies {
     implementation Libs.coreKtx
     implementation Libs.constraintlayout
 
-    implementation Libs.okhttp
-    implementation Libs.gson
     implementation Libs.kotlin
     implementation Libs.coil
     implementation Libs.imageSlider
-    implementation Libs.coroutinesCore
-    implementation Libs.coroutinesAndroid
 
     implementation Libs.viewModel
+
+    implementation Libs.retrofit2
+    implementation Libs.convertergson
 
     implementation Libs.rxJava
     implementation Libs.rxAndroid

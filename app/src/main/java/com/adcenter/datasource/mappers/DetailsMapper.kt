@@ -1,42 +1,23 @@
-package com.adcenter.datasource.processors
+package com.adcenter.datasource.mappers
 
-import com.adcenter.datasource.api.IApi
-import com.adcenter.entities.network.Message
+import com.adcenter.appconfig.IAppConfig
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
-import com.adcenter.resource.IResourceProvider
 import com.adcenter.extensions.Constants.DATE_FORMAT_PATTERN
 import com.adcenter.extensions.Constants.EMPTY
 import com.adcenter.extensions.Constants.MILLISECONDS_PREFIX
-import com.google.gson.Gson
+import com.adcenter.resource.IResourceProvider
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DetailsProcessor(
-    private val resourceProvider: IResourceProvider,
-    private val gson: Gson,
-    private val api: IApi
-) : IDataProcessor<DetailsModel> {
+class DetailsMapper(
+    private val appConfig: IAppConfig,
+    private val resourceProvider: IResourceProvider
+) {
 
-    private fun isMessage(response: String) {
-        val message: Message = try {
-            gson.fromJson<Message>(response, Message::class.java)
-        } catch (e: Exception) {
-            Message(null)
-        }
-
-        if (!message.message.isNullOrEmpty()) {
-            throw MissingFormatArgumentException(message.message)
-        }
-    }
-
-    override fun processResponse(response: String): DetailsModel {
-        isMessage(response)
-        val responseModel =
-            gson.fromJson<NetworkDetailsModel>(response, NetworkDetailsModel::class.java)
-
-        return processNetworkModel(responseModel)
-    }
+    fun map(networkModel: NetworkDetailsModel?): DetailsModel =
+        networkModel?.let { processNetworkModel(it) }
+            ?: throw IllegalArgumentException("Empty response")
 
     private fun processNetworkModel(networkModel: NetworkDetailsModel): DetailsModel {
         val id = networkModel.id
@@ -72,12 +53,12 @@ class DetailsProcessor(
         if (photos == null || photos.isEmpty()) {
             emptyList()
         } else {
-            photos.map { api.getImageDownloadUrl(it) }
+            photos.map { appConfig.imageUrl + it }
         }
 
     private fun getViews(views: Int?): String =
         if (views != null) {
-            "${resourceProvider.viewsPrefix}${views}"
+            "${resourceProvider.viewsPrefix}$views"
         } else {
             EMPTY
         }

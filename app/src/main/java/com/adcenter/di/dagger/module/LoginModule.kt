@@ -1,9 +1,9 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.api.IApi
 import com.adcenter.appconfig.IAppConfig
-import com.adcenter.datasource.processors.AppConfigProcessor
+import com.adcenter.datasource.mappers.AppConfigMapper
+import com.adcenter.datasource.network.AccountService
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.login.repository.ILoginRepository
@@ -11,7 +11,6 @@ import com.adcenter.features.login.repository.LoginRepository
 import com.adcenter.features.login.usecase.ILoginUseCase
 import com.adcenter.features.login.usecase.LoginUseCase
 import com.adcenter.features.login.viewmodel.LoginViewModel
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -22,11 +21,9 @@ class LoginModule {
     @Provides
     @ActivityScope
     fun provideLoginRepository(
-        processor: AppConfigProcessor,
-        gson: Gson,
-        api: IApi
-    ): ILoginRepository =
-        LoginRepository(processor, gson, api)
+        accountService: AccountService,
+        appConfigMapper: AppConfigMapper
+    ): ILoginRepository = LoginRepository(accountService, appConfigMapper)
 
     @Provides
     @ActivityScope

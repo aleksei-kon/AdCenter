@@ -9,7 +9,7 @@ import com.adcenter.features.myads.models.MyAdsModel
 import com.adcenter.features.myads.models.MyAdsRequestParams
 import com.adcenter.features.myads.uistate.MyAdsUiState
 import com.adcenter.features.myads.usecase.IMyAdsUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

@@ -1,6 +1,6 @@
 package com.adcenter.features.newdetails.repository
 
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import java.io.File
 
 interface IPhotoRepository {

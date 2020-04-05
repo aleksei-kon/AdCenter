@@ -1,31 +1,24 @@
 package com.adcenter.features.login.repository
 
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.Callable
-import com.adcenter.datasource.NetworkDataRequest
-import com.adcenter.datasource.processors.AppConfigProcessor
+import com.adcenter.entities.Result
+import com.adcenter.datasource.mappers.AppConfigMapper
+import com.adcenter.datasource.network.AccountService
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.features.login.models.LoginRequestParams
-import com.adcenter.datasource.Result
-import com.google.gson.Gson
 
 class LoginRepository(
-    private val processor: AppConfigProcessor,
-    private val gson: Gson,
-    private val api: IApi
+    private val accountService: AccountService,
+    private val appConfigMapper: AppConfigMapper
 ) : ILoginRepository {
 
     override fun login(params: LoginRequestParams): Result<AppConfigInfo> =
         runCatching {
-            val request = NetworkDataRequest(
-                url = api.getLoginUrl(),
-                body = gson.toJson(params)
-            )
+            val networkResponse = accountService
+                .loginUser(params.credentialsModel)
+                .execute()
+                .body()
 
-            val response = Callable<AppConfigInfo>()
-                .setRequest(request)
-                .setProcessor(processor)
-                .call()
+            val response = appConfigMapper.map(networkResponse)
 
             Result.Success(response)
         }.getOrElse {

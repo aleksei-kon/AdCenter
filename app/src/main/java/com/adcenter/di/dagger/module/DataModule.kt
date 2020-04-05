@@ -1,7 +1,9 @@
 package com.adcenter.di.dagger.module
 
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.processors.*
+import com.adcenter.appconfig.IAppConfig
+import com.adcenter.datasource.mappers.AdsMapper
+import com.adcenter.datasource.mappers.AppConfigMapper
+import com.adcenter.datasource.mappers.DetailsMapper
 import com.adcenter.resource.IResourceProvider
 import com.google.gson.Gson
 import dagger.Module
@@ -14,26 +16,14 @@ class DataModule {
     fun provideGson(): Gson = Gson()
 
     @Provides
-    fun provideAdsDataProcessor(gson: Gson, api: IApi): AdsDataProcessor =
-        AdsDataProcessor(gson, api)
+    fun provideAdsMapper(appConfig: IAppConfig): AdsMapper = AdsMapper(appConfig)
 
     @Provides
-    fun provideDetailsProcessor(
-        resourceProvider: IResourceProvider,
-        gson: Gson,
-        api: IApi
-    ): DetailsProcessor =
-        DetailsProcessor(resourceProvider, gson, api)
+    fun provideAppConfigMapper(): AppConfigMapper = AppConfigMapper()
 
     @Provides
-    fun provideAppConfigProcessor(gson: Gson): AppConfigProcessor =
-        AppConfigProcessor(gson)
-
-    @Provides
-    fun providePhotoProcessor(gson: Gson): PhotoProcessor =
-        PhotoProcessor(gson)
-
-    @Provides
-    fun provideNewDetailsProcessor(gson: Gson): NewDetailsProcessor =
-        NewDetailsProcessor(gson)
+    fun provideDetailsMapper(
+        appConfig: IAppConfig,
+        resourceProvider: IResourceProvider
+    ): DetailsMapper = DetailsMapper(appConfig, resourceProvider)
 }

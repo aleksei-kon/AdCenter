@@ -1,9 +1,9 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.api.IApi
 import com.adcenter.appconfig.IAppConfig
-import com.adcenter.datasource.processors.AppConfigProcessor
+import com.adcenter.datasource.mappers.AppConfigMapper
+import com.adcenter.datasource.network.AccountService
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.registration.repository.IRegistrationRepository
@@ -11,7 +11,6 @@ import com.adcenter.features.registration.repository.RegistrationRepository
 import com.adcenter.features.registration.usecase.IRegistrationUseCase
 import com.adcenter.features.registration.usecase.RegistrationUseCase
 import com.adcenter.features.registration.viewmodel.RegistrationViewModel
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -22,11 +21,9 @@ class RegistrationModule {
     @Provides
     @ActivityScope
     fun provideRegistrationRepository(
-        processor: AppConfigProcessor,
-        gson: Gson,
-        api: IApi
-    ): IRegistrationRepository =
-        RegistrationRepository(processor, gson, api)
+        accountService: AccountService,
+        appConfigMapper: AppConfigMapper
+    ): IRegistrationRepository = RegistrationRepository(accountService, appConfigMapper)
 
     @Provides
     @ActivityScope

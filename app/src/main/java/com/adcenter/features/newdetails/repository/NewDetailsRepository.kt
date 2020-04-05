@@ -1,31 +1,24 @@
 package com.adcenter.features.newdetails.repository
 
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.Callable
-import com.adcenter.datasource.NetworkDataRequest
-import com.adcenter.datasource.processors.NewDetailsProcessor
-import com.adcenter.features.newdetails.models.NewDetailsModel
+import com.adcenter.datasource.network.AdvertService
+import com.adcenter.entities.Result
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
-import com.adcenter.datasource.Result
-import com.google.gson.Gson
 
 class NewDetailsRepository(
-    private val processor: NewDetailsProcessor,
-    private val gson: Gson,
-    private val api: IApi
+    private val advertService: AdvertService
 ) : INewDetailsRepository {
 
-    override fun addDetails(params: NewDetailsRequestParams): Result<NewDetailsModel> =
+    override fun addDetails(params: NewDetailsRequestParams): Result<Nothing?> =
         runCatching {
-            val request = NetworkDataRequest(
-                url = api.getNewDetailsUrl(),
-                body = gson.toJson(params)
-            )
+            val networkResponse = advertService
+                .addNewDetails(params.newDetailsModel)
+                .execute()
 
-            val response = Callable<NewDetailsModel>()
-                .setRequest(request)
-                .setProcessor(processor)
-                .call()
+            val response = when (networkResponse.code()) {
+                200 -> null
+                201 -> null
+                else -> throw Exception("Not created")
+            }
 
             Result.Success(response)
         }.getOrElse {

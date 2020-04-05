@@ -9,7 +9,7 @@ import com.adcenter.features.lastads.models.LastAdsModel
 import com.adcenter.features.lastads.models.LastAdsRequestParams
 import com.adcenter.features.lastads.uistate.LastAdsUiState
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 

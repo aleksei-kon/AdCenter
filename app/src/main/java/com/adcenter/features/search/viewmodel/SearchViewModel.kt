@@ -9,7 +9,7 @@ import com.adcenter.features.search.models.SearchModel
 import com.adcenter.features.search.models.SearchRequestParams
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.usecase.ISearchUseCase
-import com.adcenter.datasource.Result
+import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

@@ -1,8 +1,8 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.api.IApi
-import com.adcenter.datasource.processors.AdsDataProcessor
+import com.adcenter.datasource.mappers.AdsMapper
+import com.adcenter.datasource.network.AdvertService
 import com.adcenter.di.dagger.annotations.FragmentScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.myads.repository.IMyAdsRepository
@@ -19,8 +19,10 @@ class MyAdsModule {
 
     @Provides
     @FragmentScope
-    fun provideMyAdsRepository(processor: AdsDataProcessor, api: IApi): IMyAdsRepository =
-        MyAdsRepository(processor, api)
+    fun provideMyAdsRepository(
+        advertService: AdvertService,
+        adsMapper: AdsMapper
+    ): IMyAdsRepository = MyAdsRepository(advertService, adsMapper)
 
     @Provides
     @FragmentScope

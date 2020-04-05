@@ -1,4 +1,4 @@
-package com.adcenter.datasource
+package com.adcenter.entities
 
 sealed class Result<out T> {
     class Success<out T>(val value: T) : Result<T>()
