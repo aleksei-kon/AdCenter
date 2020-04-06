@@ -3,12 +3,12 @@ package com.adcenter.features.details.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.entities.Result
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.async
 import com.adcenter.features.details.models.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
 import com.adcenter.features.details.usecase.IDetailsUseCase
-import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -24,10 +24,7 @@ class DetailsViewModel(
     private val dataSource: Single<DetailsModel>
         get() = Single.create {
             when (val result = useCase.load(currentParams)) {
-                is Result.Success -> {
-                    detailsModel = result.value
-                    it.onSuccess(result.value)
-                }
+                is Result.Success -> it.onSuccess(result.value)
                 is Result.Error -> it.onError(result.exception)
             }
         }
@@ -39,6 +36,7 @@ class DetailsViewModel(
         }
 
         override fun onSuccess(model: DetailsModel) {
+            detailsModel = model
             detailsUiMutableState.value = DetailsUiState.Success(model)
         }
 

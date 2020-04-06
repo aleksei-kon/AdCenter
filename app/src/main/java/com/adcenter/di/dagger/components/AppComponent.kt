@@ -1,10 +1,7 @@
 package com.adcenter.di.dagger.components
 
 import android.content.Context
-import com.adcenter.di.dagger.module.AppModule
-import com.adcenter.di.dagger.module.MappersModule
-import com.adcenter.di.dagger.module.NetworkModule
-import com.adcenter.di.dagger.module.ViewModelModule
+import com.adcenter.di.dagger.module.*
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.MainActivity
@@ -19,6 +16,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppModule::class,
+        DatabaseModule::class,
         NetworkModule::class,
         MappersModule::class,
         ViewModelModule::class

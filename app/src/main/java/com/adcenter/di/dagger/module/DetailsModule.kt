@@ -1,8 +1,9 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
+import com.adcenter.datasource.database.DetailsDao
 import com.adcenter.datasource.mappers.DetailsMapper
-import com.adcenter.datasource.network.AdvertService
+import com.adcenter.datasource.network.AdvertsService
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.details.repository.DetailsRepository
@@ -20,9 +21,10 @@ class DetailsModule {
     @Provides
     @ActivityScope
     fun provideDetailsRepository(
-        advertService: AdvertService,
+        advertsService: AdvertsService,
+        detailsDao: DetailsDao,
         detailsMapper: DetailsMapper
-    ): IDetailsRepository = DetailsRepository(advertService, detailsMapper)
+    ): IDetailsRepository = DetailsRepository(advertsService, detailsDao, detailsMapper)
 
     @Provides
     @ActivityScope

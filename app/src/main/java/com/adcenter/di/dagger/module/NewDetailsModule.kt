@@ -2,7 +2,7 @@ package com.adcenter.di.dagger.module
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.network.AdvertService
+import com.adcenter.datasource.network.AdvertsService
 import com.adcenter.datasource.network.ImageService
 import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
@@ -24,8 +24,8 @@ class NewDetailsModule {
 
     @Provides
     @ActivityScope
-    fun provideNewDetailsRepository(advertService: AdvertService): INewDetailsRepository =
-        NewDetailsRepository(advertService)
+    fun provideNewDetailsRepository(advertsService: AdvertsService): INewDetailsRepository =
+        NewDetailsRepository(advertsService)
 
     @Provides
     @ActivityScope

@@ -1,6 +1,7 @@
 package com.adcenter.datasource.mappers
 
 import com.adcenter.appconfig.IAppConfig
+import com.adcenter.entities.database.AdItemDbEntity
 import com.adcenter.entities.network.NetworkAdItem
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.Constants.DATE_FORMAT_PATTERN
@@ -9,14 +10,31 @@ import com.adcenter.extensions.Constants.MILLISECONDS_PREFIX
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AdsMapper(
+class AdvertsMapper(
     private val appConfig: IAppConfig
 ) {
 
-    fun map(items: List<NetworkAdItem>?): List<AdItemModel> =
-        items?.map { processNetworkModel(it) } ?: throw IllegalArgumentException("Empty response")
+    fun toAdItem(dbEntity: AdItemDbEntity): AdItemModel {
+        val id = dbEntity.id
+        val photoUrl = appConfig.imageUrl + dbEntity.photoUrl
+        val title = dbEntity.title ?: EMPTY
+        val price = dbEntity.price ?: EMPTY
+        val place = dbEntity.place ?: EMPTY
+        val date = formatUnixtime(dbEntity.date)
+        val views = (dbEntity.views ?: 0).toString()
 
-    private fun processNetworkModel(networkModel: NetworkAdItem): AdItemModel {
+        return AdItemModel(
+            id = id,
+            photoUrl = photoUrl,
+            title = title,
+            price = price,
+            place = place,
+            date = date,
+            views = views
+        )
+    }
+
+    fun toAdItem(networkModel: NetworkAdItem): AdItemModel {
         val id = networkModel.id
         val photoUrl = appConfig.imageUrl + networkModel.photoUrl
         val title = networkModel.title ?: EMPTY

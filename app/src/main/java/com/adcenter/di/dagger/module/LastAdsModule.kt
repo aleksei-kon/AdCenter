@@ -1,8 +1,9 @@
 package com.adcenter.di.dagger.module
 
 import androidx.lifecycle.ViewModel
-import com.adcenter.datasource.mappers.AdsMapper
-import com.adcenter.datasource.network.AdvertService
+import com.adcenter.datasource.database.AdvertsDao
+import com.adcenter.datasource.mappers.AdvertsMapper
+import com.adcenter.datasource.network.AdvertsService
 import com.adcenter.di.dagger.annotations.FragmentScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.lastads.repository.ILastAdsRepository
@@ -20,9 +21,10 @@ class LastAdsModule {
     @Provides
     @FragmentScope
     fun provideLastAdsRepository(
-        advertService: AdvertService,
-        adsMapper: AdsMapper
-    ): ILastAdsRepository = LastAdsRepository(advertService, adsMapper)
+        advertsService: AdvertsService,
+        advertsDao: AdvertsDao,
+        advertsMapper: AdvertsMapper
+    ): ILastAdsRepository = LastAdsRepository(advertsService, advertsDao, advertsMapper)
 
     @Provides
     @FragmentScope

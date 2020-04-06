@@ -60,4 +60,9 @@ dependencies {
     implementation Libs.dagger
     kapt Libs.daggerProcessor
     kapt Libs.daggerCompiler
+
+    implementation Libs.room
+    kapt Libs.roomProcessor
+    implementation Libs.roomKotlinExtensions
+    implementation Libs.roomRxJava
 }

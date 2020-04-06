@@ -3,13 +3,13 @@ package com.adcenter.features.search.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.entities.Result
 import com.adcenter.extensions.async
 import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.search.models.SearchModel
 import com.adcenter.features.search.models.SearchRequestParams
 import com.adcenter.features.search.uistate.SearchUiState
 import com.adcenter.features.search.usecase.ISearchUseCase
-import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -25,7 +25,7 @@ class SearchViewModel(
     private val dataSource: Single<SearchModel>
         get() = Single.create {
             when (val result = useCase.load(currentParams)) {
-                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Success -> it.onSuccess(result.value)
                 is Result.Error -> it.onError(result.exception)
             }
         }
@@ -37,6 +37,7 @@ class SearchViewModel(
         }
 
         override fun onSuccess(model: SearchModel) {
+            searchModel = model
             searchUiMutableState.value = SearchUiState.Success(model)
             currentParams = currentParams.copy(
                 pageNumber = currentParams.pageNumber + 1
@@ -84,14 +85,6 @@ class SearchViewModel(
         dataSource
             .async()
             .subscribe(observer)
-    }
-
-    private fun updateModel(
-        newResponse: SearchModel
-    ): SearchModel {
-        searchModel = SearchModel(searchModel.ads + newResponse.ads)
-
-        return searchModel
     }
 
     override fun onCleared() {

@@ -3,13 +3,13 @@ package com.adcenter.features.myads.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.entities.Result
 import com.adcenter.extensions.async
 import com.adcenter.features.myads.MyAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.myads.models.MyAdsModel
 import com.adcenter.features.myads.models.MyAdsRequestParams
 import com.adcenter.features.myads.uistate.MyAdsUiState
 import com.adcenter.features.myads.usecase.IMyAdsUseCase
-import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -25,7 +25,7 @@ class MyAdsViewModel(
     private val dataSource: Single<MyAdsModel>
         get() = Single.create {
             when (val result = useCase.load(currentParams)) {
-                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Success -> it.onSuccess(result.value)
                 is Result.Error -> it.onError(result.exception)
             }
         }
@@ -37,6 +37,7 @@ class MyAdsViewModel(
         }
 
         override fun onSuccess(model: MyAdsModel) {
+            myAdsModel = model
             myAdsUiMutableState.value = MyAdsUiState.Success(model)
             currentParams = currentParams.copy(
                 pageNumber = currentParams.pageNumber + 1
@@ -81,14 +82,6 @@ class MyAdsViewModel(
         dataSource
             .async()
             .subscribe(observer)
-    }
-
-    private fun updateModel(
-        newResponse: MyAdsModel
-    ): MyAdsModel {
-        myAdsModel = MyAdsModel(myAdsModel.ads + newResponse.ads)
-
-        return myAdsModel
     }
 
     override fun onCleared() {

@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface AdvertService {
+interface AdvertsService {
 
     @POST("advert/newDetails")
     fun addNewDetails(@Body body: NewDetailsModel): Call<Void>

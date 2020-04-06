@@ -3,13 +3,13 @@ package com.adcenter.features.bookmarks.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adcenter.entities.Result
 import com.adcenter.extensions.async
 import com.adcenter.features.bookmarks.BookmarksConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.bookmarks.models.BookmarksModel
 import com.adcenter.features.bookmarks.models.BookmarksRequestParams
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
 import com.adcenter.features.bookmarks.usecase.IBookmarksUseCase
-import com.adcenter.entities.Result
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -25,7 +25,7 @@ class BookmarksViewModel(
     private val dataSource: Single<BookmarksModel>
         get() = Single.create {
             when (val result = useCase.load(currentParams)) {
-                is Result.Success -> it.onSuccess(updateModel(result.value))
+                is Result.Success -> it.onSuccess(result.value)
                 is Result.Error -> it.onError(result.exception)
             }
         }
@@ -37,6 +37,7 @@ class BookmarksViewModel(
         }
 
         override fun onSuccess(model: BookmarksModel) {
+            bookmarksModel = model
             bookmarksUiMutableState.value = BookmarksUiState.Success(model)
             currentParams = currentParams.copy(
                 pageNumber = currentParams.pageNumber + 1
@@ -81,14 +82,6 @@ class BookmarksViewModel(
         dataSource
             .async()
             .subscribe(observer)
-    }
-
-    private fun updateModel(
-        newResponse: BookmarksModel
-    ): BookmarksModel {
-        bookmarksModel = BookmarksModel(bookmarksModel.ads + newResponse.ads)
-
-        return bookmarksModel
     }
 
     override fun onCleared() {

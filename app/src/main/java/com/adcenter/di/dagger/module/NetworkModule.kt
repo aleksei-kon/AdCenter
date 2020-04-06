@@ -2,7 +2,7 @@ package com.adcenter.di.dagger.module
 
 import com.adcenter.appconfig.IAppConfig
 import com.adcenter.datasource.network.AccountService
-import com.adcenter.datasource.network.AdvertService
+import com.adcenter.datasource.network.AdvertsService
 import com.adcenter.datasource.network.ImageService
 import com.adcenter.extensions.Constants.Request.AUTHORIZATION_HEADER
 import dagger.Module
@@ -43,8 +43,8 @@ class NetworkModule {
         retrofit.create(AccountService::class.java)
 
     @Provides
-    fun provideAdvertService(retrofit: Retrofit): AdvertService =
-        retrofit.create(AdvertService::class.java)
+    fun provideAdvertService(retrofit: Retrofit): AdvertsService =
+        retrofit.create(AdvertsService::class.java)
 
     @Provides
     fun provideImageService(retrofit: Retrofit): ImageService =

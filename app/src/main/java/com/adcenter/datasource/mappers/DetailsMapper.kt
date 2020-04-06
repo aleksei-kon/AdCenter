@@ -1,6 +1,7 @@
 package com.adcenter.datasource.mappers
 
 import com.adcenter.appconfig.IAppConfig
+import com.adcenter.entities.database.DetailsDbEntity
 import com.adcenter.entities.network.NetworkDetailsModel
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.Constants.DATE_FORMAT_PATTERN
@@ -15,11 +16,37 @@ class DetailsMapper(
     private val resourceProvider: IResourceProvider
 ) {
 
-    fun map(networkModel: NetworkDetailsModel?): DetailsModel =
-        networkModel?.let { processNetworkModel(it) }
-            ?: throw IllegalArgumentException("Empty response")
+    fun toDetailsModel(dbEntity: DetailsDbEntity): DetailsModel {
+        val id = dbEntity.id
+        val photos = getPhotosUrls(dbEntity.photos)
+        val isBookmark = dbEntity.isBookmark ?: false
+        val isShown = dbEntity.isShown ?: false
+        val title = dbEntity.title ?: EMPTY
+        val price = dbEntity.price ?: EMPTY
+        val location = dbEntity.location ?: EMPTY
+        val date = getDate(formatUnixtime(dbEntity.date))
+        val views = getViews(dbEntity.views)
+        val synopsis = dbEntity.synopsis ?: EMPTY
+        val username = dbEntity.username ?: EMPTY
+        val phone = dbEntity.phone ?: EMPTY
 
-    private fun processNetworkModel(networkModel: NetworkDetailsModel): DetailsModel {
+        return DetailsModel(
+            id = id,
+            photos = photos,
+            isBookmark = isBookmark,
+            isShown = isShown,
+            title = title,
+            price = price,
+            location = location,
+            date = date,
+            views = views,
+            synopsis = synopsis,
+            username = username,
+            phone = phone
+        )
+    }
+
+    fun toDetailsModel(networkModel: NetworkDetailsModel): DetailsModel {
         val id = networkModel.id
         val photos = getPhotosUrls(networkModel.photos)
         val isBookmark = networkModel.isBookmark ?: false
