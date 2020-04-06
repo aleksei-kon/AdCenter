@@ -3,7 +3,6 @@ package com.adcenter.di.dagger.injector
 import android.content.Context
 import com.adcenter.di.dagger.components.AppComponent
 import com.adcenter.di.dagger.components.DaggerAppComponent
-import com.adcenter.di.dagger.module.ContextModule
 
 object Injector {
 
@@ -15,7 +14,7 @@ object Injector {
     fun init(context: Context) {
         if (appComponentInstance == null) {
             appComponentInstance = DaggerAppComponent.builder()
-                .contextModule(ContextModule(context))
+                .context(context)
                 .build()
         }
     }

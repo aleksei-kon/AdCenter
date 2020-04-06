@@ -37,6 +37,5 @@ class RegistrationModule {
     fun provideRegistrationViewModel(
         appConfig: IAppConfig,
         useCase: IRegistrationUseCase
-    ): ViewModel =
-        RegistrationViewModel(appConfig, useCase)
+    ): ViewModel = RegistrationViewModel(appConfig, useCase)
 }

@@ -7,5 +7,5 @@ import com.adcenter.entities.Result
 
 class NewDetailsUseCase(private val repository: INewDetailsRepository) : INewDetailsUseCase {
 
-    override fun upload(params: NewDetailsRequestParams): Result<Nothing?> = repository.addDetails(params)
+    override fun upload(params: NewDetailsRequestParams): Result<Unit> = repository.addDetails(params)
 }

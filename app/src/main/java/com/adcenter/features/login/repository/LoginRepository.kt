@@ -1,8 +1,8 @@
 package com.adcenter.features.login.repository
 
-import com.adcenter.entities.Result
 import com.adcenter.datasource.mappers.AppConfigMapper
 import com.adcenter.datasource.network.AccountService
+import com.adcenter.entities.Result
 import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.features.login.models.LoginRequestParams
 

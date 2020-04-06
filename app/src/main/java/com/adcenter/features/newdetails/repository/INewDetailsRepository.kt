@@ -5,5 +5,5 @@ import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 
 interface INewDetailsRepository {
 
-    fun addDetails(params: NewDetailsRequestParams): Result<Nothing?>
+    fun addDetails(params: NewDetailsRequestParams): Result<Unit>
 }

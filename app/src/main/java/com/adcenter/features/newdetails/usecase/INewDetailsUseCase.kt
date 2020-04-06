@@ -5,5 +5,5 @@ import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 
 interface INewDetailsUseCase {
 
-    fun upload(params: NewDetailsRequestParams): Result<Nothing?>
+    fun upload(params: NewDetailsRequestParams): Result<Unit>
 }

@@ -10,6 +10,7 @@ import dagger.Provides
 class ViewModelModule {
 
     @Provides
-    fun provideViewModelFactory(map: Map<Class<out ViewModel>, @JvmSuppressWildcards ViewModel>): ViewModelProvider.Factory =
-        ViewModelFactory(map)
+    fun provideViewModelFactory(
+        map: Map<Class<out ViewModel>, @JvmSuppressWildcards ViewModel>
+    ): ViewModelProvider.Factory = ViewModelFactory(map)
 }

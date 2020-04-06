@@ -1,26 +1,39 @@
 package com.adcenter.di.dagger.components
 
-import com.adcenter.di.dagger.module.*
+import android.content.Context
+import com.adcenter.di.dagger.module.AppModule
+import com.adcenter.di.dagger.module.MappersModule
+import com.adcenter.di.dagger.module.NetworkModule
+import com.adcenter.di.dagger.module.ViewModelModule
 import com.adcenter.ui.activities.BaseActivity
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.MainActivity
 import com.adcenter.ui.activities.SplashActivity
 import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
 import com.adcenter.ui.fragments.SettingsFragment
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        ContextModule::class,
         AppModule::class,
         NetworkModule::class,
-        DataModule::class,
+        MappersModule::class,
         ViewModelModule::class
     ]
 )
 interface AppComponent {
+
+    @Component.Builder
+    interface Builder {
+
+        fun build(): AppComponent
+
+        @BindsInstance
+        fun context(context: Context): Builder
+    }
 
     fun lastAdsComponent(): LastAdsComponent
     fun adRequestsComponent(): AdRequestsComponent

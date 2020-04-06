@@ -5,7 +5,6 @@ import com.adcenter.datasource.network.AccountService
 import com.adcenter.datasource.network.AdvertService
 import com.adcenter.datasource.network.ImageService
 import com.adcenter.extensions.Constants.Request.AUTHORIZATION_HEADER
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -32,10 +31,10 @@ class NetworkModule {
             .build()
 
     @Provides
-    fun provideRetrofit(httpClient: OkHttpClient, appConfig: IAppConfig, gson: Gson): Retrofit =
+    fun provideRetrofit(httpClient: OkHttpClient, appConfig: IAppConfig): Retrofit =
         Retrofit.Builder()
             .baseUrl(appConfig.backendUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient)
             .build()
 

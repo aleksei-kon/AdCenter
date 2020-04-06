@@ -36,15 +36,13 @@ class NewDetailsModule {
     @ActivityScope
     fun provideNewDetailsUseCase(
         repository: INewDetailsRepository
-    ): INewDetailsUseCase =
-        NewDetailsUseCase(repository)
+    ): INewDetailsUseCase = NewDetailsUseCase(repository)
 
     @Provides
     @ActivityScope
     fun provideUploadPhotoUseCase(
         repository: IPhotoRepository
-    ): IUploadPhotoUseCase =
-        UploadPhotoUseCase(repository)
+    ): IUploadPhotoUseCase = UploadPhotoUseCase(repository)
 
     @Provides
     @IntoMap

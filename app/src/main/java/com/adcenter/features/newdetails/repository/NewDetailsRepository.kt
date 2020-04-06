@@ -8,15 +8,14 @@ class NewDetailsRepository(
     private val advertService: AdvertService
 ) : INewDetailsRepository {
 
-    override fun addDetails(params: NewDetailsRequestParams): Result<Nothing?> =
+    override fun addDetails(params: NewDetailsRequestParams): Result<Unit> =
         runCatching {
             val networkResponse = advertService
                 .addNewDetails(params.newDetailsModel)
                 .execute()
 
             val response = when (networkResponse.code()) {
-                200 -> null
-                201 -> null
+                200, 201 -> Unit
                 else -> throw Exception("Not created")
             }
 
