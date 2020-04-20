@@ -29,21 +29,28 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/backendUrlEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/BACKEND_URL" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/saveButton"
+                style="@style/OutlineInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:hint="@string/BACKEND_URL"
+                app:layout_constraintTop_toBottomOf="@+id/logo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/backendUrlEditText"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                style="@style/ButtonOutline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_button_add_to_bookmarks"
                 android:text="@string/SAVE" />
         </LinearLayout>
     </ScrollView>

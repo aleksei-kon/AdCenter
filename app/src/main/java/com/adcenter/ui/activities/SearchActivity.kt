@@ -26,6 +26,7 @@ import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
 import com.adcenter.ui.common.RecyclerViewMargin
 import com.adcenter.ui.common.ScrollToEndListener
 import com.jakewharton.rxbinding3.widget.textChanges
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_search.*
 import java.util.concurrent.TimeUnit
@@ -64,19 +65,19 @@ class SearchActivity : OfflineActivity() {
             .inject(this)
 
         backButton.setOnClickListener { finish() }
-
         initRecycler()
+        setViewModelObserver()
+        load()
 
         disposables.add(
             searchText.textChanges()
+                .skipInitialValue()
                 .debounce(750, TimeUnit.MILLISECONDS)
                 .filter { it.length > 1 }
                 .map { it.toString() }
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { load(it) }
         )
-
-        setViewModelObserver()
-        load()
     }
 
     override fun onDestroy() {

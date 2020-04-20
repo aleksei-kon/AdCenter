@@ -2,9 +2,11 @@ package com.adcenter.extensions
 
 object Constants {
 
+    const val SPACE = ' '
     const val EMPTY = ""
     const val DATE_FORMAT_PATTERN = "d MMM y H:mm"
     const val MILLISECONDS_PREFIX = 1000
+    val LOGIN_AND_PASSWORD_LENGTH_RANGE = 4..16
 
     object Request {
 

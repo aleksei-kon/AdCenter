@@ -6,11 +6,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
-import com.adcenter.extensions.*
 import com.adcenter.entities.network.CredentialsModel
+import com.adcenter.extensions.*
+import com.adcenter.extensions.Constants.LOGIN_AND_PASSWORD_LENGTH_RANGE
+import com.adcenter.extensions.Constants.SPACE
 import com.adcenter.features.registration.models.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.Error
-import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.uistate.Success
 import com.adcenter.features.registration.uistate.WaitRegistration
 import com.adcenter.features.registration.viewmodel.RegistrationViewModel
@@ -54,17 +55,29 @@ class RegisterActivity : BaseActivity() {
     }
 
     private val isFieldsEmpty: Boolean
-        get() = loginEditText.text.toString().isEmpty() ||
-                passwordEditText.text.toString().isEmpty() ||
-                passwordRepeatEditText.text.toString().isEmpty()
+        get() = loginEditText.isEmpty ||
+                passwordEditText.isEmpty ||
+                passwordRepeatEditText.isEmpty
 
-    private val isPasswordsTheSame: Boolean
-        get() = passwordEditText.text.toString().isEmpty() == passwordRepeatEditText.text.toString().isEmpty()
+    private val isHasWhitespace: Boolean
+        get() = loginEditText.contains(SPACE) ||
+                passwordEditText.contains(SPACE) ||
+                passwordRepeatEditText.contains(SPACE)
+
+    private val isCorrectLength: Boolean
+        get() = loginEditText.length in LOGIN_AND_PASSWORD_LENGTH_RANGE &&
+                passwordEditText.length in LOGIN_AND_PASSWORD_LENGTH_RANGE &&
+                passwordRepeatEditText.length in LOGIN_AND_PASSWORD_LENGTH_RANGE
+
+    private val isPasswordsNotMatch: Boolean
+        get() = passwordEditText.text.toString() != passwordRepeatEditText.text.toString()
 
     private fun register() {
         when {
             isFieldsEmpty -> longToast(getString(R.string.EMPTY_FIELDS_MESSAGE))
-            !isPasswordsTheSame -> longToast(getString(R.string.PASSWORDS_NOT_MATCH_MESSAGE))
+            isHasWhitespace -> longToast(getString(R.string.FIELDS_WITH_WHITESPACE_MESSAGE))
+            !isCorrectLength -> longToast(getString(R.string.INCORRECT_PASSWORD_RANGE_MESSAGE))
+            isPasswordsNotMatch -> longToast(getString(R.string.PASSWORDS_NOT_MATCH_MESSAGE))
             else -> {
                 val params = RegistrationRequestParams(
                     credentialsModel = CredentialsModel(

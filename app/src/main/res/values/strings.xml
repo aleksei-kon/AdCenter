@@ -9,6 +9,8 @@
     <string name="SETTINGS_TITLE">Settings</string>
     <string name="OFFLINE_MESSAGE">You have problem with internet connection. Check your mobile data or Wi-Fi.</string>
     <string name="EMPTY_FIELDS_MESSAGE">Some fields are empty</string>
+    <string name="FIELDS_WITH_WHITESPACE_MESSAGE">Some fields contains whitespace</string>
+    <string name="INCORRECT_PASSWORD_RANGE_MESSAGE">Login and password length should be in 4..16</string>
     <string name="PASSWORDS_NOT_MATCH_MESSAGE">Passwords not match</string>
     <string name="OFFLINE_TITLE">Connection problem</string>
     <string name="NO_RESULT_MESSAGE">No result found</string>

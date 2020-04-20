@@ -11,13 +11,15 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.isConnectedToNetwork
 import com.adcenter.extensions.visible
-import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
+import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 private const val CURRENT_MENU_ITEM_ID_KEY = "currentMenuItemId"
+private const val SEARCH_VISIBILITY = "searchVisibility"
+private const val FAB_VISIBILITY = "fabVisibility"
 
 class MainActivity : OfflineActivity() {
 
@@ -34,19 +36,28 @@ class MainActivity : OfflineActivity() {
 
     private val navigationBottomSheet = NavigationBottomSheetDialogFragment()
         .apply {
-        onItemSelectedListener = ::selectItem
-    }
+            onItemSelectedListener = ::selectItem
+        }
 
     override val layout: Int = R.layout.activity_main
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(CURRENT_MENU_ITEM_ID_KEY, currentMenuItemId)
+        outState.putInt(SEARCH_VISIBILITY, searchButton.visibility)
+        outState.putBoolean(FAB_VISIBILITY, addFab.isOrWillBeShown)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         currentMenuItemId = savedInstanceState.getInt(CURRENT_MENU_ITEM_ID_KEY)
+        searchButton.visibility = savedInstanceState.getInt(SEARCH_VISIBILITY)
+
+        if (savedInstanceState.getBoolean(FAB_VISIBILITY)) {
+            addFab.show()
+        } else {
+            addFab.hide()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +96,22 @@ class MainActivity : OfflineActivity() {
         }
     }
 
+    private fun showSearch() {
+        searchButton.visible()
+    }
+
+    private fun hideSearch() {
+        searchButton.gone()
+    }
+
+    private fun hideAdd() {
+        addFab.hide()
+    }
+
+    private fun showAdd() {
+        addFab.show()
+    }
+
     private fun initBottomAppBar() {
         setSupportActionBar(bottomAppBar)
         bottomAppBar.setNavigationOnClickListener {
@@ -120,6 +147,14 @@ class MainActivity : OfflineActivity() {
     }
 
     private fun setFragment(fragment: BaseFragment) {
+        if (fragment is SettingsFragment) {
+            hideAdd()
+            hideSearch()
+        } else {
+            showAdd()
+            showSearch()
+        }
+
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.content, fragment)

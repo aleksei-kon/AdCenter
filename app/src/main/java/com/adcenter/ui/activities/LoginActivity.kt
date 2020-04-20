@@ -6,14 +6,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
-import com.adcenter.extensions.*
-import com.adcenter.features.login.models.LoginRequestParams
-import com.adcenter.features.login.uistate.LoginUiState
-import com.adcenter.features.login.viewmodel.LoginViewModel
 import com.adcenter.entities.network.CredentialsModel
+import com.adcenter.extensions.*
+import com.adcenter.extensions.Constants.LOGIN_AND_PASSWORD_LENGTH_RANGE
+import com.adcenter.extensions.Constants.SPACE
+import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.Error
 import com.adcenter.features.login.uistate.Success
 import com.adcenter.features.login.uistate.WaitLogin
+import com.adcenter.features.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -52,21 +53,31 @@ class LoginActivity : BaseActivity() {
     }
 
     private val isFieldsEmpty: Boolean
-        get() = loginEditText.text.toString().isEmpty() ||
-                passwordEditText.text.toString().isEmpty()
+        get() = loginEditText.isEmpty ||
+                passwordEditText.isEmpty
+
+    private val isHasWhitespace: Boolean
+        get() = loginEditText.contains(SPACE) ||
+                passwordEditText.contains(SPACE)
+
+    private val isCorrectLength: Boolean
+        get() = loginEditText.length in LOGIN_AND_PASSWORD_LENGTH_RANGE &&
+                passwordEditText.length in LOGIN_AND_PASSWORD_LENGTH_RANGE
 
     private fun login() {
-        if (isFieldsEmpty) {
-            longToast(getString(R.string.EMPTY_FIELDS_MESSAGE))
-        } else {
-            val params = LoginRequestParams(
-                credentialsModel = CredentialsModel(
-                    username = loginEditText.text.toString(),
-                    password = passwordEditText.text.toString()
+        when {
+            isFieldsEmpty -> longToast(getString(R.string.EMPTY_FIELDS_MESSAGE))
+            isHasWhitespace -> longToast(getString(R.string.FIELDS_WITH_WHITESPACE_MESSAGE))
+            else -> {
+                val params = LoginRequestParams(
+                    credentialsModel = CredentialsModel(
+                        username = loginEditText.text.toString(),
+                        password = passwordEditText.text.toString()
+                    )
                 )
-            )
 
-            viewModel.login(params)
+                viewModel.login(params)
+            }
         }
     }
 
