@@ -11,11 +11,13 @@ import com.adcenter.appconfig.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.*
+import com.adcenter.extensions.Constants.EMPTY
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
-import com.adcenter.features.details.uistate.DetailsUiState
+import com.adcenter.features.details.uistate.Error
+import com.adcenter.features.details.uistate.Loading
+import com.adcenter.features.details.uistate.Success
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.adapters.DetailsPhotosAdapter
-import com.adcenter.extensions.Constants.EMPTY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
 import javax.inject.Inject
@@ -80,20 +82,20 @@ class DetailsActivity : BaseActivity() {
     private fun setViewModelObserver() {
         viewModel.detailsData.observe(this, Observer {
             when (it) {
-                is DetailsUiState.Loading -> {
+                is Loading -> {
                     progressBar.visible()
                     content.gone()
                     noDataMessage.gone()
                     hideButtons()
                 }
-                is DetailsUiState.Success -> {
+                is Success -> {
                     progressBar.gone()
                     noDataMessage.gone()
                     content.visible()
                     showButtons()
                     bindModel(it.result)
                 }
-                is DetailsUiState.Error -> {
+                is Error -> {
                     progressBar.gone()
                     content.gone()
                     hideButtons()

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
-import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,17 +13,22 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants
-import com.adcenter.features.search.uistate.SearchUiState
+import com.adcenter.features.search.uistate.Error
+import com.adcenter.features.search.uistate.NewSearch
+import com.adcenter.features.search.uistate.Pagination
+import com.adcenter.features.search.uistate.Success
 import com.adcenter.features.search.viewmodel.SearchViewModel
-import com.adcenter.ui.common.RecyclerViewMargin
-import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType
 import com.adcenter.ui.adapters.ItemType.LINEAR
 import com.adcenter.ui.adapters.ViewHolderType.ITEM
 import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
-import com.adcenter.ui.common.EmptyTextWatcher
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
+import com.jakewharton.rxbinding3.widget.textChanges
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_search.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 private const val SINGLE_COUNT = 1
@@ -47,11 +51,7 @@ class SearchActivity : OfflineActivity() {
     private val recyclerScrollListener =
         ScrollToEndListener { loadMore() }
 
-    private val textWatcher: TextWatcher = object : EmptyTextWatcher() {
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            load(searchText.text.toString())
-        }
-    }
+    private val disposables = CompositeDisposable()
 
     override val layout: Int = R.layout.activity_search
 
@@ -66,13 +66,21 @@ class SearchActivity : OfflineActivity() {
         backButton.setOnClickListener { finish() }
 
         initRecycler()
-        searchText.addTextChangedListener(textWatcher)
+
+        disposables.add(
+            searchText.textChanges()
+                .debounce(750, TimeUnit.MILLISECONDS)
+                .filter { it.length > 1 }
+                .map { it.toString() }
+                .subscribe { load(it) }
+        )
+
         setViewModelObserver()
         load()
     }
 
     override fun onDestroy() {
-        searchText.removeTextChangedListener(textWatcher)
+        disposables.clear()
 
         super.onDestroy()
     }
@@ -130,16 +138,16 @@ class SearchActivity : OfflineActivity() {
     private fun setViewModelObserver() {
         viewModel.searchData.observe(this, Observer {
             when (it) {
-                is SearchUiState.NewSearch -> {
+                is NewSearch -> {
                     noDataMessage.gone()
                     recyclerView.visible()
                     setRecyclerItems(emptyList())
                     recyclerAdapter.showPagination()
                 }
-                is SearchUiState.Pagination -> {
+                is Pagination -> {
                     recyclerAdapter.showPagination()
                 }
-                is SearchUiState.Success -> {
+                is Success -> {
                     recyclerAdapter.hidePagination()
 
                     if (it.result.ads.isEmpty()) {
@@ -153,7 +161,7 @@ class SearchActivity : OfflineActivity() {
                     setRecyclerItems(it.result.ads)
                     setScrollListener()
                 }
-                is SearchUiState.Error -> {
+                is Error -> {
                     recyclerAdapter.hidePagination()
 
                     if (recyclerAdapter.isEmpty()) {

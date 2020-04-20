@@ -8,7 +8,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.bookmarks.BookmarksConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.bookmarks.models.BookmarksModel
 import com.adcenter.features.bookmarks.models.BookmarksRequestParams
-import com.adcenter.features.bookmarks.uistate.BookmarksUiState
+import com.adcenter.features.bookmarks.uistate.*
 import com.adcenter.features.bookmarks.usecase.IBookmarksUseCase
 import io.reactivex.Single
 import io.reactivex.SingleObserver
@@ -38,14 +38,14 @@ class BookmarksViewModel(
 
         override fun onSuccess(model: BookmarksModel) {
             bookmarksModel = model
-            bookmarksUiMutableState.value = BookmarksUiState.Success(model)
+            bookmarksUiMutableState.value = Success(model)
             currentParams = currentParams.copy(
                 pageNumber = currentParams.pageNumber + 1
             )
         }
 
         override fun onError(e: Throwable) {
-            bookmarksUiMutableState.value = BookmarksUiState.Error(e)
+            bookmarksUiMutableState.value = Error(e)
         }
     }
 
@@ -56,15 +56,15 @@ class BookmarksViewModel(
 
     fun load() {
         if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
-            bookmarksUiMutableState.value = BookmarksUiState.Loading
+            bookmarksUiMutableState.value = Loading
             loadModel()
         } else {
-            bookmarksUiMutableState.value = BookmarksUiState.Success(bookmarksModel)
+            bookmarksUiMutableState.value = Success(bookmarksModel)
         }
     }
 
     fun loadMore() {
-        bookmarksUiMutableState.value = BookmarksUiState.Pagination
+        bookmarksUiMutableState.value = Pagination
         loadModel()
     }
 

@@ -11,7 +11,10 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
 import com.adcenter.entities.network.NewDetailsModel
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
+import com.adcenter.features.newdetails.uistate.Error
 import com.adcenter.features.newdetails.uistate.NewDetailsUiState
+import com.adcenter.features.newdetails.uistate.Success
+import com.adcenter.features.newdetails.uistate.WaitLoading
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
 import com.adcenter.ui.adapters.NewPhotosAdapter
 import kotlinx.android.synthetic.main.activity_new_ad.*
@@ -98,16 +101,16 @@ class NewAdActivity : BaseActivity() {
     private fun setViewModelObserver() {
         viewModel.newDetailsData.observe(this, Observer {
             when (it) {
-                is NewDetailsUiState.WaitLoading -> {
+                is WaitLoading -> {
                     viewLayout.setChildsEnabled(false)
                     progressBar.visible()
                 }
-                is NewDetailsUiState.Success -> {
+                is Success -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
                     finish()
                 }
-                is NewDetailsUiState.Error -> {
+                is Error -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
                     it.throwable.message?.let { message -> longToast(message) }

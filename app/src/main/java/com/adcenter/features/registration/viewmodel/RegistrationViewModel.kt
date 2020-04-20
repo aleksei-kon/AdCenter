@@ -10,6 +10,9 @@ import com.adcenter.features.registration.models.RegistrationRequestParams
 import com.adcenter.features.registration.uistate.RegistrationUiState
 import com.adcenter.features.registration.usecase.IRegistrationUseCase
 import com.adcenter.entities.Result
+import com.adcenter.features.registration.uistate.Error
+import com.adcenter.features.registration.uistate.Success
+import com.adcenter.features.registration.uistate.WaitRegistration
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -42,11 +45,11 @@ class RegistrationViewModel(
         }
 
         override fun onSuccess(model: AppConfigInfo) {
-            registrationUiMutableState.value = RegistrationUiState.Success(model)
+            registrationUiMutableState.value = Success(model)
         }
 
         override fun onError(e: Throwable) {
-            registrationUiMutableState.value = RegistrationUiState.Error(e)
+            registrationUiMutableState.value = Error(e)
         }
     }
 
@@ -56,7 +59,7 @@ class RegistrationViewModel(
         get() = registrationUiMutableState
 
     fun register(params: RegistrationRequestParams) {
-        registrationUiMutableState.value = RegistrationUiState.WaitRegistration
+        registrationUiMutableState.value = WaitRegistration
         currentParams = params
 
         disposable?.dispose()

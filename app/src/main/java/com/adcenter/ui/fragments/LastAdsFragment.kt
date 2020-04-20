@@ -17,7 +17,11 @@ import com.adcenter.extensions.longToast
 import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.details.DetailsConstants
+import com.adcenter.features.lastads.uistate.Error
 import com.adcenter.features.lastads.uistate.LastAdsUiState
+import com.adcenter.features.lastads.uistate.Loading
+import com.adcenter.features.lastads.uistate.Pagination
+import com.adcenter.features.lastads.uistate.Success
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.common.IPageConfiguration
@@ -118,15 +122,15 @@ class LastAdsFragment : BaseFragment(),
     private fun setViewModelObserver() {
         viewModel.lastAdsData.observe(viewLifecycleOwner, Observer { uiState ->
             when (uiState) {
-                is LastAdsUiState.Loading -> {
+                is Loading -> {
                     recyclerView.gone()
                     noDataMessage.gone()
                     progressBar.visible()
                 }
-                is LastAdsUiState.Pagination -> {
+                is Pagination -> {
                     recyclerAdapter.showPagination()
                 }
-                is LastAdsUiState.Success -> {
+                is Success -> {
                     swipeRefresh.isRefreshing = false
                     recyclerAdapter.hidePagination()
                     progressBar.gone()
@@ -142,7 +146,7 @@ class LastAdsFragment : BaseFragment(),
                     setRecyclerItems(uiState.result.ads)
                     setScrollListener()
                 }
-                is LastAdsUiState.Error -> {
+                is Error -> {
                     swipeRefresh.isRefreshing = false
                     recyclerAdapter.hidePagination()
                     progressBar.gone()

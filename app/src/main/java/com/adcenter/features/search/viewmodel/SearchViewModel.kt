@@ -8,7 +8,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.search.models.SearchModel
 import com.adcenter.features.search.models.SearchRequestParams
-import com.adcenter.features.search.uistate.SearchUiState
+import com.adcenter.features.search.uistate.*
 import com.adcenter.features.search.usecase.ISearchUseCase
 import io.reactivex.Single
 import io.reactivex.SingleObserver
@@ -38,14 +38,14 @@ class SearchViewModel(
 
         override fun onSuccess(model: SearchModel) {
             searchModel = model
-            searchUiMutableState.value = SearchUiState.Success(model)
+            searchUiMutableState.value = Success(model)
             currentParams = currentParams.copy(
                 pageNumber = currentParams.pageNumber + 1
             )
         }
 
         override fun onError(e: Throwable) {
-            searchUiMutableState.value = SearchUiState.Error(e)
+            searchUiMutableState.value = Error(e)
         }
     }
 
@@ -56,13 +56,13 @@ class SearchViewModel(
 
     fun load() {
         if (currentParams.pageNumber != FIRST_PAGE_NUMBER) {
-            searchUiMutableState.value = SearchUiState.Success(searchModel)
+            searchUiMutableState.value = Success(searchModel)
         }
     }
 
     fun load(searchText: String) {
         if (searchText != currentParams.searchText) {
-            searchUiMutableState.value = SearchUiState.NewSearch
+            searchUiMutableState.value = NewSearch
 
             searchModel = SearchModel()
             currentParams = currentParams.copy(
@@ -75,7 +75,7 @@ class SearchViewModel(
     }
 
     fun loadMore() {
-        searchUiMutableState.value = SearchUiState.Pagination
+        searchUiMutableState.value = Pagination
         loadModel()
     }
 

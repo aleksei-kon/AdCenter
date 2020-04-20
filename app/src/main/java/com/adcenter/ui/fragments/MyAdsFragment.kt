@@ -16,7 +16,11 @@ import com.adcenter.extensions.longToast
 import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.details.DetailsConstants
+import com.adcenter.features.myads.uistate.Error
+import com.adcenter.features.myads.uistate.Loading
 import com.adcenter.features.myads.uistate.MyAdsUiState
+import com.adcenter.features.myads.uistate.Pagination
+import com.adcenter.features.myads.uistate.Success
 import com.adcenter.features.myads.viewmodel.MyAdsViewModel
 import com.adcenter.resource.IResourceProvider
 import com.adcenter.ui.common.IPageConfiguration
@@ -108,15 +112,15 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
     private fun setViewModelObserver() {
         viewModel.myAdsData.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is MyAdsUiState.Loading -> {
+                is Loading -> {
                     recyclerView.gone()
                     noDataMessage.gone()
                     progressBar.visible()
                 }
-                is MyAdsUiState.Pagination -> {
+                is Pagination -> {
                     recyclerAdapter.showPagination()
                 }
-                is MyAdsUiState.Success -> {
+                is Success -> {
                     swipeRefresh.isRefreshing = false
                     recyclerAdapter.hidePagination()
                     progressBar.gone()
@@ -132,7 +136,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
                     setRecyclerItems(it.result.ads)
                     setScrollListener()
                 }
-                is MyAdsUiState.Error -> {
+                is Error -> {
                     swipeRefresh.isRefreshing = false
                     recyclerAdapter.hidePagination()
                     progressBar.gone()

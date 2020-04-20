@@ -10,6 +10,9 @@ import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.usecase.ILoginUseCase
 import com.adcenter.entities.Result
+import com.adcenter.features.login.uistate.Error
+import com.adcenter.features.login.uistate.Success
+import com.adcenter.features.login.uistate.WaitLogin
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -42,11 +45,11 @@ class LoginViewModel(
         }
 
         override fun onSuccess(model: AppConfigInfo) {
-            loginUiMutableState.value = LoginUiState.Success(model)
+            loginUiMutableState.value = Success(model)
         }
 
         override fun onError(e: Throwable) {
-            loginUiMutableState.value = LoginUiState.Error(e)
+            loginUiMutableState.value = Error(e)
         }
     }
 
@@ -56,7 +59,7 @@ class LoginViewModel(
         get() = loginUiMutableState
 
     fun login(params: LoginRequestParams) {
-        loginUiMutableState.value = LoginUiState.WaitLogin
+        loginUiMutableState.value = WaitLogin
         currentParams = params
 
         disposable?.dispose()

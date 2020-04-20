@@ -16,6 +16,10 @@ import com.adcenter.extensions.longToast
 import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
 import com.adcenter.features.bookmarks.uistate.BookmarksUiState
+import com.adcenter.features.bookmarks.uistate.Error
+import com.adcenter.features.bookmarks.uistate.Loading
+import com.adcenter.features.bookmarks.uistate.Pagination
+import com.adcenter.features.bookmarks.uistate.Success
 import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.resource.IResourceProvider
@@ -109,15 +113,15 @@ class BookmarksFragment : BaseFragment(),
     private fun setViewModelObserver() {
         viewModel.bookmarksData.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is BookmarksUiState.Loading -> {
+                is Loading -> {
                     recyclerView.gone()
                     noDataMessage.gone()
                     progressBar.visible()
                 }
-                is BookmarksUiState.Pagination -> {
+                is Pagination -> {
                     recyclerAdapter.showPagination()
                 }
-                is BookmarksUiState.Success -> {
+                is Success -> {
                     swipeRefresh.isRefreshing = false
                     recyclerAdapter.hidePagination()
                     progressBar.gone()
@@ -133,7 +137,7 @@ class BookmarksFragment : BaseFragment(),
                     setRecyclerItems(it.result.ads)
                     setScrollListener()
                 }
-                is BookmarksUiState.Error -> {
+                is Error -> {
                     swipeRefresh.isRefreshing = false
                     recyclerAdapter.hidePagination()
                     progressBar.gone()

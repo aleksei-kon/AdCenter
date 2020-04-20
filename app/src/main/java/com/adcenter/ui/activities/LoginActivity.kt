@@ -11,6 +11,9 @@ import com.adcenter.features.login.models.LoginRequestParams
 import com.adcenter.features.login.uistate.LoginUiState
 import com.adcenter.features.login.viewmodel.LoginViewModel
 import com.adcenter.entities.network.CredentialsModel
+import com.adcenter.features.login.uistate.Error
+import com.adcenter.features.login.uistate.Success
+import com.adcenter.features.login.uistate.WaitLogin
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -70,17 +73,17 @@ class LoginActivity : BaseActivity() {
     private fun setViewModelObserver() {
         viewModel.loginData.observe(this, Observer {
             when (it) {
-                is LoginUiState.WaitLogin -> {
+                is WaitLogin -> {
                     viewLayout.setChildsEnabled(false)
                     progressBar.visible()
                 }
-                is LoginUiState.Success -> {
+                is Success -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
-                is LoginUiState.Error -> {
+                is Error -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
                     it.throwable.message?.let { message -> longToast(message) }

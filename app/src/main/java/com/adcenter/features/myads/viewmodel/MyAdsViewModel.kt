@@ -8,7 +8,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.myads.MyAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.myads.models.MyAdsModel
 import com.adcenter.features.myads.models.MyAdsRequestParams
-import com.adcenter.features.myads.uistate.MyAdsUiState
+import com.adcenter.features.myads.uistate.*
 import com.adcenter.features.myads.usecase.IMyAdsUseCase
 import io.reactivex.Single
 import io.reactivex.SingleObserver
@@ -38,14 +38,14 @@ class MyAdsViewModel(
 
         override fun onSuccess(model: MyAdsModel) {
             myAdsModel = model
-            myAdsUiMutableState.value = MyAdsUiState.Success(model)
+            myAdsUiMutableState.value = Success(model)
             currentParams = currentParams.copy(
                 pageNumber = currentParams.pageNumber + 1
             )
         }
 
         override fun onError(e: Throwable) {
-            myAdsUiMutableState.value = MyAdsUiState.Error(e)
+            myAdsUiMutableState.value = Error(e)
         }
     }
 
@@ -56,15 +56,15 @@ class MyAdsViewModel(
 
     fun load() {
         if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
-            myAdsUiMutableState.value = MyAdsUiState.Loading
+            myAdsUiMutableState.value = Loading
             loadModel()
         } else {
-            myAdsUiMutableState.value = MyAdsUiState.Success(myAdsModel)
+            myAdsUiMutableState.value = Success(myAdsModel)
         }
     }
 
     fun loadMore() {
-        myAdsUiMutableState.value = MyAdsUiState.Pagination
+        myAdsUiMutableState.value = Pagination
         loadModel()
     }
 

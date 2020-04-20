@@ -8,7 +8,7 @@ import com.adcenter.extensions.async
 import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.lastads.models.LastAdsModel
 import com.adcenter.features.lastads.models.LastAdsRequestParams
-import com.adcenter.features.lastads.uistate.LastAdsUiState
+import com.adcenter.features.lastads.uistate.*
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
@@ -31,14 +31,14 @@ class LastAdsViewModel(
 
     private val successConsumer: (LastAdsModel) -> Unit = {
         lastAdsModel = it
-        lastAdsUiMutableState.value = LastAdsUiState.Success(it)
+        lastAdsUiMutableState.value = Success(it)
         currentParams = currentParams.copy(
             pageNumber = currentParams.pageNumber + 1
         )
     }
 
     private val errorConsumer: (Throwable) -> Unit = {
-        lastAdsUiMutableState.value = LastAdsUiState.Error(it)
+        lastAdsUiMutableState.value = Error(it)
     }
 
     private val lastAdsUiMutableState = MutableLiveData<LastAdsUiState>()
@@ -48,15 +48,15 @@ class LastAdsViewModel(
 
     fun load() {
         if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
-            lastAdsUiMutableState.value = LastAdsUiState.Loading
+            lastAdsUiMutableState.value = Loading
             loadModel()
         } else {
-            lastAdsUiMutableState.value = LastAdsUiState.Success(lastAdsModel)
+            lastAdsUiMutableState.value = Success(lastAdsModel)
         }
     }
 
     fun loadMore() {
-        lastAdsUiMutableState.value = LastAdsUiState.Pagination
+        lastAdsUiMutableState.value = Pagination
         loadModel()
     }
 

@@ -9,7 +9,10 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.extensions.*
 import com.adcenter.entities.network.CredentialsModel
 import com.adcenter.features.registration.models.RegistrationRequestParams
+import com.adcenter.features.registration.uistate.Error
 import com.adcenter.features.registration.uistate.RegistrationUiState
+import com.adcenter.features.registration.uistate.Success
+import com.adcenter.features.registration.uistate.WaitRegistration
 import com.adcenter.features.registration.viewmodel.RegistrationViewModel
 import kotlinx.android.synthetic.main.activity_register.*
 import javax.inject.Inject
@@ -78,17 +81,17 @@ class RegisterActivity : BaseActivity() {
     private fun setViewModelObserver() {
         viewModel.registrationData.observe(this, Observer {
             when (it) {
-                is RegistrationUiState.WaitRegistration -> {
+                is WaitRegistration -> {
                     viewLayout.setChildsEnabled(false)
                     progressBar.visible()
                 }
-                is RegistrationUiState.Success -> {
+                is Success -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
-                is RegistrationUiState.Error -> {
+                is Error -> {
                     viewLayout.setChildsEnabled(true)
                     progressBar.gone()
                     it.throwable.message?.let { message -> longToast(message) }

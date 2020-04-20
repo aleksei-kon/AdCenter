@@ -8,6 +8,9 @@ import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.async
 import com.adcenter.features.details.models.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
+import com.adcenter.features.details.uistate.Error
+import com.adcenter.features.details.uistate.Loading
+import com.adcenter.features.details.uistate.Success
 import com.adcenter.features.details.usecase.IDetailsUseCase
 import io.reactivex.Single
 import io.reactivex.SingleObserver
@@ -37,11 +40,11 @@ class DetailsViewModel(
 
         override fun onSuccess(model: DetailsModel) {
             detailsModel = model
-            detailsUiMutableState.value = DetailsUiState.Success(model)
+            detailsUiMutableState.value = Success(model)
         }
 
         override fun onError(e: Throwable) {
-            detailsUiMutableState.value = DetailsUiState.Error(e)
+            detailsUiMutableState.value = Error(e)
         }
     }
 
@@ -54,10 +57,10 @@ class DetailsViewModel(
         val detailsCopy = detailsModel
 
         when {
-            detailsId.isEmpty() -> detailsUiMutableState.value = DetailsUiState.Error(Throwable())
-            detailsCopy != null -> detailsUiMutableState.value = DetailsUiState.Success(detailsCopy)
+            detailsId.isEmpty() -> detailsUiMutableState.value = Error(Throwable())
+            detailsCopy != null -> detailsUiMutableState.value = Success(detailsCopy)
             else -> {
-                detailsUiMutableState.value = DetailsUiState.Loading
+                detailsUiMutableState.value = Loading
                 currentParams = DetailsRequestParams(detailsId)
                 loadModel()
             }
