@@ -33,4 +33,37 @@ class DetailsRepository(
         }.getOrElse {
             Result.Error(it)
         }
+
+    override fun showHide(advertId: Int): Result<Boolean> =
+        runCatching {
+            val networkResponse = advertsService
+                .showHideAdvert(advertId)
+                .execute()
+
+            Result.Success(networkResponse.code() == 202)
+        }.getOrElse {
+            Result.Error(it)
+        }
+
+    override fun addDeleteBookmark(advertId: Int): Result<Boolean> =
+        runCatching {
+            val networkResponse = advertsService
+                .addDeleteBookmark(advertId)
+                .execute()
+
+            Result.Success(networkResponse.code() == 202)
+        }.getOrElse {
+            Result.Error(it)
+        }
+
+    override fun delete(advertId: Int): Result<Boolean> =
+        runCatching {
+            val networkResponse = advertsService
+                .deleteDetails(advertId)
+                .execute()
+
+            Result.Success(networkResponse.code() == 202)
+        }.getOrElse {
+            Result.Error(it)
+        }
 }

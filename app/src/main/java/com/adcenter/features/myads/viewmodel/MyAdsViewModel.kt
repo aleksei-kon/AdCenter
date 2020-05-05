@@ -69,6 +69,7 @@ class MyAdsViewModel(
     fun load() {
         if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
             myAdsUiMutableState.value = Loading
+            disposableBad.clear()
             loadModel()
         } else {
             myAdsUiMutableState.value = Success(myAdsModel)
@@ -77,6 +78,7 @@ class MyAdsViewModel(
 
     fun loadMore() {
         myAdsUiMutableState.value = Pagination
+        disposableBad.clear()
         loadModel()
     }
 
@@ -85,12 +87,16 @@ class MyAdsViewModel(
         currentParams = currentParams.copy(
             pageNumber = FIRST_PAGE_NUMBER
         )
-        loadModel()
+
+        disposableBad.clear()
+        disposableBad.add(
+            clearDbCall
+                .async()
+                .subscribe { loadModel() }
+        )
     }
 
     private fun loadModel() {
-        disposableBad.clear()
-
         dataSource
             .async()
             .subscribe(observer)

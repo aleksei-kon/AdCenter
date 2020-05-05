@@ -7,4 +7,10 @@ import com.adcenter.entities.Result
 interface IDetailsRepository {
 
     fun getDetails(params: DetailsRequestParams): Result<DetailsModel>
+
+    fun showHide(advertId: Int): Result<Boolean>
+
+    fun addDeleteBookmark(advertId: Int): Result<Boolean>
+
+    fun delete(advertId: Int): Result<Boolean>
 }

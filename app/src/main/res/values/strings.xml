@@ -49,4 +49,10 @@
     <string name="THIS_LIST_IS_EMPTY_TEXT">This list is empty</string>
     <string name="BOTTOM_SHEET_MENU_TITLE">Menu</string>
     <string name="currency">Currency</string>
+    <string name="add_to_bookmark">Add to bookmarks</string>
+    <string name="delete_from_bookmarks">Delete from bookmarks</string>
+    <string name="show_advert">Show</string>
+    <string name="hide_advert">Hide</string>
+    <string name="edit_advert">Edit</string>
+    <string name="delete_advert">Delete</string>
 </resources>

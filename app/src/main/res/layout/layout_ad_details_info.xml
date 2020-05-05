@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,8 +25,9 @@
             app:sliderIndicatorPadding="4dp"
             app:sliderIndicatorRadius="2dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <org.apmem.tools.layouts.FlowLayout
             android:id="@+id/buttonContainer"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -37,9 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_button_add_to_bookmarks"
-                android:text="Add"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:text="@string/add_to_bookmark"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/showHideButton"
@@ -49,9 +49,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_button_add_to_bookmarks"
-                android:text="Show"
-                app:layout_constraintStart_toEndOf="@+id/addRemoveBookmarkButton"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:text="@string/hide_advert"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/editButton"
@@ -61,9 +59,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_button_add_to_bookmarks"
-                android:text="Edit"
-                app:layout_constraintStart_toEndOf="@+id/showHideButton"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/edit_advert" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteButton"
@@ -73,11 +69,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_button_add_to_bookmarks"
-                android:text="Delete"
-                app:layout_constraintStart_toEndOf="@+id/editButton"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/delete_advert" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </org.apmem.tools.layouts.FlowLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mainInfo"

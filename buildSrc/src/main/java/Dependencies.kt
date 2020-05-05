@@ -19,6 +19,7 @@ object Libs {
         const val testExtJunit = "1.1.0"
         const val espresso = "3.1.1"
 
+        const val flowLayout = "1.10"
         const val material = "1.1.0"
         const val swiperefreshlayout = "1.0.0"
         const val appcompat = "1.0.2"
@@ -41,6 +42,7 @@ object Libs {
     const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtJunit}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
+    const val flowLayout = "org.apmem.tools:layouts:${Versions.flowLayout}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"

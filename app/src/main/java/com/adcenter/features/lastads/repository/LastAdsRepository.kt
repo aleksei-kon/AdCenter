@@ -19,9 +19,8 @@ class LastAdsRepository(
             val networkResponse = advertsService
                 .getLastAds(params.pageNumber)
                 .execute()
-                .body()
 
-            networkResponse
+            networkResponse.body()
                 ?.map { AdItemDbEntity(it) }
                 ?.toTypedArray()
                 ?.let { advertsDao.insert(*it) }

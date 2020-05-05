@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="recycler_item_margin">8dp</dimen>
+    <dimen name="button_icon_size">24dp</dimen>
+    <dimen name="progress_button_progress_stroke_width">2dp</dimen>
+    <dimen name="progress_button_progress_radius">9dp</dimen>
 </resources>

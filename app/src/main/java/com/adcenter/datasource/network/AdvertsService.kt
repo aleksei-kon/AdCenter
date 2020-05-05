@@ -35,4 +35,16 @@ interface AdvertsService {
         @Query("pageNumber") pageNumber: Int,
         @Query("sortType") sortType: Int
     ): Call<List<NetworkAdItem>>
+
+    @POST("advert/update")
+    fun editDetails(@Body body: NewDetailsModel): Call<Void>
+
+    @GET("advert/showHideAd")
+    fun showHideAdvert(@Query("id") adId: Int): Call<Void>
+
+    @GET("advert/addRemoveToBookmark")
+    fun addDeleteBookmark(@Query("id") adId: Int): Call<Void>
+
+    @GET("advert/delete")
+    fun deleteDetails(@Query("advertId") detailsId: Int): Call<Void>
 }

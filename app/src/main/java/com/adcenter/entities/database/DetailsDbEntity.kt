@@ -18,10 +18,10 @@ data class DetailsDbEntity(
     val photos: List<String>? = null,
 
     @ColumnInfo(name = "is_bookmark")
-    val isBookmark: Boolean? = null,
+    val bookmark: Boolean? = null,
 
     @ColumnInfo(name = "is_shown")
-    val isShown: Boolean? = null,
+    val showed: Boolean? = null,
 
     @ColumnInfo(name = "title")
     val title: String? = null,
@@ -52,8 +52,8 @@ data class DetailsDbEntity(
     constructor(details: NetworkDetailsModel) : this(
         id = details.id,
         photos = details.photos,
-        isBookmark = details.isBookmark,
-        isShown = details.isShown,
+        bookmark = details.bookmark,
+        showed = details.showed,
         title = details.title,
         price = details.price,
         location = details.location,

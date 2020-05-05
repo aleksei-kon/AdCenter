@@ -19,8 +19,8 @@ class DetailsMapper(
     fun toDetailsModel(dbEntity: DetailsDbEntity): DetailsModel {
         val id = dbEntity.id
         val photos = getPhotosUrls(dbEntity.photos)
-        val isBookmark = dbEntity.isBookmark ?: false
-        val isShown = dbEntity.isShown ?: false
+        val isBookmark = dbEntity.bookmark ?: false
+        val isShown = dbEntity.showed ?: false
         val title = dbEntity.title ?: EMPTY
         val price = dbEntity.price ?: EMPTY
         val location = dbEntity.location ?: EMPTY
@@ -49,8 +49,8 @@ class DetailsMapper(
     fun toDetailsModel(networkModel: NetworkDetailsModel): DetailsModel {
         val id = networkModel.id
         val photos = getPhotosUrls(networkModel.photos)
-        val isBookmark = networkModel.isBookmark ?: false
-        val isShown = networkModel.isShown ?: false
+        val isBookmark = networkModel.bookmark ?: false
+        val isShown = networkModel.showed ?: false
         val title = networkModel.title ?: EMPTY
         val price = networkModel.price ?: EMPTY
         val location = networkModel.location ?: EMPTY

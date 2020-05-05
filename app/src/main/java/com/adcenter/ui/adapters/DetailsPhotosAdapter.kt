@@ -17,6 +17,8 @@ class DetailsPhotosAdapter(private val context: Context) :
 
     private val photos = mutableListOf<String>()
 
+    fun getPhotosList(): MutableList<String> = photos
+
     fun setPhotos(photos: List<String>) {
         this.photos.clear()
         this.photos.addAll(photos)

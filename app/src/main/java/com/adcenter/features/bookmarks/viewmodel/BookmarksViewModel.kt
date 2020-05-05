@@ -69,6 +69,7 @@ class BookmarksViewModel(
     fun load() {
         if (currentParams.pageNumber == FIRST_PAGE_NUMBER) {
             bookmarksUiMutableState.value = Loading
+            disposableBad.clear()
             loadModel()
         } else {
             bookmarksUiMutableState.value = Success(bookmarksModel)
@@ -77,6 +78,7 @@ class BookmarksViewModel(
 
     fun loadMore() {
         bookmarksUiMutableState.value = Pagination
+        disposableBad.clear()
         loadModel()
     }
 
@@ -85,12 +87,16 @@ class BookmarksViewModel(
         currentParams = currentParams.copy(
             pageNumber = FIRST_PAGE_NUMBER
         )
-        loadModel()
+
+        disposableBad.clear()
+        disposableBad.add(
+            clearDbCall
+                .async()
+                .subscribe { loadModel() }
+        )
     }
 
     private fun loadModel() {
-        disposableBad.clear()
-
         dataSource
             .async()
             .subscribe(observer)

@@ -3,8 +3,8 @@ package com.adcenter.entities.network
 data class NetworkDetailsModel(
     val id: Int = -1,
     val photos: List<String>? = null,
-    val isBookmark: Boolean? = null,
-    val isShown: Boolean? = null,
+    val bookmark: Boolean? = null,
+    val showed: Boolean? = null,
     val title: String? = null,
     val price: String? = null,
     val location: String? = null,

@@ -8,7 +8,9 @@ import com.adcenter.di.dagger.annotations.ActivityScope
 import com.adcenter.di.dagger.annotations.ViewModelKey
 import com.adcenter.features.details.repository.DetailsRepository
 import com.adcenter.features.details.repository.IDetailsRepository
+import com.adcenter.features.details.usecase.ActionUseCase
 import com.adcenter.features.details.usecase.DetailsUseCase
+import com.adcenter.features.details.usecase.IActionUseCase
 import com.adcenter.features.details.usecase.IDetailsUseCase
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import dagger.Module
@@ -32,9 +34,16 @@ class DetailsModule {
         DetailsUseCase(repository)
 
     @Provides
+    @ActivityScope
+    fun provideActionUseCase(repository: IDetailsRepository): IActionUseCase =
+        ActionUseCase(repository)
+
+    @Provides
     @IntoMap
     @ActivityScope
     @ViewModelKey(DetailsViewModel::class)
-    fun provideDetailsViewModel(useCase: IDetailsUseCase): ViewModel =
-        DetailsViewModel(useCase)
+    fun provideDetailsViewModel(
+        detailsUseCase: IDetailsUseCase,
+        actionUseCase: IActionUseCase
+    ): ViewModel = DetailsViewModel(detailsUseCase, actionUseCase)
 }
