@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.adcenter.entities.Result
 import com.adcenter.entities.view.DetailsModel
+import com.adcenter.extensions.Constants.EMPTY_ID
 import com.adcenter.extensions.async
 import com.adcenter.features.details.models.DetailsRequestParams
 import com.adcenter.features.details.uistate.DetailsUiState
@@ -53,11 +54,11 @@ class DetailsViewModel(
     val detailsData: LiveData<DetailsUiState>
         get() = detailsUiMutableState
 
-    fun load(detailsId: String) {
+    fun load(detailsId: Int) {
         val detailsCopy = detailsModel
 
         when {
-            detailsId.isEmpty() -> detailsUiMutableState.value = Error(Throwable())
+            detailsId == EMPTY_ID -> detailsUiMutableState.value = Error(Throwable())
             detailsCopy != null -> detailsUiMutableState.value = Success(detailsCopy)
             else -> {
                 detailsUiMutableState.value = Loading

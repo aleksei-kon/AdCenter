@@ -10,8 +10,10 @@ import com.adcenter.features.search.models.SearchModel
 import com.adcenter.features.search.models.SearchRequestParams
 import com.adcenter.features.search.uistate.*
 import com.adcenter.features.search.usecase.ISearchUseCase
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleObserver
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 class SearchViewModel(
@@ -20,7 +22,7 @@ class SearchViewModel(
 
     private var currentParams: SearchRequestParams = SearchRequestParams()
     private var searchModel: SearchModel = SearchModel()
-    private var disposable: Disposable? = null
+    private var disposableBad = CompositeDisposable()
 
     private val dataSource: Single<SearchModel>
         get() = Single.create {
@@ -30,10 +32,20 @@ class SearchViewModel(
             }
         }
 
+    private val clearDbCall: Completable
+        get() = Completable.create {
+            try {
+                useCase.clearDb()
+                it.onComplete()
+            } catch (e: Exception) {
+                it.onError(e)
+            }
+        }
+
     private val observer = object : SingleObserver<SearchModel> {
 
         override fun onSubscribe(d: Disposable) {
-            disposable = d
+            disposableBad.add(d)
         }
 
         override fun onSuccess(model: SearchModel) {
@@ -70,18 +82,22 @@ class SearchViewModel(
                 pageNumber = FIRST_PAGE_NUMBER
             )
 
-            loadModel()
+            disposableBad.clear()
+            disposableBad.add(
+                clearDbCall
+                    .async()
+                    .subscribe { loadModel() }
+            )
         }
     }
 
     fun loadMore() {
         searchUiMutableState.value = Pagination
+        disposableBad.clear()
         loadModel()
     }
 
     private fun loadModel() {
-        disposable?.dispose()
-
         dataSource
             .async()
             .subscribe(observer)
@@ -90,6 +106,7 @@ class SearchViewModel(
     override fun onCleared() {
         super.onCleared()
 
-        disposable?.dispose()
+        disposableBad.clear()
+        clearDbCall.async().subscribe()
     }
 }

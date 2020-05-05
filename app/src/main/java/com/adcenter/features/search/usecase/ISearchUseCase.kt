@@ -7,4 +7,6 @@ import com.adcenter.entities.Result
 interface ISearchUseCase {
 
     fun load(requestParams: SearchRequestParams): Result<SearchModel>
+
+    fun clearDb()
 }

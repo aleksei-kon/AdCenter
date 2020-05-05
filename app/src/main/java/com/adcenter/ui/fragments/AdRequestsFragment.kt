@@ -140,7 +140,7 @@ class AdRequestsFragment : BaseFragment(),
         recyclerView.addOnScrollListener(recyclerScrollListener)
     }
 
-    private fun onItemClick(id: String) {
+    private fun onItemClick(id: Int) {
         context?.startActivity(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)

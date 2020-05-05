@@ -1,7 +1,7 @@
 package com.adcenter.features.details.models
 
-import com.adcenter.extensions.Constants.EMPTY
+import com.adcenter.extensions.Constants.EMPTY_ID
 
 data class DetailsRequestParams(
-    val detailsId: String = EMPTY
+    val detailsId: Int = EMPTY_ID
 )

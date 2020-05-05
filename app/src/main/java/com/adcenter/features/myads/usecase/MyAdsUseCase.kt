@@ -10,6 +10,10 @@ class MyAdsUseCase(private val repository: IMyAdsRepository) : IMyAdsUseCase {
     override fun load(requestParams: MyAdsRequestParams): Result<MyAdsModel> =
         Result.Success(loadModel(requestParams))
 
+    override fun clearDb() {
+        repository.clearDb()
+    }
+
     private fun loadModel(requestParams: MyAdsRequestParams): MyAdsModel {
         val ads = when (val resutl = repository.getMyAds(requestParams)) {
             is Result.Success -> resutl.value

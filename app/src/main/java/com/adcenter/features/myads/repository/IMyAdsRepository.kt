@@ -7,4 +7,6 @@ import com.adcenter.entities.Result
 interface IMyAdsRepository {
 
     fun getMyAds(params: MyAdsRequestParams): Result<List<AdItemModel>>
+
+    fun clearDb()
 }

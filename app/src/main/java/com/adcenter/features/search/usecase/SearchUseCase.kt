@@ -10,6 +10,10 @@ class SearchUseCase(private val repository: ISearchRepository) : ISearchUseCase 
     override fun load(requestParams: SearchRequestParams): Result<SearchModel> =
         Result.Success(loadModel(requestParams))
 
+    override fun clearDb() {
+        repository.clearDb()
+    }
+
     private fun loadModel(requestParams: SearchRequestParams): SearchModel {
         val ads = when (val result = repository.getSearchResult(requestParams)) {
             is Result.Success -> result.value

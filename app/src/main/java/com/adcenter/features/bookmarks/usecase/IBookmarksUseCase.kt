@@ -7,4 +7,6 @@ import com.adcenter.entities.Result
 interface IBookmarksUseCase {
 
     fun load(requestParams: BookmarksRequestParams): Result<BookmarksModel>
+
+    fun clearDb()
 }

@@ -7,4 +7,6 @@ import com.adcenter.entities.Result
 interface IAdRequestsUseCase {
 
     fun load(requestParams: AdRequestsParams): Result<AdRequestsModel>
+
+    fun clearDb()
 }

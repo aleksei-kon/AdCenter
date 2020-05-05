@@ -1,6 +1,7 @@
 package com.adcenter.ui.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.Observer
@@ -8,12 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
-import com.adcenter.extensions.*
 import com.adcenter.entities.network.NewDetailsModel
+import com.adcenter.extensions.*
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.Error
-import com.adcenter.features.newdetails.uistate.NewDetailsUiState
 import com.adcenter.features.newdetails.uistate.Success
+import com.adcenter.features.newdetails.uistate.UpdatePhotos
 import com.adcenter.features.newdetails.uistate.WaitLoading
 import com.adcenter.features.newdetails.viewmodel.NewDetailsViewModel
 import com.adcenter.ui.adapters.NewPhotosAdapter
@@ -59,14 +60,29 @@ class NewAdActivity : BaseActivity() {
         addButton.setOnClickListener {
             upload()
         }
+
+        viewModel.updatePhotos()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
         if (resultCode == RESULT_OK) {
             data?.data?.let {
-                adapter.addItems(it)
                 viewModel.addPhoto(it)
             }
+        }
+    }
+
+    private fun deletePhoto(uri: Uri) {
+        viewModel.removePhoto(uri)
+    }
+
+    private fun updateAddPhotoButton() {
+        if (adapter.itemCount > 10) {
+            addPhotoButton.gone()
+        } else {
+            addPhotoButton.visible()
         }
     }
 
@@ -78,7 +94,7 @@ class NewAdActivity : BaseActivity() {
     }
 
     private fun initRecycler() {
-        adapter = NewPhotosAdapter(this)
+        adapter = NewPhotosAdapter(::deletePhoto)
         photosRecycler.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         photosRecycler.adapter = adapter
@@ -101,6 +117,10 @@ class NewAdActivity : BaseActivity() {
     private fun setViewModelObserver() {
         viewModel.newDetailsData.observe(this, Observer {
             when (it) {
+                is UpdatePhotos -> {
+                    adapter.setItems(it.list)
+                    updateAddPhotoButton()
+                }
                 is WaitLoading -> {
                     viewLayout.setChildsEnabled(false)
                     progressBar.visible()

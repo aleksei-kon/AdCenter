@@ -185,7 +185,7 @@ class SearchActivity : OfflineActivity() {
         recyclerView.addOnScrollListener(recyclerScrollListener)
     }
 
-    private fun onItemClick(id: String) {
+    private fun onItemClick(id: Int) {
         startActivity(
             Intent(this, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)

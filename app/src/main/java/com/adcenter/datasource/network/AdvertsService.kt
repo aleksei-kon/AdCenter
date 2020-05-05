@@ -15,7 +15,7 @@ interface AdvertsService {
     fun addNewDetails(@Body body: NewDetailsModel): Call<Void>
 
     @GET("advert/details")
-    fun getDetails(@Query("detailsId") detailsId: String): Call<NetworkDetailsModel>
+    fun getDetails(@Query("detailsId") detailsId: Int): Call<NetworkDetailsModel>
 
     @GET("advert/lastAds")
     fun getLastAds(@Query("pageNumber") pageNumber: Int): Call<List<NetworkAdItem>>

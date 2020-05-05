@@ -5,14 +5,14 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.adcenter.entities.network.NetworkDetailsModel
-import com.adcenter.extensions.Constants.EMPTY
+import com.adcenter.extensions.Constants.EMPTY_ID
 
 @Entity(tableName = "details")
 data class DetailsDbEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String = EMPTY,
+    val id: Int = EMPTY_ID,
 
     @ColumnInfo(name = "photos")
     val photos: List<String>? = null,

@@ -15,7 +15,7 @@ import com.adcenter.ui.diffutill.AdsDiffCallback
 import kotlinx.android.synthetic.main.adapter_request_item.view.*
 
 class AdRequestsAdapter(
-    private val itemClickListener: (String) -> Unit
+    private val itemClickListener: (Int) -> Unit
 ) : BasePaginationAdapter<AdItemModel>() {
 
     override val itemLayout: Int = R.layout.adapter_request_item

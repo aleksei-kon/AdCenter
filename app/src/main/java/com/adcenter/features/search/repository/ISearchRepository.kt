@@ -7,4 +7,6 @@ import com.adcenter.entities.Result
 interface ISearchRepository {
 
     fun getSearchResult(params: SearchRequestParams): Result<List<AdItemModel>>
+
+    fun clearDb()
 }

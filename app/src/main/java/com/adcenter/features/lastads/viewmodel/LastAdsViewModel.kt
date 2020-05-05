@@ -10,8 +10,9 @@ import com.adcenter.features.lastads.models.LastAdsModel
 import com.adcenter.features.lastads.models.LastAdsRequestParams
 import com.adcenter.features.lastads.uistate.*
 import com.adcenter.features.lastads.usecase.ILastAdsUseCase
+import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 
 class LastAdsViewModel(
     private val useCase: ILastAdsUseCase
@@ -19,13 +20,23 @@ class LastAdsViewModel(
 
     private var currentParams: LastAdsRequestParams = LastAdsRequestParams()
     private var lastAdsModel: LastAdsModel = LastAdsModel()
-    private var disposable: Disposable? = null
+    private var disposableBad = CompositeDisposable()
 
     private val dataSource: Single<LastAdsModel>
         get() = Single.create {
             when (val result = useCase.load(currentParams)) {
                 is Result.Success -> it.onSuccess(result.value)
                 is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val clearDbCall: Completable
+        get() = Completable.create {
+            try {
+                useCase.clearDb()
+                it.onComplete()
+            } catch (e: Exception) {
+                it.onError(e)
             }
         }
 
@@ -69,16 +80,19 @@ class LastAdsViewModel(
     }
 
     private fun loadModel() {
-        disposable?.dispose()
+        disposableBad.clear()
 
-        disposable = dataSource
-            .async()
-            .subscribe(successConsumer, errorConsumer)
+        disposableBad.add(
+            dataSource
+                .async()
+                .subscribe(successConsumer, errorConsumer)
+        )
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        disposable?.dispose()
+        disposableBad.clear()
+        clearDbCall.async().subscribe()
     }
 }

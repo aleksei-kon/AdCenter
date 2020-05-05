@@ -34,4 +34,8 @@ class MyAdsRepository(
         }.getOrElse {
             Result.Error(it)
         }
+
+    override fun clearDb() {
+        advertsDao.clear()
+    }
 }

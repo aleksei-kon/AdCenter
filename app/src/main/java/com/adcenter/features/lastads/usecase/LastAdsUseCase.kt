@@ -11,6 +11,10 @@ class LastAdsUseCase(private val repository: ILastAdsRepository) :
     override fun load(requestParams: LastAdsRequestParams): Result<LastAdsModel> =
         Result.Success(loadModel(requestParams))
 
+    override fun clearDb() {
+        repository.clearDb()
+    }
+
     private fun loadModel(requestParams: LastAdsRequestParams): LastAdsModel {
         val ads = when (val lastAds = repository.getLastAds(requestParams)) {
             is Result.Success -> lastAds.value

@@ -48,4 +48,5 @@
     <string name="EMPTY_TITLE">Empty</string>
     <string name="THIS_LIST_IS_EMPTY_TEXT">This list is empty</string>
     <string name="BOTTOM_SHEET_MENU_TITLE">Menu</string>
+    <string name="currency">Currency</string>
 </resources>

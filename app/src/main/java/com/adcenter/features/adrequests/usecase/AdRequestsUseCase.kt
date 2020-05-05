@@ -10,6 +10,10 @@ class AdRequestsUseCase(private val repository: IAdRequestsRepository) : IAdRequ
     override fun load(requestParams: AdRequestsParams): Result<AdRequestsModel> =
         Result.Success(loadModel(requestParams))
 
+    override fun clearDb() {
+        repository.clearDb()
+    }
+
     private fun loadModel(requestParams: AdRequestsParams): AdRequestsModel {
         val ads = when (val result = repository.getAdRequests(requestParams)) {
             is Result.Success -> result.value

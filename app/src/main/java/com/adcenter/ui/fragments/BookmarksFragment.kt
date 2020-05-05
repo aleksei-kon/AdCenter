@@ -166,7 +166,7 @@ class BookmarksFragment : BaseFragment(),
         recyclerView.addOnScrollListener(recyclerScrollListener)
     }
 
-    private fun onItemClick(id: String) {
+    private fun onItemClick(id: Int) {
         context?.startActivity(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DETAILS_ID_KEY, id)

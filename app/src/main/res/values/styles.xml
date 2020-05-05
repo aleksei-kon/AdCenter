@@ -92,6 +92,7 @@
         <item name="android:textCursorDrawable">@drawable/cursor</item>
         <item name="boxBackgroundColor">@null</item>
         <item name="boxStrokeColor">@color/secondaryColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
         <item name="endIconTint">@color/secondaryColor</item>
         <item name="hintTextColor">@color/secondaryColor</item>
         <item name="passwordToggleTint">@color/secondaryColor</item>
@@ -100,6 +101,44 @@
     <style name="EditTextStyle">
         <item name="android:textColor">?attr/textColor</item>
         <item name="android:textCursorDrawable">@drawable/cursor</item>
+    </style>
+
+    <style name="InputEditTextStyle">
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="boxStrokeColor">@null</item>
+        <item name="colorOnSurface">@null</item>
+        <item name="colorControlNormal">@null</item>
+        <item name="colorControlActivated">@null</item>
+        <item name="boxBackgroundColor">@null</item>
+        <item name="colorControlHighlight">@null</item>
+    </style>
+
+    <style name="Input">
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="boxStrokeColor">@null</item>
+        <item name="colorOnSurface">@null</item>
+        <item name="colorControlNormal">@null</item>
+        <item name="colorControlActivated">@null</item>
+        <item name="boxBackgroundColor">@null</item>
+        <item name="colorControlHighlight">@null</item>
+        <item name="android:textColorHint">@color/grayColor</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="hintTextColor">@color/secondaryColor</item>
+    </style>
+
+    <style name="DropDown" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="boxStrokeColor">@null</item>
+        <item name="colorOnSurface">@null</item>
+        <item name="colorControlNormal">@null</item>
+        <item name="colorControlActivated">@null</item>
+        <item name="boxBackgroundColor">@null</item>
+        <item name="colorControlHighlight">@null</item>
+        <item name="android:textColorHint">@color/grayColor</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="hintTextColor">@color/secondaryColor</item>
     </style>
 
 </resources>

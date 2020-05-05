@@ -3,7 +3,7 @@ package com.adcenter.entities.view
 import com.adcenter.extensions.Constants.EMPTY
 
 data class DetailsModel(
-    val id: String = EMPTY,
+    val id: Int = -1,
     val photos: List<String> = emptyList(),
     val isBookmark: Boolean = false,
     val isShown: Boolean = false,

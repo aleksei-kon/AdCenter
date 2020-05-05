@@ -1,9 +1,7 @@
 package com.adcenter.entities.network
 
-import com.adcenter.extensions.Constants.EMPTY
-
 data class NetworkDetailsModel(
-    val id: String = EMPTY,
+    val id: Int = -1,
     val photos: List<String>? = null,
     val isBookmark: Boolean? = null,
     val isShown: Boolean? = null,

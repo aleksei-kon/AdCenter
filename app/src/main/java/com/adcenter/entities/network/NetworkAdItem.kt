@@ -1,7 +1,7 @@
 package com.adcenter.entities.network
 
 data class NetworkAdItem(
-    val id: String,
+    val id: Int,
     val photoUrl: String?,
     val title: String?,
     val price: String?,

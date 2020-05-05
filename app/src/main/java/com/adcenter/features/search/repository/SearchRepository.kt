@@ -38,4 +38,8 @@ class SearchRepository(
         }.getOrElse {
             Result.Error(it)
         }
+
+    override fun clearDb() {
+        advertsDao.clear()
+    }
 }

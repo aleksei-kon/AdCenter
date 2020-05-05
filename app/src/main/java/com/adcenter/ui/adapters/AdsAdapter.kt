@@ -22,7 +22,7 @@ enum class ItemType {
 
 class AdsAdapter(
     private val type: ItemType,
-    private val itemClickListener: (String) -> Unit
+    private val itemClickListener: (Int) -> Unit
 ) : BasePaginationAdapter<AdItemModel>() {
 
     override val itemLayout: Int = when (type) {

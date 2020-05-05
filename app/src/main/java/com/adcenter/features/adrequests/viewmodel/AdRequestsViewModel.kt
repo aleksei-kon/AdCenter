@@ -10,30 +10,42 @@ import com.adcenter.features.adrequests.models.AdRequestsModel
 import com.adcenter.features.adrequests.models.AdRequestsParams
 import com.adcenter.features.adrequests.uistate.*
 import com.adcenter.features.adrequests.usecase.IAdRequestsUseCase
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleObserver
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 class AdRequestsViewModel(
-    private val adRequestsUseCase: IAdRequestsUseCase
+    private val useCase: IAdRequestsUseCase
 ) : ViewModel() {
 
     private var currentParams: AdRequestsParams = AdRequestsParams()
     private var adRequestsModel: AdRequestsModel = AdRequestsModel()
-    private var disposable: Disposable? = null
+    private var disposableBad = CompositeDisposable()
 
     private val dataSource: Single<AdRequestsModel>
         get() = Single.create {
-            when (val result = adRequestsUseCase.load(currentParams)) {
+            when (val result = useCase.load(currentParams)) {
                 is Result.Success -> it.onSuccess(result.value)
                 is Result.Error -> it.onError(result.exception)
+            }
+        }
+
+    private val clearDbCall: Completable
+        get() = Completable.create {
+            try {
+                useCase.clearDb()
+                it.onComplete()
+            } catch (e: Exception) {
+                it.onError(e)
             }
         }
 
     private val observer = object : SingleObserver<AdRequestsModel> {
 
         override fun onSubscribe(d: Disposable) {
-            disposable = d
+            disposableBad.add(d)
         }
 
         override fun onSuccess(model: AdRequestsModel) {
@@ -78,7 +90,7 @@ class AdRequestsViewModel(
     }
 
     private fun loadModel() {
-        disposable?.dispose()
+        disposableBad.clear()
 
         dataSource
             .async()
@@ -88,6 +100,7 @@ class AdRequestsViewModel(
     override fun onCleared() {
         super.onCleared()
 
-        disposable?.dispose()
+        disposableBad.clear()
+        clearDbCall.async().subscribe()
     }
 }

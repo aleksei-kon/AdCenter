@@ -11,7 +11,7 @@ data class AdItemDbEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String,
+    val id: Int,
 
     @ColumnInfo(name = "photo_url")
     val photoUrl: String?,

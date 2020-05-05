@@ -13,7 +13,7 @@ abstract class DetailsDao {
     abstract fun insert(vararg entity: DetailsDbEntity)
 
     @Query("SELECT * FROM details WHERE id = :id LIMIT 1")
-    abstract fun getDetails(id: String): DetailsDbEntity
+    abstract fun getDetails(id: Int): DetailsDbEntity
 
     @Query("DELETE FROM details")
     abstract fun clear()

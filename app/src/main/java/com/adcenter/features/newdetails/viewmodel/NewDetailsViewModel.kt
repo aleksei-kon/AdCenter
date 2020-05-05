@@ -10,10 +10,7 @@ import com.adcenter.entities.Result
 import com.adcenter.extensions.Constants.EMPTY
 import com.adcenter.extensions.async
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
-import com.adcenter.features.newdetails.uistate.Error
-import com.adcenter.features.newdetails.uistate.NewDetailsUiState
-import com.adcenter.features.newdetails.uistate.Success
-import com.adcenter.features.newdetails.uistate.WaitLoading
+import com.adcenter.features.newdetails.uistate.*
 import com.adcenter.features.newdetails.usecase.INewDetailsUseCase
 import com.adcenter.features.newdetails.usecase.IUploadPhotoUseCase
 import io.reactivex.Completable
@@ -72,6 +69,16 @@ class NewDetailsViewModel(
 
     fun addPhoto(uri: Uri) {
         photos.add(uri)
+        newDetailsUiMutableState.value = UpdatePhotos(photos)
+    }
+
+    fun removePhoto(uri: Uri) {
+        photos.remove(uri)
+        newDetailsUiMutableState.value = UpdatePhotos(photos)
+    }
+
+    fun updatePhotos() {
+        newDetailsUiMutableState.value = UpdatePhotos(photos)
     }
 
     fun upload(params: NewDetailsRequestParams) {

@@ -12,7 +12,9 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.view.DetailsModel
 import com.adcenter.extensions.*
 import com.adcenter.extensions.Constants.EMPTY
+import com.adcenter.extensions.Constants.EMPTY_ID
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
+import com.adcenter.features.details.DetailsConstants.IS_EDIT_PAGE
 import com.adcenter.features.details.uistate.Error
 import com.adcenter.features.details.uistate.Loading
 import com.adcenter.features.details.uistate.Success
@@ -58,25 +60,26 @@ class DetailsActivity : BaseActivity() {
         setViewModelObserver()
 
         if (intent.hasExtra(DETAILS_ID_KEY)) {
-            load(intent.getStringExtra(DETAILS_ID_KEY) ?: EMPTY)
+            load(intent.getIntExtra(DETAILS_ID_KEY, EMPTY_ID))
         } else {
             noDataMessage.visible()
         }
-    }
 
-    private fun showButtons() {
-        /*if (appConfig.isLoggedIn && !appConfig.isAdmin) {
+        if (intent.hasExtra(IS_EDIT_PAGE) && intent.getBooleanExtra(IS_EDIT_PAGE, false)) {
+            editButton.visible()
+            deleteButton.visible()
+        } else {
+            editButton.gone()
+            deleteButton.gone()
+        }
+
+        if (appConfig.isLoggedIn && !appConfig.isAdmin) {
             addRemoveBookmarkButton.visible()
         }
 
         if (appConfig.isAdmin) {
             showHideButton.visible()
-        }*/
-    }
-
-    private fun hideButtons() {
-        /*addRemoveBookmarkButton.gone()
-        showHideButton.gone()*/
+        }
     }
 
     private fun setViewModelObserver() {
@@ -86,19 +89,16 @@ class DetailsActivity : BaseActivity() {
                     progressBar.visible()
                     content.gone()
                     noDataMessage.gone()
-                    hideButtons()
                 }
                 is Success -> {
                     progressBar.gone()
                     noDataMessage.gone()
                     content.visible()
-                    showButtons()
                     bindModel(it.result)
                 }
                 is Error -> {
                     progressBar.gone()
                     content.gone()
-                    hideButtons()
                     noDataMessage.visible()
                     it.throwable.message?.let { message -> longToast(message) }
                 }
@@ -129,5 +129,5 @@ class DetailsActivity : BaseActivity() {
         }
     }
 
-    private fun load(detailsId: String) = viewModel.load(detailsId)
+    private fun load(detailsId: Int) = viewModel.load(detailsId)
 }

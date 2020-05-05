@@ -15,10 +15,10 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
 import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
-import com.adcenter.features.details.DetailsConstants
+import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
+import com.adcenter.features.details.DetailsConstants.IS_EDIT_PAGE
 import com.adcenter.features.myads.uistate.Error
 import com.adcenter.features.myads.uistate.Loading
-import com.adcenter.features.myads.uistate.MyAdsUiState
 import com.adcenter.features.myads.uistate.Pagination
 import com.adcenter.features.myads.uistate.Success
 import com.adcenter.features.myads.viewmodel.MyAdsViewModel
@@ -72,7 +72,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
             .inject(this)
 
         initRecycler()
-        initЫwipeRefresh()
+        initSwipeRefresh()
         setViewModelObserver()
         load()
     }
@@ -153,7 +153,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
         })
     }
 
-    private fun initЫwipeRefresh() {
+    private fun initSwipeRefresh() {
         swipeRefresh.setOnRefreshListener { refresh() }
     }
 
@@ -165,10 +165,11 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
         recyclerView.addOnScrollListener(recyclersScrollListener)
     }
 
-    private fun onItemClick(id: String) {
+    private fun onItemClick(id: Int) {
         context?.startActivity(
             Intent(context, DetailsActivity::class.java).apply {
-                putExtra(DetailsConstants.DETAILS_ID_KEY, id)
+                putExtra(DETAILS_ID_KEY, id)
+                putExtra(IS_EDIT_PAGE, true)
             }
         )
     }

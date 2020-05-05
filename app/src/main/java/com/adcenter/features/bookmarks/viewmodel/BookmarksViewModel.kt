@@ -10,8 +10,10 @@ import com.adcenter.features.bookmarks.models.BookmarksModel
 import com.adcenter.features.bookmarks.models.BookmarksRequestParams
 import com.adcenter.features.bookmarks.uistate.*
 import com.adcenter.features.bookmarks.usecase.IBookmarksUseCase
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleObserver
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 class BookmarksViewModel(
@@ -20,7 +22,7 @@ class BookmarksViewModel(
 
     private var currentParams: BookmarksRequestParams = BookmarksRequestParams()
     private var bookmarksModel: BookmarksModel = BookmarksModel()
-    private var disposable: Disposable? = null
+    private var disposableBad = CompositeDisposable()
 
     private val dataSource: Single<BookmarksModel>
         get() = Single.create {
@@ -30,10 +32,20 @@ class BookmarksViewModel(
             }
         }
 
+    private val clearDbCall: Completable
+        get() = Completable.create {
+            try {
+                useCase.clearDb()
+                it.onComplete()
+            } catch (e: Exception) {
+                it.onError(e)
+            }
+        }
+
     private val observer = object : SingleObserver<BookmarksModel> {
 
         override fun onSubscribe(d: Disposable) {
-            disposable = d
+            disposableBad.add(d)
         }
 
         override fun onSuccess(model: BookmarksModel) {
@@ -77,7 +89,7 @@ class BookmarksViewModel(
     }
 
     private fun loadModel() {
-        disposable?.dispose()
+        disposableBad.clear()
 
         dataSource
             .async()
@@ -87,6 +99,7 @@ class BookmarksViewModel(
     override fun onCleared() {
         super.onCleared()
 
-        disposable?.dispose()
+        disposableBad.clear()
+        clearDbCall.async().subscribe()
     }
 }
