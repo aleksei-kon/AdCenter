@@ -17,9 +17,13 @@ class AdRequestsRepository(
     override fun getAdRequests(params: AdRequestsParams): Result<List<AdItemModel>> =
         runCatching {
             val networkResponse = advertsService
-                .getAdRequests(params.pageNumber)
+                .getAdRequests(params.pageNumber, params.isForceRefresh)
                 .execute()
                 .body()
+
+            if (networkResponse != null && params.isForceRefresh) {
+                advertsDao.clear()
+            }
 
             networkResponse
                 ?.map { AdItemDbEntity(it) }

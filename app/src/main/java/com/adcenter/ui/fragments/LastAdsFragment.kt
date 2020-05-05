@@ -57,6 +57,10 @@ class LastAdsFragment : BaseFragment(),
         )
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        viewModel.forceUpdate()
+    }
+
     private val recyclerScrollListener =
         ScrollToEndListener { loadMore() }
 
@@ -176,10 +180,11 @@ class LastAdsFragment : BaseFragment(),
     }
 
     private fun onItemClick(id: Int) {
-        context?.startActivity(
+        startActivityForResult(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)
-            }
+            },
+            123
         )
     }
 

@@ -17,10 +17,15 @@ class LastAdsRepository(
     override fun getLastAds(params: LastAdsRequestParams): Result<List<AdItemModel>> =
         runCatching {
             val networkResponse = advertsService
-                .getLastAds(params.pageNumber)
+                .getLastAds(params.pageNumber, params.isForceRefresh)
                 .execute()
+                .body()
 
-            networkResponse.body()
+            if (networkResponse != null && params.isForceRefresh) {
+                advertsDao.clear()
+            }
+
+            networkResponse
                 ?.map { AdItemDbEntity(it) }
                 ?.toTypedArray()
                 ?.let { advertsDao.insert(*it) }

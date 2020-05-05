@@ -17,9 +17,13 @@ class BookmarksRepository(
     override fun getBookmarks(params: BookmarksRequestParams): Result<List<AdItemModel>> =
         runCatching {
             val networkResponse = advertsService
-                .getBookmarks(params.pageNumber)
+                .getBookmarks(params.pageNumber, params.isForceRefresh)
                 .execute()
                 .body()
+
+            if (networkResponse != null && params.isForceRefresh) {
+                advertsDao.clear()
+            }
 
             networkResponse
                 ?.map { AdItemDbEntity(it) }

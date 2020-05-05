@@ -57,11 +57,17 @@ class AdsAdapter(
             R.anim.anim_fall_down
         )
 
+        private var id: Int = -1
+
         override fun bind(item: Any) {
             if (item is AdItemModel) {
                 if (!animation.hasStarted() || animation.hasEnded()) {
-                    itemView.startAnimation(animation)
+                    if (id != item.id) {
+                        itemView.startAnimation(animation)
+                    }
                 }
+
+                id = item.id
 
                 itemView.apply {
                     title.setTextWithVisibility(item.title)

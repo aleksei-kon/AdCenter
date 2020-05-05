@@ -18,22 +18,23 @@ interface AdvertsService {
     fun getDetails(@Query("detailsId") detailsId: Int): Call<NetworkDetailsModel>
 
     @GET("advert/lastAds")
-    fun getLastAds(@Query("pageNumber") pageNumber: Int): Call<List<NetworkAdItem>>
+    fun getLastAds(@Query("pageNumber") pageNumber: Int, @Query("isForceRefresh") isForceRefresh: Boolean): Call<List<NetworkAdItem>>
 
     @GET("advert/myAds")
-    fun getMyAds(@Query("pageNumber") pageNumber: Int): Call<List<NetworkAdItem>>
+    fun getMyAds(@Query("pageNumber") pageNumber: Int, @Query("isForceRefresh") isForceRefresh: Boolean): Call<List<NetworkAdItem>>
 
     @GET("advert/bookmarks")
-    fun getBookmarks(@Query("pageNumber") pageNumber: Int): Call<List<NetworkAdItem>>
+    fun getBookmarks(@Query("pageNumber") pageNumber: Int, @Query("isForceRefresh") isForceRefresh: Boolean): Call<List<NetworkAdItem>>
 
     @GET("advert/adRequests")
-    fun getAdRequests(@Query("pageNumber") pageNumber: Int): Call<List<NetworkAdItem>>
+    fun getAdRequests(@Query("pageNumber") pageNumber: Int, @Query("isForceRefresh") isForceRefresh: Boolean): Call<List<NetworkAdItem>>
 
     @GET("advert/search")
     fun getSearch(
         @Query("searchText") searchText: String,
         @Query("pageNumber") pageNumber: Int,
-        @Query("sortType") sortType: Int
+        @Query("sortType") sortType: Int,
+        @Query("isForceRefresh") isForceRefresh: Boolean
     ): Call<List<NetworkAdItem>>
 
     @POST("advert/update")

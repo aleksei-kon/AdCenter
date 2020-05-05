@@ -12,7 +12,7 @@ abstract class AdvertsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(vararg entity: AdItemDbEntity)
 
-    @Query("SELECT * FROM ad_items")
+    @Query("SELECT * FROM ad_items ORDER BY date DESC, id")
     abstract fun getAdverts(): List<AdItemDbEntity>
 
     @Query("DELETE FROM ad_items")

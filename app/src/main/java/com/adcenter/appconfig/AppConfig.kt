@@ -1,10 +1,14 @@
 package com.adcenter.appconfig
 
+import android.content.Context
+import android.content.Intent
 import com.adcenter.entities.view.AppConfigInfo
+import com.adcenter.receivers.LOGIN_STATE_CHANGED_ACTION
 
 class AppConfig(
     private val urlHolder: IBackendUrlHolder,
-    private val appConfigManager: IAppConfigManager
+    private val appConfigManager: IAppConfigManager,
+    private val context: Context
 ) : IAppConfig {
 
     override val backendUrl: String
@@ -39,5 +43,6 @@ class AppConfig(
         appConfigManager.isAdmin = appConfigInfo.isAdmin
 
         initConfig()
+        context.sendBroadcast(Intent().setAction(LOGIN_STATE_CHANGED_ACTION))
     }
 }

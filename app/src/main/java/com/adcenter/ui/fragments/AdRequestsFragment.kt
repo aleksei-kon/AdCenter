@@ -13,7 +13,6 @@ import com.adcenter.extensions.gone
 import com.adcenter.extensions.longToast
 import com.adcenter.extensions.provideViewModel
 import com.adcenter.extensions.visible
-import com.adcenter.features.adrequests.uistate.AdRequestsUiState
 import com.adcenter.features.adrequests.uistate.Error
 import com.adcenter.features.adrequests.uistate.Loading
 import com.adcenter.features.adrequests.uistate.Pagination
@@ -21,11 +20,11 @@ import com.adcenter.features.adrequests.uistate.Success
 import com.adcenter.features.adrequests.viewmodel.AdRequestsViewModel
 import com.adcenter.features.details.DetailsConstants
 import com.adcenter.resource.IResourceProvider
+import com.adcenter.ui.activities.DetailsActivity
+import com.adcenter.ui.adapters.AdRequestsAdapter
 import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.common.RecyclerViewMargin
 import com.adcenter.ui.common.ScrollToEndListener
-import com.adcenter.ui.activities.DetailsActivity
-import com.adcenter.ui.adapters.AdRequestsAdapter
 import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
 
@@ -67,6 +66,10 @@ class AdRequestsFragment : BaseFragment(),
         initSwipeRefresh()
         setViewModelObserver()
         load()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        viewModel.forceUpdate()
     }
 
     private fun initRecycler() {
@@ -141,10 +144,11 @@ class AdRequestsFragment : BaseFragment(),
     }
 
     private fun onItemClick(id: Int) {
-        context?.startActivity(
+        startActivityForResult(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)
-            }
+            },
+            123
         )
     }
 

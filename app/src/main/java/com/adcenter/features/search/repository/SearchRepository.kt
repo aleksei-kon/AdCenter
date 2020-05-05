@@ -20,10 +20,15 @@ class SearchRepository(
                 .getSearch(
                     searchText = params.searchText,
                     pageNumber = params.pageNumber,
-                    sortType = params.sortType
+                    sortType = params.sortType,
+                    isForceRefresh = params.isForceUpdate
                 )
                 .execute()
                 .body()
+
+            if (networkResponse != null && params.isForceUpdate) {
+                advertsDao.clear()
+            }
 
             networkResponse
                 ?.map { AdItemDbEntity(it) }

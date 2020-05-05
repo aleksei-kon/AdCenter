@@ -10,10 +10,11 @@ import com.adcenter.entities.view.AppConfigInfo
 import com.adcenter.extensions.gone
 import com.adcenter.extensions.visible
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.theme.IThemeManager
-import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.activities.DevSettingsActivity
 import com.adcenter.ui.activities.LoginActivity
+import com.adcenter.ui.activities.MainActivity
+import com.adcenter.ui.common.IPageConfiguration
+import com.adcenter.ui.theme.IThemeManager
 import kotlinx.android.synthetic.main.fragment_settings.*
 import javax.inject.Inject
 
@@ -38,16 +39,14 @@ class SettingsFragment : BaseFragment(),
     override val toolbarTitle: String
         get() = resourceProvider.settingsTitle
 
+    override fun onResume() {
+        super.onResume()
+
+        updateLoginState()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (appConfig.isLoggedIn) {
-            loginButton.gone()
-            logoutButton.visible()
-        } else {
-            loginButton.visible()
-            logoutButton.gone()
-        }
 
         loginButton.setOnClickListener {
             requireContext().startActivity(
@@ -57,6 +56,7 @@ class SettingsFragment : BaseFragment(),
 
         logoutButton.setOnClickListener {
             appConfig.updateConfig(AppConfigInfo())
+            updateLoginState()
             requireActivity().recreate()
         }
 
@@ -69,6 +69,16 @@ class SettingsFragment : BaseFragment(),
             requireContext().startActivity(
                 Intent(requireContext(), DevSettingsActivity::class.java)
             )
+        }
+    }
+
+    private fun updateLoginState() {
+        if (appConfig.isLoggedIn) {
+            loginButton.gone()
+            logoutButton.visible()
+        } else {
+            loginButton.visible()
+            logoutButton.gone()
         }
     }
 }

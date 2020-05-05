@@ -80,6 +80,12 @@ class SearchActivity : OfflineActivity() {
         )
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        viewModel.forceUpdate()
+    }
+
     override fun onDestroy() {
         disposables.clear()
 
@@ -186,10 +192,11 @@ class SearchActivity : OfflineActivity() {
     }
 
     private fun onItemClick(id: Int) {
-        startActivity(
+        startActivityForResult(
             Intent(this, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)
-            }
+            },
+            123
         )
     }
 

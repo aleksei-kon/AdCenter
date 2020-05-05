@@ -77,6 +77,10 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
         load()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        viewModel.forceUpdate()
+    }
+
     private fun initRecycler() {
         val columns = when (resources.configuration.orientation) {
             ORIENTATION_LANDSCAPE -> LANDSCAPE_COUNT
@@ -166,11 +170,12 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
     }
 
     private fun onItemClick(id: Int) {
-        context?.startActivity(
+        startActivityForResult(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DETAILS_ID_KEY, id)
                 putExtra(IS_EDIT_PAGE, true)
-            }
+            },
+            123
         )
     }
 

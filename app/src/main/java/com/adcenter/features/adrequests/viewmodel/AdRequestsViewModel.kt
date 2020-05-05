@@ -52,12 +52,16 @@ class AdRequestsViewModel(
             adRequestsModel = model
             adRequestsUiMutableState.value = Success(model)
             currentParams = currentParams.copy(
-                pageNumber = currentParams.pageNumber + 1
+                pageNumber = currentParams.pageNumber + 1,
+                isForceRefresh = false
             )
         }
 
         override fun onError(e: Throwable) {
             adRequestsUiMutableState.value = Error(e)
+            currentParams = currentParams.copy(
+                isForceRefresh = false
+            )
         }
     }
 
@@ -82,18 +86,22 @@ class AdRequestsViewModel(
         loadModel()
     }
 
-    fun refresh() {
-        adRequestsModel = AdRequestsModel()
-        currentParams = currentParams.copy(
-            pageNumber = FIRST_PAGE_NUMBER
-        )
-
+    fun forceUpdate() {
         disposableBad.clear()
-        disposableBad.add(
-            clearDbCall
-                .async()
-                .subscribe { loadModel() }
+        currentParams = currentParams.copy(
+            pageNumber = currentParams.pageNumber - 1,
+            isForceRefresh = true
         )
+        loadModel()
+    }
+
+    fun refresh() {
+        disposableBad.clear()
+        currentParams = currentParams.copy(
+            pageNumber = FIRST_PAGE_NUMBER,
+            isForceRefresh = true
+        )
+        loadModel()
     }
 
     private fun loadModel() {

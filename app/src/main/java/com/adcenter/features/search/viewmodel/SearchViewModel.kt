@@ -52,7 +52,8 @@ class SearchViewModel(
             searchModel = model
             searchUiMutableState.value = Success(model)
             currentParams = currentParams.copy(
-                pageNumber = currentParams.pageNumber + 1
+                pageNumber = currentParams.pageNumber + 1,
+                isForceUpdate = false
             )
         }
 
@@ -79,7 +80,8 @@ class SearchViewModel(
             searchModel = SearchModel()
             currentParams = currentParams.copy(
                 searchText = searchText,
-                pageNumber = FIRST_PAGE_NUMBER
+                pageNumber = FIRST_PAGE_NUMBER,
+                isForceUpdate = false
             )
 
             disposableBad.clear()
@@ -89,6 +91,21 @@ class SearchViewModel(
                     .subscribe { loadModel() }
             )
         }
+    }
+
+    fun forceUpdate() {
+        disposableBad.clear()
+        currentParams = currentParams.copy(
+            pageNumber = currentParams.pageNumber - 1,
+            isForceUpdate = true
+        )
+
+        disposableBad.clear()
+        disposableBad.add(
+            clearDbCall
+                .async()
+                .subscribe { loadModel() }
+        )
     }
 
     fun loadMore() {

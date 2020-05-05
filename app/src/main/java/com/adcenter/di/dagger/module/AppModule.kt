@@ -32,6 +32,7 @@ class AppModule {
     @Singleton
     fun provideAppConfig(
         urlHolder: IBackendUrlHolder,
-        appConfigManager: IAppConfigManager
-    ): IAppConfig = AppConfig(urlHolder, appConfigManager)
+        appConfigManager: IAppConfigManager,
+        context: Context
+    ): IAppConfig = AppConfig(urlHolder, appConfigManager, context)
 }

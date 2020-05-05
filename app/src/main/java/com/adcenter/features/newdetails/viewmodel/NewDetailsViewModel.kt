@@ -30,8 +30,8 @@ class NewDetailsViewModel(
 
     private val dataSource: Completable
         get() = Completable.create {
-            val photoUrls: List<String> = photos.map { getFile(it) }.map {
-                when (val result = uploadPhotoUseCase.upload(it)) {
+            val photoUrls: List<String> = photos.map { photo -> getFile(photo) }.map { photoFile ->
+                when (val result = uploadPhotoUseCase.upload(photoFile)) {
                     is Result.Success -> result.value
                     is Result.Error -> EMPTY
                 }

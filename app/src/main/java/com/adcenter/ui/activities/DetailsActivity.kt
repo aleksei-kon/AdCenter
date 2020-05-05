@@ -83,12 +83,16 @@ class DetailsActivity : BaseActivity() {
             deleteButton.gone()
         }
 
-        if (appConfig.isLoggedIn && !appConfig.isAdmin) {
+        if (appConfig.isLoggedIn || appConfig.isAdmin) {
             addRemoveBookmarkButton.visible()
+        } else {
+            addRemoveBookmarkButton.gone()
         }
 
         if (appConfig.isAdmin) {
             showHideButton.visible()
+        } else {
+            showHideButton.gone()
         }
 
         initButtons()
