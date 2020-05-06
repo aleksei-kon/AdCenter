@@ -20,7 +20,11 @@ class ResourceProvider(private val context: Context) :
 
     override val settingsTitle: String = getString(R.string.SETTINGS_TITLE)
 
-    override val datePrefix: String = getString(R.string.DATEPREFIX)
+    override val datePrefix: String = getString(R.string.DATE_PREFIX)
 
-    override val viewsPrefix: String = getString(R.string.VIEWSPREFIX)
+    override val viewsPrefix: String = getString(R.string.VIEWS_PREFIX)
+
+    override val phonePrefix: String = getString(R.string.PHONE_PREFIX)
+
+    override val usernamePrefix: String = getString(R.string.USERNAME_PREFIX)
 }

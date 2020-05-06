@@ -27,9 +27,9 @@
 
         <org.apmem.tools.layouts.FlowLayout
             android:id="@+id/buttonContainer"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addRemoveBookmarkButton"
@@ -39,7 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_button_add_to_bookmarks"
-                tools:text="@string/add_to_bookmark"/>
+                tools:text="@string/add_to_bookmark" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/showHideButton"
@@ -49,7 +49,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_button_add_to_bookmarks"
-                tools:text="@string/hide_advert"/>
+                tools:text="@string/hide_advert" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/editButton"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor"
-                android:textSize="24sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/textColor"
-                android:textSize="24sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
@@ -103,9 +103,9 @@
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:textColor="?attr/textColor"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/price" />
 
@@ -113,9 +113,8 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:textColor="?attr/textColor"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/location" />
 
@@ -123,10 +122,9 @@
                 android:id="@+id/views"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:gravity="center_vertical"
                 android:textColor="?attr/textColor"
-                android:textSize="14sp"
+                android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/date" />
 
@@ -134,7 +132,7 @@
                 android:id="@+id/synopsisTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/DESCRIPTION"
                 android:textColor="?attr/textColor"
                 android:textSize="16sp"
@@ -144,7 +142,7 @@
                 android:id="@+id/synopsis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:textColor="?attr/textColor"
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@+id/synopsisTitle" />
@@ -153,7 +151,7 @@
                 android:id="@+id/contactsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/CONTACTS"
                 android:textColor="?attr/textColor"
                 android:textSize="16sp"
@@ -163,7 +161,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:textColor="?attr/textColor"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +181,7 @@
                 android:id="@+id/disclaimer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="100dp"
                 android:gravity="center_horizontal"
                 android:text="@string/DETAILS_DISCLAIMER"
                 android:textColor="?attr/subtextColor"

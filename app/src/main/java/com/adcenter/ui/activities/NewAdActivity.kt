@@ -149,8 +149,7 @@ class NewAdActivity : BaseActivity() {
         val params = NewDetailsRequestParams(
             newDetailsModel = NewDetailsModel(
                 title = titleEditText.text.toString().trim(),
-                price = priceEditText.text.toString()
-                    .trim() + currencySpinner.selectedItem.toString(),
+                price = "${priceEditText.text.toString().trim()} ${currencySpinner.selectedItem}",
                 location = placeEditText.text.toString().trim(),
                 synopsis = synopsisEditText.text.toString().trim(),
                 phone = phoneEditText.text.toString().trim()

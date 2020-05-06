@@ -17,4 +17,8 @@ interface IResourceProvider {
     val datePrefix: String
 
     val viewsPrefix: String
+
+    val phonePrefix: String
+
+    val usernamePrefix: String
 }

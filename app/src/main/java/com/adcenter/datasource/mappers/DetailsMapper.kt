@@ -27,8 +27,8 @@ class DetailsMapper(
         val date = getDate(formatUnixtime(dbEntity.date))
         val views = getViews(dbEntity.views)
         val synopsis = dbEntity.synopsis ?: EMPTY
-        val username = dbEntity.username ?: EMPTY
-        val phone = dbEntity.phone ?: EMPTY
+        val username = getUsername(dbEntity.username)
+        val phone = getPhone(dbEntity.phone)
 
         return DetailsModel(
             id = id,
@@ -57,8 +57,8 @@ class DetailsMapper(
         val date = getDate(formatUnixtime(networkModel.date))
         val views = getViews(networkModel.views)
         val synopsis = networkModel.synopsis ?: EMPTY
-        val username = networkModel.username ?: EMPTY
-        val phone = networkModel.phone ?: EMPTY
+        val username = getUsername(networkModel.username)
+        val phone = getPhone(networkModel.phone)
 
         return DetailsModel(
             id = id,
@@ -85,7 +85,7 @@ class DetailsMapper(
 
     private fun getViews(views: Int?): String =
         if (views != null) {
-            "${resourceProvider.viewsPrefix}$views"
+            "${resourceProvider.viewsPrefix} $views"
         } else {
             EMPTY
         }
@@ -94,7 +94,21 @@ class DetailsMapper(
         if (date.isEmpty()) {
             EMPTY
         } else {
-            "${resourceProvider.datePrefix}$date"
+            "${resourceProvider.datePrefix} $date"
+        }
+
+    private fun getUsername(username: String?): String =
+        if (username.isNullOrEmpty()) {
+            EMPTY
+        } else {
+            "${resourceProvider.usernamePrefix} $username"
+        }
+
+    private fun getPhone(phone: String?): String =
+        if (phone.isNullOrEmpty()) {
+            EMPTY
+        } else {
+            "${resourceProvider.phonePrefix} $phone"
         }
 
     private fun formatUnixtime(unixtime: Long?): String =
