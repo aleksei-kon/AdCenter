@@ -2,6 +2,7 @@ package com.adcenter.extensions
 
 object Constants {
 
+    const val APP_LOG_NAME = "com.adcenter.app_log"
     const val SPACE = ' '
     const val EMPTY = ""
     const val EMPTY_ID = -1

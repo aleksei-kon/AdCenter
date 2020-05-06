@@ -84,6 +84,8 @@ class BookmarksViewModel(
     }
 
     fun forceUpdate() {
+        bookmarksUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = currentParams.pageNumber - 1,
@@ -93,6 +95,8 @@ class BookmarksViewModel(
     }
 
     fun refresh() {
+        bookmarksUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = FIRST_PAGE_NUMBER,

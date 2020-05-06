@@ -3,6 +3,7 @@ package com.adcenter.features.adrequests.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.room.Update
 import com.adcenter.entities.Result
 import com.adcenter.extensions.async
 import com.adcenter.features.adrequests.AdRequestsConstants.FIRST_PAGE_NUMBER
@@ -87,6 +88,8 @@ class AdRequestsViewModel(
     }
 
     fun forceUpdate() {
+        adRequestsUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = currentParams.pageNumber - 1,
@@ -96,6 +99,8 @@ class AdRequestsViewModel(
     }
 
     fun refresh() {
+        adRequestsUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = FIRST_PAGE_NUMBER,

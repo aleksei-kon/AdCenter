@@ -4,19 +4,18 @@ import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
+import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants
-import com.adcenter.features.search.uistate.Error
-import com.adcenter.features.search.uistate.NewSearch
-import com.adcenter.features.search.uistate.Pagination
-import com.adcenter.features.search.uistate.Success
+import com.adcenter.features.search.uistate.*
 import com.adcenter.features.search.viewmodel.SearchViewModel
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType
@@ -29,6 +28,9 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.noDataMessage
+import kotlinx.android.synthetic.main.activity_search.recyclerView
+import kotlinx.android.synthetic.main.layout_recycler.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -146,13 +148,18 @@ class SearchActivity : OfflineActivity() {
         viewModel.searchData.observe(this, Observer {
             when (it) {
                 is NewSearch -> {
+                    removeScrollListener()
                     noDataMessage.gone()
                     recyclerView.visible()
                     setRecyclerItems(emptyList())
                     recyclerAdapter.showPagination()
                 }
                 is Pagination -> {
+                    removeScrollListener()
                     recyclerAdapter.showPagination()
+                }
+                is Updating -> {
+                    removeScrollListener()
                 }
                 is Success -> {
                     recyclerAdapter.hidePagination()
@@ -176,7 +183,11 @@ class SearchActivity : OfflineActivity() {
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> longToast(message) }
+                    if (it.throwable is EmptyPageException) {
+                        Log.d(Constants.APP_LOG_NAME, it.throwable.message ?: "Empty page")
+                    } else {
+                        it.throwable.message?.let { message -> longToast(message) }
+                    }
                     setScrollListener()
                 }
             }
@@ -188,7 +199,12 @@ class SearchActivity : OfflineActivity() {
     }
 
     private fun setScrollListener() {
+        recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(recyclerScrollListener)
+    }
+
+    private fun removeScrollListener() {
+        recyclerView.clearOnScrollListeners()
     }
 
     private fun onItemClick(id: Int) {

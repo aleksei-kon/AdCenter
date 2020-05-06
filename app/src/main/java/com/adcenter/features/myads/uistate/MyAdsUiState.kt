@@ -5,5 +5,6 @@ import com.adcenter.features.myads.models.MyAdsModel
 sealed class MyAdsUiState
 object Loading : MyAdsUiState()
 object Pagination : MyAdsUiState()
+object Updating : MyAdsUiState()
 data class Success(val result: MyAdsModel) : MyAdsUiState()
 data class Error(val throwable: Throwable) : MyAdsUiState()

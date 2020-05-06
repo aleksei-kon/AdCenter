@@ -84,6 +84,8 @@ class MyAdsViewModel(
     }
 
     fun forceUpdate() {
+        myAdsUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = currentParams.pageNumber - 1,
@@ -93,6 +95,8 @@ class MyAdsViewModel(
     }
 
     fun refresh() {
+        myAdsUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = FIRST_PAGE_NUMBER,

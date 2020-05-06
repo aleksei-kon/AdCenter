@@ -3,9 +3,11 @@ package com.adcenter.features.search.repository
 import com.adcenter.datasource.database.AdvertsDao
 import com.adcenter.datasource.mappers.AdvertsMapper
 import com.adcenter.datasource.network.AdvertsService
+import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.Result
 import com.adcenter.entities.database.AdItemDbEntity
 import com.adcenter.entities.view.AdItemModel
+import com.adcenter.features.search.SearchConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.search.models.SearchRequestParams
 
 class SearchRepository(
@@ -28,6 +30,10 @@ class SearchRepository(
 
             if (networkResponse != null && params.isForceUpdate) {
                 advertsDao.clear()
+            }
+
+            if (networkResponse.isNullOrEmpty() && params.pageNumber != FIRST_PAGE_NUMBER && !params.isForceUpdate) {
+                throw EmptyPageException("Empty page ${params.pageNumber}")
             }
 
             networkResponse

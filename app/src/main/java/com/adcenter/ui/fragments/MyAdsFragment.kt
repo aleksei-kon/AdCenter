@@ -4,33 +4,29 @@ import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
+import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.view.AdItemModel
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.longToast
-import com.adcenter.extensions.provideViewModel
-import com.adcenter.extensions.visible
+import com.adcenter.extensions.*
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.features.details.DetailsConstants.IS_EDIT_PAGE
-import com.adcenter.features.myads.uistate.Error
-import com.adcenter.features.myads.uistate.Loading
-import com.adcenter.features.myads.uistate.Pagination
-import com.adcenter.features.myads.uistate.Success
+import com.adcenter.features.myads.uistate.*
 import com.adcenter.features.myads.viewmodel.MyAdsViewModel
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.common.IPageConfiguration
-import com.adcenter.ui.common.RecyclerViewMargin
-import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType.GRID
 import com.adcenter.ui.adapters.ViewHolderType.ITEM
 import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
+import com.adcenter.ui.common.IPageConfiguration
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
 import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
 
@@ -119,12 +115,17 @@ class MyAdsFragment : BaseFragment(),
         viewModel.myAdsData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> {
+                    removeScrollListener()
                     recyclerView.gone()
                     noDataMessage.gone()
                     progressBar.visible()
                 }
                 is Pagination -> {
+                    removeScrollListener()
                     recyclerAdapter.showPagination()
+                }
+                is Updating -> {
+                    removeScrollListener()
                 }
                 is Success -> {
                     swipeRefresh.isRefreshing = false
@@ -152,7 +153,11 @@ class MyAdsFragment : BaseFragment(),
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> longToast(message) }
+                    if (it.throwable is EmptyPageException) {
+                        Log.d(Constants.APP_LOG_NAME, it.throwable.message ?: "Empty page")
+                    } else {
+                        it.throwable.message?.let { message -> longToast(message) }
+                    }
                     setScrollListener()
                 }
             }
@@ -168,7 +173,12 @@ class MyAdsFragment : BaseFragment(),
     }
 
     private fun setScrollListener() {
+        recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(recyclersScrollListener)
+    }
+
+    private fun removeScrollListener() {
+        recyclerView.clearOnScrollListeners()
     }
 
     private fun onItemClick(id: Int) {

@@ -3,9 +3,11 @@ package com.adcenter.features.myads.repository
 import com.adcenter.datasource.database.AdvertsDao
 import com.adcenter.datasource.mappers.AdvertsMapper
 import com.adcenter.datasource.network.AdvertsService
+import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.Result
 import com.adcenter.entities.database.AdItemDbEntity
 import com.adcenter.entities.view.AdItemModel
+import com.adcenter.features.myads.MyAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.myads.models.MyAdsRequestParams
 
 class MyAdsRepository(
@@ -23,6 +25,10 @@ class MyAdsRepository(
 
             if (networkResponse != null && params.isForceRefresh) {
                 advertsDao.clear()
+            }
+
+            if (networkResponse.isNullOrEmpty() && params.pageNumber != FIRST_PAGE_NUMBER && !params.isForceRefresh) {
+                throw EmptyPageException("Empty page ${params.pageNumber}")
             }
 
             networkResponse

@@ -3,10 +3,14 @@ package com.adcenter.features.lastads.repository
 import com.adcenter.datasource.database.AdvertsDao
 import com.adcenter.datasource.mappers.AdvertsMapper
 import com.adcenter.datasource.network.AdvertsService
+import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.Result
 import com.adcenter.entities.database.AdItemDbEntity
 import com.adcenter.entities.view.AdItemModel
+import com.adcenter.features.lastads.LastAdsConstants
+import com.adcenter.features.lastads.LastAdsConstants.FIRST_PAGE_NUMBER
 import com.adcenter.features.lastads.models.LastAdsRequestParams
+import java.lang.Exception
 
 class LastAdsRepository(
     private val advertsService: AdvertsService,
@@ -23,6 +27,10 @@ class LastAdsRepository(
 
             if (networkResponse != null && params.isForceRefresh) {
                 advertsDao.clear()
+            }
+
+            if (networkResponse.isNullOrEmpty() && params.pageNumber != FIRST_PAGE_NUMBER && !params.isForceRefresh) {
+                throw EmptyPageException("Empty page ${params.pageNumber}")
             }
 
             networkResponse

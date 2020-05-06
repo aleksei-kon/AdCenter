@@ -4,22 +4,17 @@ import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adcenter.R
 import com.adcenter.di.dagger.injector.Injector
+import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.view.AdItemModel
-import com.adcenter.extensions.gone
-import com.adcenter.extensions.longToast
-import com.adcenter.extensions.provideViewModel
-import com.adcenter.extensions.visible
-import com.adcenter.features.bookmarks.uistate.BookmarksUiState
-import com.adcenter.features.bookmarks.uistate.Error
-import com.adcenter.features.bookmarks.uistate.Loading
-import com.adcenter.features.bookmarks.uistate.Pagination
-import com.adcenter.features.bookmarks.uistate.Success
+import com.adcenter.extensions.*
+import com.adcenter.features.bookmarks.uistate.*
 import com.adcenter.features.bookmarks.viewmodel.BookmarksViewModel
 import com.adcenter.features.details.DetailsConstants.DETAILS_ID_KEY
 import com.adcenter.resource.IResourceProvider
@@ -119,12 +114,17 @@ class BookmarksFragment : BaseFragment(),
         viewModel.bookmarksData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> {
+                    removeScrollListener()
                     recyclerView.gone()
                     noDataMessage.gone()
                     progressBar.visible()
                 }
                 is Pagination -> {
+                    removeScrollListener()
                     recyclerAdapter.showPagination()
+                }
+                is Updating -> {
+                    removeScrollListener()
                 }
                 is Success -> {
                     swipeRefresh.isRefreshing = false
@@ -152,7 +152,11 @@ class BookmarksFragment : BaseFragment(),
                         noDataMessage.visible()
                     }
 
-                    it.throwable.message?.let { message -> longToast(message) }
+                    if (it.throwable is EmptyPageException) {
+                        Log.d(Constants.APP_LOG_NAME, it.throwable.message ?: "Empty page")
+                    } else {
+                        it.throwable.message?.let { message -> longToast(message) }
+                    }
                     setScrollListener()
                 }
             }
@@ -168,7 +172,12 @@ class BookmarksFragment : BaseFragment(),
     }
 
     private fun setScrollListener() {
+        recyclerView.clearOnScrollListeners()
         recyclerView.addOnScrollListener(recyclerScrollListener)
+    }
+
+    private fun removeScrollListener() {
+        recyclerView.clearOnScrollListeners()
     }
 
     private fun onItemClick(id: Int) {

@@ -94,6 +94,8 @@ class SearchViewModel(
     }
 
     fun forceUpdate() {
+        searchUiMutableState.value = Updating
+
         disposableBad.clear()
         currentParams = currentParams.copy(
             pageNumber = currentParams.pageNumber - 1,

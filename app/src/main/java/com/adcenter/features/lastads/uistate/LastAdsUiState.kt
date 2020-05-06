@@ -5,5 +5,6 @@ import com.adcenter.features.lastads.models.LastAdsModel
 sealed class LastAdsUiState
 object Loading : LastAdsUiState()
 object Pagination : LastAdsUiState()
+object Updating : LastAdsUiState()
 class Success(val result: LastAdsModel) : LastAdsUiState()
 class Error(val throwable: Throwable) : LastAdsUiState()
