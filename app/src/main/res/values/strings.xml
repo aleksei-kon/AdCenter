@@ -18,7 +18,7 @@
     <string name="DETAILS_DISCLAIMER">AdCenter isn\'t responsible for the quality \nof the goods</string>
     <string name="DESCRIPTION">Description</string>
     <string name="CONTACTS">Contacts</string>
-    <string name="DATE_PREFIX">Creation date:</string>
+    <string name="DATE_PREFIX">Created:</string>
     <string name="USERNAME_PREFIX">Username:</string>
     <string name="PHONE_PREFIX">Phone:</string>
     <string name="VIEWS_PREFIX">Views:</string>

@@ -50,6 +50,9 @@
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"
             android:layout_width="match_parent"
+            app:itemIconTint="?attr/iconColor"
+            android:background="?attr/bottomSheetBgColor"
+            app:itemTextColor="?attr/textColor"
             android:layout_height="match_parent"
             app:itemBackground="@drawable/default_ripple" />
 
