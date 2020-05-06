@@ -2,8 +2,6 @@ package com.adcenter.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import coil.api.load
 import com.adcenter.R
@@ -52,23 +50,8 @@ class AdsAdapter(
 
     inner class LinearItemViewHolder(view: View) : BaseItemViewHolder(view) {
 
-        private val animation: Animation = AnimationUtils.loadAnimation(
-            itemView.context,
-            R.anim.anim_fall_down
-        )
-
-        private var id: Int = -1
-
         override fun bind(item: Any) {
             if (item is AdItemModel) {
-                if (!animation.hasStarted() || animation.hasEnded()) {
-                    if (id != item.id) {
-                        itemView.startAnimation(animation)
-                    }
-                }
-
-                id = item.id
-
                 itemView.apply {
                     title.setTextWithVisibility(item.title)
                     price.setTextWithVisibility(item.price)
