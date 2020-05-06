@@ -10,6 +10,8 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module(includes = [AppModule::class])
@@ -19,6 +21,10 @@ class NetworkModule {
     @Singleton
     fun provideOkHttpClient(appConfig: IAppConfig): OkHttpClient =
         OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .callTimeout(60, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
 
@@ -34,6 +40,7 @@ class NetworkModule {
     fun provideRetrofit(httpClient: OkHttpClient, appConfig: IAppConfig): Retrofit =
         Retrofit.Builder()
             .baseUrl(appConfig.backendUrl)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient)
             .build()

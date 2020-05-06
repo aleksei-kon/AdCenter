@@ -35,6 +35,7 @@ object Libs {
         const val dagger = "2.27"
         const val viewModel = "2.1.0"
         const val retrofit2 = "2.8.1"
+        const val scalarsRetrofit2 = "2.1.0"
         const val convertergson = "2.4.0"
         const val room = "2.2.5"
     }
@@ -65,6 +66,7 @@ object Libs {
     const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
+    const val scalarsRetrofit2 = "com.squareup.retrofit2:converter-scalars:${Versions.scalarsRetrofit2}"
     const val convertergson = "com.squareup.retrofit2:converter-gson:${Versions.convertergson}"
 
     const val room = "androidx.room:room-runtime:${Versions.room}"

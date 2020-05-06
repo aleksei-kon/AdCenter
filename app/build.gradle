@@ -55,6 +55,7 @@ dependencies {
     implementation Libs.viewModel
 
     implementation Libs.retrofit2
+    implementation Libs.scalarsRetrofit2
     implementation Libs.convertergson
 
     implementation Libs.rxJava
