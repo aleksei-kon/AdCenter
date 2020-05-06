@@ -1,7 +1,6 @@
 package com.adcenter.ui.common
 
 import android.graphics.Rect
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewMargin(
@@ -9,14 +8,7 @@ class RecyclerViewMargin(
     private val columns: Int
 ) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State
-    ) {
-        val position = parent.getChildLayoutPosition(view)
-
+    override fun getItemOffsets(outRect: Rect, position: Int, parent: RecyclerView) {
         outRect.apply {
             right = margin
             bottom = margin

@@ -25,7 +25,7 @@ object Libs {
         const val appcompat = "1.0.2"
         const val coreKtx = "1.0.2"
         const val constraintlayout = "1.1.3"
-        const val coil = "0.9.5"
+        const val coil = "0.10.1"
         const val imageSlider = "1.3.2"
         const val coroutines = "1.3.2"
         const val rxJava = "2.2.19"

@@ -23,13 +23,14 @@ class AdRequestsAdapter(
     override val paginationLayout: Int = R.layout.adapter_pagination
 
     override fun setItems(items: List<AdItemModel>) {
-        val diffCallback = AdsDiffCallback(this.items, items)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        //val diffCallback = AdsDiffCallback(this.items, items)
+        //val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         this.items.clear()
         this.items.addAll(items)
+        notifyDataSetChanged()
 
-        diffResult.dispatchUpdatesTo(this)
+        //diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewHolder(parent: ViewGroup): BaseItemViewHolder =
