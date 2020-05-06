@@ -29,6 +29,7 @@
         <item name="buttonStrokeColor">@color/secondaryColor</item>
         <item name="buttonOutlineTextColor">@color/secondaryColor</item>
         <item name="buttonContainedTextColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
     </style>
 
     <!-- Application dark theme. -->
@@ -56,6 +57,7 @@
         <item name="buttonStrokeColor">@color/secondaryColor</item>
         <item name="buttonOutlineTextColor">@color/secondaryColor</item>
         <item name="buttonContainedTextColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
     </style>
 
     <style name="ButtonOutline" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
