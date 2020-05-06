@@ -55,4 +55,12 @@
     <string name="hide_advert">Hide</string>
     <string name="edit_advert">Edit</string>
     <string name="delete_advert">Delete</string>
+    <string name="empty_title_message">Title can\'t be empty</string>
+    <string name="empty_price_message">Price can\'t be empty</string>
+    <string name="empty_location_message">Locations can\'t be empty</string>
+    <string name="empty_phone_message">Phone can\'t be empty</string>
+    <string name="empty_synopsis_message">Synopsis can\'t be empty</string>
+    <string name="title_length_message">Title length should be from 4 to 40</string>
+    <string name="location_length_message">Location min length is 2</string>
+    <string name="synopsis_length_message">Description min length is 4</string>
 </resources>

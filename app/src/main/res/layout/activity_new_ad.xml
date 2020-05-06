@@ -32,72 +32,75 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
 
         <LinearLayout
             android:id="@+id/contentLayout"
             android:layout_width="match_parent"
+            android:padding="16dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/titleInputLayout"
-                style="@style/Input"
+                style="@style/OutlineInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/TITLE_HINT">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/titleEditText"
-                    style="@style/InputEditTextStyle"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/priceInputLayout"
-                style="@style/Input"
+            <LinearLayout
+                android:id="@+id/currency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/priceEditText"
-                    style="@style/InputEditTextStyle"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/priceInputLayout"
+                    style="@style/OutlineInput"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/PRICE_HINT"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_weight="3">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/currencyDropDownInputLayout"
-                style="@style/DropDown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/currency"
-                app:boxBackgroundColor="@null">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/priceEditText"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/PRICE_HINT"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <AutoCompleteTextView
-                    android:id="@+id/currencyDropDownEditText"
-                    style="@style/InputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <Spinner
+                    android:id="@+id/currencySpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/placeInputLayout"
-                style="@style/Input"
+                style="@style/OutlineInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/placeEditText"
-                    style="@style/InputEditTextStyle"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/PLACE_HINT"
@@ -106,13 +109,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneInputLayout"
-                style="@style/Input"
+                style="@style/OutlineInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneEditText"
-                    style="@style/InputEditTextStyle"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/PHONE_HINT"
@@ -124,9 +128,9 @@
                 style="@style/Input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="16dp">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/synopsisEditText"
                     style="@style/InputEditTextStyle"
                     android:layout_width="match_parent"
@@ -140,7 +144,7 @@
                 android:id="@+id/photosRecycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
             <com.google.android.material.button.MaterialButton
