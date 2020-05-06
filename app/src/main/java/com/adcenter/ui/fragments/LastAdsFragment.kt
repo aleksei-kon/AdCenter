@@ -40,6 +40,7 @@ private const val SINGLE_COUNT = 1
 private const val LANDSCAPE_COUNT = 4
 
 class LastAdsFragment : BaseFragment(),
+    IUpdatableFragment,
     IPageConfiguration {
 
     @Inject
@@ -55,10 +56,6 @@ class LastAdsFragment : BaseFragment(),
             LastAdsViewModel::class.java,
             viewModelFactory
         )
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        viewModel.forceUpdate()
     }
 
     private val recyclerScrollListener =
@@ -81,6 +78,10 @@ class LastAdsFragment : BaseFragment(),
         initSwipeRefresh()
         setViewModelObserver()
         load()
+    }
+
+    override fun updateData() {
+        viewModel.forceUpdate()
     }
 
     private fun initRecycler() {
@@ -183,8 +184,7 @@ class LastAdsFragment : BaseFragment(),
         startActivityForResult(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)
-            },
-            123
+            }, 123
         )
     }
 

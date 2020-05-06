@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
 
 class AdRequestsFragment : BaseFragment(),
+    IUpdatableFragment,
     IPageConfiguration {
 
     @Inject
@@ -68,7 +69,7 @@ class AdRequestsFragment : BaseFragment(),
         load()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun updateData() {
         viewModel.forceUpdate()
     }
 
@@ -147,8 +148,7 @@ class AdRequestsFragment : BaseFragment(),
         startActivityForResult(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DetailsConstants.DETAILS_ID_KEY, id)
-            },
-            123
+            }, 123
         )
     }
 

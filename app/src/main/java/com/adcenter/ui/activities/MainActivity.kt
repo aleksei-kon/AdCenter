@@ -15,6 +15,8 @@ import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
 import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.content
+import kotlinx.android.synthetic.main.activity_new_ad.*
 import javax.inject.Inject
 
 private const val CURRENT_MENU_ITEM_ID_KEY = "currentMenuItemId"
@@ -68,7 +70,7 @@ class MainActivity : OfflineActivity() {
         updateContentVisibility()
 
         searchButton.setOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
+            startActivityForResult(Intent(this, SearchActivity::class.java), 123)
         }
 
         addFab.setOnClickListener {
@@ -78,12 +80,18 @@ class MainActivity : OfflineActivity() {
                 LoginActivity::class.java
             }
 
-            startActivity(Intent(this, activityClass))
+            startActivityForResult(Intent(this, activityClass), 123)
         }
 
         if (savedInstanceState == null) {
             selectItem(defaultItemId)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        updateCurrentFragment()
     }
 
     override fun updateContentVisibility() {
@@ -124,6 +132,14 @@ class MainActivity : OfflineActivity() {
             fragmentLifecycleCallback,
             false
         )
+    }
+
+    private fun updateCurrentFragment() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.content)
+
+        if (currentFragment is IUpdatableFragment) {
+            currentFragment.updateData()
+        }
     }
 
     private fun selectItem(itemId: Int): Boolean {

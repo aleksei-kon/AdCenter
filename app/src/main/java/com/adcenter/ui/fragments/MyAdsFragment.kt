@@ -38,7 +38,9 @@ private const val SINGLE_COUNT = 1
 private const val PORTRAIT_COUNT = 2
 private const val LANDSCAPE_COUNT = 4
 
-class MyAdsFragment : BaseFragment(), IPageConfiguration {
+class MyAdsFragment : BaseFragment(),
+    IUpdatableFragment,
+    IPageConfiguration {
 
     @Inject
     lateinit var resourceProvider: IResourceProvider
@@ -77,7 +79,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
         load()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun updateData() {
         viewModel.forceUpdate()
     }
 
@@ -174,8 +176,7 @@ class MyAdsFragment : BaseFragment(), IPageConfiguration {
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DETAILS_ID_KEY, id)
                 putExtra(IS_EDIT_PAGE, true)
-            },
-            123
+            }, 123
         )
     }
 

@@ -39,6 +39,7 @@ private const val PORTRAIT_COUNT = 2
 private const val LANDSCAPE_COUNT = 4
 
 class BookmarksFragment : BaseFragment(),
+    IUpdatableFragment,
     IPageConfiguration {
 
     @Inject
@@ -78,7 +79,7 @@ class BookmarksFragment : BaseFragment(),
         load()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun updateData() {
         viewModel.forceUpdate()
     }
 
@@ -174,8 +175,7 @@ class BookmarksFragment : BaseFragment(),
         startActivityForResult(
             Intent(context, DetailsActivity::class.java).apply {
                 putExtra(DETAILS_ID_KEY, id)
-            },
-            123
+            }, 123
         )
     }
 
