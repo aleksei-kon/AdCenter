@@ -72,7 +72,5 @@
             app:iconPadding="8dp"
             app:iconTint="?attr/iconColor"
             app:rippleColor="?attr/rippleLightColor" />
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.adcenter.R
 import com.adcenter.appconfig.IAppConfig
 import com.adcenter.di.dagger.injector.Injector
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_bottom_sheet_navigation.*
 import javax.inject.Inject
@@ -15,6 +16,8 @@ class NavigationBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var appConfig: IAppConfig
+
+    private var mainView: View? = null
 
     init {
         Injector.appComponent.inject(this)
@@ -27,11 +30,22 @@ class NavigationBottomSheetDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.layout_bottom_sheet_navigation, container, false)
+        mainView = inflater.inflate(R.layout.layout_bottom_sheet_navigation, container, false)
+
+        return mainView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        dialog?.setOnShowListener {
+            val parent = mainView?.parent
+
+            if (parent is View) {
+                val behavior = BottomSheetBehavior.from(parent)
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
 
         closeMenuButton.setOnClickListener { dismiss() }
 

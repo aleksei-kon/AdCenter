@@ -31,10 +31,7 @@ class DevSettingsActivity : BaseActivity() {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        backButton.setOnClickListener { finish() }
     }
 
     private fun saveInfo() {

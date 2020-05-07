@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import coil.api.load
 import com.adcenter.R
 import com.adcenter.extensions.layoutInflater
+import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
 import kotlinx.android.synthetic.main.adapter_item_ad_photo.view.*
 
@@ -40,9 +40,11 @@ class DetailsPhotosAdapter(private val context: Context) :
     inner class SliderAdapterVH(private val itemView: View) :
         SliderViewAdapter.ViewHolder(itemView) {
 
-        fun bind(photo: String) = itemView.photo.load(photo) {
-            placeholder(R.drawable.default_placeholder)
-            error(R.drawable.default_placeholder)
+        fun bind(photo: String) {
+            Glide.with(context)
+                .load(photo)
+                .placeholder(R.drawable.default_placeholder)
+                .into(itemView.photo)
         }
     }
 }

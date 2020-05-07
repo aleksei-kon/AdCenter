@@ -23,15 +23,15 @@ import com.adcenter.features.details.DetailsConstants
 import com.adcenter.features.lastads.uistate.*
 import com.adcenter.features.lastads.viewmodel.LastAdsViewModel
 import com.adcenter.resource.IResourceProvider
-import com.adcenter.ui.common.IPageConfiguration
-import com.adcenter.ui.common.RecyclerViewMargin
-import com.adcenter.ui.common.ScrollToEndListener
 import com.adcenter.ui.activities.DetailsActivity
 import com.adcenter.ui.adapters.AdsAdapter
 import com.adcenter.ui.adapters.ItemType.GRID
 import com.adcenter.ui.adapters.ItemType.LINEAR
 import com.adcenter.ui.adapters.ViewHolderType.ITEM
 import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
+import com.adcenter.ui.common.IPageConfiguration
+import com.adcenter.ui.common.RecyclerViewMargin
+import com.adcenter.ui.common.ScrollToEndListener
 import kotlinx.android.synthetic.main.layout_recycler.*
 import javax.inject.Inject
 
