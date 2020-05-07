@@ -202,7 +202,5 @@
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@+id/phone" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

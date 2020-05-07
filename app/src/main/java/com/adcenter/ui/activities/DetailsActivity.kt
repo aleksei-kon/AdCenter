@@ -118,7 +118,6 @@ class DetailsActivity : BaseActivity() {
                     viewModel.makeAction(DeleteIntent(detailsId))
                 }
                 .show()
-
         }
     }
 

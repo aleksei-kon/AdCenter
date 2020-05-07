@@ -9,6 +9,7 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -23,9 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
-
         </FrameLayout>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
@@ -36,5 +35,4 @@
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
         android:visibility="gone" />
-
 </FrameLayout>

@@ -15,8 +15,6 @@ import com.adcenter.ui.bottomsheet.NavigationBottomSheetDialogFragment
 import com.adcenter.ui.common.IPageConfiguration
 import com.adcenter.ui.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.content
-import kotlinx.android.synthetic.main.activity_new_ad.*
 import javax.inject.Inject
 
 private const val CURRENT_MENU_ITEM_ID_KEY = "currentMenuItemId"

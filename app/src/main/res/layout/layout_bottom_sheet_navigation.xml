@@ -29,8 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/default_round_ripple"
+            android:padding="8dp"
             app:srcCompat="@drawable/ic_close" />
     </FrameLayout>
 
@@ -50,12 +52,10 @@
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"
             android:layout_width="match_parent"
-            app:itemIconTint="?attr/iconColor"
-            android:background="?attr/bottomSheetBgColor"
-            app:itemTextColor="?attr/textColor"
             android:layout_height="match_parent"
-            app:itemBackground="@drawable/default_ripple" />
-
+            android:background="?attr/bottomSheetBgColor"
+            app:itemBackground="@drawable/default_ripple"
+            app:itemIconTint="?attr/iconColor"
+            app:itemTextColor="?attr/textColor" />
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>
