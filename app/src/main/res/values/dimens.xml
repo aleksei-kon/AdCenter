@@ -4,4 +4,5 @@
     <dimen name="button_icon_size">24dp</dimen>
     <dimen name="progress_button_progress_stroke_width">2dp</dimen>
     <dimen name="progress_button_progress_radius">9dp</dimen>
+    <dimen name="message_margin_top">112dp</dimen>
 </resources>

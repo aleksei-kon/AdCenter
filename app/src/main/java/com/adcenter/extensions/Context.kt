@@ -9,19 +9,19 @@ import androidx.fragment.app.Fragment
 import com.adcenter.BuildConfig
 
 fun Context.longToast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    //Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
 
 fun Context.shortToast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    //Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
 fun Fragment.longToast(text: String) {
-    requireContext().longToast(text)
+    //requireContext().longToast(text)
 }
 
 fun Fragment.shortToast(text: String) {
-    requireContext().shortToast(text)
+    //requireContext().shortToast(text)
 }
 
 fun <T> Context.attr(@AttrRes attr: Int, block: (TypedArray) -> T): T {
