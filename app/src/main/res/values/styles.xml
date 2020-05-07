@@ -30,6 +30,7 @@
         <item name="buttonOutlineTextColor">@color/secondaryColor</item>
         <item name="buttonContainedTextColor">@color/primaryColor</item>
         <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="materialAlertDialogTheme">@style/AppAlertDialogTheme</item>
     </style>
 
     <!-- Application dark theme. -->
@@ -58,6 +59,20 @@
         <item name="buttonOutlineTextColor">@color/secondaryColor</item>
         <item name="buttonContainedTextColor">@color/primaryColor</item>
         <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="materialAlertDialogTheme">@style/AppAlertDialogTheme</item>
+    </style>
+
+    <style name="AppAlertDialogTheme" parent="@style/ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/buttonOutlineTextColor</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/buttonOutlineTextColor</item>
     </style>
 
     <style name="ButtonOutline" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">

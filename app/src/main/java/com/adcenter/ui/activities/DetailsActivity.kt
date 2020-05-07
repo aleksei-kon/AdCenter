@@ -19,6 +19,7 @@ import com.adcenter.features.details.DetailsConstants.IS_EDIT_PAGE
 import com.adcenter.features.details.uistate.*
 import com.adcenter.features.details.viewmodel.DetailsViewModel
 import com.adcenter.ui.adapters.DetailsPhotosAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.layout_ad_details_info.*
 import javax.inject.Inject
@@ -109,7 +110,15 @@ class DetailsActivity : BaseActivity() {
 
         }
         deleteButton.setOnClickListener {
-            viewModel.makeAction(DeleteIntent(detailsId))
+            MaterialAlertDialogBuilder(this@DetailsActivity)
+                .setTitle("Delete advert")
+                .setMessage("Are you sure that you want to delete this advert?")
+                .setNegativeButton("No") { dialog, which -> }
+                .setPositiveButton("Yes") { dialog, which ->
+                    viewModel.makeAction(DeleteIntent(detailsId))
+                }
+                .show()
+
         }
     }
 
