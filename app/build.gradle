@@ -47,7 +47,6 @@ dependencies {
     implementation Libs.constraintlayout
 
     implementation Libs.kotlin
-    implementation Libs.coil
     implementation Libs.glide
     annotationProcessor Libs.glideAnnotationProcessor
     implementation Libs.imageSlider

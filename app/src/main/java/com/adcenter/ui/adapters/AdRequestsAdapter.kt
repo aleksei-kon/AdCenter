@@ -2,16 +2,10 @@ package com.adcenter.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import androidx.recyclerview.widget.DiffUtil
-import coil.api.load
-import coil.transform.CircleCropTransformation
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.layoutInflater
 import com.adcenter.extensions.setTextWithVisibility
-import com.adcenter.ui.diffutill.AdsDiffCallback
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.adapter_request_item.view.*
@@ -27,11 +21,9 @@ class AdRequestsAdapter(
     override fun setItems(items: List<AdItemModel>) {
         //val diffCallback = AdsDiffCallback(this.items, items)
         //val diffResult = DiffUtil.calculateDiff(diffCallback)
-
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
-
         //diffResult.dispatchUpdatesTo(this)
     }
 

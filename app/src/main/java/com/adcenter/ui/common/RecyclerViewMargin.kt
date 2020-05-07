@@ -12,14 +12,8 @@ class RecyclerViewMargin(
         outRect.apply {
             right = margin
             bottom = margin
-
-            if (position < columns) {
-                top = margin
-            }
-
-            if (position % columns == 0) {
-                left = margin
-            }
+            top = margin
+            left = margin
         }
     }
 }

@@ -2,15 +2,15 @@ package com.adcenter.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import coil.api.load
 import com.adcenter.R
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.layoutInflater
 import com.adcenter.extensions.setTextWithVisibility
 import com.adcenter.ui.adapters.ItemType.GRID
 import com.adcenter.ui.adapters.ItemType.LINEAR
-import com.adcenter.ui.diffutill.AdsDiffCallback
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.adapter_linear_ads_item.view.*
 
 enum class ItemType {
@@ -33,12 +33,10 @@ class AdsAdapter(
     override fun setItems(items: List<AdItemModel>) {
         //val diffCallback = AdsDiffCallback(this.items, items)
         //val diffResult = DiffUtil.calculateDiff(diffCallback)
-
         this.items.clear()
         this.items.addAll(items)
-
-        //diffResult.dispatchUpdatesTo(this)
         notifyDataSetChanged()
+        //diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewHolder(parent: ViewGroup): BaseItemViewHolder = when (type) {
@@ -54,16 +52,26 @@ class AdsAdapter(
         override fun bind(item: Any) {
             if (item is AdItemModel) {
                 itemView.apply {
+                    setOnClickListener { itemClickListener.invoke(item.id) }
                     title.setTextWithVisibility(item.title)
                     price.setTextWithVisibility(item.price)
                     place.setTextWithVisibility(item.place)
                     views.setTextWithVisibility(item.views)
-                    adPhoto.load(item.photoUrl) {
-                        placeholder(R.drawable.default_placeholder)
-                        error(R.drawable.default_placeholder)
-                    }
-                    setOnClickListener { itemClickListener.invoke(item.id) }
                 }
+
+                val requestOptions = RequestOptions().transforms(
+                    CenterCrop()
+                )
+
+                val thumbnail = Glide.with(itemView.context)
+                    .load(R.drawable.default_placeholder)
+                    .apply(requestOptions)
+
+                Glide.with(itemView.context)
+                    .load(item.photoUrl)
+                    .apply(requestOptions)
+                    .thumbnail(thumbnail)
+                    .into(itemView.adPhoto)
             }
         }
     }
@@ -75,12 +83,22 @@ class AdsAdapter(
                 itemView.apply {
                     title.setTextWithVisibility(item.title)
                     price.setTextWithVisibility(item.price)
-                    adPhoto.load(item.photoUrl) {
-                        placeholder(R.drawable.default_placeholder)
-                        error(R.drawable.default_placeholder)
-                    }
                     setOnClickListener { itemClickListener.invoke(item.id) }
                 }
+
+                val requestOptions = RequestOptions().transforms(
+                    CenterCrop()
+                )
+
+                val thumbnail = Glide.with(itemView.context)
+                    .load(R.drawable.default_placeholder)
+                    .apply(requestOptions)
+
+                Glide.with(itemView.context)
+                    .load(item.photoUrl)
+                    .apply(requestOptions)
+                    .thumbnail(thumbnail)
+                    .into(itemView.adPhoto)
             }
         }
     }
