@@ -62,7 +62,11 @@
     <string name="empty_location_message">Locations can\'t be empty</string>
     <string name="empty_phone_message">Phone can\'t be empty</string>
     <string name="empty_synopsis_message">Synopsis can\'t be empty</string>
-    <string name="title_length_message">Title length should be from 4 to 40</string>
+    <string name="title_length_message">Title length should be from 2 to 40</string>
     <string name="location_length_message">Location min length is 2</string>
     <string name="synopsis_length_message">Description min length is 4</string>
+    <string name="delete_dialog_title">Delete advert</string>
+    <string name="delete_dialog_message">Are you sure that you want to delete this advert?</string>
+    <string name="dialog_negative_button">No</string>
+    <string name="dialog_positive_button">Yes</string>
 </resources>

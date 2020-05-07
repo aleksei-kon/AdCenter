@@ -111,10 +111,10 @@ class DetailsActivity : BaseActivity() {
         }
         deleteButton.setOnClickListener {
             MaterialAlertDialogBuilder(this@DetailsActivity)
-                .setTitle("Delete advert")
-                .setMessage("Are you sure that you want to delete this advert?")
-                .setNegativeButton("No") { dialog, which -> }
-                .setPositiveButton("Yes") { dialog, which ->
+                .setTitle(getString(R.string.delete_dialog_title))
+                .setMessage(getString(R.string.delete_dialog_message))
+                .setNegativeButton(getString(R.string.dialog_negative_button)) { _, _ -> }
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ ->
                     viewModel.makeAction(DeleteIntent(detailsId))
                 }
                 .show()
