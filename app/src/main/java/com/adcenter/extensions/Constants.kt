@@ -13,6 +13,8 @@ object Constants {
     const val LOCATION_MIN_LENGTH = 2
     const val SYNOPSIS_MIN_LENGTH = 4
     val CURRENCY_LIST = arrayOf("USD", "EUR", "BYR", "RUB", "PLN", "GBP")
+    val TYPES_LIST = arrayOf("Other", "Clothes", "Technics", "Stuff", "Realty", "Cars", "Services", "Food")
+    val SORT_LIST = arrayOf("AZ", "Date", "Price")
 
     object Request {
 

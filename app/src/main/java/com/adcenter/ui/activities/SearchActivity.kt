@@ -5,6 +5,9 @@ import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +17,10 @@ import com.adcenter.di.dagger.injector.Injector
 import com.adcenter.entities.EmptyPageException
 import com.adcenter.entities.view.AdItemModel
 import com.adcenter.extensions.*
+import com.adcenter.extensions.Constants.SORT_LIST
+import com.adcenter.extensions.Constants.TYPES_LIST
 import com.adcenter.features.details.DetailsConstants
+import com.adcenter.features.details.uistate.DeleteIntent
 import com.adcenter.features.search.uistate.*
 import com.adcenter.features.search.viewmodel.SearchViewModel
 import com.adcenter.ui.adapters.AdsAdapter
@@ -24,13 +30,11 @@ import com.adcenter.ui.adapters.ViewHolderType.ITEM
 import com.adcenter.ui.adapters.ViewHolderType.PAGINATION
 import com.adcenter.ui.common.RecyclerViewMargin
 import com.adcenter.ui.common.ScrollToEndListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.noDataMessage
-import kotlinx.android.synthetic.main.activity_search.recyclerView
-import kotlinx.android.synthetic.main.layout_recycler.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -70,6 +74,33 @@ class SearchActivity : OfflineActivity() {
         initRecycler()
         setViewModelObserver()
         load()
+
+        sortButton.setOnClickListener {
+            val alertLayout: View = layoutInflater.inflate(R.layout.sort_dialog, null)
+            val sortSpinner: Spinner = alertLayout.findViewById(R.id.sortSpinner)
+            val typeSpinner: Spinner = alertLayout.findViewById(R.id.typeSpinner)
+
+            sortSpinner.adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                SORT_LIST
+            )
+
+            typeSpinner.adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                TYPES_LIST
+            )
+
+            MaterialAlertDialogBuilder(this@SearchActivity)
+                .setTitle(getString(R.string.sort_dialog_title))
+                .setView(alertLayout)
+                .setNegativeButton(getString(R.string.sort_negative_button)) { _, _ -> }
+                .setPositiveButton(getString(R.string.sort_positive_button)) { _, _ ->
+
+                }
+                .show()
+        }
 
         disposables.add(
             searchText.textChanges()

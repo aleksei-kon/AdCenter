@@ -17,6 +17,7 @@ import com.adcenter.extensions.Constants.EMPTY
 import com.adcenter.extensions.Constants.LOCATION_MIN_LENGTH
 import com.adcenter.extensions.Constants.SYNOPSIS_MIN_LENGTH
 import com.adcenter.extensions.Constants.TITLE_LENGTH_RANGE
+import com.adcenter.extensions.Constants.TYPES_LIST
 import com.adcenter.features.newdetails.models.NewDetailsRequestParams
 import com.adcenter.features.newdetails.uistate.Error
 import com.adcenter.features.newdetails.uistate.Success
@@ -89,6 +90,12 @@ class NewAdActivity : BaseActivity() {
             android.R.layout.simple_dropdown_item_1line,
             CURRENCY_LIST
         )
+
+        typeSpinner.adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_dropdown_item_1line,
+            TYPES_LIST
+        )
     }
 
     private fun deletePhoto(uri: Uri) {
@@ -147,6 +154,7 @@ class NewAdActivity : BaseActivity() {
             newDetailsModel = NewDetailsModel(
                 title = titleEditText.text.toString().trim(),
                 price = "${priceEditText.text.toString().trim()} ${currencySpinner.selectedItem}",
+                type = "${currencySpinner.selectedItem}",
                 location = placeEditText.text.toString().trim(),
                 synopsis = synopsisEditText.text.toString().trim(),
                 phone = phoneEditText.text.toString().trim()
